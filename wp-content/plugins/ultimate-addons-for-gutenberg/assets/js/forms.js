@@ -1,10 +1,10 @@
 UAGBForms = {
 	getElement: ( id ) => {
-		/ Check if the script has run once already on the given element (required for homepage sidebar usage case).
+		// Check if the script has run once already on the given element (required for homepage sidebar usage case).
 		const getJsELement = document.querySelector( `${ id }:not(.uagb-activated-script)` );
 		if ( ! getJsELement ) return null;
 
-		/ Ensures that the script only runs once on the given element (required for homepage sidebar usage case).
+		// Ensures that the script only runs once on the given element (required for homepage sidebar usage case).
 		getJsELement.classList.add( 'uagb-activated-script' );
 		return getJsELement;
 	},
@@ -49,7 +49,7 @@ UAGBForms = {
 			}
 		}
 
-		/ validation for checkbox if required.
+		// validation for checkbox if required.
 		const requiredCheckboxes = scope.querySelectorAll( '.uagb-forms-checkbox-wrap' );
 		if ( requiredCheckboxes.length !== 0 ) {
 			for ( let k = 0; k < requiredCheckboxes.length; k++ ) {
@@ -78,7 +78,7 @@ UAGBForms = {
 		let reCaptchaSiteKeyV2 = '',
 			reCaptchaSiteKeyV3 = '';
 
-		/append recaptcha js when enabled.
+		//append recaptcha js when enabled.
 		if ( attr.reCaptchaEnable === true && attr.reCaptchaType === 'v2' ) {
 			reCaptchaSiteKeyV2 = uagb_forms_data.recaptcha_site_key_v2;
 
@@ -111,7 +111,7 @@ UAGBForms = {
 			}
 		}
 
-		/Ready Classes.
+		//Ready Classes.
 		const formscope = document.getElementsByClassName( 'uagb-block-' + attr.block_id );
 		if ( formscope?.[ 0 ] ) {
 			const formWrapper = formscope[ 0 ].children;
@@ -171,9 +171,9 @@ UAGBForms = {
 					return false;
 				}
 
-				/ eslint-disable-next-line no-undef
+				// eslint-disable-next-line no-undef
 				grecaptcha.ready( function () {
-					/ eslint-disable-next-line no-undef
+					// eslint-disable-next-line no-undef
 					grecaptcha.execute( reCaptchaSiteKeyV3, { action: 'submit' } ).then( function ( token ) {
 						if ( token ) {
 							if ( document.getElementsByClassName( 'uagb-forms-recaptcha' ).length !== 0 ) {
@@ -246,7 +246,7 @@ UAGBForms = {
 
 			if ( originalSerialized[ i ].name.endsWith( '[]' ) ) {
 				const name = originalSerialized[ i ].name.replace( /[\[\]']+/g, '' );
-				/For checkbox element
+				//For checkbox element
 				if ( ! ( name in postData ) ) {
 					postData[ name ] = [];
 				}
@@ -262,10 +262,10 @@ UAGBForms = {
 			}
 		}
 
-		/ eslint-disable-next-line no-undef
+		// eslint-disable-next-line no-undef
 		fetch( uagb_forms_data.ajax_url, {
 			method: 'POST',
-			headers: new Headers( { 'Content-Type': 'application/x-www-form-urlencoded' } ), / eslint-disable-line no-undef
+			headers: new Headers( { 'Content-Type': 'application/x-www-form-urlencoded' } ), // eslint-disable-line no-undef
 			body: new URLSearchParams( {
 				action: 'uagb_process_forms',
 				nonce: uagb_forms_data.uagb_forms_ajax_nonce,
@@ -300,7 +300,7 @@ UAGBForms = {
 				}
 			} )
 			.catch( function ( error ) {
-				console.log( JSON.stringify( error ) ); / eslint-disable-line no-console
+				console.log( JSON.stringify( error ) ); // eslint-disable-line no-console
 			} );
 	},
 
@@ -308,7 +308,7 @@ UAGBForms = {
 		return Array.apply( 0, form.elements )
 			.map( ( x ) =>
 				( ( obj ) =>
-					/ eslint-disable-next-line no-nested-ternary
+					// eslint-disable-next-line no-nested-ternary
 					x.type === 'radio' || x.type === 'checkbox' ? ( x.checked ? obj : null ) : obj )( {
 					name: x.name,
 					value: x.value,

@@ -42,12 +42,12 @@ const InformPreviousErrorModal = ( {
 		setFullOnboardingState,
 	} = useDispatch( STORE_KEY );
 
-	/ const handleBack = () => {
-	/ 	if ( typeof setOpen !== 'function' ) {
-	/ 		return;
-	/ 	}
-	/ 	setOpen( false );
-	/ };
+	// const handleBack = () => {
+	// 	if ( typeof setOpen !== 'function' ) {
+	// 		return;
+	// 	}
+	// 	setOpen( false );
+	// };
 
 	const handleConfirm = () => {
 		if ( typeof onConfirm !== 'function' ) {
@@ -87,7 +87,7 @@ const InformPreviousErrorModal = ( {
 			if ( response.success ) {
 				console.log( 'Data reset!' );
 			} else {
-				/  Handle error.
+				//  Handle error.
 				throw new Error( response?.data?.data );
 			}
 		} catch ( error ) {
@@ -163,7 +163,7 @@ const InformPreviousErrorModal = ( {
 						className="!mb-4 text-sm leading-5 font-normal text-zip-body-text"
 						dangerouslySetInnerHTML={ {
 							__html: sprintf(
-								/ translators: %s: support link
+								// translators: %s: support link
 								__(
 									'If you want to retry the import, select a saved site below then click on the “Retry Import” button. Or contact our support %1$s.',
 									'ai-builder'
@@ -177,7 +177,7 @@ const InformPreviousErrorModal = ( {
 						className="!mb-4 text-sm leading-5 font-normal text-zip-body-text"
 						dangerouslySetInnerHTML={ {
 							__html: sprintf(
-								/ translators: %s: support link
+								// translators: %s: support link
 								__(
 									'If you proceed without fixing these issues, you may encounter the same errors again, which could exhaust your AI site creation attempts. If you need help, feel free to contact us %1$s. Do you still want to continue?',
 									'ai-builder'

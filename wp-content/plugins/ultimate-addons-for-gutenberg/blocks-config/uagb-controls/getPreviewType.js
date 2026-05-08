@@ -24,19 +24,19 @@ export const setDeviceType = ( device, updateInCustomizer = true ) => {
 		dispatch( 'core/edit-post' )?.__experimentalSetPreviewDeviceType ||
 		dispatch( spectraStore )?.setDeviceType;
 
-    / Verify setPreviewDeviceType is available and setPreviewDeviceType should be function.
+    // Verify setPreviewDeviceType is available and setPreviewDeviceType should be function.
     if( ! setPreviewDeviceType || typeof setPreviewDeviceType !== 'function' ){
         return;
     }
 
 	setPreviewDeviceType( device );
 
-    / If we don't want to update the device type in the customizer preview, return.
+    // If we don't want to update the device type in the customizer preview, return.
     if ( ! updateInCustomizer ) {
         return;
     }
 
-    / This code sets the device type in the customizer preview. It's particularly useful when not using a Full Site Editing (FSE) theme.
+    // This code sets the device type in the customizer preview. It's particularly useful when not using a Full Site Editing (FSE) theme.
     setCustomizerPreview( device );
 };
 
@@ -50,14 +50,14 @@ export const setCustomizerPreview = ( deviceType ) => {
         return;
     }
 
-    / deviceType should be string.
+    // deviceType should be string.
     if ( typeof deviceType !== 'string' ) {
         return;
     }
 
     const deviceTypeLower = deviceType.toLowerCase();
 
-    / Check deviceType is valid.
+    // Check deviceType is valid.
     if ( ! [ 'desktop', 'tablet', 'mobile' ].includes( deviceTypeLower ) ) {
         return;
     }
@@ -79,7 +79,7 @@ export const setDeviceOnCustomizerAction = () => {
                 return;
             }
 
-            / Check device type only mobile, tablet and desktop.
+            // Check device type only mobile, tablet and desktop.
             if ( ! [ 'mobile', 'tablet', 'desktop' ].includes( device ) ) {
                 return;
             }

@@ -1,7 +1,7 @@
 import { select } from '@wordpress/data';
 
 const scrollBlockToView = () => {
-	/ Scroll the view to the selected block after device type change in editor.
+	// Scroll the view to the selected block after device type change in editor.
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const selectedBlockID = getSelectedBlock()?.clientId ? `block-${ getSelectedBlock()?.clientId }` : false;
 

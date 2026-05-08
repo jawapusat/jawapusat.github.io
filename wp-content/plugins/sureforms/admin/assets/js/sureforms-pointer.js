@@ -1,5 +1,5 @@
 jQuery( document ).ready( function ( $ ) {
-	/ Check with the server if the pointer should be shown
+	// Check with the server if the pointer should be shown
 	$.post(
 		sureformsPointerData.ajaxurl,
 		{
@@ -13,7 +13,7 @@ jQuery( document ).ready( function ( $ ) {
 
 			let $target = $( '#toplevel_page_sureforms_menu' );
 			if ( ! $target.length ) {
-				$target = $( '#menu-plugins' ); / fallback
+				$target = $( '#menu-plugins' ); // fallback
 			}
 
 			const pointerContent =
@@ -24,7 +24,7 @@ jQuery( document ).ready( function ( $ ) {
 				response.content +
 				'</p>';
 
-			let pointerClosedBy = null; / 'cta' or 'dismiss' or null
+			let pointerClosedBy = null; // 'cta' or 'dismiss' or null
 
 			$target
 				.pointer( {
@@ -33,7 +33,7 @@ jQuery( document ).ready( function ( $ ) {
 						edge: 'left',
 						align: 'center',
 					},
-					/ `_event` is unused but required positionally to access `t`.
+					// `_event` is unused but required positionally to access `t`.
 					buttons( _event, t ) {
 						const dismissBtn = $(
 							'<a class="close" href="#" style="margin-left:8px;"></a>'
@@ -66,7 +66,7 @@ jQuery( document ).ready( function ( $ ) {
 							} );
 						} );
 
-						/ Wrap both buttons in a div and return as a jQuery object
+						// Wrap both buttons in a div and return as a jQuery object
 						return $(
 							'<div style="display:flex;justify-content:space-between;align-items:center;width:100%"></div>'
 						)
@@ -75,7 +75,7 @@ jQuery( document ).ready( function ( $ ) {
 					},
 					close() {
 						if ( ! pointerClosedBy ) {
-							/ Only run if closed by other means (not by our buttons)
+							// Only run if closed by other means (not by our buttons)
 							$.post( sureformsPointerData.ajaxurl, {
 								action: 'sureforms_dismiss_pointer',
 								pointer_nonce:

@@ -7,7 +7,7 @@
  * @since 4.12.6
  */
 
-/ Element.matches() polyfill for IE9+.
+// Element.matches() polyfill for IE9+.
 if ( ! Element.prototype.matches ) {
 	Element.prototype.matches =
 		Element.prototype.matchesSelector ||
@@ -23,7 +23,7 @@ if ( ! Element.prototype.matches ) {
 		};
 }
 
-/ CustomEvent() constructor for IE9-11.
+// CustomEvent() constructor for IE9-11.
 ( function() {
 	if ( typeof window.CustomEvent === 'function' ) return false;
 	function CustomEvent( event, params ) {

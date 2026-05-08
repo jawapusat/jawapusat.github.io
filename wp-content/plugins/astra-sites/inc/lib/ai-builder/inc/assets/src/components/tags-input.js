@@ -13,7 +13,7 @@ const TagsInput = ( {
 	tokenClassName = '',
 	filterDuplicates = true,
 	maxLength = 80,
-	maxTokens = 0, / 0 means unlimited.
+	maxTokens = 0, // 0 means unlimited.
 } ) => {
 	const [ tags, setTags ] = useState( [] );
 	const delimitersRegex = new RegExp( delimiters.join( '|' ), 'g' );
@@ -71,18 +71,18 @@ const TagsInput = ( {
 	};
 
 	const handleKeyDown = ( event ) => {
-		/ If press Enter add tag.
+		// If press Enter add tag.
 		if ( event.key === 'Enter' ) {
 			event.preventDefault();
 			handleAddTag( event );
 		}
 
-		/ If press Backspace and input is empty, remove tag.
+		// If press Backspace and input is empty, remove tag.
 		if ( event.key === 'Backspace' && ! event.target.value ) {
 			handleDeleteTag( tags.length - 1 );
 		}
 
-		/ If press delimiter, add tag.
+		// If press delimiter, add tag.
 		if ( delimiters.includes( event.key ) ) {
 			event.preventDefault();
 			handleAddTag( event );
@@ -149,7 +149,7 @@ const TagsInput = ( {
 			tagValues = [ ...value ];
 		}
 
-		/ Slice tags if maxTokens is set.
+		// Slice tags if maxTokens is set.
 		if ( maxTokens > 0 ) {
 			tagValues = tagValues.slice( 0, maxTokens );
 		}
@@ -163,7 +163,7 @@ const TagsInput = ( {
 		setTags(
 			filterDuplicateValues ? [ ...new Set( tagValues ) ] : tagValues
 		);
-	}, [ value ] ); / eslint-disable-line
+	}, [ value ] ); // eslint-disable-line
 
 	return (
 		<div

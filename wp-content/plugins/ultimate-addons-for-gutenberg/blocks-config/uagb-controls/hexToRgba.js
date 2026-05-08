@@ -18,7 +18,7 @@ function hexToRgba( color, opacity ) {
 
 	opacity = typeof opacity !== 'undefined' ? opacity / 100 : 1;
 
-	/ Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+	// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
 	const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
 	color = color.replace( shorthandRegex, function ( m, r, g, b ) {
 		return r + r + g + g + b + b;

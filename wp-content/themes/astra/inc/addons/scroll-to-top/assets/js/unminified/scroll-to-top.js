@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			if( 'both' == device || ( 'desktop' == device && '769' == content ) || ( 'mobile' == device && '' == content ) ) {
 
-				/ Get current window / document scroll.
+				// Get current window / document scroll.
 				var  scrollTop = window.pageYOffset || document.body.scrollTop;
-				/ If masthead found.
+				// If masthead found.
 				if( masthead && masthead.length ){
 					if (scrollTop > masthead.offsetHeight + 100) {
 						astScrollTop.style.display = "block";
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					}
 				}
 				else{
-					/ If there is no masthead set default start scroll
+					// If there is no masthead set default start scroll
 					if ( window.pageYOffset > 300 ) {
 						astScrollTop.style.display = "block";
 					} else {

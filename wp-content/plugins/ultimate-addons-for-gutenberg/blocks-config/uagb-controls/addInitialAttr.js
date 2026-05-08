@@ -37,7 +37,7 @@ const addInitialAttr = ( ChildComponent ) => {
 			'uagb/content-timeline',
 			'uagb/tabs',
 			'uagb/how-to'
-		]; / Add all parent block name here who's getting issue in customize preview.
+		]; // Add all parent block name here who's getting issue in customize preview.
 
 		useEffect( () => {
 			if ( uagb_blocks_info.is_customize_preview && ( '0' === block_id || undefined === block_id ) && listOfParentBlock.includes( name ) ) {
@@ -100,7 +100,7 @@ const addInitialAttr = ( ChildComponent ) => {
 				attributeObject.allTaxonomyStore = undefined;
 			}
 
-            / editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
+            // editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
 			if ( listOfEditorInnerblocksPreview.includes( name ) ) {
 				attributeObject.editorInnerblocksPreview = false;
 			}

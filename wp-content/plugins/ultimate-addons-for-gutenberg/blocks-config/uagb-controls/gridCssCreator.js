@@ -11,7 +11,7 @@
 export const gridCssCreator = ( gridObject ) => {
     let gridCss = '';
     gridObject.forEach( ( grid ) => {
-        / Add space if the column is not the last column.
+        // Add space if the column is not the last column.
         if( gridCss ){
             gridCss = gridCss + ' ';
         }
@@ -28,7 +28,7 @@ export const gridCssCreator = ( gridObject ) => {
         gridCss += createCss + ' ';
     } );
 
-    / Grid css will as a result look like: "1fr 1fr 1fr 1fr"
+    // Grid css will as a result look like: "1fr 1fr 1fr 1fr"
     return gridCss;
 }
 
@@ -46,7 +46,7 @@ export const gridCssCreator = ( gridObject ) => {
 const gridCssObject = ( attr, deviceType = 'Desktop' ) => {
     const grid_css = {};
     
-    / Check attribute is not empty and should be array.
+    // Check attribute is not empty and should be array.
     if( attr[ 'gridColumn' + deviceType ]?.length ){
         grid_css[ 'grid-template-columns' ] = gridCssCreator( attr[ 'gridColumn' + deviceType ] );
     }

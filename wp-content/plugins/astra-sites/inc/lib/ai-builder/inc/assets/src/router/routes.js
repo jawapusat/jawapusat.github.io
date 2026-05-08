@@ -13,7 +13,7 @@ import BuildDone from '../pages/done';
 
 const skipFeatures = !! aiBuilderVars?.skipFeatures;
 
-/ Steps
+// Steps
 const steps = [
 	{
 		path: '/',

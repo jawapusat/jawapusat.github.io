@@ -19,7 +19,7 @@
 		headerContainer.append(indicatorDot);
 		headerContainer.append(button);
 	
-		/ Added function to check visit count and show/hide the red dot.
+		// Added function to check visit count and show/hide the red dot.
 		function checkVisitCount() {
 			let visitCount = localStorage.getItem('customizerVisitCount');
 			visitCount = visitCount ? parseInt(visitCount, 10) : 0;
@@ -39,82 +39,82 @@
 			event.preventDefault();
 			event.stopPropagation();
 
-			/ Access the iframe's content
+			// Access the iframe's content
 			var iframeBody = $('#customize-preview').find('iframe').contents().find('body');
 
-			/ Apply the custom class to the iframe's body
+			// Apply the custom class to the iframe's body
 			iframeBody.toggleClass('ast-sg-loaded');
 
-			/ Creating new state for restricting the preview refresh.
+			// Creating new state for restricting the preview refresh.
 			api.state.create('astra-style-guide-status');
 			api.state('astra-style-guide-status').set('loaded');
 		});
 
-		/ Bind the click event to the button to focus on the style guide section.
+		// Bind the click event to the button to focus on the style guide section.
 		const urlParams = new URLSearchParams( window.location.search );
 		const autofocus = urlParams.get( 'autofocus' );
 
 		if ( autofocus === 'astra-tour' ) {
-			let hasTriggered = false; / flag to ensure it only fires once
+			let hasTriggered = false; // flag to ensure it only fires once
 			wp.customize.previewer.bind( 'ready', () => {
 				if ( hasTriggered ) {
-					return; / if already triggered, do nothing
+					return; // if already triggered, do nothing
 				}
 
 				button.trigger( 'click' );
-				hasTriggered = true; / set the flag to true after triggering
+				hasTriggered = true; // set the flag to true after triggering
 			} );
 		}
 	});
 
-	/ development code.
+	// development code.
 	$('#customize-preview iframe').on('load', function() {
-		/ Access the iframe's content
+		// Access the iframe's content
 		var iframeBody = $('#customize-preview').find('iframe').contents().find('body');
 
-		/ Apply the custom class to the iframe's body
+		// Apply the custom class to the iframe's body
 		iframeBody.addClass('ast-sg-loaded');
 	});
 
-	/ Runs after the Customizer controls are ready.
+	// Runs after the Customizer controls are ready.
 	wp.customize.bind('ready', () => {
 
-		/ Read ?preview-device from URL (desktop|tablet|mobile)
+		// Read ?preview-device from URL (desktop|tablet|mobile)
 		const url = new URL(window.location.href);
 		const device = url.searchParams.get('preview-device');
 
-		/ Stop if nothing to do
+		// Stop if nothing to do
 		if (!device || !['desktop', 'tablet', 'mobile'].includes(device)) return;
 
 		let attempt = 0;
 		const maxAttempts = 10;
 
-		/ Try switching device with progressive delay
+		// Try switching device with progressive delay
 		const trySwitch = () => {
 			attempt++;
 
-			/ Stop if exceeded attempts
+			// Stop if exceeded attempts
 			if (attempt > maxAttempts) return;
 
-			/ If API is ready, apply device mode
+			// If API is ready, apply device mode
 			if (wp.customize.previewedDevice) {
 				try {
 					wp.customize.previewedDevice.set(device);
 
-					/ Remove param so it only runs once
+					// Remove param so it only runs once
 					url.searchParams.delete('preview-device');
 					window.history.replaceState({}, '', url.toString());
-					return; / Success — stop
+					return; // Success — stop
 				} catch (e) {
-					/ Continue to next retry
+					// Continue to next retry
 				}
 			}
 
-			/ Progressive delay: 50ms, 100ms, 150ms...
+			// Progressive delay: 50ms, 100ms, 150ms...
 			setTimeout(trySwitch, attempt * 50);
 		};
 
-		/ Start first attempt
+		// Start first attempt
 		setTimeout(trySwitch, 50);
 	});
 })(jQuery, wp.customize);

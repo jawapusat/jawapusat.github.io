@@ -41,12 +41,12 @@ const generateShadowCSS = ( shadowProperties ) => {
 		altColor = '',
 	} = shadowProperties;
 
-	/ Although optional, color is required for Sarafi on PC. Return early if color isn't set.
+	// Although optional, color is required for Sarafi on PC. Return early if color isn't set.
 	if ( ! color && ! altColor ) {
 		return '';
 	}
 
-	/ Get the CSS units for the number properties.
+	// Get the CSS units for the number properties.
 	horizontal = generateCSSUnit( horizontal, horizontalUnit );
 	if ( '' === horizontal ) {
 		horizontal = 0;
@@ -67,12 +67,12 @@ const generateShadowCSS = ( shadowProperties ) => {
 		spread = 0;
 	}
 
-	/ If all numeric unit values are exactly 0, don't render the CSS.
+	// If all numeric unit values are exactly 0, don't render the CSS.
 	if ( 0 === horizontal && 0 === vertical && 0 === blur && 0 === spread ) {
 		return '';
 	}
 
-	/ Return the CSS with horizontal, vertical, blur, and color - and conditionally render spread and position.
+	// Return the CSS with horizontal, vertical, blur, and color - and conditionally render spread and position.
 	return `${ horizontal } ${ vertical } ${ blur }${ spread ? ` ${ spread }` : '' } ${ color ? color : altColor }${
 		'outset' === position ? '' : ` ${ position }`
 	}`;

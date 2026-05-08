@@ -1,7 +1,7 @@
 // External dependencies.
 import React from 'react';
 
-/ Internal dependencies.
+// Internal dependencies.
 import Tooltip from '../../../../components/tooltip/tooltip';
 import { __ } from '@wordpress/i18n';
 import { useStateValue } from '../../../../store/store';
@@ -24,7 +24,7 @@ const MyFavorite = ( { isDisabled } ) => {
 	const handleClick = ( event ) => {
 		event.stopPropagation();
 
-		/ Bail early if the button is disabled.
+		// Bail early if the button is disabled.
 		if ( isDisabled ) {
 			return;
 		}

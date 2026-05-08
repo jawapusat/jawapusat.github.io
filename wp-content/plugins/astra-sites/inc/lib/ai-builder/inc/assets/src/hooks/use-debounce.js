@@ -25,7 +25,7 @@ export const useDebounce = ( value, delay, callback = null ) => {
 			debouncedCallback( value );
 		}, delay );
 
-		/ Cleanup logic to clear the timer when the component unmounts or the value/delay changes
+		// Cleanup logic to clear the timer when the component unmounts or the value/delay changes
 		return () => {
 			clearTimeout( handler );
 		};
@@ -53,7 +53,7 @@ export const useDebounceWithCancel = ( value, delay, callback = null ) => {
 			debouncedCallback( value );
 		}, delay );
 
-		/ Cleanup logic to clear the timer when the component unmounts or the value/delay changes
+		// Cleanup logic to clear the timer when the component unmounts or the value/delay changes
 		return () => {
 			clearTimeout( handler );
 		};

@@ -21,7 +21,7 @@ import {
 	getDemo,
 } from './import-utils';
 const { reportError } = starterTemplates;
-const successMessageDelay = 8000; / 8 seconds delay for fully assets load.
+const successMessageDelay = 8000; // 8 seconds delay for fully assets load.
 
 import './style.scss';
 
@@ -161,11 +161,11 @@ const ImportSite = () => {
 		const allRequiredPlugins =
 			templateResponse?.[ 'required-plugins' ] || [];
 
-		/ Exclude plugins the user explicitly skipped on the
-		/ "Required Plugins Missing" screen.
-		/ Match on `init` (e.g. "sfwd-lms/sfwd_lms.php") because
-		/ third-party plugin objects from PHP have { init, name, link }
-		/ but no `slug` property.
+		// Exclude plugins the user explicitly skipped on the
+		// "Required Plugins Missing" screen.
+		// Match on `init` (e.g. "sfwd-lms/sfwd_lms.php") because
+		// third-party plugin objects from PHP have { init, name, link }
+		// but no `slug` property.
 		const skippedInits = new Set(
 			( skippedPlugins || [] ).map( ( p ) => p.init )
 		);
@@ -177,14 +177,14 @@ const ImportSite = () => {
 			return { verified: true, missing: [], notActivated: [] };
 		}
 
-		/ Show verification status with plugin names
+		// Show verification status with plugin names
 		const pluginNames = requiredPluginsList
 			.map( ( p ) => p.name )
 			.join( ', ' );
 		dispatch( {
 			type: 'set',
 			importStatus: sprintf(
-				/ translators: %s: Plugin names being verified.
+				// translators: %s: Plugin names being verified.
 				__( 'Verifying plugins: %s', 'astra-sites' ),
 				pluginNames
 			),
@@ -206,15 +206,15 @@ const ImportSite = () => {
 			const result = await response.json();
 
 			if ( ! result.success ) {
-				/ Plugins missing or not activated - handle recovery
+				// Plugins missing or not activated - handle recovery
 				const { missing, not_activated } = result.data || {};
 				const missingPlugins = missing || [];
 				const notActivatedPlugins = not_activated || [];
 
-				/ Single atomic dispatch — two separate dispatches would cause two
-				/ renders in React 17 (async context, no auto-batching). Between
-				/ renders, one list would be empty and the other not, making the
-				/ requiredPluginsDone useEffect fire with partial state.
+				// Single atomic dispatch — two separate dispatches would cause two
+				// renders in React 17 (async context, no auto-batching). Between
+				// renders, one list would be empty and the other not, making the
+				// requiredPluginsDone useEffect fire with partial state.
 				dispatch( {
 					type: 'set',
 					notInstalledList: missingPlugins,
@@ -231,9 +231,9 @@ const ImportSite = () => {
 
 			return { verified: true, missing: [], notActivated: [] };
 		} catch ( error ) {
-			/ Surface the error to the user — silently returning would leave
-			/ importPart1() returning early with no state change, and since
-			/ no useEffect dependency changes, importPart1 would never retry.
+			// Surface the error to the user — silently returning would leave
+			// importPart1() returning early with no state change, and since
+			// no useEffect dependency changes, importPart1 would never retry.
 			report(
 				__( 'Plugin verification failed.', 'astra-sites' ),
 				'',
@@ -250,11 +250,11 @@ const ImportSite = () => {
 	 * Start Import Part 1.
 	 */
 	const importPart1 = async () => {
-		/ STEP 1: Verify all required plugins are installed on server
+		// STEP 1: Verify all required plugins are installed on server
 		const verificationResult = await verifyPluginsBeforeImport();
 
 		if ( ! verificationResult.verified ) {
-			/ Build a detailed message about which plugins need attention
+			// Build a detailed message about which plugins need attention
 			const { missing, notActivated } = verificationResult;
 			const problemPlugins = [];
 
@@ -264,7 +264,7 @@ const ImportSite = () => {
 					.join( ', ' );
 				problemPlugins.push(
 					sprintf(
-						/ translators: %s: Plugin names that are not installed.
+						// translators: %s: Plugin names that are not installed.
 						__( 'Not installed: %s', 'astra-sites' ),
 						missingNames
 					)
@@ -277,7 +277,7 @@ const ImportSite = () => {
 					.join( ', ' );
 				problemPlugins.push(
 					sprintf(
-						/ translators: %s: Plugin names that are not activated.
+						// translators: %s: Plugin names that are not activated.
 						__( 'Not activated: %s', 'astra-sites' ),
 						inactiveNames
 					)
@@ -287,7 +287,7 @@ const ImportSite = () => {
 			const statusMessage =
 				problemPlugins.length > 0
 					? sprintf(
-							/ translators: %s: Details about plugins needing attention.
+							// translators: %s: Details about plugins needing attention.
 							__(
 								'Plugins need attention. %s. Retrying…',
 								'astra-sites'
@@ -304,10 +304,10 @@ const ImportSite = () => {
 				importStatus: statusMessage,
 			} );
 
-			return; / Exit - the useEffects will handle re-installation
+			return; // Exit - the useEffects will handle re-installation
 		}
 
-		/ STEP 2: Proceed with existing import logic
+		// STEP 2: Proceed with existing import logic
 		let resetStatus = false;
 		let cfStatus = false;
 		let wooCARStatus = false;
@@ -316,13 +316,13 @@ const ImportSite = () => {
 		let customizerStatus = false;
 		let spectraStatus = false;
 
-		/ To make sure template data is available before import.
+		// To make sure template data is available before import.
 		await getDemo( templateId || templateResponse?.id, storedState );
 
 		resetStatus = await resetOldSite();
 
 		if ( resetStatus ) {
-			/ Use retry logic for CartFlows import (max 2 retries)
+			// Use retry logic for CartFlows import (max 2 retries)
 			cfStatus = await importWithRetry( {
 				importFn: importCartflowsFlows,
 				importName: __( 'CartFlows Import', 'astra-sites' ),
@@ -330,7 +330,7 @@ const ImportSite = () => {
 		}
 
 		if ( cfStatus ) {
-			/ Use retry logic for Cart Abandonment Recovery import (max 2 retries)
+			// Use retry logic for Cart Abandonment Recovery import (max 2 retries)
 			wooCARStatus = await importWithRetry( {
 				importFn: importCartAbandonmentRecovery,
 				importName: __(
@@ -341,7 +341,7 @@ const ImportSite = () => {
 		}
 
 		if ( wooCARStatus ) {
-			/ Use retry logic for LatePoint import (max 2 retries)
+			// Use retry logic for LatePoint import (max 2 retries)
 			latepointStatus = await importWithRetry( {
 				importFn: importLatepointTables,
 				importName: __( 'LatePoint Import', 'astra-sites' ),
@@ -349,7 +349,7 @@ const ImportSite = () => {
 		}
 
 		if ( latepointStatus ) {
-			/ Use retry logic for WPForms import (max 2 retries)
+			// Use retry logic for WPForms import (max 2 retries)
 			formsStatus = await importWithRetry( {
 				importFn: importForms,
 				importName: __( 'WPForms Import', 'astra-sites' ),
@@ -410,7 +410,7 @@ const ImportSite = () => {
 	 * Install Required plugins.
 	 */
 	const installRequiredPlugins = () => {
-		/ Install Bulk.
+		// Install Bulk.
 		if ( notInstalledList.length <= 0 ) {
 			return;
 		}
@@ -424,7 +424,7 @@ const ImportSite = () => {
 
 		notInstalledList.forEach( ( plugin ) => {
 			wp.updates.queue.push( {
-				action: 'install-plugin', / Required action.
+				action: 'install-plugin', // Required action.
 				data: {
 					slug: plugin.slug,
 					init: plugin.init,
@@ -433,13 +433,13 @@ const ImportSite = () => {
 					clear_destination: true,
 					ajax_nonce: astraSitesVars?._ajax_nonce,
 					success() {
-						/ Use reducer action to avoid closure issues
-						/ The reducer uses current state, not stale closure values
+						// Use reducer action to avoid closure issues
+						// The reducer uses current state, not stale closure values
 						dispatch( {
 							type: 'plugin_installed',
 							plugin,
 							importStatus: sprintf(
-								/ translators: Plugin Name.
+								// translators: Plugin Name.
 								__(
 									'%1$s plugin installed successfully.',
 									'astra-sites'
@@ -461,7 +461,7 @@ const ImportSite = () => {
 								errText = err.errorCode + ': ' + errText;
 							}
 						}
-						/ Showing the memory error message instead of json response
+						// Showing the memory error message instead of json response
 						if ( err && undefined !== err.responseJSON ) {
 							const json = err.responseJSON;
 							if (
@@ -473,7 +473,7 @@ const ImportSite = () => {
 						}
 						report(
 							sprintf(
-								/ translators: Plugin Name.
+								// translators: Plugin Name.
 								__(
 									'Could not install the plugin - %s',
 									'astra-sites'
@@ -491,7 +491,7 @@ const ImportSite = () => {
 			} );
 		} );
 
-		/ Required to set queue.
+		// Required to set queue.
 		wp.updates.queueChecker();
 	};
 
@@ -505,7 +505,7 @@ const ImportSite = () => {
 		dispatch( {
 			type: 'set',
 			importStatus: sprintf(
-				/ translators: Plugin Name.
+				// translators: Plugin Name.
 				__( 'Activating %1$s plugin.', 'astra-sites' ),
 				plugin.name
 			),
@@ -535,7 +535,7 @@ const ImportSite = () => {
 					const response = JSON.parse( text );
 					cloneResponse = response;
 					if ( response.success ) {
-						/ Check if this is a deprioritization response
+						// Check if this is a deprioritization response
 						let deprioritizeStatus = false;
 						if (
 							response.data &&
@@ -543,7 +543,7 @@ const ImportSite = () => {
 						) {
 							deprioritizeStatus = true;
 
-							/ Add to deferred queue
+							// Add to deferred queue
 							setDeferredPlugins( ( prev ) => {
 								const exists = prev.some(
 									( p ) => p.slug === plugin.slug
@@ -565,14 +565,14 @@ const ImportSite = () => {
 							} );
 						}
 
-						/ Use reducer actions to avoid closure issues
-						/ The reducer uses current state, not stale closure values
+						// Use reducer actions to avoid closure issues
+						// The reducer uses current state, not stale closure values
 						if ( deprioritizeStatus ) {
 							dispatch( {
 								type: 'plugin_deferred',
 								plugin,
 								importStatus: sprintf(
-									/ translators: Plugin Name.
+									// translators: Plugin Name.
 									__(
 										'%1$s deferred (requires WooCommerce).',
 										'astra-sites'
@@ -587,7 +587,7 @@ const ImportSite = () => {
 								type: 'plugin_activated',
 								plugin,
 								importStatus: sprintf(
-									/ translators: Plugin Name.
+									// translators: Plugin Name.
 									__( '%1$s activated.', 'astra-sites' ),
 									plugin.name
 								),
@@ -598,7 +598,7 @@ const ImportSite = () => {
 				} catch ( error ) {
 					report(
 						sprintf(
-							/ translators: Plugin name.
+							// translators: Plugin name.
 							__(
 								`JSON_Error: Could not activate the required plugin - %1$s.`,
 								'astra-sites'
@@ -609,7 +609,7 @@ const ImportSite = () => {
 						error,
 						'',
 						sprintf(
-							/ translators: Support article URL.
+							// translators: Support article URL.
 							__(
 								'<a href="%1$s">Read article</a> to resolve the issue and continue importing template.',
 								'astra-sites'
@@ -633,7 +633,7 @@ const ImportSite = () => {
 				} );
 				report(
 					sprintf(
-						/ translators: Plugin name.
+						// translators: Plugin name.
 						__(
 							`Could not activate the required plugin - %1$s.`,
 							'astra-sites'
@@ -644,7 +644,7 @@ const ImportSite = () => {
 					error?.data?.message,
 					'',
 					sprintf(
-						/ translators: Support article URL.
+						// translators: Support article URL.
 						__(
 							'<a href="%1$s">Read article</a> to resolve the issue and continue importing template.',
 							'astra-sites'
@@ -693,7 +693,7 @@ const ImportSite = () => {
 				dispatch( {
 					type: 'set',
 					importStatus: sprintf(
-						/ translators: %1$s: Import name, %2$d: current attempt, %3$d: max attempts.
+						// translators: %1$s: Import name, %2$d: current attempt, %3$d: max attempts.
 						__( '%1$s (retry attempt %2$d/%3$d)…', 'astra-sites' ),
 						importName,
 						attempt - 1,
@@ -702,18 +702,18 @@ const ImportSite = () => {
 				} );
 			}
 
-			/ On last attempt, allow error reporting; suppress on earlier attempts
+			// On last attempt, allow error reporting; suppress on earlier attempts
 			const result = await importFn( ! isLastAttempt );
 
-			/ If result is false and not the last attempt, retry
+			// If result is false and not the last attempt, retry
 			if ( result === false && ! isLastAttempt ) {
-				/ Calculate exponential backoff delay
+				// Calculate exponential backoff delay
 				const delay = initialDelay * Math.pow( 2, attempt - 1 );
 
 				dispatch( {
 					type: 'set',
 					importStatus: sprintf(
-						/ translators: Import name, seconds to wait.
+						// translators: Import name, seconds to wait.
 						__(
 							'%1$s encountered an error. Retrying in %2$d seconds…',
 							'astra-sites'
@@ -723,7 +723,7 @@ const ImportSite = () => {
 					),
 				} );
 
-				/ Wait before retry
+				// Wait before retry
 				await new Promise( ( resolve ) =>
 					setTimeout( resolve, delay )
 				);
@@ -731,7 +731,7 @@ const ImportSite = () => {
 				continue;
 			}
 
-			/ Either success or last attempt - return the result
+			// Either success or last attempt - return the result
 			return result;
 		}
 
@@ -1266,7 +1266,7 @@ const ImportSite = () => {
 	 * @param {boolean} suppressErrorReporting - If true, suppress error reporting (used by retry logic)
 	 */
 	const importCartflowsFlows = async ( suppressErrorReporting = false ) => {
-		/ Skip if CartFlows is not in the required plugins list.
+		// Skip if CartFlows is not in the required plugins list.
 		if ( ! inRequiredPlugins( 'cartflows' ) ) {
 			return true;
 		}
@@ -1321,7 +1321,7 @@ const ImportSite = () => {
 				}
 			} )
 			.catch( ( error ) => {
-				/ Suppress error reporting if flag is set (used in retry logic)
+				// Suppress error reporting if flag is set (used in retry logic)
 				if ( suppressErrorReporting ) {
 					return false;
 				}
@@ -1344,7 +1344,7 @@ const ImportSite = () => {
 	const importCartAbandonmentRecovery = async (
 		suppressErrorReporting = false
 	) => {
-		/ Skip if Woo Cart Abandonment Recovery is not in the required plugins list.
+		// Skip if Woo Cart Abandonment Recovery is not in the required plugins list.
 		if ( ! inRequiredPlugins( 'woo-cart-abandonment-recovery' ) ) {
 			return true;
 		}
@@ -1409,7 +1409,7 @@ const ImportSite = () => {
 				}
 			} )
 			.catch( ( error ) => {
-				/ Suppress error reporting if flag is set (used in retry logic)
+				// Suppress error reporting if flag is set (used in retry logic)
 				if ( suppressErrorReporting ) {
 					return false;
 				}
@@ -1433,7 +1433,7 @@ const ImportSite = () => {
 	 * @param {boolean} suppressErrorReporting - If true, suppress error reporting (used by retry logic)
 	 */
 	const importLatepointTables = async ( suppressErrorReporting = false ) => {
-		/ Skip if LatePoint is not in the required plugins list.
+		// Skip if LatePoint is not in the required plugins list.
 		if ( ! inRequiredPlugins( 'latepoint' ) ) {
 			return true;
 		}
@@ -1488,7 +1488,7 @@ const ImportSite = () => {
 				}
 			} )
 			.catch( ( error ) => {
-				/ Suppress error reporting if flag is set (used in retry logic)
+				// Suppress error reporting if flag is set (used in retry logic)
 				if ( suppressErrorReporting ) {
 					return false;
 				}
@@ -1509,7 +1509,7 @@ const ImportSite = () => {
 	 * @param {boolean} suppressErrorReporting - If true, suppress error reporting (used by retry logic)
 	 */
 	const importForms = async ( suppressErrorReporting = false ) => {
-		/ Skip if WPForms Lite is not in the required plugins list.
+		// Skip if WPForms Lite is not in the required plugins list.
 		if ( ! inRequiredPlugins( 'wpforms-lite' ) ) {
 			return true;
 		}
@@ -1563,7 +1563,7 @@ const ImportSite = () => {
 				}
 			} )
 			.catch( ( error ) => {
-				/ Suppress error reporting if flag is set (used in retry logic)
+				// Suppress error reporting if flag is set (used in retry logic)
 				if ( suppressErrorReporting ) {
 					return false;
 				}
@@ -1696,7 +1696,7 @@ const ImportSite = () => {
 					} );
 					if ( false === data.success ) {
 						const errorMsg = data.data.error || data.data;
-						/ Use the contextual error message from server
+						// Use the contextual error message from server
 						report(
 							errorMsg,
 							'',
@@ -1719,7 +1719,7 @@ const ImportSite = () => {
 							  )
 							: '';
 
-					/ Show preview of response for debugging
+					// Show preview of response for debugging
 					const responsePreview =
 						text.length > 200
 							? text.substring( 0, 200 ) + '...'
@@ -1740,7 +1740,7 @@ const ImportSite = () => {
 				}
 			} )
 			.catch( ( error ) => {
-				/ Enhanced network error handling
+				// Enhanced network error handling
 				let secondaryMessage = __(
 					'Unable to connect to the server. This could be due to internet connectivity issues.',
 					'astra-sites'
@@ -1750,7 +1750,7 @@ const ImportSite = () => {
 					'astra-sites'
 				);
 
-				/ Classify network errors
+				// Classify network errors
 				if (
 					error.name === 'TypeError' &&
 					error.message?.includes( 'fetch' )
@@ -1788,7 +1788,7 @@ const ImportSite = () => {
 	 * 6. Import Spectra Settings.
 	 */
 	const importSpectraSettings = async () => {
-		/ Skip if Spectra is not in the required plugins list.
+		// Skip if Spectra is not in the required plugins list.
 		if ( ! inRequiredPlugins( 'ultimate-addons-for-gutenberg' ) ) {
 			return true;
 		}
@@ -1826,7 +1826,7 @@ const ImportSite = () => {
 						return true;
 					}
 
-					/ Extract meaningful error message
+					// Extract meaningful error message
 					const errorMsg =
 						data.data?.error ||
 						data.data ||
@@ -1870,7 +1870,7 @@ const ImportSite = () => {
 	 * 7. Import Surecart Settings.
 	 */
 	const importSureCartSettings = async () => {
-		/ Skip if SureCart is not in the required plugins list.
+		// Skip if SureCart is not in the required plugins list.
 		if ( ! inRequiredPlugins( 'surecart' ) ) {
 			return true;
 		}
@@ -1938,7 +1938,7 @@ const ImportSite = () => {
 	 * @param {JSON} data JSON object for all the content in XML
 	 */
 	const importXML = ( data ) => {
-		/ Import XML though Event Source.
+		// Import XML though Event Source.
 		sseImport.data = data;
 		sseImport.render( dispatch, percentage );
 
@@ -2002,7 +2002,7 @@ const ImportSite = () => {
 			dispatch( {
 				type: 'set',
 				importStatus: sprintf(
-					/ translators: Response importMessage
+					// translators: Response importMessage
 					__( 'Importing - %1$s', 'astra-sites' ),
 					importMessage
 				),
@@ -2217,18 +2217,18 @@ const ImportSite = () => {
 	};
 
 	useEffect( () => {
-		/ Track template preview step when component mounts
+		// Track template preview step when component mounts
 		trackOnboardingStep( 'import' );
 	}, [] );
 
 	useEffect( () => {
-		window.addEventListener( 'beforeunload', preventRefresh ); / eslint-disable-line
+		window.addEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 		return () => {
-			window.removeEventListener( 'beforeunload', preventRefresh ); / eslint-disable-line
+			window.removeEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 		};
-	}, [ importPercent ] ); / Add importPercent as a dependency.
+	}, [ importPercent ] ); // Add importPercent as a dependency.
 
-	/ Add a useEffect to remove the event listener when importPercent is 100%.
+	// Add a useEffect to remove the event listener when importPercent is 100%.
 	useEffect( () => {
 		if ( importPercent === 100 ) {
 			window.removeEventListener( 'beforeunload', preventRefresh );
@@ -2288,7 +2288,7 @@ const ImportSite = () => {
 	 */
 	useEffect( () => {
 		if ( requiredPluginsDone && themeStatus ) {
-			/ Add a 2-second delay to ensure plugins are fully loaded and initialized
+			// Add a 2-second delay to ensure plugins are fully loaded and initialized
 			dispatch( {
 				type: 'set',
 				importStatus: __(
@@ -2299,7 +2299,7 @@ const ImportSite = () => {
 
 			setTimeout( () => {
 				importPart1();
-			}, 2000 ); / 2 second delay to allow plugin classes to load
+			}, 2000 ); // 2 second delay to allow plugin classes to load
 		}
 	}, [ requiredPluginsDone, themeStatus ] );
 
@@ -2312,7 +2312,7 @@ const ImportSite = () => {
 		}
 	}, [ xmlImportDone ] );
 
-	/ State for deferred plugins (WooCommerce dependency handling)
+	// State for deferred plugins (WooCommerce dependency handling)
 	const [ deferredPlugins, setDeferredPlugins ] = React.useState( [] );
 	const [ retryingDeferred, setRetryingDeferred ] = React.useState( false );
 
@@ -2326,12 +2326,12 @@ const ImportSite = () => {
 
 		setRetryingDeferred( true );
 
-		/ Move deferred plugins back to activation queue
+		// Move deferred plugins back to activation queue
 		const pluginsToRetry = [ ...deferredPlugins ];
 		setDeferredPlugins( [] );
 
-		/ Use reducer action so state.notActivatedList (not closure) is read at
-		/ dispatch time — consistent with plugin_installed/plugin_activated fix.
+		// Use reducer action so state.notActivatedList (not closure) is read at
+		// dispatch time — consistent with plugin_installed/plugin_activated fix.
 		dispatch( {
 			type: 'plugin_retry_deferred',
 			plugins: pluginsToRetry,
@@ -2340,22 +2340,22 @@ const ImportSite = () => {
 		setRetryingDeferred( false );
 	};
 
-	/ This checks if all the required plugins are installed and activated.
+	// This checks if all the required plugins are installed and activated.
 	useEffect( () => {
-		/ Don't set requiredPluginsDone if we're waiting for plugin check to complete.
-		/ This prevents race condition in "Try Again" flow.
+		// Don't set requiredPluginsDone if we're waiting for plugin check to complete.
+		// This prevents race condition in "Try Again" flow.
 		if ( awaitingPluginCheck ) {
 			return;
 		}
 
 		if ( notActivatedList.length <= 0 && notInstalledList.length <= 0 ) {
-			/ Check if we have deferred plugins to retry
+			// Check if we have deferred plugins to retry
 			if ( deferredPlugins.length > 0 && ! retryingDeferred ) {
 				retryDeferredPlugins();
 				return;
 			}
 
-			/ All plugins are truly done
+			// All plugins are truly done
 			dispatch( {
 				type: 'set',
 				requiredPluginsDone: true,
@@ -2368,9 +2368,9 @@ const ImportSite = () => {
 		awaitingPluginCheck,
 	] );
 
-	/ Activate plugins one by one using the prioritized list
+	// Activate plugins one by one using the prioritized list
 	useEffect( () => {
-		/ Installed all required plugins.
+		// Installed all required plugins.
 		if ( notActivatedList.length > 0 ) {
 			activatePlugin( notActivatedList[ 0 ] );
 		}

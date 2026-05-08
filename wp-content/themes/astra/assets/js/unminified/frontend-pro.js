@@ -12,7 +12,7 @@ astraToggleSetupPro = function( mobileHeaderType, body, menu_click_listeners ) {
 	var menuToggleAllLength;
 
 	if ( 'off-canvas' === mobileHeaderType || 'full-width' === mobileHeaderType ) {
-        / comma separated selector added, if menu is outside of Off-Canvas then submenu is not clickable, it work only for Off-Canvas area with dropdown style.
+        // comma separated selector added, if menu is outside of Off-Canvas then submenu is not clickable, it work only for Off-Canvas area with dropdown style.
         var __main_header_all = document.querySelectorAll( '#ast-mobile-popup, #ast-mobile-header' );
         if ( body.classList.contains('ast-header-break-point') ) {
 
@@ -53,7 +53,7 @@ astraToggleSetupPro = function( mobileHeaderType, body, menu_click_listeners ) {
 
             if ('undefined' !== typeof __main_header_all[i]) {
 
-                / To handle the comma seprated selector added above we need this loop.
+                // To handle the comma seprated selector added above we need this loop.
                 for( var mainHeaderCount =0; mainHeaderCount  < __main_header_all.length; mainHeaderCount++ ){
 
                     if (document.querySelector('header.site-header').classList.contains('ast-builder-menu-toggle-link')) {
@@ -61,7 +61,7 @@ astraToggleSetupPro = function( mobileHeaderType, body, menu_click_listeners ) {
                     } else {
                         var astra_menu_toggle = __main_header_all[mainHeaderCount].querySelectorAll('ul.main-header-menu .ast-menu-toggle');
                     }
-                    / Add Eventlisteners for Submenu.
+                    // Add Eventlisteners for Submenu.
                     if (astra_menu_toggle.length > 0) {
 
                         for (var j = 0; j < astra_menu_toggle.length; j++) {

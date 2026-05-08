@@ -422,7 +422,7 @@ export const installAstra = ( importPercent, dispatch ) => {
 			} )
 			.catch( ( error ) => {
 				console.log( error );
-				/ Check if error is due to folder already existing
+				// Check if error is due to folder already existing
 				const isFolderExistsError =
 					error?.errorCode === 'folder_exists' ||
 					( error?.errorMessage &&
@@ -430,7 +430,7 @@ export const installAstra = ( importPercent, dispatch ) => {
 						error.errorMessage.toLowerCase().includes( 'exist' ) );
 
 				if ( isFolderExistsError ) {
-					/ Theme is already installed, proceed to activate
+					// Theme is already installed, proceed to activate
 					dispatch( {
 						importStatus: __(
 							'Astra Theme Already Installed.',
@@ -463,7 +463,7 @@ export const installAstra = ( importPercent, dispatch ) => {
 	}
 
 	if ( 'installed-but-inactive' === themeStatus ) {
-		/ WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
+		// WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
 		setTimeout( () => activateAstra( dispatch ), 3000 );
 	}
 
@@ -617,7 +617,7 @@ export const generateAnalyticsLead = async ( tryAgainCount, status, data ) => {
 	importContent.append( 'type', 'ai_builder' );
 	importContent.append( '_ajax_nonce', aiBuilderVars._ajax_nonce );
 
-	/ Append extra data.
+	// Append extra data.
 	Object.entries( data ).forEach( ( [ key, value ] ) =>
 		importContent.append( key, value )
 	);
@@ -639,20 +639,20 @@ export const checkMultisiteImportPermissions = (
 	requiredPluginsData,
 	aiBuilderVars
 ) => {
-	/ Only apply in multisite environments
+	// Only apply in multisite environments
 	if ( ! aiBuilderVars.isMultisite ) {
 		return { allowed: true };
 	}
 
-	/ Server-side logic in helper.php already handles all the multisite permission checks
-	/ and returns an 'error' key in the response data
+	// Server-side logic in helper.php already handles all the multisite permission checks
+	// and returns an 'error' key in the response data
 	const hasPluginError = requiredPluginsData?.error || false;
 	const hasThemeError = aiBuilderVars.canActivatePlugins
 		? themeStatus === 'not-installed'
 		: themeStatus !== 'installed-and-active';
 
 	if ( hasPluginError || hasThemeError ) {
-		/ Extract missing plugins and themes from the required plugins data
+		// Extract missing plugins and themes from the required plugins data
 		const requiredPlugins = requiredPluginsData?.required_plugins || {};
 		const notInstalledPlugins = requiredPlugins.notinstalled || [];
 		const inactivePlugins = requiredPlugins.inactive || [];
@@ -662,7 +662,7 @@ export const checkMultisiteImportPermissions = (
 			allMissingPlugins = [ ...notInstalledPlugins ];
 		}
 
-		/ Check theme requirements from localized variables
+		// Check theme requirements from localized variables
 		const missingThemes = hasThemeError ? [ { name: 'Astra' } ] : [];
 
 		return {
@@ -672,6 +672,6 @@ export const checkMultisiteImportPermissions = (
 		};
 	}
 
-	/ Import allowed
+	// Import allowed
 	return { allowed: true };
 };

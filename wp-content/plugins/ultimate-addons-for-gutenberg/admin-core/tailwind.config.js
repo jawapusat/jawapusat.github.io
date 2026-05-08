@@ -11,7 +11,7 @@ module.exports = withTW( {
 	theme: {
 		extend: {
 			colors: {
-				/ brand
+				// brand
 				'brand-background-50': '#EFF6FF',
 				'brand-background-hover-100': '#DBEAFE',
 				'brand-200': '#BFDBFE',
@@ -23,14 +23,14 @@ module.exports = withTW( {
 				'brand-800': '#1E40AF',
 				'brand-900': '#1E3A8A',
 				'brand-text-950': '#172554',
-				/ background
+				// background
 				'background-primary': '#FFFFFF',
 				'background-secondary': '#F9FAFB',
 				'background-inverse': '#111827',
 				'background-brand': '#6005FF',
 				'background-brand-light': '#F3F0FF',
 				'background-important': '#DC2626',
-				/ field
+				// field
 				'field-primary-background': '#F9FAFB',
 				'field-secondary-background': '#FFFFFF',
 				'field-primary-hover': '#F3F4F6',
@@ -50,7 +50,7 @@ module.exports = withTW( {
 				'field-border-error': '#FECACA',
 				'field-background-error': '#FEF2F2',
 				'field-required': '#DC2626',
-				/ border
+				// border
 				'border-interactive': '#6005FF',
 				'border-subtle': '#E5E7EB',
 				'border-strong': '#6B7280',
@@ -60,7 +60,7 @@ module.exports = withTW( {
 				'border-error': '#DC2626',
 				'border-transparent-subtle': '#37415114',
 				'border-white': '#FFFFFF',
-				/ text
+				// text
 				'text-primary': '#111827',
 				'text-secondary': '#4B5563',
 				'text-tertiary': '#9CA3AF',
@@ -70,14 +70,14 @@ module.exports = withTW( {
 				'text-inverse': '#FFFFFF',
 				'text-disabled': '#D1D5DB',
 				'text-on-button-disabled': '#9CA3AF',
-				/ link
+				// link
 				'link-primary': '#6005FF',
 				'link-primary-hover': '#1D4ED8',
 				'link-inverse': '#38BDF8',
 				'link-visited': '#7C3AED',
 				'link-visited-inverse': '#A78BFA',
 				'link-inverse-hover': '#7DD3FC',
-				/ icon
+				// icon
 				'icon-primary': '#111827',
 				'icon-secondary': '#4B5563',
 				'icon-on-color': '#FFFFFF',
@@ -85,7 +85,7 @@ module.exports = withTW( {
 				'icon-interactive': '#6005FF',
 				'icon-on-color-disabled': '#9CA3AF',
 				'icon-disabled': '#D1D5DB',
-				/ support
+				// support
 				'support-error': '#DC2626',
 				'support-success': '#16A34A',
 				'support-warning': '#EAB308',
@@ -94,7 +94,7 @@ module.exports = withTW( {
 				'support-success-inverse': '#4ADE80',
 				'support-warning-inverse': '#FDE047',
 				'support-info-inverse': '#38BDF8',
-				/ button
+				// button
 				'button-primary': '#6005FF',
 				'button-primary-hover': '#5104D6',
 				'button-secondary': '#1F2937',
@@ -107,7 +107,7 @@ module.exports = withTW( {
 				'button-disabled': '#F3F4F6',
 				'button-tertiary-border': '#E5E7EB',
 				'button-tertiary-color': '#111827',
-				/ focus
+				// focus
 				'focus': '#6005FF',
 				'focus-inset': '#FFFFFF',
 				'focus-inverse': '#38BDF8',
@@ -115,7 +115,7 @@ module.exports = withTW( {
 				'focus-error': '#DC2626',
 				'focus-border': '#BFDBFE',
 				'focus-error-border': '#FECACA',
-				/ misc
+				// misc
 				'misc-highlight': '#BFDBFE',
 				'misc-overlay': '#11182780',
 				'misc-skeleton-background': '#F3F4F6',
@@ -126,7 +126,7 @@ module.exports = withTW( {
 				'misc-loader-base': '#1118270D',
 				'misc-loader-color': '#6005FF',
 				'misc-progress-background': '#E5E7EB',
-				/ badge
+				// badge
 				'badge-background-gray': '#F9FAFB',
 				'badge-color-gray': '#1F2937',
 				'badge-hover-gray': '#F3F4F6',
@@ -152,7 +152,7 @@ module.exports = withTW( {
 				'badge-hover-disabled': '#F3F4F6',
 				'badge-border-disabled': '#E5E7EB',
 				'badge-background-important': '#DC2626',
-				/ alert
+				// alert
 				'alert-background-neutral': '#FFFFFF',
 				'alert-border-neutral': '#E5E7EB',
 				'alert-background-danger': '#FEF2F2',
@@ -163,13 +163,13 @@ module.exports = withTW( {
 				'alert-border-green': '#BBF7D0',
 				'alert-background-info': '#F0F9FF',
 				'alert-border-info': '#BAE6FD',
-				/ tab
+				// tab
 				'tab-background': '#F3F4F6',
 				'tab-border': '#E5E7EB',
-				/ tooltip
+				// tooltip
 				'tooltip-background-light': '#FFFFFF',
 				'tooltip-background-dark': '#111827',
-				/ toggle
+				// toggle
 				'toggle-off': '#E5E7EB',
 				'toggle-on': '#6005FF',
 				'toggle-dial-background': '#FFFFFF',
@@ -197,10 +197,10 @@ module.exports = withTW( {
 				inter: ['"Inter"', 'sans-serif'],
 			},
 			fontSize: {
-				xxs: '0.6875rem', / 11px
+				xxs: '0.6875rem', // 11px
 			},
 			lineHeight: {
-				2.6: '0.6875rem', / 11px
+				2.6: '0.6875rem', // 11px
 			},
 			boxShadow: {
 				'soft-shadow-sm':
@@ -221,10 +221,10 @@ module.exports = withTW( {
 				'hover': '0px 12px 24px -12px rgba(0, 0, 0, 0.12)',
 			},
 			spacing: {
-				120: '30rem', / 480px
-				95: '23.75rem', / 380px
-				141.5: '35.375rem', / 566px
-				188: '47rem', / 752px
+				120: '30rem', // 480px
+				95: '23.75rem', // 380px
+				141.5: '35.375rem', // 566px
+				188: '47rem', // 752px
 			},
 			zIndex: {
 				999999: '999999',
@@ -244,7 +244,7 @@ module.exports = withTW( {
 	},
 	plugins: [
 		require( '@tailwindcss/forms' ),
-		/ Polyfill size-* utility for Tailwind < 3.3 (used by force-ui).
+		// Polyfill size-* utility for Tailwind < 3.3 (used by force-ui).
 		function ( { matchUtilities, theme } ) {
 			matchUtilities(
 				{

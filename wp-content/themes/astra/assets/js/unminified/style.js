@@ -16,13 +16,13 @@
  */
 var astraGetParents = function ( elem, selector ) {
 
-	/ Setup parents array.
+	// Setup parents array.
 	var parents = [];
 
-	/ Get matching parent elements.
+	// Get matching parent elements.
 	for ( ; elem && elem !== document; elem = elem.parentNode ) {
 
-		/ Add matching parents to array.
+		// Add matching parents to array.
 		if ( selector ) {
 			if ( elem.matches( selector ) ) {
 				parents.push( elem );
@@ -102,9 +102,9 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	content = content.replace( /[^0-9]/g, '' );
 
 	if( 'both' == device || ( 'desktop' == device && '769' == content ) || ( 'mobile' == device && '' == content ) ) {
-		/ Get current window / document scroll.
+		// Get current window / document scroll.
 		var  scrollTop = window.pageYOffset || document.body.scrollTop;
-		/ If masthead found.
+		// If masthead found.
 		if( masthead && masthead.length ) {
 			if (scrollTop > masthead.offsetHeight + 100) {
 				astScrollTop.style.display = "block";
@@ -112,7 +112,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				astScrollTop.style.display = "none";
 			}
 		} else {
-			/ If there is no masthead set default start scroll
+			// If there is no masthead set default start scroll
 			if ( window.pageYOffset > 300 ) {
 				astScrollTop.style.display = "block";
 			} else {
@@ -132,8 +132,8 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	/* Add break point Class and related trigger */
 	var updateHeaderBreakPoint = function () {
 
-		/ Content overrflowing out of screen can give incorrect window.innerWidth.
-		/ Adding overflow hidden and then calculating the window.innerWidth fixes the problem.
+		// Content overrflowing out of screen can give incorrect window.innerWidth.
+		// Adding overflow hidden and then calculating the window.innerWidth fixes the problem.
 		var originalOverflow = document.querySelector('body').style.overflow;
 		document.querySelector('body').style.overflow = 'hidden';
 		var ww = window.innerWidth;
@@ -147,7 +147,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 				if (headerWrap[i].tagName == 'DIV' && headerWrap[i].classList.contains('main-header-bar-wrap')) {
 					if (ww > break_point) {
-						/remove menu toggled class.
+						//remove menu toggled class.
 						if (null != menu_toggle_all[i]) {
 							menu_toggle_all[i].classList.remove('toggled');
 						}
@@ -219,7 +219,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	AstraToggleMenu = function( astra_menu_toggle ) {
 		console.warn('AstraToggleMenu() function has been deprecated since version 1.6.5 or above of Astra Theme and will be removed in the future. Use AstraToggleSubMenu() instead.');
 
-		/ Add Eventlisteners for Submenu.
+		// Add Eventlisteners for Submenu.
 		if (astra_menu_toggle.length > 0) {
 			for (var i = 0; i < astra_menu_toggle.length; i++) {
 				astra_menu_toggle[i].removeEventListener('click', AstraToggleSubMenu);
@@ -251,7 +251,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 						var astra_menu_toggle = __main_header_all[i].querySelectorAll('ul.main-header-menu .ast-menu-toggle');
 					}
 
-					/ Add Eventlisteners for Submenu.
+					// Add Eventlisteners for Submenu.
 					if (astra_menu_toggle.length > 0) {
 						for (var j = 0; j < astra_menu_toggle.length; j++) {
 							astra_menu_toggle[j].removeEventListener('click', AstraToggleSubMenu);
@@ -328,7 +328,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	}, false);
 
 	window.addEventListener('resize', function () {
-		/ Skip resize event when keyboard display event triggers on devices.
+		// Skip resize event when keyboard display event triggers on devices.
 		if( 'INPUT' !== document.activeElement.tagName ) {
 			updateHeaderBreakPoint();
 			AstraToggleSetup();
@@ -420,7 +420,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 		var menu = container.getElementsByTagName( 'ul' )[0];
 
-		/ Hide menu toggle button if menu is empty and return early.
+		// Hide menu toggle button if menu is empty and return early.
 		if ( 'undefined' === typeof menu ) {
 			button.style.display = 'none';
 			return;
@@ -443,17 +443,17 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 			}
 		};
 
-		/ Get all the link elements within the menu.
+		// Get all the link elements within the menu.
 		var links    = menu.getElementsByTagName( 'a' );
 		var subMenus = menu.getElementsByTagName( 'ul' );
 
 
-		/ Set menu items with submenus to aria-haspopup="true".
+		// Set menu items with submenus to aria-haspopup="true".
 		for ( var i = 0, len = subMenus.length; i < len; i++ ) {
 			subMenus[i].parentNode.setAttribute( 'aria-haspopup', 'true' );
 		}
 
-		/ Each time a menu link is focused or blurred, toggle focus.
+		// Each time a menu link is focused or blurred, toggle focus.
 		for ( i = 0, len = links.length; i < len; i++ ) {
 			links[i].addEventListener( 'focus', toggleFocus, true );
 			links[i].addEventListener( 'blur', toggleBlurFocus, true );
@@ -512,7 +512,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 					astraTriggerEvent( document.querySelector('body'), 'astraMenuHashLinkClicked' );
                 } else {
 	            	while ( -1 === self.className.indexOf( 'nav-menu' ) ) {
-						/ On li elements toggle the class .focus.
+						// On li elements toggle the class .focus.
 						if ( 'li' === self.tagName.toLowerCase() ) {
 							if ( -1 !== self.className.indexOf( 'focus' ) ) {
 								self.className = self.className.replace( ' focus', '' );
@@ -583,7 +583,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	 * @since x.x.x
 	 */
 	if ( astra.is_scroll_to_id ) {
-		/ Calculate the offset top of an element, accounting for nested elements.
+		// Calculate the offset top of an element, accounting for nested elements.
 		const getOffsetTop = (element) => {
 			let offsetTop = 0;
 			while (element) {
@@ -600,7 +600,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 			if (siteHeader) {
 
-				/ Check and add offset to scroll top if header is sticky.
+				// Check and add offset to scroll top if header is sticky.
 				const stickyHeaders = siteHeader.querySelectorAll(
 					'div[data-stick-support]'
 				);
@@ -645,7 +645,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 		if (links) {
 			for (const link of links) {
 				if (link.href.split("#")[0] !== location.href.split("#")[0]) {
-					/ Store the hash
+					// Store the hash
 					hashLinks.push({
 						hash: link.hash,
 						url: link.href.split("#")[0],
@@ -662,7 +662,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 					const siteHeader = document.querySelector('.site-header');
 					let offset = 0;
 	
-					/ Check and add offset to scroll top if header is sticky.
+					// Check and add offset to scroll top if header is sticky.
 					const headerHeight = siteHeader.querySelectorAll('div[data-stick-support]');
 					if (headerHeight) {
 						headerHeight.forEach(single => {
@@ -680,7 +680,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				}
 			}
 
-			/ If there is a hash in the URL when the page loads, scroll to that element after a short delay.
+			// If there is a hash in the URL when the page loads, scroll to that element after a short delay.
 			if ( location.hash ) {
 				setTimeout( () => scrollToIDHandler( new Event( 'click' ), location.hash ), 750 );
 			}

@@ -140,18 +140,18 @@ window.UAGBPostMasonry = {
 		const HTMLElement = document.createElement( 'div' );
 		HTMLElement.innerHTML = htmlString.trim();
 
-		/ Change this to div.childNodes to support multiple top-level nodes
+		// Change this to div.childNodes to support multiple top-level nodes
 		return HTMLElement;
 	},
 	_callAjax( $scope, $obj, $attr, loader, append = false, count ) {
-		const PostData = new FormData(); / eslint-disable-line no-undef
+		const PostData = new FormData(); // eslint-disable-line no-undef
 
 		PostData.append( 'action', 'uagb_get_posts' );
 		PostData.append( 'nonce', uagb_data.uagb_masonry_ajax_nonce );
 		PostData.append( 'page_number', $obj.page_number );
 		PostData.append( 'attr', JSON.stringify( $attr ) );
 
-		/ eslint-disable-next-line no-undef
+		// eslint-disable-next-line no-undef
 		fetch( uagb_data.ajax_url, {
 			method: 'POST',
 			credentials: 'same-origin',
@@ -166,7 +166,7 @@ window.UAGBPostMasonry = {
 				}
 
 				setTimeout( function () {
-					/ eslint-disable-next-line no-undef
+					// eslint-disable-next-line no-undef
 					const isotope = new Isotope( element, {
 						itemSelector: 'article',
 					} );
@@ -185,7 +185,7 @@ window.UAGBPostMasonry = {
 					if ( count === parseInt( $obj.total ) ) {
 						$scope.querySelector( '.uagb-post__load-more-wrap' ).style.display = 'none';
 					}
-					/ This CSS is for Post BG Image Spacing
+					// This CSS is for Post BG Image Spacing
 					const articles = document.querySelectorAll(
 						'.uagb-post__image-position-background .uagb-post__inner-wrap'
 					);
@@ -203,21 +203,21 @@ window.UAGBPostMasonry = {
 				}, 500 );
 			} )
 			.catch( function ( error ) {
-				console.log( JSON.stringify( error ) ); / eslint-disable-line no-console
+				console.log( JSON.stringify( error ) ); // eslint-disable-line no-console
 			} );
 	},
 };
 window.UAGBPostGrid = {
 	_callAjax( $attr, $page_number, block_id ) {
 
-		/ Create new FormData object with necessary data to send in AJAX call.
+		// Create new FormData object with necessary data to send in AJAX call.
 		const PostData = new FormData();
 		PostData.append( 'action', 'uagb_post_pagination_grid' );
 		PostData.append( 'nonce', uagb_data.uagb_grid_ajax_nonce );
 		PostData.append( 'page_number', $page_number );
 		PostData.append( 'attr', JSON.stringify( $attr ) );
 
-		/ Send AJAX call with PostData object.
+		// Send AJAX call with PostData object.
 		fetch( uagb_data.ajax_url, {
 			method: 'POST',
 			credentials: 'same-origin',
@@ -226,17 +226,17 @@ window.UAGBPostGrid = {
 		  .then( ( resp ) => resp.json() )
 		  .then( function( data ) { 
 
-			/ Get the relevant DOM elements to replace.
+			// Get the relevant DOM elements to replace.
 			const grid_element = document.querySelector( '.uagb-block-'+ block_id );
 			if( ! grid_element ) {	
 				return;
 			}
 
-			/ Remove the old elements and replace them with the updated markup received from the AJAX response.
+			// Remove the old elements and replace them with the updated markup received from the AJAX response.
 			const html = data.data.replace( /\n|\t/g, '' );
 			grid_element.outerHTML = html;
 
-			/ Get the new block ID to use for future pagination requests.
+			// Get the new block ID to use for future pagination requests.
 			const new_blockId = html.match( /uagb-block-([\w-]+)/ )?.[1] || '';
 			addClickListeners( new_blockId );
 			
@@ -244,17 +244,17 @@ window.UAGBPostGrid = {
 
 		function addClickListeners( new_blockId ) {
 
-			/ Add click event listener to each pagination link in the updated markup.
+			// Add click event listener to each pagination link in the updated markup.
 			const elements = document.querySelectorAll( `.uagb-post-grid.uagb-block-${new_blockId} .uagb-post-pagination-wrap a` );
 			elements.forEach( element => {
 				element.addEventListener( 'click', event => {
 
-					/ Prevent default link behavior and extract the new page number to send in the next AJAX call
+					// Prevent default link behavior and extract the new page number to send in the next AJAX call
 					event.preventDefault();
 					const link = event.target.getAttribute( 'href' ).match( /admin-ajax.*/ )?.[0] || '';
 					const pageNumber = link.match( /\d+/ )?.[0] || 1;
 					
-					/ Call _callAjax again with updated page number and block ID
+					// Call _callAjax again with updated page number and block ID
 					window.UAGBPostGrid._callAjax( $attr, parseInt( pageNumber ), new_blockId );
 
 				} );
@@ -264,8 +264,8 @@ window.UAGBPostGrid = {
 	}
 };
 
-/ Set Carousel Height for Customiser.
-/ eslint-disable-next-line no-unused-vars
+// Set Carousel Height for Customiser.
+// eslint-disable-next-line no-unused-vars
 function uagb_carousel_height( id ) {
 	const wrap = document.querySelector( '#wpwrap .is-carousel.uagb-block-' + id );
 	if ( wrap ) {
@@ -273,8 +273,8 @@ function uagb_carousel_height( id ) {
 	}
 }
 
-/ Unset Carousel Height for Customiser.
-/ eslint-disable-next-line no-unused-vars
+// Unset Carousel Height for Customiser.
+// eslint-disable-next-line no-unused-vars
 function uagb_carousel_unset_height( id ) {
 	const wrap = document.querySelector( '#wpwrap .is-carousel.uagb-block-' + id );
 	if ( wrap ) {

@@ -24,46 +24,46 @@ UAGBTableOfContents = {
 		const block_element = document_collapsable.querySelector( id );
 		const uagbLoader = block_element.querySelector( '.uagb-toc__loader' );
 
-		/ Get the first list item to compute the ::marker styles.
+		// Get the first list item to compute the ::marker styles.
 		const firstListItem = block_element.querySelector( 'li.uagb-toc__list:not(.uagb-toc__list--expandable)' );
 		if( firstListItem ) {
 			const listFontSize = window.getComputedStyle( firstListItem ).fontSize;
 			const listWrap = block_element.querySelector( '.uagb-toc__list-wrap' );
 
-			/ Calculate the width for ::before pseudo-elements
+			// Calculate the width for ::before pseudo-elements
 			const widthValue = `calc(${listFontSize} / 3)`;
 
-			/ Check if a previous style element exists and remove it.
-			/ Escape periods in the id for use in querySelector or CSS.
+			// Check if a previous style element exists and remove it.
+			// Escape periods in the id for use in querySelector or CSS.
 			const escapedId = id?.replace( /\./g, '' );
 
-			/ Ensure no existing stylesheets target the ID
+			// Ensure no existing stylesheets target the ID
 			const existingStyleSheet = document_collapsable.querySelector( `#${escapedId}-toc-style` );
 			if ( existingStyleSheet ) {
-				existingStyleSheet.remove();  / Remove the existing stylesheet if it exists.
+				existingStyleSheet.remove();  // Remove the existing stylesheet if it exists.
 			}
 	
-			/ Create or append to the <style> element.
+			// Create or append to the <style> element.
 			const styleSheet = document_collapsable.createElement( 'style' );
-			styleSheet.id = `${escapedId}-toc-style`; / Assign an ID to the style element for future reference.
+			styleSheet.id = `${escapedId}-toc-style`; // Assign an ID to the style element for future reference.
 			
-			/ check if the browser is Safari or Firefox.
+			// check if the browser is Safari or Firefox.
 			const userAgent = navigator.userAgent.toLowerCase();
 			const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test( userAgent ) && !userAgent.includes( 'edge' );
 			const isFirefox = userAgent.includes( 'firefox' );
 			const isFirefoxOrSafari = isSafari || isFirefox;
 
 
-			/ Function to calculate margin-right based on font size.
+			// Function to calculate margin-right based on font size.
 			const calculateMarginRightDisc = ( fontSize ) => {
-				const baseFontSize = 8; / Base font size for margin calculation.
-				const baseMargin = 5; / Base margin for font size 8px.
-				const increment = 5; / Increment for each additional 8px font size.
+				const baseFontSize = 8; // Base font size for margin calculation.
+				const baseMargin = 5; // Base margin for font size 8px.
+				const increment = 5; // Increment for each additional 8px font size.
 				
-				/ Parse font size to number.
+				// Parse font size to number.
 				const fontSizeNumeric = parseFloat( fontSize );
 				
-				/ Calculate number of 8px increments.
+				// Calculate number of 8px increments.
 				const increments = ( ( fontSizeNumeric - baseFontSize ) / 8 );
 				const marginRight = baseMargin + ( increments * increment );
 	
@@ -73,9 +73,9 @@ UAGBTableOfContents = {
 			const calculateMarginRightDecimal = ( ListFontSize ) => {
 				const fontSize = parseFloat( ListFontSize );
 			
-				/ Base margin calculated as one-fourth of the font size.
+				// Base margin calculated as one-fourth of the font size.
 				const baseMargin = ( 1 / 4 ) * fontSize;
-				/ Additional margin added for font sizes greater than 16px.
+				// Additional margin added for font sizes greater than 16px.
 				const additionalMargin = Math.max( 0, ( fontSize - 16 ) / 8 ) * 2;
 				return ( baseMargin + additionalMargin );
 			};
@@ -83,7 +83,7 @@ UAGBTableOfContents = {
 			let marginRight;
 			let marginLeft = '-0.5px';
 			
-			/ Check if markerView is 'disc'
+			// Check if markerView is 'disc'
 			if ( 'disc' === attr?.markerView ) {
 				if ( isFirefoxOrSafari ) {
 					marginRight = calculateMarginRightDisc( listFontSize );
@@ -93,15 +93,15 @@ UAGBTableOfContents = {
 				}
 			} 
 			if ( 'decimal' === attr?.markerView ) {
-				/ For non-'disc' marker view
+				// For non-'disc' marker view
 				const marginRightDeducting = calculateMarginRightDecimal( listFontSize )
 				marginRight = `${parseFloat( listFontSize ) - marginRightDeducting}px`;
 				marginLeft = '1px'
 			}
 			
-			/ First apply the width to the marker pseudo elements.
-			/ Them update the margins of the markers.
-			/ Them update the RTL based margins of the markers. Basically inverted version of the LTR margins.
+			// First apply the width to the marker pseudo elements.
+			// Them update the margins of the markers.
+			// Them update the RTL based margins of the markers. Basically inverted version of the LTR margins.
 			styleSheet.innerHTML += `
 				${ id } .list-open::before,
 				${ id } .list-collapsed::before {
@@ -119,13 +119,13 @@ UAGBTableOfContents = {
 				}
 			`;
 
-			/ Append the <style> element to the document's head.
+			// Append the <style> element to the document's head.
 			document_collapsable.head.appendChild( styleSheet );
 			setTimeout( () => {
 				block_element.style.opacity = '';
 				uagbLoader?.remove();
 				listWrap?.classList.remove( 'uagb-toc__list-hidden' );
-			}, 300 ); / Duration to match the transition duration.
+			}, 300 ); // Duration to match the transition duration.
 		}
 	},
 
@@ -133,20 +133,20 @@ UAGBTableOfContents = {
 		const document_collapsable = UAGBTableOfContents._getDocumentElement();
 		const block_element = document_collapsable.querySelector( id );
 	
-		/ Run only if toc-content-collapsable class is present and script hasn't run before
+		// Run only if toc-content-collapsable class is present and script hasn't run before
 		if ( attr?.isFrontend && attr?.enableCollapsableList && ! block_element.classList.contains( 'init-collapsed-script' ) ) {
-			block_element.classList.add( 'init-collapsed-script' ); / Mark script as executed.
+			block_element.classList.add( 'init-collapsed-script' ); // Mark script as executed.
 	
 			const ulElements = block_element.querySelectorAll( 'ul.uagb-toc__list' );
 	
-			/ Set margins for collapsible icon in editor and frontend
+			// Set margins for collapsible icon in editor and frontend
 			if ( 'function' === typeof UAGBTableOfContents._setCollapseIconMargin ) {
 				UAGBTableOfContents._setCollapseIconMargin( id, attr );
 			}
 	
 			ulElements.forEach( ( ul ) => {
 				const spanElement = ul.parentElement.querySelector( '.list-open' );
-				/ Apply initial transition and max height settings
+				// Apply initial transition and max height settings
 				ul.classList.add( 'transition' );
 				ul.dataset.originalMaxHeight = ul.scrollHeight + 'px';
 				if ( spanElement ) {
@@ -165,7 +165,7 @@ UAGBTableOfContents = {
 				}
 			} );
 	
-			/ Initialize event listeners for each span with class .list-open.
+			// Initialize event listeners for each span with class .list-open.
 			const spanList = Array.from( block_element.getElementsByClassName( 'list-open' ) );
 			spanList.forEach( ( ele ) => {
 				const handleToggle = () => {
@@ -177,12 +177,12 @@ UAGBTableOfContents = {
 					ele.setAttribute( 'aria-expanded', ! isExpanded );
 
 
-					/ If the list was not expanded, remove the display-none class before animating.
+					// If the list was not expanded, remove the display-none class before animating.
 					if ( ! isExpanded ) {
 						ulElement.classList.remove( 'uagb-toc__list--hidden-child' );
 					}
 
-					/ All the rest should happen after the display is updated.
+					// All the rest should happen after the display is updated.
 					setTimeout( () => {
 						if ( isExpanded ) {
 							ulElement.style.maxHeight = '0px';
@@ -194,11 +194,11 @@ UAGBTableOfContents = {
 						ele.classList.toggle( 'list-open', ! isExpanded );
 						ele.classList.toggle( 'list-collapsed', isExpanded );
 						
-						/ If this was expanded, add a class to remove the padding inside the UL of the collapsible list after it has collapsed. Else just remove that class.
+						// If this was expanded, add a class to remove the padding inside the UL of the collapsible list after it has collapsed. Else just remove that class.
 						ulElement.classList.toggle( 'uagb-toc__list--child-of-closed-list' );
 					}, 0 );
 
-					/ If the list was expanded, add the display-none class after animating.
+					// If the list was expanded, add the display-none class after animating.
 					if ( isExpanded ) {
 						setTimeout( () => {
 							ulElement.classList.add( 'uagb-toc__list--hidden-child' );
@@ -206,7 +206,7 @@ UAGBTableOfContents = {
 					}	
 				};
 	
-				/ Add click and keydown event listeners
+				// Add click and keydown event listeners
 				ele.addEventListener( 'click', handleToggle );
 				ele.addEventListener( 'keydown', ( event ) => {
 					if ( event.key === 'Enter' || event.key === ' ' ) {
@@ -218,18 +218,18 @@ UAGBTableOfContents = {
 				ele.setAttribute( 'aria-expanded', ele.classList.contains( 'list-open' ) );
 			} );
 
-			/ Initial collapse state handling
+			// Initial collapse state handling
 			if ( attr?.initiallyCollapseList ) {
 				ulElements.forEach( ( ul ) => {
-					 / Check if there's a span sibling at the same level
+					 // Check if there's a span sibling at the same level
 					const hasSiblingSpan = ul.parentElement.querySelector( 'span' );	
 					 if ( hasSiblingSpan ) {
 						ul.style.maxHeight = '0px';
 						ul.style.overflow = 'hidden';
-						/ If this is initially collapsed, then add the closed padding class.
+						// If this is initially collapsed, then add the closed padding class.
 						ul.classList.add( 'uagb-toc__list--child-of-closed-list' );
 
-						/ After the animation has ended, set display to none so that screenreaders avoide the hidden content.
+						// After the animation has ended, set display to none so that screenreaders avoide the hidden content.
 						setTimeout( () => {
 							ul.classList.add( 'uagb-toc__list--hidden-child' );
 						}, 300 );
@@ -277,14 +277,14 @@ UAGBTableOfContents = {
 
 		function collapseListener( event ) {
 			const element = event.target;
-			/ These two conditions help us target the required element (collapsible icon beside TOC heading).
-			const condition1 = element?.tagName === 'path' || element?.tagName === 'svg' || element?.tagName === 'DIV'; / Check if the clicked element type is either path or SVG or Title DIV.
-			const condition2 = element?.className === 'uagb-toc__title' || element?.parentNode?.className === 'uagb-toc__title' || element?.parentNode?.tagName === 'svg'; / Check if the clicked element's parent has the required class.
+			// These two conditions help us target the required element (collapsible icon beside TOC heading).
+			const condition1 = element?.tagName === 'path' || element?.tagName === 'svg' || element?.tagName === 'DIV'; // Check if the clicked element type is either path or SVG or Title DIV.
+			const condition2 = element?.className === 'uagb-toc__title' || element?.parentNode?.className === 'uagb-toc__title' || element?.parentNode?.tagName === 'svg'; // Check if the clicked element's parent has the required class.
 
 			if ( condition1 && condition2 ) {
 				const $root = element?.closest( `.wp-block-uagb-table-of-contents${id}` );
 				const tocListWrapEl = elementToOpen?.querySelector( '.wp-block-uagb-table-of-contents .uagb-toc__list-wrap' );
-				/ If not have the tocListWrapEl then return false!
+				// If not have the tocListWrapEl then return false!
 				if ( ! tocListWrapEl ) {
 					return;
 				}
@@ -318,7 +318,7 @@ UAGBTableOfContents = {
 		target.style.transitionDuration = duration + 'ms';
 		target.style.boxSizing = 'border-box';
 		target.style.height = target.offsetHeight + 'px';
-		target.offsetHeight; / eslint-disable-line no-unused-expressions
+		target.offsetHeight; // eslint-disable-line no-unused-expressions
 		target.style.overflow = 'hidden';
 		target.style.height = 0;
 		target.style.paddingTop = 0;
@@ -352,7 +352,7 @@ UAGBTableOfContents = {
 		target.style.paddingBottom = 0;
 		target.style.marginTop = 0;
 		target.style.marginBottom = 0;
-		target.offsetHeight; / eslint-disable-line no-unused-expressions
+		target.offsetHeight; // eslint-disable-line no-unused-expressions
 		target.style.boxSizing = 'border-box';
 		target.style.transitionProperty = 'height, margin, padding';
 		target.style.transitionDuration = duration + 'ms';
@@ -434,7 +434,7 @@ UAGBTableOfContents = {
 		*/
 		if ( ! hash && e.target.tagName && e.target.tagName !== 'A' ) {
 			const getHash = e.target.closest( 'a' );
-			/ Add a null check for getHash to prevent errors
+			// Add a null check for getHash to prevent errors
 			if ( getHash ) {
 				hash = getHash.getAttribute( 'href' );
 			}
@@ -468,17 +468,17 @@ UAGBTableOfContents = {
 		}
 	},
 	selectDomElement( id ){
-		/ Select id class but not with script init class.
+		// Select id class but not with script init class.
 		const thisScope = document.querySelector( `${ id }:not(.script-init)` );
 		if ( ! thisScope ) {
 			return null;
 		}
-		/ Add script init class to avoid reinit.
+		// Add script init class to avoid reinit.
 		thisScope.classList.add( 'script-init' );
 		return thisScope;
 	},
 	parseTocSlug( slug ) {
-		/ If not have the element then return false!
+		// If not have the element then return false!
 		if ( ! slug ) {
 			return slug;
 		}
@@ -486,23 +486,23 @@ UAGBTableOfContents = {
 		const parsedSlug = slug
 			.toString()
 			.toLowerCase()
-			.replace( /\…+/g, '' ) / Remove multiple …
-			.replace( /\u2013|\u2014/g, '' ) / Remove long dash
-			.replace( /&(amp;)/g, '' ) / Remove &
-			.replace( /[&]nbsp[;]/gi, '-' ) / Replace inseccable spaces
-			.replace( /[^a-zA-Z0-9\u00C0-\u017F _-]/g, '' ) / Keep only alphnumeric, space, -, _ and latin characters.
-			.replace( /&(mdash;)/g, '' ) / Remove long dash
-			.replace( /\s+/g, '-' ) / Replace spaces with -
-			.replace( /[&\/\\#,^!+()$~%.\[\]'":*?;-_<>{}@‘’”“|]/g, '' ) / Remove special chars
-			.replace( /\-\-+/g, '-' ) / Replace multiple - with single -
-			.replace( /^-+/, '' ) / Trim - from start of text
-			.replace( /-+$/, '' ); / Trim - from end of text
+			.replace( /\…+/g, '' ) // Remove multiple …
+			.replace( /\u2013|\u2014/g, '' ) // Remove long dash
+			.replace( /&(amp;)/g, '' ) // Remove &
+			.replace( /[&]nbsp[;]/gi, '-' ) // Replace inseccable spaces
+			.replace( /[^a-zA-Z0-9\u00C0-\u017F _-]/g, '' ) // Keep only alphnumeric, space, -, _ and latin characters.
+			.replace( /&(mdash;)/g, '' ) // Remove long dash
+			.replace( /\s+/g, '-' ) // Replace spaces with -
+			.replace( /[&\/\\#,^!+()$~%.\[\]'":*?;-_<>{}@‘’”“|]/g, '' ) // Remove special chars
+			.replace( /\-\-+/g, '-' ) // Replace multiple - with single -
+			.replace( /^-+/, '' ) // Trim - from start of text
+			.replace( /-+$/, '' ); // Trim - from end of text
 
 		return decodeURI( encodeURIComponent( parsedSlug ) );
 	},
 	mapTocAnchorsForHref( anchors ) {
 		for ( const anchor of anchors ) {
-			/ Update the href attribute with text content and text content should be parsed.
+			// Update the href attribute with text content and text content should be parsed.
 			const href = anchor.textContent;
 			const parsedHref = UAGBTableOfContents.parseTocSlug( href );
 			anchor.setAttribute( 'href', `#${parsedHref}` );
@@ -516,7 +516,7 @@ UAGBTableOfContents = {
 	 * @param {string} id
 	 */
 	_run( attr, id ) {
-		/ Add setTime
+		// Add setTime
 		setTimeout( function () {
 			UAGBTableOfContents._runWithTimeOut( attr, id );
 		}, 500 );
@@ -539,7 +539,7 @@ UAGBTableOfContents = {
 
 		if ( undefined !== attr.mappingHeaders ) {
 			attr.mappingHeaders.forEach( function ( h_tag, index ) {
-				/ eslint-disable-next-line no-unused-expressions
+				// eslint-disable-next-line no-unused-expressions
 				h_tag === true ? allowedHTags.push( 'h' + ( index + 1 ) ) : null;
 			} );
 			allowedHTagStr = null !== allowedHTags ? allowedHTags.join( ',' ) : '';
@@ -558,7 +558,7 @@ UAGBTableOfContents = {
 
 			const aTags = tocListWrap.getElementsByTagName( 'a' );
 
-			/ Map the anchors to their hrefs to ensure that the hrefs are is correct.
+			// Map the anchors to their hrefs to ensure that the hrefs are is correct.
 			UAGBTableOfContents.mapTocAnchorsForHref( aTags );
 
 			/* Logic for Remove duplicate heading with same HTML tag and create an new array with duplicate entries start here. */

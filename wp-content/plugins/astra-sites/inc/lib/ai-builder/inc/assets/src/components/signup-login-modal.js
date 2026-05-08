@@ -26,11 +26,11 @@ const SignupLoginModal = () => {
 	const authChildWindow = useRef( null );
 	const onAuthSuccessRef = useRef( onAuthSuccess );
 
-	/ Resolve the expected ZipWP auth origin once. Used to reject cross-origin
-	/ postMessage events that would otherwise be able to spoof auth success.
+	// Resolve the expected ZipWP auth origin once. Used to reject cross-origin
+	// postMessage events that would otherwise be able to spoof auth success.
 	const expectedAuthOrigin = resolveAuthOrigin( screen_url );
 
-	/ Keep callback ref in sync so the message handler always has the latest.
+	// Keep callback ref in sync so the message handler always has the latest.
 	useEffect( () => {
 		onAuthSuccessRef.current = onAuthSuccess;
 	}, [ onAuthSuccess ] );
@@ -61,12 +61,12 @@ const SignupLoginModal = () => {
 		[]
 	);
 
-	/ Listen for ZIPWP_AUTH_SUCCESS postMessage from the popup window.
+	// Listen for ZIPWP_AUTH_SUCCESS postMessage from the popup window.
 	useEffect( () => {
 		const handleMessage = async ( event ) => {
-			/ Reject messages from any origin other than the ZipWP auth origin
-			/ and from any source other than the popup this component opened.
-			/ Prevents CSRF via forged postMessage from attacker-controlled pages.
+			// Reject messages from any origin other than the ZipWP auth origin
+			// and from any source other than the popup this component opened.
+			// Prevents CSRF via forged postMessage from attacker-controlled pages.
 			if (
 				! isValidAuthMessage(
 					event,
@@ -79,7 +79,7 @@ const SignupLoginModal = () => {
 
 			const { token, credit_token: creditToken, email } = event.data;
 
-			/ Save tokens to the WordPress database.
+			// Save tokens to the WordPress database.
 			const result = await saveAuthToken( {
 				token,
 				creditToken,
@@ -111,11 +111,11 @@ const SignupLoginModal = () => {
 		const currentUrlObj = new URL( currentUrl );
 		currentUrlObj.hash = '';
 
-		/ add should_resume=1 and skip_redirect_last_step=1 to the URL
+		// add should_resume=1 and skip_redirect_last_step=1 to the URL
 		currentUrlObj.searchParams.set( 'should_resume', '1' );
 		currentUrlObj.searchParams.set( 'skip_redirect_last_step', '1' );
 
-		/ change hash to /design
+		// change hash to /design
 		currentUrlObj.hash = '/design';
 
 		const newUrl = currentUrlObj.toString();
@@ -124,18 +124,18 @@ const SignupLoginModal = () => {
 			partner_id ? `&aff=${ partner_id }` : ''
 		}&utm_source=${ utmSource }&utm_medium=plugin&utm_campaign=build-with-ai&utm_content=start-building`;
 
-		/ if it's a premium template, add premium_design=true to the URL
-		/ so zipwp can redirect back to designs page if user wants to change design
+		// if it's a premium template, add premium_design=true to the URL
+		// so zipwp can redirect back to designs page if user wants to change design
 		if ( isPremiumTemplate ) {
 			url += `&premium_design=true&change_design_redirect=${ encodeURIComponent(
 				newUrl
 			) }`;
 		}
 
-		/ Append mode=popup so ZipWP sends postMessage instead of redirecting.
+		// Append mode=popup so ZipWP sends postMessage instead of redirecting.
 		url += '&mode=popup';
 
-		/ Open auth in a child browser window, centered on screen.
+		// Open auth in a child browser window, centered on screen.
 		const width = 1280;
 		const height = 828;
 		const left = window.screenX + ( window.outerWidth - width ) / 2;
@@ -148,7 +148,7 @@ const SignupLoginModal = () => {
 			authChildWindow.current = childWindow;
 			setIsAuthLoading( true );
 		} else {
-			/ Popup blocked — fall back to redirect.
+			// Popup blocked — fall back to redirect.
 			window.location.href = url.replace( '&mode=popup', '' );
 			setSignupLoginModal( { open: false } );
 		}

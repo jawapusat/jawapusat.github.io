@@ -16,18 +16,18 @@ const Sidebar = () => {
 	] = useState( srfm_quick_sidebar_blocks.allowed_blocks );
 	const [ isPopoverVisible, setPopoverVisible ] = useState( false );
 
-	/ State to track the sorting status
+	// State to track the sorting status
 	const [ isSorting, setSorting ] = useState( false );
 	const [ hovering, setHovering ] = useState( null );
-	/ State to track the active tab
+	// State to track the active tab
 	const [ activeTab, setActiveTab ] = useState( 0 );
 	const handleMouseOver = ( button ) => setHovering( button );
 
 	const handleMouseOut = () => setHovering( false );
-	/ Function to handle outside click
+	// Function to handle outside click
 	useEffect( () => {
 		const handleOutsideClick = ( event ) => {
-			/ Check if the click is outside the QAB sidebar and popover
+			// Check if the click is outside the QAB sidebar and popover
 			if (
 				document.querySelector( '.srfm-ee-quick-access' ) &&
 				! document
@@ -42,16 +42,16 @@ const Sidebar = () => {
 			}
 		};
 
-		/ Add event listener when component mounts
+		// Add event listener when component mounts
 		document.body.addEventListener( 'click', handleOutsideClick );
 
-		/ Remove event listener when component unmounts
+		// Remove event listener when component unmounts
 		return () => {
 			document.body.removeEventListener( 'click', handleOutsideClick );
 		};
-	}, [] ); / Empty array ensures this effect runs only once when the component mounts
+	}, [] ); // Empty array ensures this effect runs only once when the component mounts
 
-	/ Function to handle tab click
+	// Function to handle tab click
 	const handleTabClick = ( index ) => {
 		setActiveTab( index );
 	};
@@ -62,17 +62,17 @@ const Sidebar = () => {
 			style.unuse();
 		};
 	}, [] );
-	/ Function to open the popover
+	// Function to open the popover
 	const openPopover = () => {
 		setPopoverVisible( true );
 		setSorting( false );
 	};
-	/ Function to close the popover
+	// Function to close the popover
 	const closePopover = () => {
 		setPopoverVisible( false );
 		setSorting( false );
 	};
-	/ Function to enable re-arrange
+	// Function to enable re-arrange
 	const enableRearrange = () => {
 		setSorting( true );
 	};
@@ -80,16 +80,16 @@ const Sidebar = () => {
 	function updateDefaultAllowedQuickSidebarBlocks( allowedBlocks ) {
 		setDefaultAllowedQuickSidebarBlocks( allowedBlocks );
 	}
-	/ Saving the allowed blocks to the database.
+	// Saving the allowed blocks to the database.
 	const saveOptionToDatabase = ( allowedBlocks ) => {
-		/ update allowedBlocks.
+		// update allowedBlocks.
 		updateDefaultAllowedQuickSidebarBlocks( allowedBlocks );
-		/ Create an object with the srfm_ajax_nonce and confirmation properties.
+		// Create an object with the srfm_ajax_nonce and confirmation properties.
 		const data = {
 			security: srfm_quick_sidebar_blocks.srfm_ajax_nonce,
 			defaultAllowedQuickSidebarBlocks: JSON.stringify( allowedBlocks ),
 		};
-		/ Call the getApiData function with the specified parameters.
+		// Call the getApiData function with the specified parameters.
 		getApiData( {
 			url: srfm_quick_sidebar_blocks.srfm_ajax_url,
 			action: 'srfm_global_update_allowed_block',

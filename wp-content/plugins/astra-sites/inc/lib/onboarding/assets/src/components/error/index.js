@@ -20,15 +20,15 @@ const ErrorScreen = () => {
 	const tryAgain = () => {
 		dispatch( {
 			type: 'set',
-			/ Reset errors.
+			// Reset errors.
 			importErrorMessages: {},
 			importErrorResponse: [],
 			importError: false,
 
-			/ Try again count.
+			// Try again count.
 			tryAgainCount: tryAgainCount + 1,
 
-			/ Reset import flags.
+			// Reset import flags.
 			xmlImportDone: false,
 			resetData: [],
 			importStart: false,
@@ -38,10 +38,10 @@ const ErrorScreen = () => {
 			notInstalledList: [],
 			notActivatedList: [],
 
-			/ Flag to prevent premature requiredPluginsDone while checking plugins.
+			// Flag to prevent premature requiredPluginsDone while checking plugins.
 			awaitingPluginCheck: true,
 
-			/ Go to previous step.
+			// Go to previous step.
 			currentIndex: currentIndex - 1,
 		} );
 	};

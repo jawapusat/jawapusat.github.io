@@ -77,9 +77,9 @@
 		/**
 		 * Layout 2
 		 */
-		/ Layout 2 > Right Section > Text / HTML
-		/ Layout 2 > Right Section > Search Type
-		/ Layout 2 > Right Section > Search Type > Search Box Type.
+		// Layout 2 > Right Section > Text / HTML
+		// Layout 2 > Right Section > Search Type
+		// Layout 2 > Right Section > Search Type > Search Box Type.
 		'astra-settings[header-main-rt-section]' : [],
 
 

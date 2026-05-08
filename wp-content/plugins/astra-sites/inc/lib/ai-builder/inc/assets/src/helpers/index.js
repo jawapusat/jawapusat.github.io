@@ -77,7 +77,7 @@ export const SITE_CREATION_STATUS_CODES = {
 		"It's taking a bit more than usual. Bear with us…",
 		'ai-builder'
 	),
-	A011: 'Done', / Don't translate 'Done' as it is used as a status check.
+	A011: 'Done', // Don't translate 'Done' as it is used as a status check.
 	R001: __(
 		'Oops, Site creation hiccupped, we are trying one more time',
 		'ai-builder'
@@ -102,7 +102,7 @@ export const getLocalStorageItem = ( key ) => {
 		const value = localStorage.getItem( key );
 		return value ? JSON.parse( value ) : null;
 	} catch ( error ) {
-		/ Handle error (e.g., data is not JSON, localStorage is not available, etc.)
+		// Handle error (e.g., data is not JSON, localStorage is not available, etc.)
 		return null;
 	}
 };
@@ -121,7 +121,7 @@ export const setLocalStorageItem = ( key, value ) => {
 		}
 		localStorage.setItem( key, JSON.stringify( value ) );
 	} catch ( error ) {
-		/ Handle error (e.g., localStorage is full, etc.)
+		// Handle error (e.g., localStorage is full, etc.)
 	}
 };
 

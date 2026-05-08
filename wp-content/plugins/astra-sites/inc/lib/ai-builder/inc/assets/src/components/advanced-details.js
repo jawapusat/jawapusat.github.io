@@ -176,7 +176,7 @@ const AdvancedDetails = ( {
 		siteTone || 'balanced'
 	);
 
-	/ Fetches keywords on content change by keystroke or by improved content insertion from AI.
+	// Fetches keywords on content change by keystroke or by improved content insertion from AI.
 	useEffect( () => {
 		if ( debouncedDescriptionValue !== undefined ) {
 			if (
@@ -193,7 +193,7 @@ const AdvancedDetails = ( {
 		}
 	}, [ debouncedDescriptionValue, showAdvancedOptions ] );
 
-	/ Fetches keywords advanced option dropdown opens.
+	// Fetches keywords advanced option dropdown opens.
 	useEffect( () => {
 		if (
 			showAdvancedOptions &&

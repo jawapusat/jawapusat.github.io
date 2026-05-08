@@ -6,11 +6,11 @@ import { decodeEntities } from '@wordpress/html-entities';
 const { imageDir, supportLink } = aiBuilderVars;
 
 export const _unescape = ( title = '' ) => {
-	/ WordPress encoded chars.
+	// WordPress encoded chars.
 	title = title.replace( '&#038;', '&' );
 	title = title.replace( '&amp;', '&' );
 
-	/ Unescape all charactors.
+	// Unescape all charactors.
 	title = unescape( title );
 
 	return title.__wrapped__;
@@ -42,10 +42,10 @@ export const savePostIfSpectraInactive = async () => {
 const displayNotice = ( status, message ) => {
 	( function ( wp ) {
 		wp.data.dispatch( 'core/notices' ).createNotice(
-			status, / Can be one of: success, info, warning, error.
-			message, / Text string to display.
+			status, // Can be one of: success, info, warning, error.
+			message, // Text string to display.
 			{
-				isDismissible: true, / Whether the user can dismiss the notice.
+				isDismissible: true, // Whether the user can dismiss the notice.
 			}
 		);
 	} )( window.wp );
@@ -72,7 +72,7 @@ export const getProUrl = () => {
 };
 
 export const sendPostMessage = ( data ) => {
-	/ console.log( 'sendPostMessage' );
+	// console.log( 'sendPostMessage' );
 	const frame = document.getElementById( 'astra-starter-templates-preview' );
 	if ( ! frame ) {
 		return;
@@ -92,12 +92,12 @@ export const getDataUri = ( url, callback ) => {
 
 	image.onload = function () {
 		const canvas = document.createElement( 'canvas' );
-		canvas.width = this.naturalWidth; / or 'width' if you want a special/scaled size
-		canvas.height = this.naturalHeight; / or 'height' if you want a special/scaled size
+		canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+		canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
 
 		canvas.getContext( '2d' ).drawImage( this, 0, 0 );
 
-		/ ... or get as Data URI
+		// ... or get as Data URI
 		callback( canvas.toDataURL( 'image/png' ) );
 	};
 

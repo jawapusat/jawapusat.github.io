@@ -25,7 +25,7 @@ const SiteGrid = ( { sites } ) => {
 				site.ecommerce_parent_template !== undefined &&
 				site.ecommerce_parent_template !== ''
 			) {
-				/ If ecommerce_parent_template is not empty, skip adding the site to allSites.
+				// If ecommerce_parent_template is not empty, skip adding the site to allSites.
 				continue;
 			}
 			const gridItem = getGridItem( site );
@@ -55,10 +55,10 @@ const SiteGrid = ( { sites } ) => {
 
 			const siteId = `id-${ item.id }`;
 
-			/ Quick toggle the favorites.
+			// Quick toggle the favorites.
 			quickToggleFavorites( siteId, favoriteStatus );
 
-			/ Dispatch toggle favorite.
+			// Dispatch toggle favorite.
 			const formData = new FormData();
 			formData.append( 'action', 'astra-sites-favorite' );
 			formData.append( 'is_favorite', favoriteStatus );
@@ -70,34 +70,34 @@ const SiteGrid = ( { sites } ) => {
 			} );
 			const data = await resonse.json();
 
-			/ Toggle fail so unset favorite.
+			// Toggle fail so unset favorite.
 			if ( ! data.success ) {
 				quickToggleFavorites( siteId, false );
 			}
 		} catch ( err ) {
-			/ Do nothing
+			// Do nothing
 		}
 	};
 
 	useEffect( () => {
 		const handleResize = () => {
-			/ Update the number of columns based on the screen width
+			// Update the number of columns based on the screen width
 			if ( window.innerWidth <= 768 ) {
-				setColumns( 2 ); / Adjust for smaller screens
+				setColumns( 2 ); // Adjust for smaller screens
 			} else if ( window.innerWidth > 768 && window.innerWidth <= 1024 ) {
 				setColumns( 3 );
 			} else {
-				setColumns( 4 ); / Default for larger screens
+				setColumns( 4 ); // Default for larger screens
 			}
 		};
 
-		/ Listen for window resize events
+		// Listen for window resize events
 		window.addEventListener( 'resize', handleResize );
 
-		/ Call handleResize initially to set the correct number of columns.
+		// Call handleResize initially to set the correct number of columns.
 		handleResize();
 
-		/ Clean up the event listener on component unmount
+		// Clean up the event listener on component unmount
 		return () => window.removeEventListener( 'resize', handleResize );
 	}, [] );
 

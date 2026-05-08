@@ -78,7 +78,7 @@
 		return value;
 	}
 
-	/ Build a destructive iterator for the value list
+	// Build a destructive iterator for the value list
 	function iteratorFor( items ) {
 		var iterator = {
 			next: function () {
@@ -253,7 +253,7 @@
 				isDataView( body )
 			) {
 				this._bodyArrayBuffer = bufferClone( body.buffer );
-				/ IE 10-11 can't handle a DataView body.
+				// IE 10-11 can't handle a DataView body.
 				this._bodyInit = new Blob( [ this._bodyArrayBuffer ] );
 			} else if (
 				support.arrayBuffer &&
@@ -349,7 +349,7 @@
 		return this;
 	}
 
-	/ HTTP methods whose capitalization should be normalized
+	// HTTP methods whose capitalization should be normalized
 	var methods = [ 'DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT' ];
 
 	function normalizeMethod( method ) {
@@ -421,8 +421,8 @@
 
 	function parseHeaders( rawHeaders ) {
 		var headers = new Headers();
-		/ Replace instances of \r\n and \n followed by at least one space or horizontal tab with a space
-		/ https://tools.ietf.org/html/rfc7230#section-3.2
+		// Replace instances of \r\n and \n followed by at least one space or horizontal tab with a space
+		// https://tools.ietf.org/html/rfc7230#section-3.2
 		var preProcessedHeaders = rawHeaders.replace( /\r?\n[\t ]+/g, ' ' );
 		preProcessedHeaders.split( /\r?\n/ ).forEach( function ( line ) {
 			var parts = line.split( ':' );
@@ -557,7 +557,7 @@
 				request.signal.addEventListener( 'abort', abortXhr );
 
 				xhr.onreadystatechange = function () {
-					/ DONE (success or failure)
+					// DONE (success or failure)
 					if ( xhr.readyState === 4 ) {
 						request.signal.removeEventListener( 'abort', abortXhr );
 					}

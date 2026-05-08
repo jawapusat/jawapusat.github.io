@@ -2,8 +2,8 @@ import domReady from '@wordpress/dom-ready';
 import { withinIframe, getStorgeData } from './utils';
 
 const callFromKey = 'starterTemplatePreviewDispatch';
-/ const storageDataKey = 'starter-templates-zip-iframe-preview-data';
-/ const callFromKey = 'starterTemplatesPreviewDispatch';
+// const storageDataKey = 'starter-templates-zip-iframe-preview-data';
+// const callFromKey = 'starterTemplatesPreviewDispatch';
 const storageDataKey = 'starter-templates-iframe-preview-data';
 
 const getDefaultLogo = () => {
@@ -45,7 +45,7 @@ const addGoogleFontTags = ( typography ) => {
 		return;
 	}
 
-	/ Create Preconnect URL.
+	// Create Preconnect URL.
 	if ( ! document.getElementById( 'google-fonts-domain' ) ) {
 		const node = document.createElement( 'link' );
 		node.id = 'google-fonts-domain';
@@ -54,7 +54,7 @@ const addGoogleFontTags = ( typography ) => {
 		document.head.appendChild( node );
 	}
 
-	/ Create GoogleFonts URL.
+	// Create GoogleFonts URL.
 	let fontLinkNode = document.getElementById( 'st-previw-google-fonts-url' );
 
 	if ( ! fontLinkNode ) {
@@ -101,7 +101,7 @@ const addTypographyCss = ( typography ) => {
 	}
 
 	const headingsTags = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ];
-	/ let styleNode = document.getElementById( 'starter-templates-zip-typography' );
+	// let styleNode = document.getElementById( 'starter-templates-zip-typography' );
 	let styleNode = document.getElementById( 'starter-templates-typography' );
 
 	if ( ! styleNode ) {
@@ -225,10 +225,10 @@ const setPreviewValues = ( eventData ) => {
 				)[ 0 ];
 				siteIdentityContainer.insertBefore( logoSpan, siteTitleElems );
 
-				/ Hide site title wrap when logo is uploaded.
-				/ if ( siteTitleElems ) {
-				/ 	siteTitleElems.style.display = 'none';
-				/ }
+				// Hide site title wrap when logo is uploaded.
+				// if ( siteTitleElems ) {
+				// 	siteTitleElems.style.display = 'none';
+				// }
 
 				const width = eventData.value.data.width || '';
 				if ( '' !== width ) {
@@ -236,11 +236,11 @@ const setPreviewValues = ( eventData ) => {
 					imgElem.style.maxWidth = width + 'px';
 				}
 			} else if ( '' !== logoURL ) {
-				/ eslint-disable-next-line no-unused-vars
+				// eslint-disable-next-line no-unused-vars
 				for ( const [ key, element ] of Object.entries(
 					logoElement
 				) ) {
-					/ Remove srcset and set logo image src.
+					// Remove srcset and set logo image src.
 					element.removeAttribute( 'srcset' );
 					element.setAttribute( 'src', logoURL );
 					const width = eventData.value.data.width;
@@ -249,7 +249,7 @@ const setPreviewValues = ( eventData ) => {
 						element.style.maxWidth = width + 'px';
 					}
 				}
-				/ hideSiteTitleElement();
+				// hideSiteTitleElement();
 			}
 
 			break;
@@ -260,7 +260,7 @@ const setPreviewValues = ( eventData ) => {
 				starter_templates_zip_preview.AstColorPaletteVarPrefix;
 			const paletteEleStylePrefix =
 				starter_templates_zip_preview.AstEleColorPaletteVarPrefix;
-			/ If colorPalette is empty, remove and reset to default from the template.
+			// If colorPalette is empty, remove and reset to default from the template.
 			if ( colorPalette.length === 0 ) {
 				document
 					.querySelector( 'body' )
@@ -270,9 +270,9 @@ const setPreviewValues = ( eventData ) => {
 					'starter-templates-preview-palette'
 				);
 
-				/ .classList.remove( 'starter-templates-zip-preview-palette' );
-				/ const styleSheetPalette = document.getElementsByClassName(
-				/ 	'starter-templates-zip-preview-palette'
+				// .classList.remove( 'starter-templates-zip-preview-palette' );
+				// const styleSheetPalette = document.getElementsByClassName(
+				// 	'starter-templates-zip-preview-palette'
 
 				if ( styleSheetPalette.length > 0 ) {
 					styleSheetPalette[ 0 ].remove();
@@ -282,9 +282,9 @@ const setPreviewValues = ( eventData ) => {
 			}
 			document
 				.querySelector( 'body' )
-				/ .classList.add( 'starter-templates-zip-preview-palette' );
+				// .classList.add( 'starter-templates-zip-preview-palette' );
 				.classList.add( 'starter-templates-preview-palette' );
-			/ Set CSS variables for palette.
+			// Set CSS variables for palette.
 			const colorPaletteStyleSheet = Object.entries( colorPalette )
 				.map( ( paletteItem, index ) => {
 					return [
@@ -301,22 +301,22 @@ const setPreviewValues = ( eventData ) => {
 			);
 			if ( ! styleTag ) {
 				styleTag = document.createElement( 'style' );
-				/ styleTag.id = 'starter-templates-zip-preview-palette-css';
+				// styleTag.id = 'starter-templates-zip-preview-palette-css';
 				styleTag.id = 'starter-templates-preview-palette-css';
 				styleTag.setAttribute( 'rel', 'stylesheet' );
 				document.head.appendChild( styleTag );
 			}
-			/ styleTag.innerHTML = `.starter-templates-zip-preview-palette{ ${ colorPaletteStyleSheet } }`;
+			// styleTag.innerHTML = `.starter-templates-zip-preview-palette{ ${ colorPaletteStyleSheet } }`;
 
 			styleTag.innerHTML = `.starter-templates-preview-palette{ ${ colorPaletteStyleSheet } }`;
 
 			break;
 
 		case 'siteTypography':
-			/ If typography is not set, then remove the already added typograhy from the DOM.
+			// If typography is not set, then remove the already added typograhy from the DOM.
 			if ( ! Object.keys( eventData.value.data ).length ) {
 				const styleSheetTypography = document.getElementById(
-					/ 'starter-templates-zip-typography'
+					// 'starter-templates-zip-typography'
 					'starter-templates-typography'
 				);
 
@@ -337,7 +337,7 @@ const setPreviewValues = ( eventData ) => {
 
 		case 'clearPreviewAssets':
 			const styleSheetTypography = document.getElementById(
-				/ 'starter-templates-zip-typography'
+				// 'starter-templates-zip-typography'
 				'starter-templates-typography'
 			);
 			if ( styleSheetTypography ) {
@@ -346,12 +346,12 @@ const setPreviewValues = ( eventData ) => {
 
 			document
 				.querySelector( 'body' )
-				/ 	.classList.remove( 'starter-templates-zip-preview-palette' );
+				// 	.classList.remove( 'starter-templates-zip-preview-palette' );
 
 				.classList.remove( 'starter-templates-preview-palette' );
 
-			/ const styleSheetPalette = document.getElementsByClassName(
-			/ 	'starter-templates-zip-preview-palette' );
+			// const styleSheetPalette = document.getElementsByClassName(
+			// 	'starter-templates-zip-preview-palette' );
 			const styleSheetPalette = document.getElementsByClassName(
 				'starter-templates-preview-palette'
 			);
@@ -363,12 +363,12 @@ const setPreviewValues = ( eventData ) => {
 			break;
 
 		case 'completeOnboarding':
-			/ localStorage.removeItem( storageDataKey );
+			// localStorage.removeItem( storageDataKey );
 			localStorage.removeItem( 'starter-templates-iframe-preview-data' );
 	}
 };
 
-/ eslint-disable-next-line
+// eslint-disable-next-line
 window.addEventListener(
 	'message',
 	function ( event ) {
@@ -387,7 +387,7 @@ window.addEventListener(
 				localStorage.getItem( storageDataKey )
 			);
 
-			/ if storageData is not set yet, set it to empty values.
+			// if storageData is not set yet, set it to empty values.
 			if ( storageData === null ) {
 				storageData = {};
 				storageData.data = {};
@@ -395,13 +395,13 @@ window.addEventListener(
 
 			storageData.data[ eventData.value.param ] = eventData.value.data;
 
-			/ Add curent URL to event data.
+			// Add curent URL to event data.
 			delete storageData.data.clearPreviewAssets;
 			eventData.url = window.location.origin;
 			storageData.url = window.location.origin;
 
-			/ If it's a cleanStorage message, Clear the local storage and render the cleared data.
-			/ If logo is set in the starter templates customizer, then that will be rendered.
+			// If it's a cleanStorage message, Clear the local storage and render the cleared data.
+			// If logo is set in the starter templates customizer, then that will be rendered.
 			if ( eventData.value.param === 'cleanStorage' ) {
 				delete storageData.data.cleanStorage;
 				storageData.data.siteLogo = eventData.value.data;

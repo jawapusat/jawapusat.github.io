@@ -52,7 +52,7 @@ UAGBCounter = {
 		const callback = ( entries ) => {
 			entries.forEach( ( entry ) => {
 				const el = entry.target;
-				const hasPlayed = el.hasAttribute( 'played' ); / Check if an animation has played; If played already, do mot re-trigger it.
+				const hasPlayed = el.hasAttribute( 'played' ); // Check if an animation has played; If played already, do mot re-trigger it.
 				if ( entry.isIntersecting && ! hasPlayed ) {
 					if ( ! countUp.error ) {
 						if ( data.layout === 'bars' ) {
@@ -62,7 +62,7 @@ UAGBCounter = {
 						}
 						countUp.start();
 					} else {
-						console.error( countUp.error ); / eslint-disable-line no-console
+						console.error( countUp.error ); // eslint-disable-line no-console
 					}
 				}
 			} );
@@ -106,12 +106,12 @@ UAGBCounter = {
 			fill: 'forwards',
 		};
 
-		/ Condition to prevent an edge case bug where number layout gets animated like bar layout.
+		// Condition to prevent an edge case bug where number layout gets animated like bar layout.
 		if ( el.classList.contains( parentWrapClass ) ) {
 			numberWrap?.animate( animationKeyframes, animationProperties );
 		}
 
-		el.setAttribute( 'played', true ); / Set: animation has played once.
+		el.setAttribute( 'played', true ); // Set: animation has played once.
 	},
 
 	_triggerCircle( el, data ) {
@@ -145,7 +145,7 @@ UAGBCounter = {
 
 		circleWrap?.animate( animationKeyframes, animationProperties );
 
-		el.setAttribute( 'played', true ); / Set: animation has played once.
+		el.setAttribute( 'played', true ); // Set: animation has played once.
 	},
 
 	_getAnimationDuration( data ) {
@@ -183,7 +183,7 @@ UAGBCounter = {
 	},
 	_getCounterData( element,data ){
 		
-		/ Getting data from html attribute data-counter and overwrite data which comes from php.
+		// Getting data from html attribute data-counter and overwrite data which comes from php.
 		let getCounterData = element?.getAttribute( 'data-counter' );
 		if( ! getCounterData ){
 			return data;

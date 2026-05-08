@@ -37,7 +37,7 @@
 		}
 	) : null;
 
-	/ Function to register commands.
+	// Function to register commands.
 	function registerAstraCommands() {
 		panels.forEach( function ( panel ) {
 			let url = customizerUrl;
@@ -48,7 +48,7 @@
 			}
 
 			try {
-				/ Register the command.
+				// Register the command.
 				dispatch( commandsStore ).registerCommand( {
 					name: panel.name,
 					label: panel.label,
@@ -64,7 +64,7 @@
 		} );
 	}
 
-	/ Function to add click handler for admin bar search icon.
+	// Function to add click handler for admin bar search icon.
 	function addSearchIconClickHandler() {
 		const searchTrigger = document.querySelector( '#wp-admin-bar-astra-command-palette-search > a' );
 		if ( searchTrigger ) {
@@ -77,13 +77,13 @@
 		}
 	}
 
-	/ Initialize the command registration and event handlers.
+	// Initialize the command registration and event handlers.
 	const init = () => {
 		registerAstraCommands();
 		addSearchIconClickHandler();
 	}
 
-	/ Wait for the editor to be ready before registering commands.
+	// Wait for the editor to be ready before registering commands.
 	if ( wp.domReady ) {
 		wp.domReady( init );
 	} else {

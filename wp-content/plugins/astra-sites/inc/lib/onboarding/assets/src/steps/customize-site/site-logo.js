@@ -7,13 +7,13 @@ import { MediaUpload } from '@wordpress/media-utils';
 import { useStateValue } from '../../store/store';
 import { getDataUri, sendPostMessage } from '../../utils/functions';
 import { initialState } from '../../store/reducer';
-/ import ToggleSwitch from '../../components/toggle-switch';
+// import ToggleSwitch from '../../components/toggle-switch';
 
 const SiteLogo = () => {
 	const replaceMediaUpload = () => MediaUpload;
 	const [ { siteLogo }, dispatch ] = useStateValue();
-	/ const [ showTitle, setShowTitle ] = useState( true ),
-	/ 	toggleTitle = () => setShowTitle( ( prev ) => ! prev );
+	// const [ showTitle, setShowTitle ] = useState( true ),
+	// 	toggleTitle = () => setShowTitle( ( prev ) => ! prev );
 
 	addFilter(
 		'editor.MediaUpload',
@@ -75,10 +75,10 @@ const SiteLogo = () => {
 		dispatchPostMessage( 'siteLogo', newLogoOptions );
 	};
 
-	/ const handleOnChangeToggleTitle = () => {
-	/ 	dispatchPostMessage( 'siteTitle', ! showTitle );
-	/ 	toggleTitle();
-	/ };
+	// const handleOnChangeToggleTitle = () => {
+	// 	dispatchPostMessage( 'siteTitle', ! showTitle );
+	// 	toggleTitle();
+	// };
 
 	useEffect( () => {
 		if ( !! astraSitesVars?.isRTLEnabled ) {
@@ -88,7 +88,7 @@ const SiteLogo = () => {
 			if ( rangeControl === null ) {
 				return;
 			}
-			/ Range control slider styling for RTL.
+			// Range control slider styling for RTL.
 			const currentValue = rangeControl.children[ 3 ].style.left;
 			rangeControl.children[ 3 ].style.marginRight = '-10px';
 			rangeControl.children[ 3 ].style.removeProperty( 'margin-left' );

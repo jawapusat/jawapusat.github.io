@@ -2,7 +2,7 @@ window.addEventListener( 'DOMContentLoaded', uagbTimelineInit );
 window.addEventListener( 'resize', uagbTimelineInit );
 window.addEventListener( 'scroll', uagbTimelineInit );
 document.addEventListener( 'UAGTimelineEditor', uagbTimelineInit );
-/ Callback function for all event listeners.
+// Callback function for all event listeners.
 function uagbTimelineInit() {
 	const iframeEl = document.querySelector( `iframe[name='editor-canvas']` );
 	let mainDiv;
@@ -80,7 +80,7 @@ function uagbTimelineInit() {
 			}
 		}
 
-		/ Icon bg color and icon color
+		// Icon bg color and icon color
 
 		let timelineIconPos, timelineCardPos;
 		let timelineIconTop, timelineCardTop;
@@ -103,17 +103,17 @@ function uagbTimelineInit() {
 				animateBorder[ j ].classList.remove( 'out-view' );
 				animateBorder[ j ].classList.add( 'in-view' );
 			} else {
-				/ Remove classes if element is below than half of viewport.
+				// Remove classes if element is below than half of viewport.
 				animateBorder[ j ].classList.add( 'out-view' );
 				animateBorder[ j ].classList.remove( 'in-view' );
 			}
 
 			if ( timelineIconTop < viewportHeightHalf ) {
-				/ Add classes if element is above than half of viewport.
+				// Add classes if element is above than half of viewport.
 				timelineIcon[ j ].classList.remove( 'uagb-timeline__out-view-icon' );
 				timelineIcon[ j ].classList.add( 'uagb-timeline__in-view-icon' );
 			} else {
-				/ Remove classes if element is below than half of viewport.
+				// Remove classes if element is below than half of viewport.
 				timelineIcon[ j ].classList.add( 'uagb-timeline__out-view-icon' );
 				timelineIcon[ j ].classList.remove( 'uagb-timeline__in-view-icon' );
 			}
@@ -121,7 +121,7 @@ function uagbTimelineInit() {
 	}
 }
 
-/ eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
 function UAGBTimelineClasses( attributes, id ) {
 	const timeline = document.querySelectorAll( id );
 

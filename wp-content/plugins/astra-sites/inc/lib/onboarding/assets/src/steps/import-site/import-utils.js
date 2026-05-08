@@ -3,7 +3,7 @@ const { themeStatus } = starterTemplates;
 import apiFetch from '@wordpress/api-fetch';
 
 export const getDemo = async ( id, storedState ) => {
-	const [ , dispatch ] = storedState; / Destructuring assignment only for dispatch method.
+	const [ , dispatch ] = storedState; // Destructuring assignment only for dispatch method.
 
 	const generateData = new FormData();
 	generateData.append( 'action', 'astra-sites-api-request' );
@@ -210,14 +210,14 @@ export const checkRequiredPlugins = async ( storedState ) => {
 				requiredPlugins: response.data,
 				notInstalledList: notInstalledPlugin,
 				notActivatedList: notActivePlugins,
-				/ Clear the flag so requiredPluginsDone can be set when lists are empty.
+				// Clear the flag so requiredPluginsDone can be set when lists are empty.
 				awaitingPluginCheck: false,
 			} );
 		} )
 		.catch( () => {
-			/ On network failure, clear the flag so the import isn't permanently
-			/ blocked — awaitingPluginCheck: true would prevent requiredPluginsDone
-			/ from ever being set, leaving the user with a silent frozen state.
+			// On network failure, clear the flag so the import isn't permanently
+			// blocked — awaitingPluginCheck: true would prevent requiredPluginsDone
+			// from ever being set, leaving the user with a silent frozen state.
 			dispatch( {
 				type: 'set',
 				awaitingPluginCheck: false,
@@ -415,7 +415,7 @@ export const installAstra = ( storedState ) => {
 			} )
 			.catch( ( error ) => {
 				console.log( error );
-				/ Check if error is due to folder already existing
+				// Check if error is due to folder already existing
 				const isFolderExistsError =
 					error?.errorCode === 'folder_exists' ||
 					( error?.errorMessage &&
@@ -423,7 +423,7 @@ export const installAstra = ( storedState ) => {
 						error.errorMessage.toLowerCase().includes( 'exist' ) );
 
 				if ( isFolderExistsError ) {
-					/ Theme is already installed, proceed to activate
+					// Theme is already installed, proceed to activate
 					dispatch( {
 						importStatus: __(
 							'Astra Theme Already Installed.',
@@ -447,7 +447,7 @@ export const installAstra = ( storedState ) => {
 				}
 			} );
 
-		/ eslint-disable-next-line no-undef
+		// eslint-disable-next-line no-undef
 		jQuery( document ).on( 'wp-theme-install-success', function () {
 			dispatch( {
 				type: 'set',
@@ -458,7 +458,7 @@ export const installAstra = ( storedState ) => {
 	}
 
 	if ( 'installed-but-inactive' === themeStatus ) {
-		/ WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
+		// WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
 		setTimeout( () => activateAstra( storedState ), 3000 );
 	}
 
@@ -598,7 +598,7 @@ export const generateAnalyticsLead = async ( tryAgainCount, status, data ) => {
 	importContent.append( 'type', 'astra-sites' );
 	importContent.append( '_ajax_nonce', astraSitesVars?._ajax_nonce );
 
-	/ Append extra data.
+	// Append extra data.
 	Object.entries( data ).forEach( ( [ key, value ] ) =>
 		importContent.append( key, value )
 	);

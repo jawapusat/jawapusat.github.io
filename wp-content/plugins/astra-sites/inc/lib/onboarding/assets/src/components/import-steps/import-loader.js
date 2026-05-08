@@ -51,13 +51,13 @@ const ImportLoader = () => {
 	let descMessage;
 	let tweetMessage;
 	const themeName = builder !== 'fse' ? '@AstraWP' : '@WPSpectra';
-	const threshold = 5; / Max 5 mins threshold.
+	const threshold = 5; // Max 5 mins threshold.
 
 	if ( timeTaken > 0 && timeTaken <= threshold ) {
 		timeTaken = timeTaken < 1 ? timeTaken.split( '.' )[ 1 ] : timeTaken;
 
 		descMessage = sprintf(
-			/translators: %1$s Time taken %2$s Time Type %3$s Website Url.
+			//translators: %1$s Time taken %2$s Time Type %3$s Website Url.
 			__(
 				`Your Website is ready and it took just %1$s %2$s to build.`,
 				'astra-sites'
@@ -66,7 +66,7 @@ const ImportLoader = () => {
 			typeOfTime
 		);
 		tweetMessage = sprintf(
-			/translators: %1$s Time taken %2$s Time Type %3$s theme name.
+			//translators: %1$s Time taken %2$s Time Type %3$s theme name.
 			__(
 				`I just built my website in %1$s %2$s with Starter Templates by %3$s. Can’t believe how easy it was!!! 😍`,
 				'astra-sites'
@@ -81,7 +81,7 @@ const ImportLoader = () => {
 			'astra-sites'
 		);
 		tweetMessage = sprintf(
-			/translators: %1$s theme name.
+			//translators: %1$s theme name.
 			__(
 				`I just built my website with Starter Templates by %1$s in minutes. Can't believe how easy it is! 😍`,
 				'astra-sites'

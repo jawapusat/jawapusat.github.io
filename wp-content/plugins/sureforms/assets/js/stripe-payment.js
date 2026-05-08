@@ -20,17 +20,17 @@ function getPaymentKey( form, blockId ) {
 window.srfmGetPaymentKey = getPaymentKey;
 
 class StripePayment {
-	/ Store Stripe instances
+	// Store Stripe instances
 	static stripeInstances = {};
 	static paymentElements = {};
 	static paymentIntents = {};
 	static subscriptionIntents = {};
-	/ BOTH MODE: per-block guard so rapid type-flips don't race two
-	/ Stripe.elements() instances on the same DOM container. Keyed by
-	/ compositeKey, cleared in the 'ready' handler of the new element.
+	// BOTH MODE: per-block guard so rapid type-flips don't race two
+	// Stripe.elements() instances on the same DOM container. Keyed by
+	// compositeKey, cleared in the 'ready' handler of the new element.
 	static reinitInProgress = new Set();
 
-	/ Initialize on page load
+	// Initialize on page load
 	static {
 		window.srfmPaymentElements = this.paymentElements;
 	}
@@ -41,12 +41,12 @@ class StripePayment {
 	 */
 	constructor( form ) {
 		this.form = form;
-		/ Find all payment blocks within the form.
+		// Find all payment blocks within the form.
 		const getPaymentFields = this.form.querySelectorAll(
 			'.srfm-block.srfm-payment-block'
 		);
 
-		/ Initialize Stripe payment for each payment field.
+		// Initialize Stripe payment for each payment field.
 		getPaymentFields.forEach( ( field ) => {
 			this.processPayment( field );
 		} );
@@ -70,11 +70,11 @@ class StripePayment {
 		paymentInput,
 		paymentType = 'one-time'
 	) {
-		/ Setup
+		// Setup
 		const isSubscription = paymentType === 'subscription';
 		const customerData = this.extractCustomerData( paymentInput );
 
-		/ Extract common data
+		// Extract common data
 		const currency = paymentInput.dataset.currency || 'usd';
 		const description =
 			paymentInput.dataset.description ||
@@ -88,7 +88,7 @@ class StripePayment {
 					'SureForms Payment'
 				  ) );
 
-		/ Build FormData
+		// Build FormData
 		const data = new FormData();
 		data.append(
 			'action',
@@ -96,10 +96,10 @@ class StripePayment {
 				? 'srfm_create_subscription_intent'
 				: 'srfm_create_payment_intent'
 		);
-		/ Read submit token from form element for server-side verification.
+		// Read submit token from form element for server-side verification.
 		const formElement = paymentInput.closest( 'form' );
 		data.append( 'token', formElement?.getAttribute( 'data-submit-token' ) || '' );
-		/ Handle zero-decimal currencies (JPY, KRW, etc.) - don't multiply by 100
+		// Handle zero-decimal currencies (JPY, KRW, etc.) - don't multiply by 100
 		const formattedAmount =
 			window?.srfmStripe?.zeroDecimalCurrencies?.includes(
 				currency.toUpperCase()
@@ -119,13 +119,13 @@ class StripePayment {
 			data.append( 'form_id', formIdInput.value );
 		}
 
-		/ Add subscription-specific data
+		// Add subscription-specific data
 		if ( isSubscription ) {
 			data.append( 'interval', customerData.interval );
 			data.append( 'plan_name', customerData.planName );
 		}
 
-		/ Make API call
+		// Make API call
 		try {
 			const response = await fetch( srfm_ajax.ajax_url, {
 				method: 'POST',
@@ -134,13 +134,13 @@ class StripePayment {
 
 			const responseData = await response.json();
 
-			/ Handle success
+			// Handle success
 			if ( responseData.success ) {
 				const clientSecret = responseData.data.client_secret;
 				const paymentIntentId = responseData.data.payment_intent_id;
 				const customerId = responseData?.data?.customer_id || null;
 
-				/ Store payment/subscription data
+				// Store payment/subscription data
 				if ( isSubscription ) {
 					const subscriptionId = responseData.data.subscription_id;
 
@@ -158,19 +158,19 @@ class StripePayment {
 					};
 				}
 
-				/ Update elements with client secret
+				// Update elements with client secret
 				const elementData =
 					StripePayment.paymentElements[ compositeKey ];
 				if ( elementData ) {
-					/ CRITICAL: Store client secret WITHOUT calling elements.update()
-					/ This preserves user-entered card data
+					// CRITICAL: Store client secret WITHOUT calling elements.update()
+					// This preserves user-entered card data
 					elementData.clientSecret = clientSecret;
 				}
 
 				return { valid: true };
 			}
 
-			/ Handle failure
+			// Handle failure
 			return {
 				valid: false,
 				message:
@@ -203,11 +203,11 @@ class StripePayment {
 
 		const blockId = field.getAttribute( 'data-block-id' );
 		const compositeKey = getPaymentKey( this.form, blockId );
-		/ Check payment type from data attribute
+		// Check payment type from data attribute
 		const paymentType =
 			paymentInput.getAttribute( 'data-payment-type' ) || 'one-time';
 
-		/ Initialize Stripe elements using unified function
+		// Initialize Stripe elements using unified function
 		this.initializePaymentElements(
 			compositeKey,
 			paymentInput,
@@ -229,8 +229,8 @@ class StripePayment {
 		paymentInput,
 		paymentType = 'one-time'
 	) {
-		/ CRITICAL: Check if elements already exist to prevent re-initialization
-		/ Re-mounting elements destroys user-entered card data
+		// CRITICAL: Check if elements already exist to prevent re-initialization
+		// Re-mounting elements destroys user-entered card data
 		if ( StripePayment.paymentElements[ compositeKey ] ) {
 			return;
 		}
@@ -249,14 +249,14 @@ class StripePayment {
 			return;
 		}
 
-		/ Initialize Stripe
+		// Initialize Stripe
 		if ( ! StripePayment.stripeInstances[ compositeKey ] ) {
 			StripePayment.stripeInstances[ compositeKey ] = Stripe( stripeKey );
 		}
 
 		const stripe = StripePayment.stripeInstances[ compositeKey ];
 
-		/ Build elements configuration based on payment type
+		// Build elements configuration based on payment type
 		const elementsConfig = {
 			mode: paymentType === 'subscription' ? 'subscription' : 'payment',
 			currency: paymentInput.dataset.currency || 'usd',
@@ -275,36 +275,36 @@ class StripePayment {
 			},
 			fields: {
 				billingDetails: {
-					email: 'auto', / ✅ Email + Link enabled
+					email: 'auto', // ✅ Email + Link enabled
 				},
 			},
 		};
 
-		/ Add type-specific configuration
+		// Add type-specific configuration
 		if ( paymentType === 'one-time' ) {
 			elementsConfig.captureMethod = 'manual';
 		}
 
-		/ Create and mount payment element
+		// Create and mount payment element
 		const elements = stripe.elements( elementsConfig );
 		const paymentElement = elements.create( 'payment' );
 		paymentElement.mount( elementContainer );
 
-		/ Store references (structure varies by payment type)
+		// Store references (structure varies by payment type)
 		const storedData = {
 			stripe,
 			elements,
 			paymentElement,
-			clientSecret: null, / Will be set when payment/subscription intent is created
+			clientSecret: null, // Will be set when payment/subscription intent is created
 			paymentType,
 		};
 
 		StripePayment.paymentElements[ compositeKey ] = storedData;
 
-		/ Update window object
+		// Update window object
 		window.srfmPaymentElements = StripePayment.paymentElements;
 
-		/ Setup event handlers
+		// Setup event handlers
 		this.setupPaymentElementEvents( paymentElement, compositeKey );
 	}
 
@@ -316,9 +316,9 @@ class StripePayment {
 	 * @return {void} This function does not return a value.
 	 */
 	setupPaymentElementEvents( paymentElement, compositeKey ) {
-		/ Ready event — clears the reinit-in-flight flag so subsequent type
-		/ flips can proceed. Without this, a stale flag would block all future
-		/ reinits for this block.
+		// Ready event — clears the reinit-in-flight flag so subsequent type
+		// flips can proceed. Without this, a stale flag would block all future
+		// reinits for this block.
 		paymentElement.on( 'ready', () => {
 			if ( compositeKey ) {
 				StripePayment.reinitInProgress.delete( compositeKey );
@@ -337,21 +337,21 @@ class StripePayment {
 		let amount = 0;
 
 		if ( amountType === 'fixed' ) {
-			/ Get fixed amount from data attribute
+			// Get fixed amount from data attribute
 			amount = parseFloat( paymentInput.dataset.fixedAmount || 0 );
 		} else {
-			/ Get the format type for dynamic amounts
+			// Get the format type for dynamic amounts
 			const formatType =
 				paymentInput.getAttribute(
 					'data-dynamic-amount-format-type'
 				) || 'us-style';
 			const rawAmount = paymentInput.dataset.currentAmount || 0;
 
-			/ Normalize the amount based on format type
+			// Normalize the amount based on format type
 			amount = StripePayment.normalizeAmount( rawAmount, formatType );
 		}
 
-		/ Validate the amount - must be valid, not negative, and greater than 0
+		// Validate the amount - must be valid, not negative, and greater than 0
 		if ( isNaN( amount ) ) {
 			return false;
 		}
@@ -364,7 +364,7 @@ class StripePayment {
 			return false;
 		}
 
-		/ Additional validation using existing method
+		// Additional validation using existing method
 		if ( ! StripePayment.validatePaymentAmount( amount ) ) {
 			return false;
 		}
@@ -382,7 +382,7 @@ class StripePayment {
 		const form = paymentInput.closest( 'form' );
 		const block = paymentInput.closest( '.srfm-block' );
 
-		/ Get subscription plan data from input attributes
+		// Get subscription plan data from input attributes
 		const planName =
 			paymentInput.dataset.subscriptionPlanName ||
 			PAYMENT_UTILITY.getStripeStrings(
@@ -391,7 +391,7 @@ class StripePayment {
 			);
 		const interval = paymentInput.dataset.subscriptionInterval || 'month';
 
-		/ Use static methods to extract customer data from mapped form fields
+		// Use static methods to extract customer data from mapped form fields
 		const customerName =
 			StripePayment.extractBillingName( form, block ) ||
 			PAYMENT_UTILITY.getStripeStrings(
@@ -438,7 +438,7 @@ class StripePayment {
 			};
 		}
 
-		/ Get payment amount using helper method
+		// Get payment amount using helper method
 		const amount = StripePayment.getPaymentAmount( paymentInput );
 
 		if ( false === amount ) {
@@ -460,12 +460,12 @@ class StripePayment {
 		}
 
 		try {
-			/ Create a temporary instance to call the method
+			// Create a temporary instance to call the method
 			const tempInstance = new StripePayment( form );
 			const blockId = paymentBlock.getAttribute( 'data-block-id' );
 			const compositeKey = getPaymentKey( form, blockId );
 
-			/ Use unified function for both payment types
+			// Use unified function for both payment types
 			const result = await tempInstance.createPaymentIntentOnSubmission(
 				blockId,
 				compositeKey,
@@ -500,9 +500,9 @@ class StripePayment {
 	 * @return {boolean} True if the amount is valid, false otherwise.
 	 */
 	static validatePaymentAmount( amount ) {
-		/ Stripe minimum is $0.50 for most currencies
+		// Stripe minimum is $0.50 for most currencies
 		const minAmount = 0.5;
-		const maxAmount = 999999.99; / Reasonable maximum
+		const maxAmount = 999999.99; // Reasonable maximum
 
 		if ( isNaN( amount ) || amount < minAmount ) {
 			return false;
@@ -520,24 +520,24 @@ class StripePayment {
 	 * @return {number} The normalized amount as a number.
 	 */
 	static normalizeAmount( amount, formatType = 'us-style' ) {
-		/ If already a number, return it
+		// If already a number, return it
 		if ( typeof amount === 'number' ) {
 			return amount;
 		}
 
-		/ Convert to string and trim
+		// Convert to string and trim
 		const amountStr = String( amount ).trim();
 
 		if ( formatType === 'eu-style' ) {
-			/ EU-style: 1.234,56 (period = thousands, comma = decimal)
-			/ Remove periods (thousands separator) and replace comma with period (decimal)
+			// EU-style: 1.234,56 (period = thousands, comma = decimal)
+			// Remove periods (thousands separator) and replace comma with period (decimal)
 			return parseFloat(
 				amountStr.replace( /\./g, '' ).replace( ',', '.' )
 			);
 		}
 
-		/ US-style (default): 1,234.56 (comma = thousands, period = decimal)
-		/ Remove commas (thousands separator)
+		// US-style (default): 1,234.56 (comma = thousands, period = decimal)
+		// Remove commas (thousands separator)
 		return parseFloat( amountStr.replace( /,/g, '' ) );
 	}
 
@@ -548,7 +548,7 @@ class StripePayment {
 	 * @return {string} The extracted billing name or a default value.
 	 */
 	static extractBillingName( form, paymentBlock ) {
-		/ Get the customer name field slug from payment input data attribute
+		// Get the customer name field slug from payment input data attribute
 		const paymentInput = paymentBlock.querySelector(
 			'input.srfm-payment-input'
 		);
@@ -560,7 +560,7 @@ class StripePayment {
 			return '';
 		}
 
-		/ Find the actual name input field in the form using the slug
+		// Find the actual name input field in the form using the slug
 		const nameInput = form.querySelector(
 			`.srfm-input-block.srfm-slug-${ customerNameFieldSlug } .srfm-input-common`
 		);
@@ -569,7 +569,7 @@ class StripePayment {
 			return '';
 		}
 
-		/ Return the trimmed value
+		// Return the trimmed value
 		return nameInput.value.trim() || '';
 	}
 
@@ -580,7 +580,7 @@ class StripePayment {
 	 * @return {string} The extracted billing email or a default value.
 	 */
 	static extractBillingEmail( form, paymentBlock ) {
-		/ Get the customer email field slug from payment input data attribute
+		// Get the customer email field slug from payment input data attribute
 		const paymentInput = paymentBlock.querySelector(
 			'input.srfm-payment-input'
 		);
@@ -595,7 +595,7 @@ class StripePayment {
 			return '';
 		}
 
-		/ Find the actual email input field in the form using the slug
+		// Find the actual email input field in the form using the slug
 		const emailInput = form.querySelector(
 			`.srfm-email-block.srfm-slug-${ customerEmailFieldSlug } .srfm-input-common`
 		);
@@ -604,7 +604,7 @@ class StripePayment {
 			return '';
 		}
 
-		/ Return the trimmed value
+		// Return the trimmed value
 		return emailInput.value.trim() || '';
 	}
 
@@ -618,8 +618,8 @@ class StripePayment {
 	static async srfmConfirmPayment( compositeKey, paymentData, form ) {
 		const { elements } = paymentData;
 
-		/ Validate card details AFTER payment intent is created but BEFORE confirmation
-		/ This is the correct timing to avoid card data loss
+		// Validate card details AFTER payment intent is created but BEFORE confirmation
+		// This is the correct timing to avoid card data loss
 		const { error: submitError } = await elements.submit();
 
 		if ( submitError ) {
@@ -630,7 +630,7 @@ class StripePayment {
 			};
 		}
 
-		/ Handle payment confirmation via unified handler
+		// Handle payment confirmation via unified handler
 		try {
 			return await StripePayment.confirmStripePayment(
 				compositeKey,
@@ -638,7 +638,7 @@ class StripePayment {
 				form
 			);
 		} catch ( error ) {
-			/ Catch any errors thrown by confirmStripePayment and return consistent structure
+			// Catch any errors thrown by confirmStripePayment and return consistent structure
 			return {
 				valid: false,
 				error: error.message || error,
@@ -655,29 +655,29 @@ class StripePayment {
 	static async confirmStripePayment( compositeKey, paymentData, form ) {
 		const { stripe, elements, clientSecret } = paymentData;
 
-		/ Extract original blockId from compositeKey for DOM queries
-		/ compositeKey format is always "numericInstanceId-blockId"
+		// Extract original blockId from compositeKey for DOM queries
+		// compositeKey format is always "numericInstanceId-blockId"
 		const separatorIndex = compositeKey.indexOf( '-' );
 		const blockId =
 			separatorIndex > -1
 				? compositeKey.substring( separatorIndex + 1 )
 				: compositeKey;
 
-		/ Get the payment block element
+		// Get the payment block element
 		const paymentBlock = form.querySelector(
 			`[data-block-id="${ blockId }"]`
 		);
-		/ Update form input with subscription data for backend processing
+		// Update form input with subscription data for backend processing
 		const paymentInput = paymentBlock.querySelector(
 			'.srfm-payment-input'
 		);
 
-		/ BOTH MODE: read paymentType fresh from the live data attribute rather
-		/ than the cached paymentData. reinitForBlock() rebuilds the cache on
-		/ type flip, and a confirm captured before the flip would otherwise
-		/ branch on a stale type. If paymentType and clientSecret ever truly
-		/ diverge, Stripe itself rejects the wrong confirmSetup/confirmPayment
-		/ call — no need for a redundant client-side guard here.
+		// BOTH MODE: read paymentType fresh from the live data attribute rather
+		// than the cached paymentData. reinitForBlock() rebuilds the cache on
+		// type flip, and a confirm captured before the flip would otherwise
+		// branch on a stale type. If paymentType and clientSecret ever truly
+		// diverge, Stripe itself rejects the wrong confirmSetup/confirmPayment
+		// call — no need for a redundant client-side guard here.
 		const paymentType =
 			paymentInput.getAttribute( 'data-payment-type' ) ||
 			paymentData.paymentType ||
@@ -686,7 +686,7 @@ class StripePayment {
 		const amountType =
 			paymentInput.getAttribute( 'data-amount-type' ) || 'fixed';
 
-		/ Prepare billing details using StripePayment class methods
+		// Prepare billing details using StripePayment class methods
 		const billingDetails = {
 			name: StripePayment.extractBillingName( form, paymentBlock ),
 			email: StripePayment.extractBillingEmail( form, paymentBlock ),
@@ -714,7 +714,7 @@ class StripePayment {
 			const getErrorCode =
 				paymentResult?.error?.decline_code ||
 				paymentResult?.error?.code;
-			/ Get the user-friendly message for the decline code
+			// Get the user-friendly message for the decline code
 			const errorMessage =
 				PAYMENT_UTILITY.getStripeStrings( getErrorCode );
 
@@ -827,10 +827,10 @@ class StripePayment {
 	}
 }
 
-/ BOTH MODE: start — helper to re-mount Stripe Elements when the user flips the
-/ payment-type chooser between one-time and subscription. Stripe's elements.update()
-/ does not reliably support switching `mode`, so we unmount, drop the cached
-/ element, and let the existing initializer pathway recreate everything.
+// BOTH MODE: start — helper to re-mount Stripe Elements when the user flips the
+// payment-type chooser between one-time and subscription. Stripe's elements.update()
+// does not reliably support switching `mode`, so we unmount, drop the cached
+// element, and let the existing initializer pathway recreate everything.
 StripePayment.reinitForBlock = function ( form, paymentBlock ) {
 	const paymentInput = paymentBlock.querySelector( 'input.srfm-payment-input' );
 	if ( ! paymentInput ) {
@@ -840,11 +840,11 @@ StripePayment.reinitForBlock = function ( form, paymentBlock ) {
 	const blockId = paymentBlock.getAttribute( 'data-block-id' );
 	const compositeKey = getPaymentKey( form, blockId );
 
-	/ Bail if a reinit is already in flight for this block. Stripe's iframe
-	/ mount is async, and a second pass before 'ready' fires would race two
-	/ elements.create('payment') instances on the same DOM container. The
-	/ caller (radio change handler) reverts the radio UI when this guard
-	/ trips so the visible state stays consistent.
+	// Bail if a reinit is already in flight for this block. Stripe's iframe
+	// mount is async, and a second pass before 'ready' fires would race two
+	// elements.create('payment') instances on the same DOM container. The
+	// caller (radio change handler) reverts the radio UI when this guard
+	// trips so the visible state stays consistent.
 	if ( StripePayment.reinitInProgress.has( compositeKey ) ) {
 		return;
 	}
@@ -854,7 +854,7 @@ StripePayment.reinitForBlock = function ( form, paymentBlock ) {
 		try {
 			existing.paymentElement.unmount();
 		} catch ( err ) {
-			/ Already unmounted — safe to ignore.
+			// Already unmounted — safe to ignore.
 		}
 	}
 	delete StripePayment.paymentElements[ compositeKey ];
@@ -864,18 +864,18 @@ StripePayment.reinitForBlock = function ( form, paymentBlock ) {
 
 	StripePayment.reinitInProgress.add( compositeKey );
 
-	/ Re-init only the target block. Previously this used `new StripePayment(form)`
-	/ which walked every payment block in the form and re-ran processPayment on
-	/ each — wasted work on multi-block forms. Object.create gives us a stub
-	/ bound to the form (the only `this` field processPayment touches indirectly
-	/ via initializePaymentElements) without triggering the constructor walk.
+	// Re-init only the target block. Previously this used `new StripePayment(form)`
+	// which walked every payment block in the form and re-ran processPayment on
+	// each — wasted work on multi-block forms. Object.create gives us a stub
+	// bound to the form (the only `this` field processPayment touches indirectly
+	// via initializePaymentElements) without triggering the constructor walk.
 	const stub = Object.create( StripePayment.prototype );
 	stub.form = form;
 	stub.processPayment( paymentBlock );
 };
-/ BOTH MODE: end
+// BOTH MODE: end
 
-/ Make StripePayment available globally for form submission
+// Make StripePayment available globally for form submission
 window.StripePayment = StripePayment;
 
 const PAYMENT_UTILITY = {
@@ -896,7 +896,7 @@ const PAYMENT_UTILITY = {
 	 * @return {string} The formatted number string
 	 */
 	formatNumberByType: ( amount, formatType = 'us-style' ) => {
-		/ Normalize to a number first
+		// Normalize to a number first
 		const normalizedAmount = StripePayment.normalizeAmount(
 			amount,
 			formatType
@@ -906,11 +906,11 @@ const PAYMENT_UTILITY = {
 			return '0.00';
 		}
 
-		/ Format to 2 decimal places
+		// Format to 2 decimal places
 		const fixedAmount = normalizedAmount.toFixed( 2 );
 
 		if ( formatType === 'eu-style' ) {
-			/ EU-style: 1.234,56 (period = thousands, comma = decimal)
+			// EU-style: 1.234,56 (period = thousands, comma = decimal)
 			const parts = fixedAmount.split( '.' );
 			const integerPart = parts[ 0 ].replace(
 				/\B(?=(\d{3})+(?!\d))/g,
@@ -920,7 +920,7 @@ const PAYMENT_UTILITY = {
 			return integerPart + ',' + decimalPart;
 		}
 
-		/ US-style (default): 1,234.56 (comma = thousands, period = decimal)
+		// US-style (default): 1,234.56 (comma = thousands, period = decimal)
 		const parts = fixedAmount.split( '.' );
 		const integerPart = parts[ 0 ].replace( /\B(?=(\d{3})+(?!\d))/g, ',' );
 		const decimalPart = parts[ 1 ];
@@ -945,7 +945,7 @@ const PAYMENT_UTILITY = {
 			return PAYMENT_UTILITY.amountPlaceHolder;
 		}
 
-		/ Format amount with currency using the appropriate number format and position
+		// Format amount with currency using the appropriate number format and position
 		const formattedNumber =
 			! amount || amount <= 0
 				? ''
@@ -959,7 +959,7 @@ const PAYMENT_UTILITY = {
 				  )
 				: '';
 
-		/ Replace {amount} placeholder with formatted amount
+		// Replace {amount} placeholder with formatted amount
 		return '' !== formattedAmount
 			? messageFormat.replace( '{amount}', formattedAmount )
 			: PAYMENT_UTILITY.amountPlaceHolder;
@@ -969,9 +969,9 @@ const PAYMENT_UTILITY = {
 		amount,
 		inputFormatType = 'us-style'
 	) => {
-		/ BOTH MODE: in "both" payment-type mode two .srfm-payment-value spans
-		/ exist (one per amount block). Target the VISIBLE one so the correct
-		/ type's amount updates. Falls back to the first match for non-both mode.
+		// BOTH MODE: in "both" payment-type mode two .srfm-payment-value spans
+		// exist (one per amount block). Target the VISIBLE one so the correct
+		// type's amount updates. Falls back to the first match for non-both mode.
 		const paymentBlock = paymentInput.closest( '.srfm-block' );
 		const getPlaceHolderElement =
 			paymentBlock.querySelector(
@@ -986,7 +986,7 @@ const PAYMENT_UTILITY = {
 			);
 
 			if ( getCurrencySymbol ) {
-				/ Check if message format exists (for subscription messages)
+				// Check if message format exists (for subscription messages)
 				if ( messageFormat ) {
 					const formattedMessage =
 						PAYMENT_UTILITY.formatSubscriptionMessage(
@@ -997,8 +997,8 @@ const PAYMENT_UTILITY = {
 						);
 					getPlaceHolderElement.innerHTML = formattedMessage;
 				} else {
-					/ Fallback to simple amount display (backward compatible)
-					/ Format the amount according to the number format type and currency position
+					// Fallback to simple amount display (backward compatible)
+					// Format the amount according to the number format type and currency position
 					const formattedNumber = PAYMENT_UTILITY.formatNumberByType(
 						amount,
 						inputFormatType
@@ -1036,13 +1036,13 @@ const PAYMENT_UTILITY = {
 					'data-variable-amount-field'
 				);
 
-				/ BOTH MODE: tear down any listeners previously bound for this
-				/ payment input. switchActivePaymentType() calls this method again
-				/ each time the user flips one-time/subscription, which previously
-				/ piled up duplicate listeners on the source field. Round-trip
-				/ flips compounded the leak (field A → field B → field A → ...).
-				/ Each prior listener still fires on input events and can overwrite
-				/ the displayed amount with a stale source field's value.
+				// BOTH MODE: tear down any listeners previously bound for this
+				// payment input. switchActivePaymentType() calls this method again
+				// each time the user flips one-time/subscription, which previously
+				// piled up duplicate listeners on the source field. Round-trip
+				// flips compounded the leak (field A → field B → field A → ...).
+				// Each prior listener still fires on input events and can overwrite
+				// the displayed amount with a stale source field's value.
 				if ( paymentInput._srfmAmountListenerController ) {
 					paymentInput._srfmAmountListenerController.abort();
 				}
@@ -1056,7 +1056,7 @@ const PAYMENT_UTILITY = {
 							`.srfm-block.srfm-slug-${ getBlockMappedSlug }`
 						);
 					if ( getMappedBlock ) {
-						/ Check block type.
+						// Check block type.
 						if (
 							getMappedBlock.classList.contains(
 								'srfm-number-block'
@@ -1072,7 +1072,7 @@ const PAYMENT_UTILITY = {
 									( event ) => {
 										const getMappedBlockInputValue =
 											event.target.value;
-										/ Get format type from the number input's data attribute
+										// Get format type from the number input's data attribute
 										const inputFormatType =
 											getMappedBlockInput.getAttribute(
 												'format-type'
@@ -1085,7 +1085,7 @@ const PAYMENT_UTILITY = {
 									},
 									listenerOpts
 								);
-								/ Get initial format type for the initial value
+								// Get initial format type for the initial value
 								const inputFormatType =
 									getMappedBlockInput.getAttribute(
 										'format-type'
@@ -1120,7 +1120,7 @@ const PAYMENT_UTILITY = {
 									},
 									listenerOpts
 								);
-								/ Set initial value
+								// Set initial value
 								const initialAmount =
 									PAYMENT_UTILITY.getDropdownAmount(
 										getMappedBlock,
@@ -1155,7 +1155,7 @@ const PAYMENT_UTILITY = {
 									},
 									listenerOpts
 								);
-								/ Set initial value
+								// Set initial value
 								const initialAmount =
 									PAYMENT_UTILITY.getMultiChoiceAmount(
 										getMappedBlock,
@@ -1176,10 +1176,10 @@ const PAYMENT_UTILITY = {
 									'.srfm-hidden-input'
 								);
 							if ( hiddenFieldInput ) {
-								/ Hidden inputs don't fire native input/change
-								/ events when set programmatically, so listen
-								/ for both — integrators that set the value
-								/ via JS should dispatch a 'change' event.
+								// Hidden inputs don't fire native input/change
+								// events when set programmatically, so listen
+								// for both — integrators that set the value
+								// via JS should dispatch a 'change' event.
 								const syncAmount = () => {
 									const trimmed =
 										hiddenFieldInput.value.trim();
@@ -1204,7 +1204,7 @@ const PAYMENT_UTILITY = {
 									'input',
 									syncAmount
 								);
-								/ Set initial value from defaultValue.
+								// Set initial value from defaultValue.
 								syncAmount();
 							}
 						}
@@ -1214,12 +1214,12 @@ const PAYMENT_UTILITY = {
 		}
 	},
 	getCurrencySymbol: ( currencyCode ) => {
-		/ Use localized currency data from PHP
+		// Use localized currency data from PHP
 		const currenciesData = window.srfmStripe?.currenciesData || {};
 		const upperCurrencyCode = currencyCode?.toUpperCase();
 		const currencyData = currenciesData[ upperCurrencyCode ];
 
-		/ Return symbol from localized data, or fallback to currency code
+		// Return symbol from localized data, or fallback to currency code
 		return currencyData?.symbol || currencyCode;
 	},
 	/**
@@ -1273,12 +1273,12 @@ const PAYMENT_UTILITY = {
 		const { extractValue, normalizeDashes } =
 			window.srfm?.srfmUtility || {};
 
-		/ Extract selected values from hidden input (format: "Option 1 | Option 2")
+		// Extract selected values from hidden input (format: "Option 1 | Option 2")
 		const selectedOptions = extractValue
 			? extractValue( hiddenInputValue )
 			: hiddenInputValue.split( '|' ).map( ( v ) => v.trim() );
 
-		/ Get all dropdown options
+		// Get all dropdown options
 		const options = dropdownBlock.querySelectorAll(
 			'.srfm-dropdown-input option[option-value]'
 		);
@@ -1292,7 +1292,7 @@ const PAYMENT_UTILITY = {
 
 				if ( optionText === selectedOptionText ) {
 					const optionValue = option.getAttribute( 'option-value' );
-					/ Only add numeric values
+					// Only add numeric values
 					if ( ! isNaN( optionValue ) ) {
 						selectedValues.push( parseFloat( optionValue ) );
 					} else if ( '' === optionValue ) {
@@ -1302,7 +1302,7 @@ const PAYMENT_UTILITY = {
 			} );
 		} );
 
-		/ Sum all selected option values
+		// Sum all selected option values
 		return selectedValues.length > 0
 			? selectedValues.reduce( ( sum, value ) => sum + value, 0 )
 			: 0;
@@ -1323,18 +1323,18 @@ const PAYMENT_UTILITY = {
 
 		const { extractValue } = window.srfm?.srfmUtility || {};
 
-		/ Extract selected values from hidden input (format: "Option 1 | Option 2")
+		// Extract selected values from hidden input (format: "Option 1 | Option 2")
 		const selectedOptions = extractValue( hiddenInputValue );
 
-		/ Get all multi-choice options
+		// Get all multi-choice options
 		const choices = multiChoiceBlock.querySelectorAll(
 			'.srfm-multi-choice-single'
 		);
 
-		/ Normalize whitespace: collapse multiple spaces to one, then trim.
-		/ This is necessary because browsers collapse consecutive whitespace in
-		/ innerText, while the stored value (from data-option-text attribute)
-		/ preserves the original spacing from the block attributes.
+		// Normalize whitespace: collapse multiple spaces to one, then trim.
+		// This is necessary because browsers collapse consecutive whitespace in
+		// innerText, while the stored value (from data-option-text attribute)
+		// preserves the original spacing from the block attributes.
 		const normalizeStr = ( str ) =>
 			typeof str === 'string' ? str.trim().replace( /\s+/g, ' ' ) : '';
 
@@ -1351,7 +1351,7 @@ const PAYMENT_UTILITY = {
 						'.srfm-input-multi-choice-single'
 					);
 					const optionValue = input?.getAttribute( 'option-value' );
-					/ Only add numeric values
+					// Only add numeric values
 					if ( ! isNaN( optionValue ) ) {
 						selectedValues.push( parseFloat( optionValue ) );
 					} else if ( '' === optionValue ) {
@@ -1361,31 +1361,31 @@ const PAYMENT_UTILITY = {
 			} );
 		} );
 
-		/ Sum all selected option values
+		// Sum all selected option values
 		return selectedValues.length > 0
 			? selectedValues.reduce( ( sum, value ) => sum + value, 0 )
 			: 0;
 	},
 	getStripeStrings: ( code, defaultMessage = '' ) => {
-		/ If no code provided
+		// If no code provided
 		if ( ! code || code === null || code === undefined ) {
-			/ Return default message if provided, otherwise unknown error
+			// Return default message if provided, otherwise unknown error
 			return defaultMessage && defaultMessage.trim() !== ''
 				? defaultMessage
 				: window.srfmStripe?.strings?.unknown_error ||
 						'An unknown error occurred. Please try again or contact the site administrator.';
 		}
 
-		/ Check if code exists in localized strings
+		// Check if code exists in localized strings
 		const localizedMessage = window.srfmStripe?.strings?.[ code ];
 
 		if ( localizedMessage ) {
-			/ Code found in localized strings, return it
+			// Code found in localized strings, return it
 			return localizedMessage;
 		}
 
-		/ Code not found in localized strings
-		/ Return default message if provided, otherwise unknown error
+		// Code not found in localized strings
+		// Return default message if provided, otherwise unknown error
 		return defaultMessage && defaultMessage.trim() !== ''
 			? defaultMessage
 			: window.srfmStripe?.strings?.unknown_error ||
@@ -1401,20 +1401,20 @@ window.srfmPaymentUtility = PAYMENT_UTILITY;
 document.addEventListener( 'srfm_form_after_initialization', ( event ) => {
 	const form = event?.detail?.form;
 	if ( form ) {
-		/ Check if form has payment blocks before initializing
+		// Check if form has payment blocks before initializing
 		const paymentBlocks = form.querySelectorAll(
 			'.srfm-block.srfm-payment-block'
 		);
 		if ( paymentBlocks.length > 0 ) {
 			new StripePayment( form );
 			PAYMENT_UTILITY.init( form );
-			/ BOTH MODE: wire the one-time / subscription radio chooser, if present.
+			// BOTH MODE: wire the one-time / subscription radio chooser, if present.
 			initPaymentTypeChoosers( form );
 		}
 	}
 } );
 
-/ BOTH MODE: start — payment-type chooser (one-time vs subscription) wiring.
+// BOTH MODE: start — payment-type chooser (one-time vs subscription) wiring.
 
 /**
  * Wire the payment-type chooser radios for any payment blocks in this form
@@ -1435,7 +1435,7 @@ function initPaymentTypeChoosers( form ) {
 			return;
 		}
 
-		/ Only wire when the admin chose "both" mode.
+		// Only wire when the admin chose "both" mode.
 		if (
 			paymentInput.getAttribute( 'data-original-payment-type' ) !==
 			'both'
@@ -1456,12 +1456,12 @@ function initPaymentTypeChoosers( form ) {
 					return;
 				}
 
-				/ BOTH MODE: block type-flip while a payment is in flight.
-				/ reinitForBlock() unmounts the Stripe Element and deletes the
-				/ cached intent the pending confirmPayment is still using —
-				/ flipping mid-submit produces double charges or wrong-type
-				/ completions. Revert the radio to whatever data-payment-type
-				/ currently is so the UI does not lie about the user's choice.
+				// BOTH MODE: block type-flip while a payment is in flight.
+				// reinitForBlock() unmounts the Stripe Element and deletes the
+				// cached intent the pending confirmPayment is still using —
+				// flipping mid-submit produces double charges or wrong-type
+				// completions. Revert the radio to whatever data-payment-type
+				// currently is so the UI does not lie about the user's choice.
 				const blockId =
 					paymentBlock.getAttribute( 'data-block-id' );
 				const compositeKey = getPaymentKey( form, blockId );
@@ -1506,7 +1506,7 @@ function initPaymentTypeChoosers( form ) {
 function switchActivePaymentType( form, paymentBlock, paymentInput, newType ) {
 	const safeType = newType === 'subscription' ? 'subscription' : 'one-time';
 
-	/ 1. Toggle visible amount block.
+	// 1. Toggle visible amount block.
 	const amountBlocks = paymentBlock.querySelectorAll(
 		'.srfm-payment-amount-block'
 	);
@@ -1518,7 +1518,7 @@ function switchActivePaymentType( form, paymentBlock, paymentInput, newType ) {
 		}
 	} );
 
-	/ 2. Sync the live data attributes from the per-type configuration.
+	// 2. Sync the live data attributes from the per-type configuration.
 	const prefix = safeType === 'subscription' ? 'subscription' : 'one-time';
 	const amountType =
 		paymentInput.getAttribute( `data-${ prefix }-amount-type` ) || 'fixed';
@@ -1544,24 +1544,24 @@ function switchActivePaymentType( form, paymentBlock, paymentInput, newType ) {
 		paymentInput.setAttribute( 'data-variable-amount-field', variableField );
 	} else {
 		paymentInput.removeAttribute( 'data-variable-amount-field' );
-		/ Also clear any cached current-amount so stale values don't leak across choices.
+		// Also clear any cached current-amount so stale values don't leak across choices.
 		paymentInput.removeAttribute( 'data-current-amount' );
 	}
 
-	/ 3. Re-initialize Stripe Element in the new mode.
+	// 3. Re-initialize Stripe Element in the new mode.
 	if ( typeof StripePayment.reinitForBlock === 'function' ) {
 		StripePayment.reinitForBlock( form, paymentBlock );
 	}
 
-	/ 3b. BOTH MODE: re-wire variable-amount listeners and trigger an immediate
-	/ display update for the new type. listenAmountChanges() queries
-	/ [data-variable-amount-field] which was just updated above, so it will
-	/ find and wire the correct field. The immediate update populates the
-	/ amount span which is empty at PHP render time for variable types.
+	// 3b. BOTH MODE: re-wire variable-amount listeners and trigger an immediate
+	// display update for the new type. listenAmountChanges() queries
+	// [data-variable-amount-field] which was just updated above, so it will
+	// find and wire the correct field. The immediate update populates the
+	// amount span which is empty at PHP render time for variable types.
 	if ( amountType === 'variable' && variableField ) {
 		PAYMENT_UTILITY.listenAmountChanges();
 
-		/ Read current value from the mapped field and update the display now.
+		// Read current value from the mapped field and update the display now.
 		const mappedBlock = form.querySelector(
 			`.srfm-block.srfm-slug-${ variableField }`
 		);
@@ -1594,11 +1594,11 @@ function switchActivePaymentType( form, paymentBlock, paymentInput, newType ) {
 						multiChoiceInput
 					) || 0;
 			} else if ( hiddenFieldInput ) {
-				/ Mirror syncAmount() in listenAmountChanges — accept only numeric
-				/ strings, clamp negatives to 0. Without this branch, currentValue
-				/ stays 0 and overwrites the value syncAmount() just wrote during
-				/ listenAmountChanges() above, breaking initial-amount pickup on
-				/ every one-time/subscription flip.
+				// Mirror syncAmount() in listenAmountChanges — accept only numeric
+				// strings, clamp negatives to 0. Without this branch, currentValue
+				// stays 0 and overwrites the value syncAmount() just wrote during
+				// listenAmountChanges() above, breaking initial-amount pickup on
+				// every one-time/subscription flip.
 				const trimmed = hiddenFieldInput.value.trim();
 				const rawValue = /^\d+(\.\d+)?$/.test( trimmed )
 					? parseFloat( trimmed )
@@ -1612,24 +1612,24 @@ function switchActivePaymentType( form, paymentBlock, paymentInput, newType ) {
 				currentValue
 			);
 		} else {
-			/ No mapped field found — show placeholder.
+			// No mapped field found — show placeholder.
 			PAYMENT_UTILITY.updatePaymentBlockAmount( paymentInput, 0 );
 		}
 	}
 
-	/ 4. Dispatch gateway-agnostic event so other gateways (PayPal etc.) can react.
-	/
-	/ Event contract — `srfm_payment_type_changed` (document-level, bubbles):
-	/   detail: {
-	/     blockId:      string            — Original payment block id (no instance prefix).
-	/     form:         HTMLFormElement   — Form element the payment block belongs to.
-	/     paymentType:  'one-time' | 'subscription' — The newly active type.
-	/     paymentInput: HTMLInputElement  — The hidden .srfm-payment-input element.
-	/   }
-	/ Companion event `srfm_payment_method_changed` (dispatched in payment-manager.js)
-	/ uses a deliberately narrower shape — { blockId, paymentMethod, form } — because
-	/ gateway listeners only need the method id; if you need paymentInput on that
-	/ path, query it from the form rather than expanding the schema (avoids drift).
+	// 4. Dispatch gateway-agnostic event so other gateways (PayPal etc.) can react.
+	//
+	// Event contract — `srfm_payment_type_changed` (document-level, bubbles):
+	//   detail: {
+	//     blockId:      string            — Original payment block id (no instance prefix).
+	//     form:         HTMLFormElement   — Form element the payment block belongs to.
+	//     paymentType:  'one-time' | 'subscription' — The newly active type.
+	//     paymentInput: HTMLInputElement  — The hidden .srfm-payment-input element.
+	//   }
+	// Companion event `srfm_payment_method_changed` (dispatched in payment-manager.js)
+	// uses a deliberately narrower shape — { blockId, paymentMethod, form } — because
+	// gateway listeners only need the method id; if you need paymentInput on that
+	// path, query it from the form rather than expanding the schema (avoids drift).
 	const blockId = paymentBlock.getAttribute( 'data-block-id' );
 	document.dispatchEvent(
 		new CustomEvent( 'srfm_payment_type_changed', {
@@ -1643,4 +1643,4 @@ function switchActivePaymentType( form, paymentBlock, paymentInput, newType ) {
 		} )
 	);
 }
-/ BOTH MODE: end
+// BOTH MODE: end

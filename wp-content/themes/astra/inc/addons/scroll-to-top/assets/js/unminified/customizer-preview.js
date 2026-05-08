@@ -20,7 +20,7 @@
 	astra_css( 'astra-settings[scroll-to-top-icon-h-color]', 'color', '#ast-scroll-top:hover' );
 	astra_css( 'astra-settings[scroll-to-top-icon-h-bg-color]', 'background-color', '#ast-scroll-top:hover' );
 
-	/ Border Radius Fields for Button.
+	// Border Radius Fields for Button.
 	wp.customize( 'astra-settings[scroll-to-top-icon-radius-fields]', function( value ) {
 		value.bind( function( border ) {
 			let tablet_break_point    = astraBuilderPreview.tablet_break_point || 768,
@@ -39,7 +39,7 @@
 		} );
 	} );
 
-	/ Scroll to top position.
+	// Scroll to top position.
 	wp.customize( 'astra-settings[scroll-to-top-icon-position]', function( value ) {
 		value.bind( function( position ) {
 			jQuery("#ast-scroll-top").removeClass("ast-scroll-to-top-right ast-scroll-to-top-left");

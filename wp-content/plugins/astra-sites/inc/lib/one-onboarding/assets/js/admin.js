@@ -5,5 +5,5 @@
  */
 
 jQuery( function () {
-	/ DOM is ready.
+	// DOM is ready.
 } );

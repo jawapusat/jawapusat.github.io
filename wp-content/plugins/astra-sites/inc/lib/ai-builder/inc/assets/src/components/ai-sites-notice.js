@@ -4,7 +4,7 @@ import { classNames } from '../helpers';
 import { showAISitesNotice } from '../utils/helpers';
 
 const AISitesNotice = ( { className, ...props } ) => {
-	/ handle not logged in case.
+	// handle not logged in case.
 
 	if (
 		typeof aiBuilderVars?.zip_plans !== 'object' ||

@@ -1,6 +1,6 @@
 (function () {
 
-    / Triggers sticky add to cart on scroll.
+    // Triggers sticky add to cart on scroll.
     const astraStickyAddToCart = document.querySelector(".ast-sticky-add-to-cart");
 
     if (astraStickyAddToCart) {
@@ -14,7 +14,7 @@
         })
     }
 
-    / Smooth scrolls if select option button is active.
+    // Smooth scrolls if select option button is active.
     const AstraSmoothScrollBtn = document.querySelector(".ast-sticky-add-to-cart-action-wrap .single_link_to_cart_button");
     const element = document.querySelector(".single_add_to_cart_button");
 

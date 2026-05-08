@@ -14,7 +14,7 @@ const SiteColorsControls = () => {
 	const [ { activePaletteSlug, templateResponse, builder }, dispatch ] = [
 		{},
 		() => {},
-	]; / Remove this line.
+	]; // Remove this line.
 	const [ defaultPalette, setDefaultPalette ] = useState( [] );
 	const [ colorScheme, setColorScheme ] = useState( LIGHT_PALETTES );
 

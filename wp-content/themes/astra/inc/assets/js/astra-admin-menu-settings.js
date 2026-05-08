@@ -81,7 +81,7 @@
 				activatedSlug = response.slug;
 			}
 
-			/ Transform the 'Install' button into an 'Activate' button.
+			// Transform the 'Install' button into an 'Activate' button.
 			$init = $message.data('init');
 			var activatingText = astra.recommendedPluiginActivatingText;
 			var astraSitesLink = astra.astraSitesLink;
@@ -92,7 +92,7 @@
 				.addClass('updating-message')
 				.html( activatingText );
 
-			/ WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
+			// WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
 			setTimeout( function() {
 
 				$.ajax({
@@ -174,7 +174,7 @@
 				}
 				const disableActivationNoticeParam = redirectionLink?.includes( 'onboarding' ) ? '' : '&ast-disable-activation-notice';
 				
-				/ Add delay to prevent plugin activation hook from interfering with redirect
+				// Add delay to prevent plugin activation hook from interfering with redirect
 				setTimeout( function() {
 					window.location.href = redirectionLink + disableActivationNoticeParam;
 				}, 1000 );

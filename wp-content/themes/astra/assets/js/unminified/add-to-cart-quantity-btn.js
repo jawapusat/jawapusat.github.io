@@ -10,7 +10,7 @@ window.addEventListener( "load", function(e) {
 });
 
 
-/ Here we are selecting the node that will be observed for mutations.
+// Here we are selecting the node that will be observed for mutations.
 const astraminiCarttargetNodes = document.querySelectorAll(".ast-site-header-cart");
 
 astraminiCarttargetNodes.forEach(function(astraminiCarttargetNode) {
@@ -39,7 +39,7 @@ jQuery( function( $ ) {
 });
 
 (function() {
-    / Delay the method override so that we do not interfere with the Metrix test.
+    // Delay the method override so that we do not interfere with the Metrix test.
     setTimeout(() => {
         var send = XMLHttpRequest.prototype.send
         XMLHttpRequest.prototype.send = function() {
@@ -72,10 +72,10 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
 
         if ( $quantityBoxes && 'date' !== $quantityBoxes.getAttribute( 'type' ) && 'hidden' !== $quantityBoxes.getAttribute( 'type' ) ) {
 
-            / Add plus and minus icons.
+            // Add plus and minus icons.
             $qty_parent = $quantityBoxes.parentElement;
 
-            / Remove existing plus and minus placeholders.
+            // Remove existing plus and minus placeholders.
             document.querySelectorAll( '.ast-qty-placeholder' )?.forEach( ( placeholder ) => placeholder?.remove() );
 
             $qty_parent.classList.add( 'buttons_added' );
@@ -112,13 +112,13 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
                 }
             }
 
-            / Quantity input.
+            // Quantity input.
             let objbody = document.getElementsByTagName('BODY')[0];
             let cart = document.getElementsByClassName('cart')[0];
 
             if (objbody.classList.contains('single-product') && cart && !cart.classList.contains('grouped_form')) {
                 let quantityInput = document.querySelector('.woocommerce input[type=number].qty');
-                / Check for single product page.
+                // Check for single product page.
                 if (quantityInput) {
                     quantityInput.addEventListener('keyup', function () {
                         let qtyVal = quantityInput.value;
@@ -136,12 +136,12 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
                 pm_el.addEventListener( "click", function(ev) {
 
 
-                    / Quantity.
+                    // Quantity.
                     var $quantityBox;
 
                     $quantityBox = ev.target.parentElement.querySelector( $quantitySelector );
 
-                    / Get values.
+                    // Get values.
                     var $currentQuantity = parseFloat( $quantityBox.value ),
                     $maxQuantity = parseFloat( $quantityBox.getAttribute( 'max' ) ),
                     $minQuantity = parseFloat( $quantityBox.getAttribute( 'min' ) ),
@@ -149,7 +149,7 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
                     checkStepInteger = Number.isInteger( $step ),
                     finalValue;
 
-                    / Fallback default values on falsy values like '' and NaN.
+                    // Fallback default values on falsy values like '' and NaN.
                     if ( ! $currentQuantity ) {
                         $currentQuantity = 0;
                     }
@@ -164,7 +164,7 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
                         $step = 1;
                     }
 
-                    / Change the value.
+                    // Change the value.
                     if ( ev.target.classList.contains( 'plus' ) ) {
 
                         if ( $maxQuantity && ( $maxQuantity === $currentQuantity || $currentQuantity > Number( $maxQuantity ) ) ) {
@@ -185,11 +185,11 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
 
                     }
 
-                    / Trigger the change event on the input.
+                    // Trigger the change event on the input.
                     var changeEvent = new Event('change', { bubbles: true });
                     $quantityBox.dispatchEvent(changeEvent);
 
-                    / Trigger change event.
+                    // Trigger change event.
                     var update_cart_btn = document.getElementsByName("update_cart");
                     if (update_cart_btn.length > 0) {
                         for ( var btn = 0; btn < update_cart_btn.length; btn++ ) {
@@ -212,7 +212,7 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
 
 function sendAjaxQuantityRequest(currentTarget, quantity, itemHash ) {
 
-    / Send AJAX request from mini cart.
+    // Send AJAX request from mini cart.
     const miniCart = currentTarget.closest( '.woocommerce-mini-cart' );
 
     if ( miniCart && astra && astra.single_product_qty_ajax_nonce && astra.ajax_url ) {
@@ -221,19 +221,19 @@ function sendAjaxQuantityRequest(currentTarget, quantity, itemHash ) {
 
         miniCart.classList.add('ajax-mini-cart-qty-loading');
 
-        / Creating a XMLHttpRequest object.
+        // Creating a XMLHttpRequest object.
         let xhrRequest = new XMLHttpRequest();
         xhrRequest.open( 'POST', astra.ajax_url, true );
 
-        / Send the proper header information along with the request
+        // Send the proper header information along with the request
         xhrRequest.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
 
         xhrRequest.send( 'action=astra_add_cart_single_product_quantity&hash=' + itemHash + '&quantity=' + quantity + '&qtyNonce=' + qtyNonce );
 
         xhrRequest.onload = function () {
-            if ( xhrRequest.readyState == XMLHttpRequest.DONE ) {   / XMLHttpRequest.DONE == 4
+            if ( xhrRequest.readyState == XMLHttpRequest.DONE ) {   // XMLHttpRequest.DONE == 4
                 if ( 200 <= xhrRequest.status || 400 <= xhrRequest.status ) {
-                    / Trigger event so themes can refresh other areas.
+                    // Trigger event so themes can refresh other areas.
                     var event = document.createEvent( 'HTMLEvents' );
                     event.initEvent( 'wc_fragment_refresh', true, false );
                     document.body.dispatchEvent(event);
@@ -255,7 +255,7 @@ function sendAjaxQuantityRequest(currentTarget, quantity, itemHash ) {
 
 
 
-let typingTimer; /timer identifier
+let typingTimer; //timer identifier
 let doneTypingInterval = 500;
 
 function quantityInput() {

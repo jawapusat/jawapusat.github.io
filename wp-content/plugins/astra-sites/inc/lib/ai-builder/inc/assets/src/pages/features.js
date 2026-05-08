@@ -100,7 +100,7 @@ const EcommerceOptions = ( { ecomSupported, selectedEcom, onChange } ) => {
 							</div>
 						</div>
 						<span>
-							{ ! isOnlyOneEcom && ( / Hide the chevron if there is only one ecom option
+							{ ! isOnlyOneEcom && ( // Hide the chevron if there is only one ecom option
 								<ChevronUpIcon
 									className={ classNames(
 										'w-3 h-3 text-app-active-icon ',
@@ -197,12 +197,12 @@ const Features = ( {
 		( item ) => item.uuid === selectedTemplate
 	);
 
-	/ const enabledFeatures = siteFeatures
-	/ 	.filter( ( feature ) => feature.enabled )
-	/ 	.map( ( feature ) => feature.id );
+	// const enabledFeatures = siteFeatures
+	// 	.filter( ( feature ) => feature.enabled )
+	// 	.map( ( feature ) => feature.id );
 
-	/ const uniqueSiteFeatures = [ ...new Set( enabledFeatures ) ];
-	/ const ecommerceEnabled = uniqueSiteFeatures.includes( 'ecommerce' );
+	// const uniqueSiteFeatures = [ ...new Set( enabledFeatures ) ];
+	// const ecommerceEnabled = uniqueSiteFeatures.includes( 'ecommerce' );
 	const [ ecomSupported, defaultEcom ] = useMemo( () => {
 		return [
 			selectedTemplateData?.features_data?.ecommerce_supported || [],
@@ -234,10 +234,10 @@ const Features = ( {
 		} );
 
 		if ( response?.success ) {
-			/ Store to state.
+			// Store to state.
 			storeSiteFeatures( response.data.data );
 
-			/ Set status to fetched.
+			// Set status to fetched.
 			return setIsFetchingStatus( fetchStatus.fetched );
 		}
 
@@ -292,7 +292,7 @@ const Features = ( {
 
 	useEffect( () => {
 		if ( siteFeatures?.length > 0 ) {
-			/ we already have features
+			// we already have features
 			storeSiteFeatures( siteFeatures );
 			setIsFetchingStatus( fetchStatus.fetched );
 		} else if ( isFetchingStatus === fetchStatus.fetching ) {
@@ -304,15 +304,15 @@ const Features = ( {
 		const isEcommerceEnabled = siteFeatures.some(
 			( feat ) => feat.id === 'ecommerce' && feat.enabled
 		);
-		/ Exclude disabled features from UI only when site features have been fetched.
+		// Exclude disabled features from UI only when site features have been fetched.
 		return isFetchingStatus === fetchStatus.fetched
 			? siteFeatures?.filter( ( feat ) => {
-					/ If feature is not sales-funnels, return it if it's not disabled
+					// If feature is not sales-funnels, return it if it's not disabled
 					if ( feat.id !== 'sales-funnels' ) {
 						return ! disabledFeatures?.includes( feat.id );
 					}
 
-					/ For sales-funnels, only show if e-commerce is enabled and selected ecom is woocommerce
+					// For sales-funnels, only show if e-commerce is enabled and selected ecom is woocommerce
 					const shouldShowSalesFunnels =
 						isEcommerceEnabled && selectedEcom === 'woocommerce';
 
@@ -324,12 +324,12 @@ const Features = ( {
 			: [];
 	}, [ siteFeatures, disabledFeatures, isFetchingStatus, selectedEcom ] );
 
-	/ State for tracking if we're checking multisite permissions
+	// State for tracking if we're checking multisite permissions
 	const [ isCheckingMultisite, setIsCheckingMultisite ] = useState( false );
 
-	/ Check multisite permissions when user clicks Start Building
+	// Check multisite permissions when user clicks Start Building
 	const checkMultisitePermissions = async () => {
-		/ Only check in multisite environments
+		// Only check in multisite environments
 		if ( ! aiBuilderVars.isMultisite ) {
 			return { allowed: true };
 		}
@@ -340,7 +340,7 @@ const Features = ( {
 			true
 		);
 
-		/ Check permissions
+		// Check permissions
 		const permissionResult = checkMultisiteImportPermissions(
 			requiredPluginsResponse.data,
 			aiBuilderVars
@@ -365,11 +365,11 @@ const Features = ( {
 			return;
 		}
 
-		/ Check multisite permissions when user clicks Start Building in multisite env.
+		// Check multisite permissions when user clicks Start Building in multisite env.
 		if ( aiBuilderVars.isMultisite ) {
 			const permissionResult = await checkMultisitePermissions();
 
-			/ If permissions are not met, show blocking modal
+			// If permissions are not met, show blocking modal
 			if ( ! permissionResult.allowed ) {
 				setMultisitePermissionModal( {
 					open: true,
@@ -380,7 +380,7 @@ const Features = ( {
 			}
 		}
 
-		/ get the start building function from the parent component
+		// get the start building function from the parent component
 		const startBuilding = handleClickStartBuilding( skipFeature );
 
 		if ( aiBuilderVars?.hideCreditsWarningModal ) {
@@ -400,7 +400,7 @@ const Features = ( {
 				onConfirm: startBuilding,
 			} );
 		} else {
-			/ user doesn't have sufficient credits or confirmation modal is not needed, startBuilding will show upgrade modal if needed
+			// user doesn't have sufficient credits or confirmation modal is not needed, startBuilding will show upgrade modal if needed
 			startBuilding();
 		}
 	};

@@ -9,7 +9,7 @@ import parseSVG from './parseIcon';
 function renderSVG( svg, setAttributes = false, extraProps = {} ) {
 	svg = parseSVG( svg );
 	let fontAwesome;
-	/ Load Polyfiller Array if needed.
+	// Load Polyfiller Array if needed.
 	if ( 0 !== uagb_blocks_info.font_awesome_5_polyfill.length ) {
 		fontAwesome = uagb_blocks_info.uagb_svg_icons[ svg ];
 		if ( ! fontAwesome ) {

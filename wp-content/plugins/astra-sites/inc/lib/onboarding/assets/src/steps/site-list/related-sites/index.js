@@ -1,7 +1,7 @@
 // External Dependencies.
 import React from 'react';
 import { __ } from '@wordpress/i18n';
-/ Internal Dependencies.
+// Internal Dependencies.
 import SiteGrid from '../sites-grid';
 import { useStateValue } from '../../../store/store';
 import { useFilteredSites } from '..';

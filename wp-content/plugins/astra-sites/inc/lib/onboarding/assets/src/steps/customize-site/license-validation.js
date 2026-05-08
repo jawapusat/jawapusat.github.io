@@ -90,7 +90,7 @@ const LicenseValidation = ( param ) => {
 	};
 	const processingClass = processing ? 'processing' : '';
 	const StoreLink = sprintf(
-		/translators: %1$s Opening anchor tag %2$s Closing anchor tag.
+		//translators: %1$s Opening anchor tag %2$s Closing anchor tag.
 		__(
 			`If you have already purchased the Essential or Business Toolkit, please install the premium version of the Starter Templates plugin from our %1$sstore%2$s.`,
 			'astra-sites'
@@ -100,7 +100,7 @@ const LicenseValidation = ( param ) => {
 	);
 
 	const SupportTeam = sprintf(
-		/translators: %1$s Opening anchor tag %2$s Closing anchor tag.
+		//translators: %1$s Opening anchor tag %2$s Closing anchor tag.
 		__(
 			'Need help? feel free to get in touch with our %1$ssupport team%2$s.',
 			'astra-sites'

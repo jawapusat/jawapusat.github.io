@@ -1,10 +1,10 @@
 UAGBLottie = {
 	getElement : ( id ) => {
-		/ Check if the script has run once already on the given element (required for homepage sidebar usage case).
+		// Check if the script has run once already on the given element (required for homepage sidebar usage case).
 		const getJsELement = document.querySelector( `.${id}:not(.uagb-activated-script)` );
 		if( ! getJsELement ) return null;
 
-		/ Ensures that the script only runs once on the given element (required for homepage sidebar usage case).
+		// Ensures that the script only runs once on the given element (required for homepage sidebar usage case).
 		getJsELement.classList.add( 'uagb-activated-script' );
 		return getJsELement;
 	}, 

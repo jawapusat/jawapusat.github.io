@@ -23,7 +23,7 @@ const PageBuilder = () => {
 			localStorage.removeItem( 'st-import-end' );
 		}
 
-		/ Track page builder step when component mounts
+		// Track page builder step when component mounts
 		trackOnboardingStep( 'page-builder' );
 	}, [] );
 
@@ -49,17 +49,17 @@ const PageBuilder = () => {
 		e = e || window.event;
 
 		if ( e.keyCode === 37 ) {
-			/Left Arrow
+			//Left Arrow
 			if ( e.target.previousSibling ) {
 				e.target.previousSibling.focus();
 			}
 		} else if ( e.keyCode === 39 ) {
-			/Right Arrow
+			//Right Arrow
 			if ( e.target.nextSibling ) {
 				e.target.nextSibling.focus();
 			}
 		} else if ( e.key === 'Enter' ) {
-			/Enter
+			//Enter
 			update( value );
 		}
 	};
@@ -183,23 +183,23 @@ const PageBuilder = () => {
 					</div>
 				</div>
 			}
-			/ actions={
-			/ 	<>
-			/ 		<PreviousStepLink
-			/ 			customizeStep={ true }
-			/ 			before
-			/ 			onClick={ () => {
-			/ 				dispatch( {
-			/ 					type: 'set',
-			/ 					currentIndex: 0,
-			/ 					builder: 'ai-builder',
-			/ 				} );
-			/ 			} }
-			/ 		>
-			/ 			{ __( 'Back', 'astra-sites' ) }
-			/ 		</PreviousStepLink>
-			/ 	</>
-			/ }
+			// actions={
+			// 	<>
+			// 		<PreviousStepLink
+			// 			customizeStep={ true }
+			// 			before
+			// 			onClick={ () => {
+			// 				dispatch( {
+			// 					type: 'set',
+			// 					currentIndex: 0,
+			// 					builder: 'ai-builder',
+			// 				} );
+			// 			} }
+			// 		>
+			// 			{ __( 'Back', 'astra-sites' ) }
+			// 		</PreviousStepLink>
+			// 	</>
+			// }
 		/>
 	);
 };

@@ -64,8 +64,8 @@
 				xhr.onabort = k;
 				xhr.onprogress = k;
 				xhr.onreadystatechange = k;
-				/ IE 8 - 9: XDomainRequest#abort() does not fire any event
-				/ Opera < 10: XMLHttpRequest#abort() does not fire any event
+				// IE 8 - 9: XDomainRequest#abort() does not fire any event
+				// Opera < 10: XMLHttpRequest#abort() does not fire any event
 				xhr.abort();
 				if ( timeout !== 0 ) {
 					clearTimeout( timeout );
@@ -81,7 +81,7 @@
 
 		var onStart = function () {
 			if ( state === 1 ) {
-				/state = 2;
+				//state = 2;
 				var status = 0;
 				var statusText = '';
 				var contentType = undefined;
@@ -91,15 +91,15 @@
 						statusText = xhr.statusText;
 						contentType = xhr.getResponseHeader( 'Content-Type' );
 					} catch ( error ) {
-						/ IE < 10 throws exception for `xhr.status` when xhr.readyState === 2 || xhr.readyState === 3
-						/ Opera < 11 throws exception for `xhr.status` when xhr.readyState === 2
-						/ https://bugs.webkit.org/show_bug.cgi?id=29121
+						// IE < 10 throws exception for `xhr.status` when xhr.readyState === 2 || xhr.readyState === 3
+						// Opera < 11 throws exception for `xhr.status` when xhr.readyState === 2
+						// https://bugs.webkit.org/show_bug.cgi?id=29121
 						status = 0;
 						statusText = '';
 						contentType = undefined;
-						/ Firefox < 14, Chrome ?, Safari ?
-						/ https://bugs.webkit.org/show_bug.cgi?id=29658
-						/ https://bugs.webkit.org/show_bug.cgi?id=77854
+						// Firefox < 14, Chrome ?, Safari ?
+						// https://bugs.webkit.org/show_bug.cgi?id=29658
+						// https://bugs.webkit.org/show_bug.cgi?id=77854
 					}
 				} else {
 					status = 200;
@@ -124,7 +124,7 @@
 				try {
 					responseText = xhr.responseText;
 				} catch ( error ) {
-					/ IE 8 - 9 with XMLHttpRequest
+					// IE 8 - 9 with XMLHttpRequest
 				}
 				that.readyState = 3;
 				that.responseText = responseText;
@@ -132,8 +132,8 @@
 			}
 		};
 		var onFinish = function () {
-			/ Firefox 52 fires "readystatechange" (xhr.readyState === 4) without final "readystatechange" (xhr.readyState === 3)
-			/ IE 8 fires "onload" without "onprogress"
+			// Firefox 52 fires "readystatechange" (xhr.readyState === 4) without final "readystatechange" (xhr.readyState === 3)
+			// IE 8 fires "onload" without "onprogress"
 			onProgress();
 			if ( state === 1 || state === 2 || state === 3 ) {
 				state = 4;
@@ -147,7 +147,7 @@
 		};
 		var onReadyStateChange = function () {
 			if ( xhr != undefined ) {
-				/ Opera 12
+				// Opera 12
 				if ( xhr.readyState === 4 ) {
 					onFinish();
 				} else if ( xhr.readyState === 3 ) {
@@ -166,17 +166,17 @@
 			}
 		};
 
-		/ XDomainRequest#abort removes onprogress, onerror, onload
+		// XDomainRequest#abort removes onprogress, onerror, onload
 		xhr.onload = onFinish;
 		xhr.onerror = onFinish;
-		/ improper fix to match Firefox behaviour, but it is better than just ignore abort
-		/ see https://bugzilla.mozilla.org/show_bug.cgi?id=768596
-		/ https://bugzilla.mozilla.org/show_bug.cgi?id=880200
-		/ https://code.google.com/p/chromium/issues/detail?id=153570
-		/ IE 8 fires "onload" without "onprogress
+		// improper fix to match Firefox behaviour, but it is better than just ignore abort
+		// see https://bugzilla.mozilla.org/show_bug.cgi?id=768596
+		// https://bugzilla.mozilla.org/show_bug.cgi?id=880200
+		// https://code.google.com/p/chromium/issues/detail?id=153570
+		// IE 8 fires "onload" without "onprogress
 		xhr.onabort = onFinish;
 
-		/ https://bugzilla.mozilla.org/show_bug.cgi?id=736723
+		// https://bugzilla.mozilla.org/show_bug.cgi?id=736723
 		if (
 			! ( 'sendAsBinary' in XMLHttpRequest.prototype ) &&
 			! ( 'mozAnon' in XMLHttpRequest.prototype )
@@ -184,12 +184,12 @@
 			xhr.onprogress = onProgress;
 		}
 
-		/ IE 8 - 9 (XMLHTTPRequest)
-		/ Opera < 12
-		/ Firefox < 3.5
-		/ Firefox 3.5 - 3.6 - ? < 9.0
-		/ onprogress is not fired sometimes or delayed
-		/ see also #64
+		// IE 8 - 9 (XMLHTTPRequest)
+		// Opera < 12
+		// Firefox < 3.5
+		// Firefox 3.5 - 3.6 - ? < 9.0
+		// onprogress is not fired sometimes or delayed
+		// see also #64
 		xhr.onreadystatechange = onReadyStateChange;
 
 		if ( 'contentType' in xhr ) {
@@ -199,8 +199,8 @@
 		xhr.open( method, url, true );
 
 		if ( 'readyState' in xhr ) {
-			/ workaround for Opera 12 issue with "progress" events
-			/ #91
+			// workaround for Opera 12 issue with "progress" events
+			// #91
 			timeout = setTimeout( function () {
 				onTimeout();
 			}, 0 );
@@ -219,7 +219,7 @@
 		}
 	};
 	XHRWrapper.prototype.send = function () {
-		/ loading indicator in Safari < ? (6), Chrome < 14, Firefox
+		// loading indicator in Safari < ? (6), Chrome < 14, Firefox
 		if (
 			! ( 'ontimeout' in XMLHttpRequest.prototype ) &&
 			document != undefined &&
@@ -235,14 +235,14 @@
 		}
 
 		var xhr = this._xhr;
-		/ withCredentials should be set after "open" for Safari and Chrome (< 19 ?)
+		// withCredentials should be set after "open" for Safari and Chrome (< 19 ?)
 		xhr.withCredentials = this.withCredentials;
 		xhr.responseType = this.responseType;
 		try {
-			/ xhr.send(); throws "Not enough arguments" in Firefox 3.0
+			// xhr.send(); throws "Not enough arguments" in Firefox 3.0
 			xhr.send( undefined );
 		} catch ( error1 ) {
-			/ Safari 5.1.7, Opera 12
+			// Safari 5.1.7, Opera 12
 			throw error1;
 		}
 	};
@@ -694,8 +694,8 @@
 			valueStart = 0;
 			state = FIELD_START;
 
-			/ https://bugzilla.mozilla.org/show_bug.cgi?id=428916
-			/ Request header field Last-Event-ID is not allowed by Access-Control-Allow-Headers.
+			// https://bugzilla.mozilla.org/show_bug.cgi?id=428916
+			// Request header field Last-Event-ID is not allowed by Access-Control-Allow-Headers.
 			var requestURL = url;
 			if (
 				url.slice( 0, 5 ) !== 'data:' &&
@@ -762,12 +762,12 @@
 		( NativeEventSource == undefined ||
 			! ( 'withCredentials' in NativeEventSource.prototype ) )
 	) {
-		/ Why replace a native EventSource ?
-		/ https://bugzilla.mozilla.org/show_bug.cgi?id=444328
-		/ https://bugzilla.mozilla.org/show_bug.cgi?id=831392
-		/ https://code.google.com/p/chromium/issues/detail?id=260144
-		/ https://code.google.com/p/chromium/issues/detail?id=225654
-		/ ...
+		// Why replace a native EventSource ?
+		// https://bugzilla.mozilla.org/show_bug.cgi?id=444328
+		// https://bugzilla.mozilla.org/show_bug.cgi?id=831392
+		// https://code.google.com/p/chromium/issues/detail?id=260144
+		// https://code.google.com/p/chromium/issues/detail?id=225654
+		// ...
 		global.EventSource = EventSourcePolyfill;
 	}
 } )( typeof window !== 'undefined' ? window : this );

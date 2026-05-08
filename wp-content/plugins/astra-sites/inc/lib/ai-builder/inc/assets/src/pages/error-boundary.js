@@ -12,7 +12,7 @@ class ErrorBoundary extends Component {
 	}
 
 	static getDerivedStateFromError() {
-		/ Update state so the next render will show the fallback UI.
+		// Update state so the next render will show the fallback UI.
 		return { hasError: true };
 	}
 
@@ -72,7 +72,7 @@ class ErrorBoundary extends Component {
 	}
 }
 
-/ Functional wrapper component to use the dispatch hook
+// Functional wrapper component to use the dispatch hook
 const ErrorBoundaryWrapper = ( props ) => {
 	const { toggleOnboardingAIStep } = useDispatch( STORE_KEY );
 

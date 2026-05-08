@@ -111,7 +111,7 @@ const HeaderCreditStatus = () => {
 															/\B(?=(\d{3})+(?!\d))/g,
 															','
 														) } Credits in Your Account`
-												: 'Authentication Problem.' / Or any other fallback message
+												: 'Authentication Problem.' // Or any other fallback message
 										}
 									</span>
 								</div>

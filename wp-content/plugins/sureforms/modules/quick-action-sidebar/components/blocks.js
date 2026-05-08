@@ -40,7 +40,7 @@ const Blocks = ( {
 		return createBlock( name );
 	};
 
-	/ Loop through each object and add id
+	// Loop through each object and add id
 	srfmBlocks.forEach( ( item, index ) => {
 		item.id = `${ index + 1 }`;
 	} );
@@ -48,7 +48,7 @@ const Blocks = ( {
 	const sortedY = defaultAllowedQuickSidebarBlocks
 		.filter( ( item ) => item !== undefined && item !== null )
 		.map( ( item ) => srfmBlocks.find( ( { name } ) => name === item ) )
-		.filter( ( item ) => item !== undefined ); / Remove undefined objects
+		.filter( ( item ) => item !== undefined ); // Remove undefined objects
 
 	return (
 		<>

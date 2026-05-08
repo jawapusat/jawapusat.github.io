@@ -38,9 +38,9 @@ export const getBuildersList = () => {
 		} );
 	}
 
-	/ Filter and order by supported page builders.
+	// Filter and order by supported page builders.
 	if ( supportedPageBuilders?.length ) {
-		/ Map 'spectra' to 'block-editor' for comparison with supportedPageBuilders.
+		// Map 'spectra' to 'block-editor' for comparison with supportedPageBuilders.
 		const mapBuilderId = ( id ) =>
 			id === 'spectra' ? 'block-editor' : id;
 

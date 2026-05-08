@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { decodeEntities } from '@wordpress/html-entities';
 import { sprintf, __ } from '@wordpress/i18n';
 
-/ Internal Dependencies.
+// Internal Dependencies.
 import { DefaultStep, PreviousStepLink, Button } from '../../components/index';
 import './style.scss';
 import { useStateValue } from '../../store/store';
@@ -46,13 +46,13 @@ export const useFilteredSites = () => {
 	] = useStateValue();
 
 	const filteredSites = useMemo( () => {
-		/ Step 1: fallback for all sites
+		// Step 1: fallback for all sites
 		let allSites =
 			allSitesData && Object.keys( allSitesData ).length
 				? allSitesData
 				: getAllSites();
 
-		/ Step 2: ensure object format (fallback for Chrome)
+		// Step 2: ensure object format (fallback for Chrome)
 		if ( Array.isArray( allSites ) ) {
 			allSites = allSites.reduce( ( acc, site ) => {
 				if ( site.id ) {
@@ -62,7 +62,7 @@ export const useFilteredSites = () => {
 			}, {} );
 		}
 
-		/ Step 3: filter by builder
+		// Step 3: filter by builder
 		let sites =
 			builder && builder !== 'custom-templates'
 				? Object.fromEntries(
@@ -73,7 +73,7 @@ export const useFilteredSites = () => {
 				  )
 				: { ...allSites };
 
-		/ Step 4: filter by site type
+		// Step 4: filter by site type
 		if ( siteType ) {
 			sites = Object.fromEntries(
 				Object.entries( sites ).filter( ( [ , site ] ) => {
@@ -83,7 +83,7 @@ export const useFilteredSites = () => {
 			);
 		}
 
-		/ Step 5: filter by Spectra Blocks version (only for Gutenberg)
+		// Step 5: filter by Spectra Blocks version (only for Gutenberg)
 		if ( builder === 'gutenberg' && spectraBlocksVersion ) {
 			const version = astraSitesVars?.spectraBlocks?.selectorEnabled
 				? spectraBlocksVersion
@@ -100,7 +100,7 @@ export const useFilteredSites = () => {
 			);
 		}
 
-		/ Step 6: Filter custom templates builder sites to only include those with custom templates.
+		// Step 6: Filter custom templates builder sites to only include those with custom templates.
 		if ( builder === 'custom-templates' ) {
 			sites = Object.fromEntries(
 				Object.entries( sites ).filter(
@@ -109,7 +109,7 @@ export const useFilteredSites = () => {
 			);
 		}
 
-		/ Step 7: sort if latest
+		// Step 7: sort if latest
 		if ( siteOrder === 'latest' && Object.keys( sites ).length ) {
 			sites = sortBy( Object.values( sites ), 'publish-date' ).reverse();
 		}
@@ -170,7 +170,7 @@ const SiteList = () => {
 	}, [ builder, siteType, spectraBlocksVersion, siteOrder, allSitesData ] );
 
 	useEffect( () => {
-		/ Track template listing step when component mounts
+		// Track template listing step when component mounts
 		trackOnboardingStep( 'template-listing' );
 	}, [] );
 
@@ -181,8 +181,8 @@ const SiteList = () => {
 	const backStep = () => {
 		dispatch( {
 			type: 'set',
-			siteSearchTerm: '', / Reset the search term on back
-			siteBusinessType: '', / Reset the business type on back
+			siteSearchTerm: '', // Reset the search term on back
+			siteBusinessType: '', // Reset the business type on back
 			currentIndex: builder === 'fse' ? 0 : 1,
 		} );
 		const urlParam = setURLParmsValue( 's' );
@@ -201,12 +201,12 @@ const SiteList = () => {
 	};
 
 	useEffect( () => {
-		/ use timeout function so the new content wrapper for the builder will be loaded
+		// use timeout function so the new content wrapper for the builder will be loaded
 		const scrollTopTimeout = setTimeout( () => {
 			handleClickBackToTop();
 		}, 300 );
 
-		/ Cleanup function to clear the timeout if the component unmounts
+		// Cleanup function to clear the timeout if the component unmounts
 		return () => clearTimeout( scrollTopTimeout );
 	}, [ builder ] );
 
@@ -232,47 +232,47 @@ const SiteList = () => {
 		}
 	};
 
-	/ const fetchSitesAndCategories = async () => {
-	/ 	try {
-	/ 		const formData = new FormData();
-	/ 		formData.append( 'action', 'astra-sites-update-library' );
-	/ 		formData.append( '_ajax_nonce', astraSitesVars?._ajax_nonce );
-	/ 		const response = await fetch( ajaxurl, {
-	/ 			method: 'post',
-	/ 			body: formData,
-	/ 		} );
-	/ 		const jsonData = await response.json();
-	/ 		if (
-	/ 			jsonData.data === 'updated' &&
-	/ 			Object.keys( storedState.allSitesData ).length !== 0
-	/ 		) {
-	/ 			dispatch( {
-	/ 				type: 'set',
-	/ 				bgSyncInProgress: false,
-	/ 			} );
-	/ 			return;
-	/ 		}
+	// const fetchSitesAndCategories = async () => {
+	// 	try {
+	// 		const formData = new FormData();
+	// 		formData.append( 'action', 'astra-sites-update-library' );
+	// 		formData.append( '_ajax_nonce', astraSitesVars?._ajax_nonce );
+	// 		const response = await fetch( ajaxurl, {
+	// 			method: 'post',
+	// 			body: formData,
+	// 		} );
+	// 		const jsonData = await response.json();
+	// 		if (
+	// 			jsonData.data === 'updated' &&
+	// 			Object.keys( storedState.allSitesData ).length !== 0
+	// 		) {
+	// 			dispatch( {
+	// 				type: 'set',
+	// 				bgSyncInProgress: false,
+	// 			} );
+	// 			return;
+	// 		}
 
-	/ 		const sites = await SyncImportAllSites();
-	/ 		const categories = await SyncAndGetAllCategories();
-	/ 		const categoriesAndTags = await SyncAndGetAllCategoriesAndTags();
-	/ 		console.log( typeof dispatch );
-	/ 		dispatch( {
-	/ 			type: 'set',
-	/ 			bgSyncInProgress: false,
-	/ 			allSitesData: sites,
-	/ 			categories,
-	/ 			categoriesAndTags,
-	/ 		} );
+	// 		const sites = await SyncImportAllSites();
+	// 		const categories = await SyncAndGetAllCategories();
+	// 		const categoriesAndTags = await SyncAndGetAllCategoriesAndTags();
+	// 		console.log( typeof dispatch );
+	// 		dispatch( {
+	// 			type: 'set',
+	// 			bgSyncInProgress: false,
+	// 			allSitesData: sites,
+	// 			categories,
+	// 			categoriesAndTags,
+	// 		} );
 
-	/ 		/ await fetchSitesAndCategories();
-	/ 	} catch ( error ) {
-	/ 		console.error( error );
-	/ 	}
-	/ };
+	// 		// await fetchSitesAndCategories();
+	// 	} catch ( error ) {
+	// 		console.error( error );
+	// 	}
+	// };
 
 	const syncSites = async () => {
-		/ const newData = await SyncStart();
+		// const newData = await SyncStart();
 		const { totalPages, currentPage } = await fetchSitesPageCount();
 
 		dispatch( {
@@ -297,7 +297,7 @@ const SiteList = () => {
 			return sites;
 		}
 
-		/ Fetch all sites if the current page is greater than 1 (means we were in the middle of fetching all the sites).
+		// Fetch all sites if the current page is greater than 1 (means we were in the middle of fetching all the sites).
 		return Object.values( await fetchAllSites() );
 	};
 
@@ -312,7 +312,7 @@ const SiteList = () => {
 
 			const syncUptoDate = await isSyncUptoDate();
 			if ( syncUptoDate ) {
-				/ Even if sync is up-to-date, preserve existing allSitesData and update bgSyncInProgress
+				// Even if sync is up-to-date, preserve existing allSitesData and update bgSyncInProgress
 				dispatch( {
 					type: 'set',
 					bgSyncInProgress: false,
@@ -324,7 +324,7 @@ const SiteList = () => {
 			const categories = await SyncAndGetAllCategories();
 			const categoriesAndTags = await SyncAndGetAllCategoriesAndTags();
 
-			/ Only update state if we have valid data
+			// Only update state if we have valid data
 			const updatePayload = {
 				bgSyncInProgress: false,
 				syncPageInProgress: 0,
@@ -346,9 +346,9 @@ const SiteList = () => {
 	};
 
 	useEffect( () => {
-		/ if ( ! bgSyncInProgress ) {
-		/ 	return;
-		/ }
+		// if ( ! bgSyncInProgress ) {
+		// 	return;
+		// }
 
 		fetchSitesAndCategories();
 	}, [] );

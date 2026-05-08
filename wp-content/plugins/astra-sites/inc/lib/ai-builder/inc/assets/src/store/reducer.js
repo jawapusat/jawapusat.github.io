@@ -164,7 +164,7 @@ updatedInitialValue = {
 };
 
 const keysToIgnore = [ 'limitExceedModal', 'apiErrorModal' ];
-/ Saved AI onboarding state.
+// Saved AI onboarding state.
 let savedAiOnboardingState = getLocalStorageItem(
 	'ai-builder-onboarding-details'
 );
@@ -177,7 +177,7 @@ if ( savedAiOnboardingState ) {
 }
 
 export const initialState = {
-	/ Onboarding AI.
+	// Onboarding AI.
 	...( savedAiOnboardingState ?? updatedInitialValue ),
 };
 
@@ -306,7 +306,7 @@ const reducer = ( state = initialState, action ) => {
 			return {
 				...state,
 				...action.payload,
-				continueProgressModal: state.continueProgressModal, / prevent this function from overriding continueProgressModal
+				continueProgressModal: state.continueProgressModal, // prevent this function from overriding continueProgressModal
 			};
 		case actionTypes.SET_WEBSITE_TEMPLATES_AI_STEP:
 			return {

@@ -1,6 +1,6 @@
 ( function () {
 	window.addEventListener( 'elementor/frontend/init', function () {
-		/ Listen for elementor frontend init event
+		// Listen for elementor frontend init event
 		if (
 			typeof elementorFrontend !== 'undefined' &&
 			elementorFrontend.hooks
@@ -14,14 +14,14 @@
 					srfmLoadPageBreak();
 				}
 
-				/ initial phone field
+				// initial phone field
 				if ( typeof srfmInitializePhoneField === 'function' ) {
 					srfmInitializePhoneField();
 				}
 
-				/ initial dropdown field
+				// initial dropdown field
 				if ( typeof srfmInitializeDropdown === 'function' ) {
-					/ call the hook after 2 seconds to make sure the dropdown is initialized properly without any issues.
+					// call the hook after 2 seconds to make sure the dropdown is initialized properly without any issues.
 					setTimeout( function () {
 						srfmInitializeDropdown();
 					}, 2000 );

@@ -42,7 +42,7 @@ export function getPanelIdFromRef( ref ) {
 
 export function getNumber( input ) {
     if ( input.includes( '#' ) ) {
-        / Handeling special case for padding controls
+        // Handeling special case for padding controls
         return '';
     }
     const regex = /\d+(\.\d+)?/;
@@ -82,35 +82,35 @@ export function getUnitDimension( input ) {
     return 'px';
 }
 
-/ Get 2 version strings, and do a comparison based on the operator parsed.
+// Get 2 version strings, and do a comparison based on the operator parsed.
 export function compareVersions( version1, version2, sign = '=' ) {
-	/ Function to normalize the given version string.
-	/ Split the version string at every hyphen and dot, then convert the parts to integers, then pad with zeros if necessary, and take only the first three parts.
+	// Function to normalize the given version string.
+	// Split the version string at every hyphen and dot, then convert the parts to integers, then pad with zeros if necessary, and take only the first three parts.
     const normalizeVersion = ( version ) => 
         version.split( '-' )[0].split( '.' ).map( part => parseInt( part, 10 ) || 0 ).concat( 0, 0, 0 ).slice( 0, 3 );
 
-	/ Normalize both input versions and get the resulting normalized values.
+	// Normalize both input versions and get the resulting normalized values.
     const [ v1, v2 ] = [ normalizeVersion( version1 ), normalizeVersion( version2 ) ];
 
-	/ Compare the normalized versions using reduce.
+	// Compare the normalized versions using reduce.
     const comparison = v1.reduce( ( acc, part, i ) => acc || ( part - ( v2[ i ] || 0 ) ), 0 );
 
-    / Check the comparison result based on the provided operator
+    // Check the comparison result based on the provided operator
 	switch ( sign ) {
 		case '<':
-			/ Return true if v1 is less than v2.
+			// Return true if v1 is less than v2.
 			return comparison < 0;
 		case '<=':
-			/ Return true if v1 is less than or equal to v2.
+			// Return true if v1 is less than or equal to v2.
 			return comparison <= 0;
 		case '>':
-			/ Return true if v1 is greater than v2.
+			// Return true if v1 is greater than v2.
 			return comparison > 0;
 		case '>=':
-			/ Return true if v1 is greater than or equal to v2.
+			// Return true if v1 is greater than or equal to v2.
 			return comparison >= 0;
 		default:
-			/ Default: return true if v1 equals v2.
+			// Default: return true if v1 equals v2.
 			return comparison === 0;
 	}
 }
@@ -191,14 +191,14 @@ export const updateUAGDay = ( UAGDay, value ) => {
  * @example
  * const obj = { a: { b: { c: 42 } } };
  *
- * / Using a dot-separated string as the path
- * const value = get(obj, 'a.b.c'); / Returns 42
+ * // Using a dot-separated string as the path
+ * const value = get(obj, 'a.b.c'); // Returns 42
  *
- * / Using an array of keys as the path
- * const valueArray = get(obj, ['a', 'b', 'c']); / Returns 42
+ * // Using an array of keys as the path
+ * const valueArray = get(obj, ['a', 'b', 'c']); // Returns 42
  *
- * / Providing a default value
- * const nonExistentValue = get(obj, 'x.y.z', 'Default'); / Returns 'Default'
+ * // Providing a default value
+ * const nonExistentValue = get(obj, 'x.y.z', 'Default'); // Returns 'Default'
  */
 export const uagbGetValue = ( getObjectValue, path, defaultValue ) => {
 	const keys = Array.isArray( path ) ? path : path.split( '.' );
@@ -220,7 +220,7 @@ export const uagbGetValue = ( getObjectValue, path, defaultValue ) => {
  * @return {boolean} - The result.
  */
 export const isCustomizerPage = () => {
-    / We need to run this script only on customizer page.
+    // We need to run this script only on customizer page.
     if ( ! window.location.href.includes( '/customize.php' ) ) {
         return false;
     }
@@ -248,14 +248,14 @@ export const debounce = ( func, delay ) => {
 	};
 };
 
-/ JS counterpart of UAGB_Block_Helper::get_logical_text_align(). Flips
-/ user-selected Text Alignment under RTL so left↔right mirror the reading
-/ direction; empty and `center` pass through unchanged.
-/
-/ Uses an explicit physical swap (rather than CSS logical `start`/`end`)
-/ because the Gutenberg editor iframe does not reliably inherit
-/ `direction: rtl` onto the block wrapper. The DOM `dir` check covers
-/ switch-direction plugins that toggle `dir="rtl"` without changing locale.
+// JS counterpart of UAGB_Block_Helper::get_logical_text_align(). Flips
+// user-selected Text Alignment under RTL so left↔right mirror the reading
+// direction; empty and `center` pass through unchanged.
+//
+// Uses an explicit physical swap (rather than CSS logical `start`/`end`)
+// because the Gutenberg editor iframe does not reliably inherit
+// `direction: rtl` onto the block wrapper. The DOM `dir` check covers
+// switch-direction plugins that toggle `dir="rtl"` without changing locale.
 export const getLogicalTextAlign = ( value ) => {
 	const rtlContext =
 		isRTL() ||

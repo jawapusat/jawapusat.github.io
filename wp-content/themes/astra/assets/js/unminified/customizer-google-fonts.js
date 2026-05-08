@@ -45,7 +45,7 @@
 					AstFontFamilies.custom = fontData.custom || AstFontFamilies.custom || {};
 					AstFontFamilies.googleLoaded = true;
 
-					/ Update React component's font data
+					// Update React component's font data
 					if (typeof window.AstraBuilderCustomizerData !== 'undefined') {
 						window.AstraBuilderCustomizerData.googleFonts = fontData.google || {};
 					}
@@ -55,7 +55,7 @@
 				}
 			},
 			error: function () {
-				/ Fallback: try once more with $.post
+				// Fallback: try once more with $.post
 				$.post(ajaxurl, {
 					action: 'astra_load_google_fonts',
 					nonce: astraCustomizer.customizer_nonce
@@ -67,7 +67,7 @@
 						AstFontFamilies.custom = fontData.custom || AstFontFamilies.custom || {};
 						AstFontFamilies.googleLoaded = true;
 
-						/ Update React component's font data
+						// Update React component's font data
 						if (typeof window.AstraBuilderCustomizerData !== 'undefined') {
 							window.AstraBuilderCustomizerData.googleFonts = fontData.google || {};
 						}
@@ -80,7 +80,7 @@
 		});
 	}
 
-	/ Initialize when customizer is ready
+	// Initialize when customizer is ready
 	wp.customize.bind('ready', function () {
 		if (typeof AstFontFamilies !== 'undefined' && AstFontFamilies.googleLoaded === false) {
 			setTimeout(loadGoogleFonts, 100);

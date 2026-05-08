@@ -4,7 +4,7 @@
  * @package
  */
 
-/ Wait for DOM to be ready
+// Wait for DOM to be ready
 document.addEventListener( 'DOMContentLoaded', function () {
-	/ TODO: Initialize frontend functionality.
+	// TODO: Initialize frontend functionality.
 } );

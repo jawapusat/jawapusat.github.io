@@ -132,7 +132,7 @@ const DescribeBusiness = () => {
 
 	const handleFormSubmit = async ( data ) => {
 		let { businessDetails: description } = data;
-		/ if description too short, show modal
+		// if description too short, show modal
 		if ( description.length < 200 ) {
 			setFocus( 'businessDetails' );
 			description = await improveUsingAiModal.show( {
@@ -152,7 +152,7 @@ const DescribeBusiness = () => {
 
 		setWebsiteDetailsAIStep( data.businessDetails );
 		if ( prevBusinessDetails.current !== data.businessDetails ) {
-			/ Reset images and keywords if description changes.
+			// Reset images and keywords if description changes.
 			resetKeywordsImagesAIStep();
 		}
 		await fetchImageKeywords( data.businessDetails );
@@ -197,7 +197,7 @@ const DescribeBusiness = () => {
 		if ( isFetchingKeywords ) {
 			return;
 		}
-		/ If description is same as previous, do not fetch keywords.
+		// If description is same as previous, do not fetch keywords.
 		if ( prevBusinessDetails.current === details ) {
 			return;
 		}
@@ -224,7 +224,7 @@ const DescribeBusiness = () => {
 				);
 			}
 		} catch ( error ) {
-			/ DO Nothing.
+			// DO Nothing.
 		} finally {
 			setIsFetchingKeywords( false );
 		}
@@ -362,7 +362,7 @@ const DescribeBusiness = () => {
 
 		const newList = [ ...descriptionList ];
 
-		/ check if user has made changes to current description and save that change in new slot
+		// check if user has made changes to current description and save that change in new slot
 		if ( descriptionList[ currentPageIndex ] !== formBusinessDetails ) {
 			newList[ currentPageIndex ] = formBusinessDetails;
 		}

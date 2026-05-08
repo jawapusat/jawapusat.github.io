@@ -11,7 +11,7 @@ function renderSVG ( svg ) {
 
 	svg = parseSVG( svg )
 
-	/ Social icons are lazy-loaded; read from window global set by ensureSocialIcons().
+	// Social icons are lazy-loaded; read from window global set by ensureSocialIcons().
 	const socialIcons = window.astraSocialIcons || {};
 	const fontAwesome = socialIcons[svg]
 

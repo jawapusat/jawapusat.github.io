@@ -19,7 +19,7 @@ const PopoverModal = ( {
 	const blocks = getBlockTypes();
 
 	const closePopup = () => {
-		/ Call the callback function in the parent
+		// Call the callback function in the parent
 		closePopover( false );
 	};
 
@@ -27,13 +27,13 @@ const PopoverModal = ( {
 		setSearchTerm( newSearchTerm );
 
 	const handleBlockClick = ( selectedBlock ) => {
-		/ You can handle the selected block here, e.g., add it to the state or perform other actions
+		// You can handle the selected block here, e.g., add it to the state or perform other actions
 		const allowedBlocks = [
 			...defaultAllowedQuickSidebarBlocks,
 			selectedBlock.name,
 		];
 		saveOptionToDatabase( allowedBlocks );
-		/ Increment uniqueId when removing a block
+		// Increment uniqueId when removing a block
 		setUniqueId( ( prevUniqueId ) => prevUniqueId + 1 );
 
 		createNotice(
@@ -51,9 +51,9 @@ const PopoverModal = ( {
 				isDismissible: true,
 			}
 		);
-		/ Set a timeout to remove the notice after a specific duration (e.g., 600 milliseconds)
+		// Set a timeout to remove the notice after a specific duration (e.g., 600 milliseconds)
 		setTimeout( () => {
-			/ Remove the notice by ID
+			// Remove the notice by ID
 			dispatch( 'core/notices' ).removeNotice( addedNoticeID );
 		}, 1000 );
 		closePopup();
@@ -63,11 +63,11 @@ const PopoverModal = ( {
 		block.title.toLowerCase()?.includes( searchTerm.toLowerCase() )
 	);
 
-	/ Separate arrays for used and unused items
+	// Separate arrays for used and unused items
 	const usedArray = [];
 	const unusedArray = [];
 
-	/ Iterate.
+	// Iterate.
 	filteredBlocks.forEach( ( item ) => {
 		if ( defaultAllowedQuickSidebarBlocks?.includes( item.name ) ) {
 			usedArray.push( item );
@@ -85,7 +85,7 @@ const PopoverModal = ( {
 	const addToSidebar = () => {
 		return unusedArray.map(
 			( item, index ) =>
-				/ include all srfm blocks and core/paragraph block
+				// include all srfm blocks and core/paragraph block
 				isSrfmBlock( item ) && (
 					<div
 						key={ index }

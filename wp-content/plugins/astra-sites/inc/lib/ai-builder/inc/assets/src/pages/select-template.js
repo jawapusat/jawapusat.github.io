@@ -44,14 +44,14 @@ export const USER_KEYWORD = 'st-template-search';
 export const getRandomUniqueId = () =>
 	Math.random().toString( 16 ).substring( 3 );
 
-const DESIGN_LOAD_BATCH_COUNT = 4; / how many templates to load at once
+const DESIGN_LOAD_BATCH_COUNT = 4; // how many templates to load at once
 
-/ Determine default page builder
+// Determine default page builder
 const { supportedPageBuilders = [] } = aiBuilderVars;
 const defaultPageBuilder = ! [ 'block-editor', 'gutenberg' ].includes(
 	supportedPageBuilders?.[ 0 ]
 )
-	? supportedPageBuilders?.[ 0 ] / Could be 'elementor'
+	? supportedPageBuilders?.[ 0 ] // Could be 'elementor'
 	: 'spectra';
 
 const SelectTemplate = () => {
@@ -132,7 +132,7 @@ const SelectTemplate = () => {
 	const templatesContainer = useRef( null );
 	const abortRequest = useRef( [] );
 
-	/ Batch template loading state
+	// Batch template loading state
 	const [ designLoadState, setDesignLoadState ] = useState( {
 		toLoad: [],
 		loaded: [],
@@ -211,10 +211,10 @@ const SelectTemplate = () => {
 	};
 
 	const handleHiddenTemplates = ( result ) => {
-		/ Hide ecommerce templates if ecommerce is disabled in the AI Builder settings.
+		// Hide ecommerce templates if ecommerce is disabled in the AI Builder settings.
 		const hideEcommerceTemplates =
 			aiBuilderVars?.hide_site_features?.includes( 'ecommerce' );
-		/ Hide premium templates if `show_premium_template` is false.
+		// Hide premium templates if `show_premium_template` is false.
 		const hidePremiumTemplates = ! aiBuilderVars?.show_premium_templates;
 
 		if ( hidePremiumTemplates ) {
@@ -242,7 +242,7 @@ const SelectTemplate = () => {
 		return result;
 	};
 
-	/ Called when an iframe (template preview) finishes loading
+	// Called when an iframe (template preview) finishes loading
 	const onIframeLoaded = ( uniqueId ) => {
 		setDesignLoadState( ( state ) => {
 			const updatedToLoad = state.toLoad.filter(
@@ -250,7 +250,7 @@ const SelectTemplate = () => {
 			);
 			const updatedLoaded = [ ...state.loaded, uniqueId ];
 
-			/ Load next batch if current batch is fully loaded
+			// Load next batch if current batch is fully loaded
 			if ( updatedToLoad.length === 0 ) {
 				const remainingToLoad = allTemplates
 					.filter(
@@ -305,11 +305,11 @@ const SelectTemplate = () => {
 			let results = [];
 			const allTemplatesList = [];
 
-			/ Create a single abort controller for the combined request
+			// Create a single abort controller for the combined request
 			const abortController = new AbortController();
 			abortRequest.current.push( abortController );
 
-			/ Use search endpoint for default sort, all-templates for active sort
+			// Use search endpoint for default sort, all-templates for active sort
 			let result = [];
 			if ( isDefaultSort ) {
 				const response = await apiFetch( {
@@ -340,7 +340,7 @@ const SelectTemplate = () => {
 				result = response?.data?.data?.result || [];
 			}
 
-			/ Filter out Hidden templates based on the settings.
+			// Filter out Hidden templates based on the settings.
 			result = handleHiddenTemplates( result );
 
 			results = result.map( ( item ) => {
@@ -357,7 +357,7 @@ const SelectTemplate = () => {
 				};
 			} );
 
-			/ Get the designs in sequence
+			// Get the designs in sequence
 			result.forEach( ( item ) => {
 				if ( Array.isArray( item.designs ) ) {
 					allTemplatesList.push(
@@ -387,7 +387,7 @@ const SelectTemplate = () => {
 				page: 1,
 			} );
 
-			/ Add templates to load list
+			// Add templates to load list
 			const templateIdList = allTemplatesList.map(
 				( { uniqueId } ) => uniqueId
 			);
@@ -455,11 +455,11 @@ const SelectTemplate = () => {
 			let result = response?.data?.data?.result || [];
 			const lastPage = response?.data?.data?.lastPage || 1;
 
-			/ Filter out Hidden templates based on the settings.
+			// Filter out Hidden templates based on the settings.
 
 			result = handleHiddenTemplates( result );
 
-			/ Get the the designs in sequence
+			// Get the the designs in sequence
 			const allTemplatesList = templateList ? [ ...templateList ] : [];
 			const newSearchResults = searchResults ? [ ...searchResults ] : [];
 
@@ -467,7 +467,7 @@ const SelectTemplate = () => {
 				( template ) => template.uuid
 			);
 
-			/ There might be duplicates with same uuid, so add a uniqueId for each
+			// There might be duplicates with same uuid, so add a uniqueId for each
 			result = result.map( ( item ) => {
 				if ( Array.isArray( item.designs ) ) {
 					item.designs = item.designs.map( ( design ) => {
@@ -475,7 +475,7 @@ const SelectTemplate = () => {
 							return false;
 						}
 
-						/ else return the design with a uniqueId
+						// else return the design with a uniqueId
 						return {
 							...design,
 							uniqueId: getRandomUniqueId(),
@@ -520,7 +520,7 @@ const SelectTemplate = () => {
 			const templateIdList = allTemplatesList.map(
 				( { uniqueId } ) => uniqueId
 			);
-			/ If toLoad list is empty, add new templates to load
+			// If toLoad list is empty, add new templates to load
 			setDesignLoadState( ( state ) => {
 				const newLoadList = templateIdList
 					.filter(
@@ -563,7 +563,7 @@ const SelectTemplate = () => {
 	useEffect( () => {
 		setFocus( 'keyword' );
 
-		/ Save the manually entered keyword to session storage.
+		// Save the manually entered keyword to session storage.
 		return () => {
 			const keyword = getValues( 'keyword' );
 			if (
@@ -579,7 +579,7 @@ const SelectTemplate = () => {
 	}, [] );
 
 	const resetState = () => {
-		/ clear the state before calling the API
+		// clear the state before calling the API
 		setLoadMoreTemplates( {
 			page: 1,
 			loading: false,
@@ -609,7 +609,7 @@ const SelectTemplate = () => {
 	}, [ debouncedKeyword, sortBy ] );
 
 	useEffect( () => {
-		/ if there's a uuid in the query params, find the template
+		// if there's a uuid in the query params, find the template
 		const urlParams = new URLSearchParams( window.location.search );
 		const templateUuid = urlParams.get( 'uuid' );
 
@@ -690,7 +690,7 @@ const SelectTemplate = () => {
 						key={ template.uniqueId }
 						template={ template }
 						position={ index + 1 }
-						onIframeLoaded={ onIframeLoaded } / callback to track load
+						onIframeLoaded={ onIframeLoaded } // callback to track load
 						shouldLoad={ designToLoadList.includes(
 							template.uniqueId
 						) }
@@ -704,7 +704,7 @@ const SelectTemplate = () => {
 						position={
 							index + 1 + ( recommendedTemplates?.length || 0 )
 						}
-						onIframeLoaded={ onIframeLoaded } / callback to track load
+						onIframeLoaded={ onIframeLoaded } // callback to track load
 						shouldLoad={ designToLoadList.includes(
 							template.uniqueId
 						) }
@@ -721,7 +721,7 @@ const SelectTemplate = () => {
 							( ( recommendedTemplates?.length || 0 ) +
 								( partialTemplates?.length || 0 ) )
 						}
-						onIframeLoaded={ onIframeLoaded } / callback to track load
+						onIframeLoaded={ onIframeLoaded } // callback to track load
 						shouldLoad={ designToLoadList.includes(
 							template.uniqueId
 						) }
@@ -767,7 +767,7 @@ const SelectTemplate = () => {
 			.filter( ( design ) => {
 				return (
 					design.middlePoint >= actualScrollTop &&
-					design.middlePoint <= actualScrollBottom / Middle point is within the range
+					design.middlePoint <= actualScrollBottom // Middle point is within the range
 				);
 			} )
 			.map( ( { uniqueId } ) => uniqueId );
@@ -788,7 +788,7 @@ const SelectTemplate = () => {
 		} );
 	};
 
-	/ Wait X amount of time after user scrolls and then checkForVisibleTemplates
+	// Wait X amount of time after user scrolls and then checkForVisibleTemplates
 	const debouncedCheckForVisibleTemplates = debounce( ( target ) => {
 		checkForVisibleTemplates( target );
 	}, 2000 );
@@ -917,7 +917,7 @@ const SelectTemplate = () => {
 			<div
 				ref={ templatesContainer }
 				className={ classNames(
-					'custom-confirmation-modal-scrollbar', / class for thin scrollbar
+					'custom-confirmation-modal-scrollbar', // class for thin scrollbar
 					'relative',
 					'px-5 md:px-10 lg:px-14 xl:px-15',
 					'xl:max-w-full'

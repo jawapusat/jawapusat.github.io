@@ -12,7 +12,7 @@ const USABLE_HREF_REGEXP = /^(?:[a-z]+:|#|\?|\.|\/)/i;
  *
  * @example
  * ```js
- * const actualURL = prependHTTP( 'wordpress.org' ); / https://wordpress.org
+ * const actualURL = prependHTTP( 'wordpress.org' ); // https://wordpress.org
  * ```
  *
  * @return {string} The updated URL.

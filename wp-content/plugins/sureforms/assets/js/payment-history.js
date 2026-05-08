@@ -17,7 +17,7 @@
 	const txs = window.srfmDashboardTxs || [];
 
 	let cancelState = { name: '', paymentId: null };
-	let isCancelling = false; / eslint-disable-line prefer-const -- reassigned in confirmCancel()
+	let isCancelling = false; // eslint-disable-line prefer-const -- reassigned in confirmCancel()
 	let lastFocusedElement = null;
 
 	/**
@@ -54,7 +54,7 @@
 			return;
 		}
 
-		/ Event delegation for rows — handles clicks on subscription and payment rows.
+		// Event delegation for rows — handles clicks on subscription and payment rows.
 		widget.addEventListener( 'click', function ( e ) {
 			const subRow = e.target.closest( '.srfm-pd-sub-row' );
 			if ( subRow ) {
@@ -85,7 +85,7 @@
 			}
 		} );
 
-		/ Overlay click-outside-to-close and button delegation.
+		// Overlay click-outside-to-close and button delegation.
 		document
 			.querySelectorAll( '.srfm-pd-overlay' )
 			.forEach( function ( overlay ) {
@@ -95,7 +95,7 @@
 						return;
 					}
 
-					/ Delegate button clicks inside panels.
+					// Delegate button clicks inside panels.
 					const btn = e.target.closest( '[data-action]' );
 					if ( btn ) {
 						handlePanelAction( btn.dataset.action, btn.dataset );
@@ -340,9 +340,9 @@
 		openOverlay( 'srfm-pd-tx-overlay' );
 	}
 
-	/ =========================================================================
-	/ Cancel Flow
-	/ =========================================================================
+	// =========================================================================
+	// Cancel Flow
+	// =========================================================================
 
 	function openCancel( name, paymentId ) {
 		cancelState = { name, paymentId };
@@ -465,9 +465,9 @@
 		window.location.reload();
 	}
 
-	/ =========================================================================
-	/ Overlay Helpers
-	/ =========================================================================
+	// =========================================================================
+	// Overlay Helpers
+	// =========================================================================
 
 	function openOverlay( id ) {
 		const el = document.getElementById( id );
@@ -478,7 +478,7 @@
 			el.classList.add( 'srfm-pd-overlay--open' );
 			document.body.style.overflow = 'hidden';
 
-			/ Move focus to the first focusable element in the panel.
+			// Move focus to the first focusable element in the panel.
 			const focusable = el.querySelector( 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])' );
 			if ( focusable ) {
 				focusable.focus();
@@ -496,7 +496,7 @@
 		if ( ! document.querySelector( '.srfm-pd-overlay--open' ) ) {
 			document.body.style.overflow = '';
 
-			/ Restore focus to the element that triggered the overlay.
+			// Restore focus to the element that triggered the overlay.
 			if ( lastFocusedElement ) {
 				lastFocusedElement.focus();
 				lastFocusedElement = null;
@@ -504,9 +504,9 @@
 		}
 	}
 
-	/ =========================================================================
-	/ HTML Helpers
-	/ =========================================================================
+	// =========================================================================
+	// HTML Helpers
+	// =========================================================================
 
 	function panelRow( label, value, isHtml ) {
 		return (
@@ -547,9 +547,9 @@
 		return esc( str ).replace( /'/g, '&#39;' ).replace( /"/g, '&quot;' );
 	}
 
-	/ =========================================================================
-	/ Public API (minimal — only needed for external integration)
-	/ =========================================================================
+	// =========================================================================
+	// Public API (minimal — only needed for external integration)
+	// =========================================================================
 
 	window.srfmPH = {
 		openCancel,

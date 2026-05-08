@@ -3,14 +3,14 @@ import qs from 'qs';
 export const parseResponse = ( resp ) =>
 	resp.json().then( ( data ) => {
 		if ( resp.ok ) {
-			/ Expose response via a getter, which avoids copying.
+			// Expose response via a getter, which avoids copying.
 			Object.defineProperty( data, 'getResponse', {
 				get: () => () => resp,
 			} );
 			return data;
 		}
 
-		/ Build an error
+		// Build an error
 		const err = new Error( data.message );
 		err.code = data.code;
 		err.data = data.data;
@@ -38,11 +38,11 @@ export default class {
 	}
 
 	saveCredentials() {
-		/ no op.
+		// no op.
 	}
 
 	removeCredentials() {
-		/ no op.
+		// no op.
 	}
 
 	hasCredentials() {
@@ -101,11 +101,11 @@ export default class {
 	}
 
 	fetch( url, options ) {
-		/ Make URL absolute
+		// Make URL absolute
 		const relUrl = url[ 0 ] === '/' ? url.substring( 1 ) : url;
 		const absUrl = new URL( relUrl, this.url + '/' );
 
-		/ Clone options
+		// Clone options
 		const actualOptions = {
 			headers: {},
 			credentials: 'include',

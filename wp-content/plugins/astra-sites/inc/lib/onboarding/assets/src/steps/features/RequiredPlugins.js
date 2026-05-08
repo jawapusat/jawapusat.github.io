@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 const { imageDir } = starterTemplates;
 
-/ Plugin icon path mapper - O(1) lookup performance.
+// Plugin icon path mapper - O(1) lookup performance.
 const PLUGIN_ICON_MAP = {
 	'astra-addon': 'astra.svg',
 	cartflows: 'cartflows.svg',
@@ -31,16 +31,16 @@ const PLUGIN_ICON_MAP = {
 const RequiredPlugins = ( { pluginsList } ) => {
 	const [ loadedImages, setLoadedImages ] = useState( {} );
 
-	/ Initialize loadedImages state for each plugin in pluginsList.
+	// Initialize loadedImages state for each plugin in pluginsList.
 	useEffect( () => {
 		pluginsList?.forEach( ( { slug } ) => {
 			loadedImages[ slug ] = loadedImages?.[ slug ] ?? false;
 		} );
 	}, [ pluginsList ] );
 
-	/ Handle image load event to update local state.
+	// Handle image load event to update local state.
 	const handleImageLoad = ( slug ) => {
-		/ Update local state.
+		// Update local state.
 		setLoadedImages( ( prev ) => ( {
 			...prev,
 			[ slug ]: true,

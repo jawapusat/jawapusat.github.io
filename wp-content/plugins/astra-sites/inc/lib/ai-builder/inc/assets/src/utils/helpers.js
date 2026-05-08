@@ -116,11 +116,11 @@ export const clearSessionStorage = ( key ) => {
  * @return {string} The generated unique string.
  */
 const uniqString = ( length = 8 ) => {
-	/ Define the characters to be used in the string.
+	// Define the characters to be used in the string.
 	const chars =
 		'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	let result = '';
-	/ Generate the string by randomly selecting characters from the defined set.
+	// Generate the string by randomly selecting characters from the defined set.
 	for ( let i = length; i > 0; --i ) {
 		result += chars[ Math.floor( Math.random() * chars.length ) ];
 	}
@@ -142,7 +142,7 @@ export const manipulateAttributeBlockId = ( blocks ) => {
 		}
 	} );
 
-	/ Return the manipulated blocks.
+	// Return the manipulated blocks.
 	return blocks;
 };
 
@@ -239,7 +239,7 @@ export const getColorClass = ( percentage ) => {
 };
 
 export const addHttps = ( url ) => {
-	if ( ! /^https?:\/\/i.test( url ) ) {
+	if ( ! /^https?:\/\//i.test( url ) ) {
 		url = 'https://' + url;
 	}
 	return url;
@@ -262,7 +262,7 @@ export const sendPostMessage = ( data, id ) => {
 function fallbackCopy( text ) {
 	const textarea = document.createElement( 'textarea' );
 	textarea.value = text;
-	textarea.style.position = 'fixed'; / avoid scrolling to bottom
+	textarea.style.position = 'fixed'; // avoid scrolling to bottom
 	document.body.appendChild( textarea );
 	textarea.focus();
 	textarea.select();
@@ -273,7 +273,7 @@ function fallbackCopy( text ) {
 }
 
 export const copyToClipboard = ( text ) => {
-	/ Copy the text inside the text field
+	// Copy the text inside the text field
 	if ( navigator.clipboard ) {
 		navigator.clipboard
 			.writeText( text )
@@ -289,7 +289,7 @@ export const handleCopyToClipboard = ( event, text ) => {
 
 export const setCookie = ( name, value, expiryInSeconds = 60 ) => {
 	const date = new Date();
-	date.setTime( date.getTime() + expiryInSeconds * 1000 ); / in milliseconds.
+	date.setTime( date.getTime() + expiryInSeconds * 1000 ); // in milliseconds.
 	const expires = 'expires=' + date.toUTCString();
 	document.cookie = `${ name }=${ value }; ${ expires }; path=/`;
 };
@@ -319,20 +319,20 @@ export const deleteCookie = ( name ) => {
 export const getClientCountryCode = async () => {
 	const cookieName = 'ai_builder_client_country';
 
-	/ Check if already cached in cookie.
+	// Check if already cached in cookie.
 	const cachedCountry = getCookie( cookieName );
 	if ( cachedCountry ) {
 		return cachedCountry;
 	}
 
 	try {
-		/ Use ipwho.is API to detect client location.
+		// Use ipwho.is API to detect client location.
 		const response = await fetch( 'https://ipwho.is/' );
 		if ( response.ok ) {
 			const data = await response.json();
 			const countryCode = data?.country_code || '';
 
-			/ Cache for 30 days in cookie (30 days * 24 hours * 60 minutes * 60 seconds).
+			// Cache for 30 days in cookie (30 days * 24 hours * 60 minutes * 60 seconds).
 			if ( countryCode ) {
 				setCookie( cookieName, countryCode, 30 * 24 * 60 * 60 );
 			}
@@ -340,7 +340,7 @@ export const getClientCountryCode = async () => {
 			return countryCode;
 		}
 	} catch ( error ) {
-		/ Silently fail - server will handle location detection as fallback.
+		// Silently fail - server will handle location detection as fallback.
 		console.error( 'Failed to detect client country:', error );
 	}
 
@@ -405,14 +405,14 @@ export const socialMediaParser = {
 export const isValidURL = ( url ) => {
 	try {
 		new URL( url );
-		return true; / If the URL constructor doesn't throw an error, the URL is valid
+		return true; // If the URL constructor doesn't throw an error, the URL is valid
 	} catch ( _ ) {
-		return false; / Invalid URL
+		return false; // Invalid URL
 	}
 };
 
 export const isValidImageURL = ( fileURL ) => {
-	/ regex only matches letters, numbers, spaces, dots, underscores, colons, slashes, and hyphens
+	// regex only matches letters, numbers, spaces, dots, underscores, colons, slashes, and hyphens
 	const validPattern = /^[a-zA-Z0-9_\-\. :~/]+$/;
 
 	if ( ! isValidURL( fileURL ) ) {
@@ -429,7 +429,7 @@ export const isValidImageURL = ( fileURL ) => {
 const { plan_data } = aiBuilderVars?.zip_plans;
 
 export const showAISitesNotice = () => {
-	/ if only 1 AI Site is remaining
+	// if only 1 AI Site is remaining
 	if ( plan_data?.remaining?.ai_sites_count === 1 ) {
 		return true;
 	}

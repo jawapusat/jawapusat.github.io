@@ -3,25 +3,25 @@ let clickedImageId = null;
 
 const UAGBImageGalleryMasonry = {
 	initByOffset( $selector, instance ){
-		/ Verify $selector and instance.
+		// Verify $selector and instance.
 		if ( ! $selector || ! instance ) {
 			return;
 		}
 
-		/ Add class for scroll not init.
+		// Add class for scroll not init.
 		$selector.classList.add( 'scroll-not-init' );
 
-		/ Add class for last image not loaded.
+		// Add class for last image not loaded.
 		$selector.classList.add( 'last-image-not-loaded' );
 
 		const getAllImages = $selector.querySelectorAll( 'img' );
 		if( getAllImages.length ){
-			/ Get last image.
+			// Get last image.
 			const getLastImage = getAllImages[ getAllImages.length - 1 ];
-			/ Add event listener for last image.
+			// Add event listener for last image.
 			getLastImage.addEventListener( 'load', () => {
-					/ You can perform additional actions here once the image has loaded.
-					/ Remove class for last image not loaded.
+					// You can perform additional actions here once the image has loaded.
+					// Remove class for last image not loaded.
 					$selector.classList.remove( 'last-image-not-loaded' );
 					setTimeout( function() {
 						instance.layout();
@@ -31,18 +31,18 @@ const UAGBImageGalleryMasonry = {
 		}
 
 		let timeOutInstance = null;
-		/ Get scroll position dynamically.
+		// Get scroll position dynamically.
 		window.addEventListener( 'scroll', function() {
 			if ( ! $selector.classList.contains( 'scroll-not-init' ) ) {
 				return;
 			}
-			/ Clear timeout instance.
+			// Clear timeout instance.
 			clearTimeout( timeOutInstance );
 
 			if ( UAGBImageGalleryMasonry.presentInViewport( $selector ) ) {
-				/ If $selector comes in view port then init masonry.
+				// If $selector comes in view port then init masonry.
 				$selector.classList.remove( 'scroll-not-init' );
-				/ Init masonry.
+				// Init masonry.
 				timeOutInstance = setTimeout( function() {
 					instance.layout();
 				}, 100 );
@@ -125,7 +125,7 @@ const UAGBImageGalleryMasonry = {
 
 	getCustomURL( image, $attr ) {
 		const urlValidRegex = new RegExp(
-			'^((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&/=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&/=]*)$'
+			'^((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$'
 		);
 		const imageID = parseInt( image.getAttribute( 'data-spectra-gallery-image-id' ) );
 		return urlValidRegex.test( $attr?.customLinks[ imageID ] ) ? $attr.customLinks[ imageID ] : undefined;
@@ -297,7 +297,7 @@ const UAGBImageGalleryPagedGrid = {
 
 	getCustomURL( image, $attr ) {
 		const urlValidRegex = new RegExp(
-			'^((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&/=\\-]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&/=]*)$'
+			'^((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=\\-]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$'
 		);
 		const imageID = parseInt( image.getAttribute( 'data-spectra-gallery-image-id' ) );
 		return urlValidRegex.test( $attr?.customLinks[ imageID ] ) ? $attr.customLinks[ imageID ] : undefined;
@@ -391,21 +391,21 @@ const UAGBImageGalleryPagedGrid = {
 };
 
 const cycleInLightbox = ( selector, e ) => {
-	/ Check if Tab key was pressed
+	// Check if Tab key was pressed
 	if ( e.key === 'Tab' ) {
 		const focusableElements = selector.querySelectorAll( 'button, div[data-role="button"], [href], [tabindex]:not([tabindex="-1"])' );
 		const firstFocusableElement = focusableElements[0];
 		const lastFocusableElement = focusableElements[focusableElements.length - 1];
 		
-		/ Get the active element using ownerDocument
+		// Get the active element using ownerDocument
 		const activeElement = e.target.ownerDocument.activeElement;
 
-		/ Check if Shift + Tab was pressed and if the current active element is the first one
+		// Check if Shift + Tab was pressed and if the current active element is the first one
 		if ( e.shiftKey && activeElement === firstFocusableElement ) {
 			e.preventDefault();
 			lastFocusableElement.focus();
 		}
-		/ Check if Tab was pressed and if the current active element is the last one
+		// Check if Tab was pressed and if the current active element is the last one
 		else if ( !e.shiftKey && activeElement === lastFocusableElement ) {
 			e.preventDefault();
 			firstFocusableElement.focus();
@@ -446,16 +446,16 @@ const loadLightBoxImages = ( blockScope, lightboxSwiper, pageNum, attr, thumbnai
 	const lightbox = blockScope?.nextElementSibling;
 	let lightboxHandlers = {};
 	if ( lightbox && lightbox?.classList.contains( 'spectra-image-gallery__control-lightbox' ) ) {
-		/ create a lightbox cycle listeners.
+		// create a lightbox cycle listeners.
         const createListeners = () => {
 			const cycleInLightboxWithID = cycleInLightbox.bind( null, lightbox );
 
-			/ Function to add the event listener
+			// Function to add the event listener
 			function addEventListener() {
 			  lightbox.addEventListener( 'keydown', cycleInLightboxWithID );
 			}
 
-			/ Function to remove the event listener
+			// Function to remove the event listener
 			function removeEventListener() {
 			  lightbox.removeEventListener( 'keydown', cycleInLightboxWithID );
 			}
@@ -556,7 +556,7 @@ const addClickListeners = ( $scope, pageNum, enableLightbox, pageLimit, attr )  
 			const imgId = image.getAttribute( 'data-spectra-gallery-image-id' );
 			const imgURL = imageUrls[ imgId ];
 			image.addEventListener( 'click', () => {
-				openImageInWindow( imgURL ); / To avoid opening multiple tab at same when Popup and redirect is enabled.
+				openImageInWindow( imgURL ); // To avoid opening multiple tab at same when Popup and redirect is enabled.
 			} );
 			image.addEventListener( 'keydown', ( event ) => {
 				if ( 13 === event.keyCode || 32 === event.keyCode ) {
@@ -578,12 +578,12 @@ const addClickListeners = ( $scope, pageNum, enableLightbox, pageLimit, attr )  
 
 let imageWindow = null;
 const openImageInWindow = ( imageUrl ) => {
-	/ Check if the window is already open
+	// Check if the window is already open
 	if ( imageWindow && !imageWindow.closed ) {
-		/ If open, focus on the existing window
+		// If open, focus on the existing window
 		imageWindow.focus();
 	} else {
-		/ If not open or closed, open a new window
+		// If not open or closed, open a new window
 		imageWindow = window.open( imageUrl, '_blank' );
 	}
 }

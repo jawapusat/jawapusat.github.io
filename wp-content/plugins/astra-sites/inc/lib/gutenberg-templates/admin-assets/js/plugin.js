@@ -88,13 +88,13 @@ const AstBlockTemplatesAjaxQueue = ( function () {
 		 * Bind
 		 */
 		_bind() {
-			/Page builder installation & save option
+			//Page builder installation & save option
 			$( document )
-				/ .on(
-				/ 	'click',
-				/ 	'.install-required-plugins',
-				/ 	AstBlockTemplates._install_required_plugins
-				/ )
+				// .on(
+				// 	'click',
+				// 	'.install-required-plugins',
+				// 	AstBlockTemplates._install_required_plugins
+				// )
 				.on( 'wp-plugin-installing', AstBlockTemplates._pluginInstalling )
 				.on( 'wp-plugin-install-error', AstBlockTemplates._installError )
 				.on(
@@ -122,13 +122,13 @@ const AstBlockTemplatesAjaxQueue = ( function () {
 			}
 
 			wp.updates.queue.push( {
-				action: 'install-plugin', / Required action.
+				action: 'install-plugin', // Required action.
 				data: {
 					slug: plugin_slug,
 				},
 			} );
 
-			/ Required to set queue.
+			// Required to set queue.
 			wp.updates.queueChecker();
 		},
 
@@ -146,7 +146,7 @@ const AstBlockTemplatesAjaxQueue = ( function () {
 				.done( function ( response ) {
 					if ( response.success ) {
 						console.log( plugin_slug + ' activated' );
-						/ trigger_event();
+						// trigger_event();
 					} else {
 						console.log(
 							'Error: ' + response.data && response.data.message
@@ -191,7 +191,7 @@ const AstBlockTemplatesAjaxQueue = ( function () {
 			const plugin_init = args.slug + '/' + args.slug + '.php';
 			const plugin_slug = args.slug;
 
-			/ WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
+			// WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
 			setTimeout( function () {
 				AstBlockTemplates._activatePlugin( plugin_init, plugin_slug );
 			}, 1500 );

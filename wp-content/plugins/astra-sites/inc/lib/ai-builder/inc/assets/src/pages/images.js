@@ -134,7 +134,7 @@ const Images = () => {
 						if ( ! files[ 0 ].id ) {
 							return;
 						}
-						/ if NOT a valid image name
+						// if NOT a valid image name
 						if ( ! isValidImageURL( files[ 0 ]?.url ) ) {
 							toast.error(
 								toastBody( {
@@ -289,7 +289,7 @@ const Images = () => {
 	const scrollContainerRef = useRef( null );
 	const imageRequestCompleted = useRef( false );
 	const blackListedEngines = useRef( new Set() );
-	/ const previouslySelected = useRef( selectedImages );
+	// const previouslySelected = useRef( selectedImages );
 	const uploadImagesBtn = useRef( null );
 
 	const { register, handleSubmit, setValue, reset, setFocus, watch } =
@@ -327,13 +327,13 @@ const Images = () => {
 		return imageIndx > -1;
 	};
 
-	/ Function to merge new images with old images without duplicates
+	// Function to merge new images with old images without duplicates
 	const mergeUniqueImages = ( oldImages, newImages ) => {
 		const uniqueImagesMap = new Map();
 
 		[ ...oldImages, ...newImages ].forEach( ( image ) => {
 			if ( ! uniqueImagesMap.has( image.id ) ) {
-				/ Add check to prevent overwrite
+				// Add check to prevent overwrite
 				uniqueImagesMap.set( image.id, image );
 			}
 		} );
@@ -356,7 +356,7 @@ const Images = () => {
 
 			setWebsiteImagesAIStep( newSelectedImages );
 		},
-		[ selectedImages, setWebsiteImagesAIStep ] / eslint-disable-line
+		[ selectedImages, setWebsiteImagesAIStep ] // eslint-disable-line
 	);
 
 	const handleClearImageSelection = useCallback(
@@ -434,18 +434,18 @@ const Images = () => {
 		const { scrollTop, scrollHeight, clientHeight } =
 			scrollContainerRef.current;
 
-		/ Load more images when user is 200px away from the bottom
+		// Load more images when user is 200px away from the bottom
 		if ( scrollTop + clientHeight >= scrollHeight - 100 ) {
 			setPage( ( prev ) => prev + 1 );
 		}
 	};
 
-	/ Define a function to fetch all images
+	// Define a function to fetch all images
 	const fetchAllImages = async ( engine ) => {
-		/ eslint-disable-line
+		// eslint-disable-line
 		let searchKeywords = keyword;
 
-		/ If we the input filed is empty we are passing the keyword as businessName[category]
+		// If we the input filed is empty we are passing the keyword as businessName[category]
 		if (
 			typeof keyword === 'string' &&
 			( ! keyword || keyword.trim() === '' )
@@ -453,10 +453,10 @@ const Images = () => {
 			searchKeywords = businessName;
 		}
 
-		/ Get client country code (checks cookie first, fetches from API if not cached).
+		// Get client country code (checks cookie first, fetches from API if not cached).
 		const clientCountryCode = await getClientCountryCode();
 
-		/ Use Unsplash for Russian clients, otherwise use the provided engine or default from server.
+		// Use Unsplash for Russian clients, otherwise use the provided engine or default from server.
 		const selectedEngine = clientCountryCode === 'RU' ? 'unsplash' : engine;
 
 		const payload = {
@@ -478,12 +478,12 @@ const Images = () => {
 			if ( ! res?.success ) {
 				throw new Error( res?.data?.data );
 			}
-			/ If there are no images, blacklist the engine
+			// If there are no images, blacklist the engine
 			if ( imageResponse?.length === 0 ) {
 				blackListedEngines.current.add( engine );
 			}
 
-			/ Filter out images that are already selected
+			// Filter out images that are already selected
 			const newImages =
 				imageResponse?.length > 0
 					? imageResponse.map( ( image ) => ( {
@@ -492,12 +492,12 @@ const Images = () => {
 					  } ) )
 					: [];
 
-			/ Combine with existing images
+			// Combine with existing images
 			setImages( ( prevImages ) =>
 				mergeUniqueImages( prevImages, newImages )
 			);
 
-			/ Return image response length
+			// Return image response length
 			return imageResponse?.length || 0;
 		} catch ( error ) {
 			if ( error.name === 'AbortError' ) {
@@ -563,7 +563,7 @@ const Images = () => {
 					setHasMore( true );
 				}
 			} catch ( error ) {
-				/ Do nothing
+				// Do nothing
 				if ( error.name === 'AbortError' ) {
 					return;
 				}
@@ -584,7 +584,7 @@ const Images = () => {
 		setHasMore( true );
 	}, [ keyword, orientation ] );
 
-	/ Trigger to load more images.
+	// Trigger to load more images.
 	useEffect( () => {
 		mainWrapper.current = document.getElementById(
 			'sp-onboarding-content-wrapper'
@@ -688,20 +688,20 @@ const Images = () => {
 		} )
 			.then( () => {} )
 			.catch( () => {
-				/ Do nothing
+				// Do nothing
 			} );
 	};
 
 	const handleClickNext =
 		( skip = false ) =>
 		async () => {
-			/ Show modal if user clicks Next without selecting images
+			// Show modal if user clicks Next without selecting images
 			if ( skip || ! selectedImages.length ) {
 				setOpenSkipModal( true );
 				return;
 			}
 
-			/ Auto-select top 10 images if user is skipping and has no selections
+			// Auto-select top 10 images if user is skipping and has no selections
 			let currentSelectedImages = selectedImages;
 			if ( currentSelectedImages.length === 0 ) {
 				currentSelectedImages = autoSelectTopImages();
@@ -711,14 +711,14 @@ const Images = () => {
 			clearSessionStorage( USER_KEYWORD );
 			nextStep();
 
-			/ Stores - null value on state -> Commented out.
-			/ if ( skip ) {
-			/ 	setWebsiteImagesAIStep( previouslySelected.current ?? [] );
-			/ }
+			// Stores - null value on state -> Commented out.
+			// if ( skip ) {
+			// 	setWebsiteImagesAIStep( previouslySelected.current ?? [] );
+			// }
 		};
 
 	const handleConfirmSkip = async () => {
-		/ Auto-select top 10 images if no images are currently selected
+		// Auto-select top 10 images if no images are currently selected
 		setLoadingNextStep( true );
 		let currentSelectedImages = selectedImages;
 		if ( currentSelectedImages.length === 0 ) {
@@ -730,15 +730,15 @@ const Images = () => {
 		nextStep();
 		setLoadingNextStep( false );
 
-		/ Stores - null value on state -> Commented out.
-		/ setWebsiteImagesAIStep( previouslySelected.current ?? [] );
+		// Stores - null value on state -> Commented out.
+		// setWebsiteImagesAIStep( previouslySelected.current ?? [] );
 	};
 
-	/ Auto-select top 10 images when user skips selection
+	// Auto-select top 10 images when user skips selection
 	const autoSelectTopImages = () => {
-		/ Only auto-select if no images are currently selected
+		// Only auto-select if no images are currently selected
 		if ( selectedImages?.length > 0 ) {
-			return selectedImages; / return existing selections
+			return selectedImages; // return existing selections
 		}
 
 		const imagesToSelect = images.slice( 0, 10 );
@@ -746,7 +746,7 @@ const Images = () => {
 			handleImageSelection( image );
 		} );
 
-		/ Update the state with the selected images
+		// Update the state with the selected images
 		const newSelectedImages = imagesToSelect;
 		setWebsiteImagesAIStep( newSelectedImages );
 
@@ -780,7 +780,7 @@ const Images = () => {
 		}
 	};
 
-	/ handle outside click to close the suggestions.
+	// handle outside click to close the suggestions.
 	useEffect( () => {
 		document.addEventListener( 'mousedown', handleClickOutside );
 		return () =>
@@ -792,7 +792,7 @@ const Images = () => {
 			return;
 		}
 
-		/ Check if the event type is on click
+		// Check if the event type is on click
 		if ( event?.type === 'click' || event?.type === 'keydown' ) {
 			setOpenSuggestedKeywords( true );
 		}
@@ -839,7 +839,7 @@ const Images = () => {
 							}
 						) }
 						onClick={ ( event ) => {
-							/ If event target is `search-images-wrapper` then focus input.
+							// If event target is `search-images-wrapper` then focus input.
 							if ( event.target.id !== 'search-images-wrapper' ) {
 								return;
 							}

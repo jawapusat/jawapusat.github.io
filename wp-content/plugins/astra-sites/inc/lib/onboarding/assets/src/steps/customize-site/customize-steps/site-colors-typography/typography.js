@@ -56,7 +56,7 @@ const TypographyWrapper = () => {
 				document.head.appendChild( node );
 			}
 
-			/ Removes existing Google fonts URL.
+			// Removes existing Google fonts URL.
 			if ( !! googleFontsURL ) {
 				googleFontsURL.remove();
 			}
@@ -120,7 +120,7 @@ const TypographyWrapper = () => {
 				otherFontsString = otherFontsString.replace( /[&]{1}$/i, '' );
 			}
 
-			/ Add Google fonts URL.
+			// Add Google fonts URL.
 			if ( fontsName ) {
 				const fontUrl = `https://fonts.googleapis.com/css2?${ fontsName.join(
 					'&'
@@ -138,7 +138,7 @@ const TypographyWrapper = () => {
 				} );
 			}
 
-			/ Set default font.
+			// Set default font.
 			fonts = defaultFonts.concat( fonts );
 
 			setFonts( fonts );

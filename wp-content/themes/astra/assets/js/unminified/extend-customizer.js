@@ -10,7 +10,7 @@
 
   api.bind( 'pane-contents-reflowed', function() {
 
-    / Reflow sections
+    // Reflow sections
     var sections = [];
 
     api.section.each( function( section ) {
@@ -38,7 +38,7 @@
 
     });
 
-    / Reflow panels
+    // Reflow panels
     var panels = [];
 
     api.panel.each( function( panel ) {
@@ -69,7 +69,7 @@
   });
 
 
-  / Extend Panel
+  // Extend Panel
   var _panelEmbed = wp.customize.Panel.prototype.embed;
   var _panelIsContextuallyActive = wp.customize.Panel.prototype.isContextuallyActive;
   var _panelAttachEvents = wp.customize.Panel.prototype.attachEvents;
@@ -118,7 +118,7 @@
 
           }
 
-          event.preventDefault(); / Keep this AFTER the key filter above
+          event.preventDefault(); // Keep this AFTER the key filter above
 
           if ( panel.expanded() ) {
 
@@ -202,7 +202,7 @@
   });
 
 
-  / Extend Section
+  // Extend Section
   var _sectionEmbed = wp.customize.Section.prototype.embed;
   var _sectionIsContextuallyActive = wp.customize.Section.prototype.isContextuallyActive;
   var _sectionAttachEvents = wp.customize.Section.prototype.attachEvents;
@@ -251,7 +251,7 @@
 
           }
 
-          event.preventDefault(); / Keep this AFTER the key filter above
+          event.preventDefault(); // Keep this AFTER the key filter above
 
           if ( section.expanded() ) {
 

@@ -149,14 +149,14 @@ var PHP = {
 
 		return serialize( val );
 	},
-	/ Provide in second argument the classes that may be instantiated
-	/  e.g.  { MyClass1, MyClass2 }
+	// Provide in second argument the classes that may be instantiated
+	//  e.g.  { MyClass1, MyClass2 }
 	parse: function parse( str ) {
 		var allowedClasses =
 			arguments.length > 1 && arguments[ 1 ] !== undefined
 				? arguments[ 1 ]
 				: {};
-		allowedClasses.stdClass = PHP.stdClass; / Always allowed.
+		allowedClasses.stdClass = PHP.stdClass; // Always allowed.
 
 		var offset = 0;
 		var values = [ null ];
@@ -242,7 +242,7 @@ var PHP = {
 				: new ( _defineProperty( {}, className, function () {} )[
 						className
 				  ] )();
-		}; / Create a mock class for this name
+		}; // Create a mock class for this name
 
 		var readBoolean = function readBoolean() {
 			return readMatch( /^[01]/, "a '0' or '1'", ';' );
@@ -329,13 +329,13 @@ var PHP = {
 					: typ === 'd'
 					? readDecimal()
 					: typ === 'a'
-					? readArray() / Associative array
+					? readArray() // Associative array
 					: typ === 'o'
-					? readObject( create( readString() ) ) / Object
+					? readObject( create( readString() ) ) // Object
 					: typ === 'c'
-					? readCustomObject( create( readString() ) ) / Custom serialized object
+					? readCustomObject( create( readString() ) ) // Custom serialized object
 					: typ === 'r'
-					? values[ readInt() ] / Backreference
+					? values[ readInt() ] // Backreference
 					: kick( 'Unexpected type '.concat( typ ), offset - 1 );
 			if ( typ !== 'r' ) values[ ref ] = val;
 			return val;

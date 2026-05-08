@@ -231,7 +231,7 @@
 					( h.getRootUrl = function () {
 						var e =
 							r.location.protocol +
-							'/' +
+							'//' +
 							( r.location.hostname || r.location.host );
 						if ( r.location.port || ! 1 )
 							e += ':' + r.location.port;
@@ -286,7 +286,7 @@
 							r = e.substring( 0, 1 );
 						return (
 							( t = typeof t == 'undefined' ? ! 0 : t ),
-							/[a-z]+\:\/\/.test( e ) ||
+							/[a-z]+\:\/\//.test( e ) ||
 								( r === '/'
 									? ( n =
 											h.getRootUrl() +

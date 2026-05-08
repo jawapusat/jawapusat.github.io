@@ -107,7 +107,7 @@
 								if ( reference ) {
 									switch (itemId) {
 										case 'astra-color-palettes':
-											defaultTarget.wp.customize.control( itemId ).container.find( '.components-button.astra-color-icon-indicate.open').click(); / Close all other opened pickers first.
+											defaultTarget.wp.customize.control( itemId ).container.find( '.components-button.astra-color-icon-indicate.open').click(); // Close all other opened pickers first.
 											defaultTarget.wp.customize.control( itemId ).container.find( '.' + reference + ' .components-button.astra-color-icon-indicate').click();
 										break;
 
@@ -119,7 +119,7 @@
 										case 'astra-settings[ast-heading-h4-typo]':
 										case 'astra-settings[ast-heading-h5-typo]':
 										case 'astra-settings[ast-heading-h6-typo]':
-											defaultTarget.wp.customize.control( itemId ).container.find( '.ast-adv-toggle-icon.open').click(); / Close all other opened settings group first.
+											defaultTarget.wp.customize.control( itemId ).container.find( '.ast-adv-toggle-icon.open').click(); // Close all other opened settings group first.
 											defaultTarget.wp.customize.control( itemId ).container.find( '.' + reference + ' .ast-adv-toggle-icon').click();
 										break;
 
@@ -188,7 +188,7 @@
 } )( jQuery, wp.customize );
 
 
-/ Single Post Content Width
+// Single Post Content Width
 wp.customize( 'astra-settings[blog-single-width]', function( value ) {
     value.bind( function( value ) {
 
@@ -209,7 +209,7 @@ wp.customize( 'astra-settings[blog-single-width]', function( value ) {
     } );
 } );
 
-/ Blog Post Content Width
+// Blog Post Content Width
 wp.customize( 'astra-settings[blog-width]', function( value ) {
     value.bind( function( value ) {
 
@@ -230,7 +230,7 @@ wp.customize( 'astra-settings[blog-width]', function( value ) {
     } );
 } );
 
-/ Blog Post Content Width
+// Blog Post Content Width
 wp.customize( 'astra-settings[edd-archive-grids]', function( value ) {
     value.bind( function( value ) {
 
@@ -250,7 +250,7 @@ wp.customize( 'astra-settings[edd-archive-grids]', function( value ) {
 } );
 
 
-/ Blog Post Content Width
+// Blog Post Content Width
 wp.customize( 'astra-settings[edd-archive-width]', function( value ) {
     value.bind( function( value ) {
 
@@ -266,11 +266,11 @@ wp.customize( 'astra-settings[edd-archive-width]', function( value ) {
     } );
 } );
 
-/ WooCommerce store notice color configs.
+// WooCommerce store notice color configs.
 astra_css( 'astra-settings[store-notice-text-color]', 'color', 'body p.demo_store, body .woocommerce-store-notice, body p.demo_store a, body .woocommerce-store-notice a' );
 astra_css( 'astra-settings[store-notice-background-color]', 'background-color', 'body p.demo_store, body .woocommerce-store-notice, body p.demo_store a, body .woocommerce-store-notice a' );
 
-/ WooCommerce store notice position preview.
+// WooCommerce store notice position preview.
 wp.customize( 'astra-settings[store-notice-position]', function( setting ) {
     setting.bind( function( position ) {
 		if( 'hang-over-top' === position ) {

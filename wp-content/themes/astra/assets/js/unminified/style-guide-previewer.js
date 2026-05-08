@@ -14,7 +14,7 @@
 			let element = $(document.body).find( e.detail.selector );
 			let value   = e.detail.value;
 
-			/ Check if value is an object or else set the value.
+			// Check if value is an object or else set the value.
 			if ( typeof value === 'object' ) {
 				let desktopValue = value.desktop;
 				let tabletValue  = value.tablet;

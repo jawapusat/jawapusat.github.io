@@ -16,13 +16,13 @@
  */
 var astraGetParents = function ( elem, selector ) {
 
-	/ Setup parents array.
+	// Setup parents array.
 	var parents = [];
 
-	/ Get matching parent elements.
+	// Get matching parent elements.
 	for ( ; elem && elem !== document; elem = elem.parentNode ) {
 
-		/ Add matching parents to array.
+		// Add matching parents to array.
 		if ( selector ) {
 			if ( elem.matches( selector ) ) {
 				parents.push( elem );
@@ -102,9 +102,9 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	content = content.replace( /[^0-9]/g, '' );
 
 	if( 'both' == device || ( 'desktop' == device && '769' == content ) || ( 'mobile' == device && '' == content ) ) {
-		/ Get current window / document scroll.
+		// Get current window / document scroll.
 		var  scrollTop = window.pageYOffset || document.body.scrollTop;
-		/ If masthead found.
+		// If masthead found.
 		if( masthead && masthead.length ) {
 			if (scrollTop > masthead.offsetHeight + 100) {
 				astScrollTop.style.display = "block";
@@ -112,7 +112,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				astScrollTop.style.display = "none";
 			}
 		} else {
-			/ If there is no masthead set default start scroll
+			// If there is no masthead set default start scroll
 			if ( window.pageYOffset > 300 ) {
 				astScrollTop.style.display = "block";
 			} else {
@@ -315,11 +315,11 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				popupInner = document.querySelector( '.ast-mobile-popup-inner' );
 
 			if ( undefined === popupInner || null === popupInner ) {
-				return; / if toggel button component is not loaded.
+				return; // if toggel button component is not loaded.
 			}
 			popupLinks = popupInner.getElementsByTagName( 'a' );
 
-			/ --- Focus Trap Implementation Start ---
+			// --- Focus Trap Implementation Start ---
 			document.removeEventListener( 'keydown', astraOffcanvasTrapTabKey );
 
 			function astraOffcanvasTrapTabKey( e ) {
@@ -348,7 +348,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 			}
 			document.addEventListener( 'keydown', astraOffcanvasTrapTabKey );
 
-			/ Remove focus trap when menu is closed
+			// Remove focus trap when menu is closed
 			function removeAstraOffcanvasTrap() {
 				document.removeEventListener( 'keydown', astraOffcanvasTrapTabKey );
 			}
@@ -370,7 +370,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 			for ( var item = 0; item < popupTriggerMobile.length; item++ ) {
 				popupTriggerMobile[ item ].removeEventListener( 'click', astraNavMenuToggle, false );
-				/ Open the Popup when click on trigger
+				// Open the Popup when click on trigger
 				popupTriggerMobile[ item ].removeEventListener( 'click', popupTriggerClick );
 				popupTriggerMobile[ item ].addEventListener( 'click', function(event) {
 					event.currentTarget.setAttribute('aria-expanded', 'true');
@@ -384,7 +384,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 			}
 			for ( var item = 0; item < popupTriggerDesktop.length; item++ ) {
 				popupTriggerDesktop[ item ].removeEventListener( 'click', astraNavMenuToggle, false );
-				/ Open the Popup when click on trigger
+				// Open the Popup when click on trigger
 				popupTriggerDesktop[ item ].removeEventListener( 'click', popupTriggerClick );
 				popupTriggerDesktop[ item ].addEventListener( 'click', function(event) {
 					event.currentTarget.setAttribute('aria-expanded', 'true');
@@ -393,20 +393,20 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				popupTriggerDesktop[ item ].trigger_type = 'desktop';
 			}
 
-			/ Getting menu toggle button element.
+			// Getting menu toggle button element.
 			const menuToggleButton = document.querySelector( '.ast-button-wrap .menu-toggle' );
 
-			/Close Popup on CLose Button Click.
+			//Close Popup on CLose Button Click.
 			popupClose.addEventListener( 'click', function ( e ) {
 				document.getElementById( 'ast-mobile-popup' ).classList.remove( 'active', 'show' );
 				updateTrigger( this );
-				/ Don't focus if we're in an iframe (e.g., Beaver Builder editor)
+				// Don't focus if we're in an iframe (e.g., Beaver Builder editor)
 				if ( window.self === window.top ) {
 					menuToggleButton?.focus();
 				}
 			} );
 
-			/ Close Popup if esc is pressed.
+			// Close Popup if esc is pressed.
 			document.addEventListener( 'keyup', function ( event ) {
 				if ( event.key === 'Escape' ) {
 					event.preventDefault();
@@ -416,7 +416,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				}
 			} );
 
-			/ Close Popup on outside click.
+			// Close Popup on outside click.
 			document.addEventListener( 'click', function ( event ) {
 				var target = event.target;
 				var modal = document.querySelector( '.ast-mobile-popup-drawer.active .ast-mobile-popup-overlay' );
@@ -427,7 +427,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				}
 			} );
 
-			/ Close Popup on # link click inside Popup.
+			// Close Popup on # link click inside Popup.
 			for ( let link = 0, len = popupLinks.length; link < len; link++ ) {
 				if (
 					null !== popupLinks[ link ].getAttribute( 'href' ) &&
@@ -448,12 +448,12 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 			var mobileDropdownContent = document.querySelectorAll( '.ast-mobile-header-content' ) || false,
 				desktopDropdownContent = document.querySelector( '.ast-desktop-header-content' ) || false;
 
-			/ Close Popup on # link click inside Popup.
+			// Close Popup on # link click inside Popup.
 			if ( mobileDropdownContent.length > 0 ) {
 				for ( let index = 0; index < mobileDropdownContent.length; index++ ) {
 					var mobileLinks = mobileDropdownContent[ index ].getElementsByTagName( 'a' );
 					for ( link = 0, len = mobileLinks.length; link < len; link++ ) {
-						/ Check if the link is not inside the tabs container
+						// Check if the link is not inside the tabs container
 						const isNotInsideTabsContainer = mobileLinks[ link ].closest( '.wp-block-uagb-tabs' ) === null;
 
 						if (
@@ -472,7 +472,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				}
 			}
 
-			/ Close Popup on # link click inside Popup.
+			// Close Popup on # link click inside Popup.
 			if ( desktopDropdownContent ) {
 				var desktopLinks = desktopDropdownContent.getElementsByTagName( 'a' );
 				for ( link = 0, len = desktopLinks.length; link < len; link++ ) {
@@ -576,7 +576,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	}
 
 	window.addEventListener('resize', function(){
-		/ Skip resize event when keyboard display event triggers on devices.
+		// Skip resize event when keyboard display event triggers on devices.
 		if( 'INPUT' !== document.activeElement.tagName ) {
 			AstraHandleResizeEvent();
 		}
@@ -608,11 +608,11 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	/* Add break point Class and related trigger */
 	var updateHeaderBreakPoint = function () {
 
-		/ Use clientWidth directly. The overflow:hidden trick previously used here
-		/ caused a visible content jump (scrollbar flash) after the breakpoint class
-		/ was pre-applied by the early inline script in wp_body_open. Since
-		/ document.documentElement.clientWidth is not affected by content overflow
-		/ (unlike window.innerWidth), the overflow manipulation is not needed.
+		// Use clientWidth directly. The overflow:hidden trick previously used here
+		// caused a visible content jump (scrollbar flash) after the breakpoint class
+		// was pre-applied by the early inline script in wp_body_open. Since
+		// document.documentElement.clientWidth is not affected by content overflow
+		// (unlike window.innerWidth), the overflow manipulation is not needed.
 		var ww = get_window_width();
 
 		var break_point = astra.break_point;
@@ -624,7 +624,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 		 * This could be fixed by using `0 === ww` condition below.
 		 */
 		if (ww > break_point || 0 === ww) {
-			/remove menu toggled class.
+			//remove menu toggled class.
 			if ( menu_toggle_all.length > 0 ) {
 
 				for (var i = 0; i < menu_toggle_all.length; i++) {
@@ -714,7 +714,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 			var flag = false;
 			var menuToggleAllLength;
 			if ( 'off-canvas' === mobileHeaderType || 'full-width' === mobileHeaderType ) {
-				/ comma separated selector added, if menu is outside of Off-Canvas then submenu is not clickable, it work only for Off-Canvas area with dropdown style.
+				// comma separated selector added, if menu is outside of Off-Canvas then submenu is not clickable, it work only for Off-Canvas area with dropdown style.
 				var __main_header_all = document.querySelectorAll( '#ast-mobile-popup, #ast-mobile-header' );
 				var menu_toggle_all = document.querySelectorAll('#ast-mobile-header .main-header-menu-toggle');
 
@@ -746,7 +746,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 					if ('undefined' !== typeof __main_header_all[i]) {
 
-						/ To handle the comma seprated selector added above we need this loop.
+						// To handle the comma seprated selector added above we need this loop.
 						for( var mainHeaderCount =0; mainHeaderCount  < __main_header_all.length; mainHeaderCount++ ){
 
 							if (document.querySelector('header.site-header').classList.contains('ast-builder-menu-toggle-link')) {
@@ -754,7 +754,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 							} else {
 								var astra_menu_toggle = __main_header_all[mainHeaderCount].querySelectorAll('ul.main-header-menu .ast-menu-toggle');
 							}
-							/ Add Eventlisteners for Submenu.
+							// Add Eventlisteners for Submenu.
 							if (astra_menu_toggle.length > 0) {
 
 								for (var j = 0; j < astra_menu_toggle.length; j++) {
@@ -913,7 +913,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 		}
 		var menu = containerMenu.getElementsByTagName('ul')[0];
 
-		/ Hide menu toggle button if menu is empty and return early.
+		// Hide menu toggle button if menu is empty and return early.
 		if (!menu) {
 			if (!button.classList.contains('custom-logo-link')) {
 				button.style.display = 'none';
@@ -948,16 +948,16 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 		if (!astra.is_header_footer_builder_active) {
 
-			/ Get all the link elements within the menu.
+			// Get all the link elements within the menu.
 			var links = menu.getElementsByTagName('a');
 			var subMenus = menu.getElementsByTagName('ul');
 
-			/ Set menu items with submenus to aria-haspopup="true".
+			// Set menu items with submenus to aria-haspopup="true".
 			for (var i = 0, len = subMenus.length; i < len; i++) {
 				subMenus[i].parentNode.setAttribute('aria-haspopup', 'true');
 			}
 
-			/ Each time a menu link is focused or blurred, toggle focus.
+			// Each time a menu link is focused or blurred, toggle focus.
 			for (var i = 0, len = links.length; i < len; i++) {
 				links[i].addEventListener('focus', toggleFocus, true);
 				links[i].addEventListener('blur', toggleFocus, true);
@@ -970,7 +970,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 		}
 	}
 
-	/ Tab navigation for accessibility.
+	// Tab navigation for accessibility.
 	function tabNavigation() {
 		const dropdownToggleLinks = document.querySelectorAll('nav.site-navigation .menu-item-has-children > a .ast-header-navigation-arrow');
 		const siteNavigationSubMenu = document.querySelectorAll('nav.site-navigation .sub-menu');
@@ -981,7 +981,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 			dropdownToggleLinks.forEach(element => {
 				element.addEventListener('keydown', function (e) {
 					if ('Enter' === e.key || ' ' === e.key) {
-						/ Check if the user is on a mobile device and prevent default and stop propagation if true.
+						// Check if the user is on a mobile device and prevent default and stop propagation if true.
 						if ( /Mobi|Android|iPad|iPhone/i.test( navigator.userAgent ) ) {
 							e.preventDefault();
 							e.stopPropagation();
@@ -1050,7 +1050,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 					const childMenuItem     = currentMenuItem.querySelector( '.menu-item' );
 
 
-					/ If the next focus is the same menu item or a child menu item, don't close the submenu.
+					// If the next focus is the same menu item or a child menu item, don't close the submenu.
 					if (
 						currentMenuItem == nextFocusMenuItem ||
 						( childMenuItem && childMenuItem == nextFocusMenuItem )
@@ -1058,7 +1058,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 						return;
 					}
 					
-					/ If there's no next focus, close all submenus.
+					// If there's no next focus, close all submenus.
 					if( nextFocusMenuItem == null ) {
 						if ( wrapperSubmenu )
 							recursiveMenuCloseOnblur( wrapperSubmenu );
@@ -1067,12 +1067,12 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 						return;
 					}
 
-					/ If the next focus is the next or previous sibling, don't close all the submenu.
+					// If the next focus is the next or previous sibling, don't close all the submenu.
 					if (
 						currentMenuItem.nextElementSibling == nextFocusMenuItem ||
 						currentMenuItem.previousElementSibling == nextFocusMenuItem
 					) {
-						/ If the submenu is opened, close it and remove the 'ast-menu-hover' class.
+						// If the submenu is opened, close it and remove the 'ast-menu-hover' class.
 						if( subMenuOpened ) {
 							recursiveMenuCloseOnblur( subMenu, false );
 							currentMenuItem.classList.remove( 'ast-menu-hover' );
@@ -1080,15 +1080,15 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 						return;
 					}
 
-					/ If the next focus is the parent menu item, close the submenu till the inner child menu item submenu
+					// If the next focus is the parent menu item, close the submenu till the inner child menu item submenu
 					if ( parentMenuItem && parentMenuItem == nextFocusMenuItem ) {
 						childSubMenu = currentMenuItem.querySelector( '.sub-menu' );
 						recursiveMenuCloseOnblur( childSubMenu, false );
 						return;
 					}
 
-					/ Here we are setting a depth level point while traversing from lower to upper submenu parents.
-					/ The next focus is the next sibling of any of the parent elements in the tree, then close submenus till that level.
+					// Here we are setting a depth level point while traversing from lower to upper submenu parents.
+					// The next focus is the next sibling of any of the parent elements in the tree, then close submenus till that level.
 					let tempParent = parentMenuItem;
 					let subMenuCloseEnd = null;
 					while ( tempParent != null ) {
@@ -1099,7 +1099,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 						tempParent = tempParent.closest('.sub-menu')?.closest( '.menu-item-has-children' );
 					}
 
-					/ Closes all the menus.
+					// Closes all the menus.
 					if( wrapperSubmenu )
 						recursiveMenuCloseOnblur( wrapperSubmenu, true, subMenuCloseEnd );
 
@@ -1108,7 +1108,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 		});
 	}
 
-	/ Recursively closes the submenu upwards
+	// Recursively closes the submenu upwards
 	function recursiveMenuCloseOnblur( submenu, recursive = true, bubblingEnd = null ) {
 		/**
 		 * Close the submenu
@@ -1134,7 +1134,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 		const parentSubmenu = submenu.parentElement.closest( '.sub-menu' );
 		
-		/ If there's a parent submenu, close it and continue closing upwards.
+		// If there's a parent submenu, close it and continue closing upwards.
 		if( null !== parentSubmenu && submenu !== bubblingEnd ) {
 			recursiveMenuCloseOnblur( parentSubmenu, true, bubblingEnd );
 		}
@@ -1199,7 +1199,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 				} else {
 					while ( -1 === self.className.indexOf( 'nav-menu' ) ) {
-						/ On li elements toggle the class .focus.
+						// On li elements toggle the class .focus.
 						if ( 'li' === self.tagName.toLowerCase() ) {
 							if ( -1 !== self.className.indexOf( 'focus' ) ) {
 								self.className = self.className.replace( ' focus', '' );
@@ -1217,9 +1217,9 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	 */
 	function toggleFocus() {
 		var self = this;
-		/ Move up through the ancestors of the current link until we hit .nav-menu.
+		// Move up through the ancestors of the current link until we hit .nav-menu.
 		while ( -1 === self.className.indexOf( 'navigation-accessibility' ) ) {
-			/ On li elements toggle the class .focus.
+			// On li elements toggle the class .focus.
 			if ( 'li' === self.tagName.toLowerCase() ) {
 				self.classList.toggle('focus');
 			}
@@ -1247,7 +1247,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 	 * @since x.x.x
 	 */
 	if ( astra.is_scroll_to_id ) {
-		/ Calculate the offset top of an element, accounting for nested elements.
+		// Calculate the offset top of an element, accounting for nested elements.
 		const getOffsetTop = (element) => {
 			let offsetTop = 0;
 			while (element) {
@@ -1264,7 +1264,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 			if (siteHeader) {
 
-				/ Check and add offset to scroll top if header is sticky.
+				// Check and add offset to scroll top if header is sticky.
 				const stickyHeaders = siteHeader.querySelectorAll(
 					'div[data-stick-support]'
 				);
@@ -1309,7 +1309,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 		if (links) {
 			for (const link of links) {
 				if (link.href.split("#")[0] !== location.href.split("#")[0]) {
-					/ Store the hash
+					// Store the hash
 					hashLinks.push({
 						hash: link.hash,
 						url: link.href.split("#")[0],
@@ -1326,7 +1326,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 					const siteHeader = document.querySelector('.site-header');
 					let offset = 0;
 	
-					/ Check and add offset to scroll top if header is sticky.
+					// Check and add offset to scroll top if header is sticky.
 					const headerHeight = siteHeader.querySelectorAll('div[data-stick-support]');
 					if (headerHeight) {
 						headerHeight.forEach(single => {
@@ -1344,7 +1344,7 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 				}
 			}
 
-			/ If there is a hash in the URL when the page loads, scroll to that element after a short delay.
+			// If there is a hash in the URL when the page loads, scroll to that element after a short delay.
 			if ( location.hash ) {
 				setTimeout( () => scrollToIDHandler( new Event( 'click' ), location.hash ), 750 );
 			}
@@ -1414,13 +1414,13 @@ astScrollToTopHandler = function ( masthead, astScrollTop ) {
 
 })();
 
-/ Accessibility improvement for menu items.
+// Accessibility improvement for menu items.
 document.addEventListener('DOMContentLoaded', function () {
     const submenuToggles = document.querySelectorAll('.menu-link .dropdown-menu-toggle');
 
 	const menuItemsWithSubmenu = document.querySelectorAll('.menu-item-has-children > a');
 
-	/ Ensuring the submenu toggle action is handled with appropriate CSS, with cross browser compatibility for Enter key press.
+	// Ensuring the submenu toggle action is handled with appropriate CSS, with cross browser compatibility for Enter key press.
     menuItemsWithSubmenu.forEach(item => {
         item.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
@@ -1434,7 +1434,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    / Add event listeners for focus, blur, and keydown events.
+    // Add event listeners for focus, blur, and keydown events.
     submenuToggles.forEach(toggle => {
         toggle.addEventListener('focus', () => updateAriaExpanded(toggle));
         toggle.addEventListener('blur', () => updateAriaExpanded(toggle));
@@ -1446,7 +1446,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    / Add event listener for Escape key press to close all submenus.
+    // Add event listener for Escape key press to close all submenus.
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
             closeAllSubmenus();
@@ -1481,13 +1481,13 @@ document.addEventListener('DOMContentLoaded', function () {
         submenuToggles.forEach(toggle => updateAriaExpanded(toggle));
     }
 
-	/ This event listener is triggered when the device orientation changes, and it dispatches a 'resize' event to ensure layout adjustments are made.
+	// This event listener is triggered when the device orientation changes, and it dispatches a 'resize' event to ensure layout adjustments are made.
 	window.addEventListener( 'orientationchange', () => {
 		setTimeout( () => window.dispatchEvent( new Event( 'resize' ) ), 50 );
 	} );
 });
 
-/ Accessibility improvement for product card quick view and add to cart buttons.
+// Accessibility improvement for product card quick view and add to cart buttons.
 document.addEventListener('DOMContentLoaded', () => {
     const thumbnailWraps = document.querySelectorAll('.astra-shop-thumbnail-wrap');
 
@@ -1504,7 +1504,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             el.addEventListener('blur', () => {
-                / Added Check to check if child elements are still focused.
+                // Added Check to check if child elements are still focused.
                 const isAnyFocused = Array.from(focusableElements).some(child => child === document.activeElement);
                 if (!isAnyFocused) {
                     wrap.querySelectorAll('.ast-on-card-button, .ast-quick-view-trigger').forEach(btn => {

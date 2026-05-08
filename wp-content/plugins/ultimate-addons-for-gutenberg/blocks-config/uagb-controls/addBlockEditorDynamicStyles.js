@@ -27,7 +27,7 @@ const addBlockEditorDynamicStyles = () => {
 		const editorCustomStyle = cloneStyleTag( 'uagb-blocks-editor-custom-css' );
 
 		for ( const iterateIFrames of getAllIFrames ) {
-			/ Skip the iframe with the specific name.
+			// Skip the iframe with the specific name.
 			if ( uagb_blocks_info.exclude_crops_iframes.includes( iterateIFrames.name ) ) {
 				continue;
 			}
@@ -68,9 +68,9 @@ const addBlockEditorDynamicStyles = () => {
 			copyStyleTag( spacingStyle, 'uagb-blocks-editor-spacing-style' );
 			copyStyleTag( editorCustomStyle, 'uagb-blocks-editor-custom-css' );
 			} catch ( e ) {
-				/ Ignore cross-origin access errors.
+				// Ignore cross-origin access errors.
 			}
-		} / Loop end.
+		} // Loop end.
 	} );
 };
 

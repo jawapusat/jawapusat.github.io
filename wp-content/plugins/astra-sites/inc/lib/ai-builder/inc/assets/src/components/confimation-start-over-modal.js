@@ -45,11 +45,11 @@ const ConfirmationStartOverModal = () => {
 		removeLocalStorageItem( 'ai-builder-onboarding-details' );
 		setWebsiteOnboardingAIDetails( defaultOnboardingAIState );
 		setContinueProgressModal( { open: false } );
-		deleteCookie( 'ai-show-start-over-warning' ); / Clear the cookie.
+		deleteCookie( 'ai-show-start-over-warning' ); // Clear the cookie.
 		navigateTo( {
 			to: '/',
 			replace: true,
-		} ); / Navigate to the first step
+		} ); // Navigate to the first step
 	};
 
 	const handleContinue = () => {

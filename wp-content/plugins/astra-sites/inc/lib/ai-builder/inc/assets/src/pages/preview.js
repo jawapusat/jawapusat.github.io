@@ -134,14 +134,14 @@ const SitePreview = ( { handleClickStartBuilding, isInProgress } ) => {
 		const scaleValue = scaleX;
 
 		if ( responsiveMode.name !== 'desktop' ) {
-			/ Check if overflowing.
+			// Check if overflowing.
 			iframe.removeAttribute( 'style' );
 			if ( containerWidth > iframeWidth ) {
 				return;
 			}
 		}
 
-		/ Set the scale for both width and height
+		// Set the scale for both width and height
 		iframe.style.transform = `scale(${ scaleValue })`;
 		iframe.style.transformOrigin = 'top left';
 		iframe.style.height = `${ containerHeight / scaleValue }px`;
@@ -239,9 +239,9 @@ const SitePreview = ( { handleClickStartBuilding, isInProgress } ) => {
 			},
 		} ).then( ( response ) => {
 			if ( response.success ) {
-				/ setZipPlans( response.data );
+				// setZipPlans( response.data );
 			} else {
-				/  Handle error.
+				//  Handle error.
 			}
 		} );
 	};
@@ -258,7 +258,7 @@ const SitePreview = ( { handleClickStartBuilding, isInProgress } ) => {
 		}
 	};
 
-	/ Check for window resize.
+	// Check for window resize.
 	useLayoutEffect( () => {
 		const resizeObserver = new ResizeObserver( handleResize );
 		resizeObserver.observe( window.document.body );

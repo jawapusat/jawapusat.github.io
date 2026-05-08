@@ -68,7 +68,7 @@ ButtonGroup.ButtonItem = ( {
 	...props
 } ) => {
 	const { onChange, lastItemIndex, selectedValue, by } =
-		/ eslint-disable-next-line react-hooks/rules-of-hooks
+		// eslint-disable-next-line react-hooks/rules-of-hooks
 		useButtonGroupState();
 	const isSelected = selectedValue?.[ by ] === value?.[ by ];
 

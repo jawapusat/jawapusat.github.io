@@ -44,7 +44,7 @@ const ContinueProgressModal = () => {
 		navigateTo( {
 			to: '/',
 			replace: true,
-		} ); / Navigate to the first step
+		} ); // Navigate to the first step
 	};
 
 	const handleContinue = () => {

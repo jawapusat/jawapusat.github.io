@@ -31,7 +31,7 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 		gradientAngle,
 		selectGradient,
 
-		/image overlay
+		//image overlay
 		backgroundOverlayImage,
 		backgroundOverlayRepeat,
 		backgroundOverlayPosition,
@@ -64,14 +64,14 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 	const customXPosition = generateCSSUnit( xPositionValue, xPositionTypeValue );
 	const customYPosition = generateCSSUnit( yPositionValue, yPositionTypeValue );
 
-	/ Handle the Overlay Opacity.
+	// Handle the Overlay Opacity.
 	const applyOverlayOpacity = () => {
 		if ( undefined !== overlayOpacity && '' !== overlayOpacity ) {
 			bgOverlayCSS.opacity = `${ overlayOpacity }`;
 		}
 	};
 
-	/ Handle the Gradient Properties.
+	// Handle the Gradient Properties.
 	let gradient;
 
 	switch ( selectGradient ) {
@@ -96,14 +96,14 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 			break;
 	}
 
-	/ Handle the Background Size Properties.
+	// Handle the Background Size Properties.
 	let backgroundSizeValue = backgroundSize;
 
 	if ( 'custom' === backgroundSize ) {
 		backgroundSizeValue = backgroundCustomSize + backgroundCustomSizeType;
 	}
 
-	/ Handle the Background Properties along with Overlay if Needed.
+	// Handle the Background Properties along with Overlay if Needed.
 	if ( undefined !== backgroundType && '' !== backgroundType ) {
 		if ( 'color' === backgroundType ) {
 			if (
@@ -123,9 +123,9 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 			} else if ( undefined === backgroundImage || '' === backgroundImage || 'unset' === backgroundImage ) {
 				bgCSS[ 'background-color' ] = backgroundColor;
 			}
-			/ globalBlockStyleId
+			// globalBlockStyleId
 			if ( globalBlockStyleId ) {
-				/ We have added overlay for container block only that's why we are checking for pseudoElementOverlay?.blockName in future we will implement overlay for all blocks then we will remove this condition.
+				// We have added overlay for container block only that's why we are checking for pseudoElementOverlay?.blockName in future we will implement overlay for all blocks then we will remove this condition.
 				bgCSS[ 'background-image' ] = `unset;`;
 			} 
 		} else if ( 'image' === backgroundType ) {
@@ -141,7 +141,7 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 					bgOverlayCSS.background = backgroundImageColor;
 					applyOverlayOpacity();
 				} else if ( 'container' === pseudoElementOverlay?.blockName ) {
-					/ We have added overlay for container block only that's why we are checking for pseudoElementOverlay?.blockName in future we will implement overlay for all blocks then we will remove this condition.
+					// We have added overlay for container block only that's why we are checking for pseudoElementOverlay?.blockName in future we will implement overlay for all blocks then we will remove this condition.
 					bgCSS[ 'background-image' ] = `url(${ backgroundImage.url });`;
 				} else {
 					bgCSS[ 'background-image' ] =
@@ -165,7 +165,7 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 					bgOverlayCSS[ 'background-image' ] = gradient;
 					applyOverlayOpacity();
 				} else if ( 'container' === pseudoElementOverlay?.blockName ) {
-					/ We have added overlay for container block only that's why we are checking for pseudoElementOverlay?.blockName in future we will implement overlay for all blocks then we will remove this condition.
+					// We have added overlay for container block only that's why we are checking for pseudoElementOverlay?.blockName in future we will implement overlay for all blocks then we will remove this condition.
 					bgCSS[ 'background-image' ] = `url(${ backgroundImage.url });`;
 				}  else {
 					bgCSS[ 'background-image' ] = gradient + ', url(' + backgroundImage?.url + ');';
@@ -210,7 +210,7 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 		}
 	}
 
-	/Handle background overlay image css
+	//Handle background overlay image css
 	if ( 'image' === overlayType ) {
 		if ( '' !== backgroundOverlayImage && backgroundOverlayImage?.url ) {
 			bgOverlayCSS[ 'background-image' ] = `url(${ backgroundOverlayImage.url } );`;

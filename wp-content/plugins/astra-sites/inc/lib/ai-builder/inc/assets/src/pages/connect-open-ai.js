@@ -43,7 +43,7 @@ const ConnectOpenAI = ( { onClickContinue, onLater } ) => {
 			} );
 			onLater();
 		} catch ( error ) {
-			/ Do nothing
+			// Do nothing
 		}
 
 		return 0;

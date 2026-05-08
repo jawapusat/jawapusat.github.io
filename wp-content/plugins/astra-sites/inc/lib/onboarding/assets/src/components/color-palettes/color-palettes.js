@@ -6,17 +6,17 @@ const ColorPalettes = ( { selected, options, onChange, tabIndex, type } ) => {
 		e = e || window.event;
 
 		if ( e.keyCode === 38 ) {
-			/Up Arrow
+			//Up Arrow
 			if ( e.target.previousSibling ) {
 				e.target.previousSibling.focus();
 			}
 		} else if ( e.keyCode === 40 ) {
-			/Down Arrow
+			//Down Arrow
 			if ( e.target.nextSibling ) {
 				e.target.nextSibling.focus();
 			}
 		} else if ( e.key === 'Enter' ) {
-			/Enter
+			//Enter
 			onChange( e, palette );
 		}
 	};

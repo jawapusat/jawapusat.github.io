@@ -1,9 +1,9 @@
 // Spectra Popup JS Actions Needed in the Admin CPT Page.
 
-/ Click Event to Enable or Disable Related Popup.
+// Click Event to Enable or Disable Related Popup.
 const UAGBToggelSwitch = ( event ) => {
 	const element = event.target;
-	/ If the current toggle is on, this is false - else this is true.
+	// If the current toggle is on, this is false - else this is true.
 	const updatedStatus = element.classList.contains( 'spectra-popup-builder__switch--active' ) ? 'false' : 'true';
 
 	const mediaData = new FormData();
@@ -22,7 +22,7 @@ const UAGBToggelSwitch = ( event ) => {
 		if ( false === data.success ) {
 			return;
 		}
-		/ If the API Fetch was successful, invert the toggle.
+		// If the API Fetch was successful, invert the toggle.
 		if ( 'false' === updatedStatus ) {
 			element.classList.remove( 'spectra-popup-builder__switch--active' );
 		} else {
@@ -31,9 +31,9 @@ const UAGBToggelSwitch = ( event ) => {
 	} );
 }
 
-/ Bind Related Click Events on Load.
+// Bind Related Click Events on Load.
 document.addEventListener( 'DOMContentLoaded', () => {
-	/ Bind all the Toggles.
+	// Bind all the Toggles.
 	const spectraToggles = document.querySelectorAll( '.spectra-popup-builder__switch' );
 	for ( let spectraToggleCount = 0; spectraToggleCount < spectraToggles.length; spectraToggleCount++ ) {
 		spectraToggles[ spectraToggleCount ].addEventListener( 'click', ( event ) => UAGBToggelSwitch( event ), false );

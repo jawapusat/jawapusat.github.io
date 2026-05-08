@@ -24,20 +24,20 @@ const ChooseEcommerce = () => {
 	const [ checkedTemplateID, setCheckedTemplateID ] =
 		useState( selectedTemplateID );
 
-	/ Handle both array and object structures for allSitesData
+	// Handle both array and object structures for allSitesData
 	const getSelectedTemplate = () => {
 		if ( ! allSitesData || ! selectedTemplateID ) {
 			return null;
 		}
 
-		/ If allSitesData is an array, find the template by ID
+		// If allSitesData is an array, find the template by ID
 		if ( Array.isArray( allSitesData ) ) {
 			return allSitesData.find(
 				( site ) => site.id === selectedTemplateID
 			);
 		}
 
-		/ If allSitesData is an object, access by key
+		// If allSitesData is an object, access by key
 		return allSitesData[ `id-${ selectedTemplateID }` ] || null;
 	};
 
@@ -48,13 +48,13 @@ const ChooseEcommerce = () => {
 	const changeEcommerceTemplate = async ( event ) => {
 		const templateValue = parseInt( event?.value );
 
-		/ Update selected template ID in the state and UI
+		// Update selected template ID in the state and UI
 		dispatch( {
 			type: 'set',
 			templateId: event?.id,
 		} );
 		setCheckedTemplateID( templateValue );
-		/ Update stored state for selected plugin and trigger further checks
+		// Update stored state for selected plugin and trigger further checks
 		storedState[ 0 ].selectedEcommercePlugin = event?.id;
 		await getDemo( templateValue, storedState );
 		await checkRequiredPlugins( storedState );
@@ -69,7 +69,7 @@ const ChooseEcommerce = () => {
 		if ( ! relatedTemplateID ) {
 			dispatch( {
 				type: 'set',
-				currentCustomizeIndex: currentCustomizeIndex + 1, / Skip 1 step.
+				currentCustomizeIndex: currentCustomizeIndex + 1, // Skip 1 step.
 			} );
 		}
 	}, [ relatedTemplateID, currentCustomizeIndex, dispatch ] );

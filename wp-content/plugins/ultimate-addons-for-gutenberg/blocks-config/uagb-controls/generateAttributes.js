@@ -1,6 +1,6 @@
 export const getBorderAttributes = ( prefix ) => {
 	const defaults = {
-		/ Width
+		// Width
 		borderTopWidth: '',
 		borderRightWidth: '',
 		borderBottomWidth: '',
@@ -13,7 +13,7 @@ export const getBorderAttributes = ( prefix ) => {
 		borderRightWidthMobile: '',
 		borderBottomWidthMobile: '',
 		borderLeftWidthMobile: '',
-		/ Radius
+		// Radius
 		borderTopLeftRadius: '',
 		borderTopRightRadius: '',
 		borderBottomRightRadius: '',
@@ -26,11 +26,11 @@ export const getBorderAttributes = ( prefix ) => {
 		borderTopRightRadiusMobile: '',
 		borderBottomRightRadiusMobile: '',
 		borderBottomLeftRadiusMobile: '',
-		/ unit
+		// unit
 		borderRadiusUnit: 'px',
 		borderRadiusUnitTablet: 'px',
 		borderRadiusUnitMobile: 'px',
-		/ common
+		// common
 		borderStyle: '',
 		borderColor: '',
 		borderHColor: '',
@@ -43,7 +43,7 @@ export const getBorderAttributes = ( prefix ) => {
 	];
 
 	devices.forEach( ( item ) => {
-		/ border width
+		// border width
 		attributes[ prefix + 'BorderTopWidth' + item.devicePrefix ] = {
 			type: 'number',
 			default: defaults[ `borderTopWidth${ item.devicePrefix }` ],
@@ -77,7 +77,7 @@ export const getBorderAttributes = ( prefix ) => {
 			},
 		};
 
-		/ border radius
+		// border radius
 		attributes[ prefix + 'BorderTopLeftRadius' + item.devicePrefix ] = {
 			type: 'number',
 			default: defaults[ `borderTopLeftRadius${ item.devicePrefix }` ],
@@ -111,7 +111,7 @@ export const getBorderAttributes = ( prefix ) => {
 			},
 		};
 
-		/ radius unit
+		// radius unit
 		attributes[ prefix + 'BorderRadiusUnit' + item.devicePrefix ] = {
 			type: 'string',
 			default: defaults[ `borderRadiusUnit${ item.devicePrefix }` ],
@@ -191,7 +191,7 @@ export const migrateBorderAttributes = (
 			if ( '' === attributes[ prefix + 'BorderBottomWidth' ] ) {
 				setAttributes( { [ prefix + 'BorderBottomWidth' ]: borderWidth.value } );
 			}
-			/ reset
+			// reset
 			attributes[ borderWidth.label ] = '';
 		}
 
@@ -208,7 +208,7 @@ export const migrateBorderAttributes = (
 			if ( '' === attributes[ prefix + 'BorderBottomRightRadius' ] ) {
 				setAttributes( { [ prefix + 'BorderBottomRightRadius' ]: borderRadius.value } );
 			}
-			/ reset
+			// reset
 			attributes[ borderRadius.label ] = '';
 		}
 
@@ -216,7 +216,7 @@ export const migrateBorderAttributes = (
 			if ( '' === attributes[ prefix + 'BorderColor' ] ) {
 				setAttributes( { [ prefix + 'BorderColor' ]: color.value } );
 			}
-			/ reset
+			// reset
 			attributes[ color.label ] = '';
 		}
 
@@ -224,7 +224,7 @@ export const migrateBorderAttributes = (
 			if ( '' === attributes[ prefix + 'BorderHColor' ] ) {
 				setAttributes( { [ prefix + 'BorderHColor' ]: hoverColor.value } );
 			}
-			/ reset
+			// reset
 			attributes[ hoverColor.label ] = '';
 		}
 
@@ -232,7 +232,7 @@ export const migrateBorderAttributes = (
 			if ( '' === attributes[ prefix + 'BorderStyle' ] ) {
 				setAttributes( { [ prefix + 'BorderStyle' ]: borderStyle.value } );
 			}
-			/ reset
+			// reset
 			attributes[ borderStyle.label ] = '';
 		}
 	}

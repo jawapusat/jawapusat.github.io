@@ -1,15 +1,15 @@
 const isAnyWordMatching = ( search, content ) => {
-	/ Lowarize the search term and the content.
+	// Lowarize the search term and the content.
 	search = search.toLocaleLowerCase();
 	content = content.toLocaleLowerCase();
 
-	/ Remove all inner spaces and keep only one space between two words.
+	// Remove all inner spaces and keep only one space between two words.
 	search = search.replace( /\s\s+/g, ' ' ).trim();
 
-	/ Add the pipe operator to match any single world.
+	// Add the pipe operator to match any single world.
 	search = search.replace( ' ', '|' );
 
-	/ Match any word in the content.
+	// Match any word in the content.
 	if ( content.match( new RegExp( search, 'g' ) ) ) {
 		return true;
 	}

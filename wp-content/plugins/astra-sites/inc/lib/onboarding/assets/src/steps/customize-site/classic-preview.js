@@ -67,9 +67,9 @@ const ClassicPreview = () => {
 	};
 
 	useEffect( () => {
-		window.addEventListener( 'beforeunload', preventRefresh ); / eslint-disable-line
+		window.addEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 		return () =>
-			window.removeEventListener( 'beforeunload', preventRefresh ); / eslint-disable-line
+			window.removeEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 	} );
 	return (
 		<>

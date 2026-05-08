@@ -12,17 +12,17 @@ const List = ( { className, options, onSelect, selected, type } ) => {
 		e = e || window.event;
 
 		if ( e.keyCode === 37 ) {
-			/Left Arrow
+			//Left Arrow
 			if ( e.target.previousSibling ) {
 				e.target.previousSibling.focus();
 			}
 		} else if ( e.keyCode === 39 ) {
-			/Right Arrow
+			//Right Arrow
 			if ( e.target.nextSibling ) {
 				e.target.nextSibling.focus();
 			}
 		} else if ( e.key === 'Enter' ) {
-			/Enter
+			//Enter
 			onSelect( e, id );
 		}
 	};

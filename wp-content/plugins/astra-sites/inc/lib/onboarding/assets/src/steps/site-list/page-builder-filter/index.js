@@ -41,7 +41,7 @@ const PageBuilder = ( { placement = 'bottom-end', isDisabled } ) => {
 
 		if ( currentIndex !== getStepIndex( 'site-list' ) ) {
 			const urlParams = new URLSearchParams( window.location.search );
-			/ Removing the query param from url.
+			// Removing the query param from url.
 			const newURL = new URL( window.location.href );
 			newURL.searchParams.delete( 'page-builder' );
 			window.history.replaceState( {}, '', newURL );
@@ -80,7 +80,7 @@ const PageBuilder = ( { placement = 'bottom-end', isDisabled } ) => {
 		return null;
 	}
 
-	/ Don't show page builder selection on page builder screen (i.e. ci=1) and if all builders are showing.
+	// Don't show page builder selection on page builder screen (i.e. ci=1) and if all builders are showing.
 	if ( ! showOtherBuilders && currentIndex === 1 ) {
 		return;
 	}
@@ -116,42 +116,42 @@ const PageBuilder = ( { placement = 'bottom-end', isDisabled } ) => {
 	];
 
 	if ( isElementorDisabled === '1' ) {
-		/ Find the index of the Elementor builder in the array.
+		// Find the index of the Elementor builder in the array.
 		const indexToRemove = buildersList.findIndex(
 			( pageBuilder ) => pageBuilder.id === 'elementor'
 		);
 
-		/ Remove the Elementor builder if it exists.
+		// Remove the Elementor builder if it exists.
 		if ( indexToRemove !== -1 ) {
 			buildersList.splice( indexToRemove, 1 );
 		}
 	}
 
 	if ( isBeaverBuilderDisabled === '1' ) {
-		/ Find the index of the Beaver builder in the array.
+		// Find the index of the Beaver builder in the array.
 		const indexToRemove = buildersList.findIndex(
 			( pageBuilder ) => pageBuilder.id === 'beaver-builder'
 		);
 
-		/ Remove the Beaver builder if it exists.
+		// Remove the Beaver builder if it exists.
 		if ( indexToRemove !== -1 ) {
 			buildersList.splice( indexToRemove, 1 );
 		}
 	}
 
 	if ( ! showAiBuilder ) {
-		/ Find the index of the Beaver builder in the array.
+		// Find the index of the Beaver builder in the array.
 		const indexToRemove = buildersList.findIndex(
 			( pageBuilder ) => pageBuilder.id === 'ai-builder'
 		);
 
-		/ Remove the Beaver builder if it exists.
+		// Remove the Beaver builder if it exists.
 		if ( indexToRemove !== -1 ) {
 			buildersList.splice( indexToRemove, 1 );
 		}
 	}
 
-	/ Add `Show Other Builders` option when any of our builders are disabled via option meta.
+	// Add `Show Other Builders` option when any of our builders are disabled via option meta.
 	if ( showOtherBuilders ) {
 		buildersList.push( {
 			id: 'show-other-builders',
@@ -172,7 +172,7 @@ const PageBuilder = ( { placement = 'bottom-end', isDisabled } ) => {
 			.then( ( response ) => response.json() )
 			.then( ( data ) => {
 				if ( data.success ) {
-					/ Reload the window to reflect the builders options.
+					// Reload the window to reflect the builders options.
 					window.location.reload();
 				} else {
 					console.error(

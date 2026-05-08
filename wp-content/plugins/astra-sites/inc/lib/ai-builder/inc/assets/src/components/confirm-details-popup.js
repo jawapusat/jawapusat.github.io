@@ -10,7 +10,7 @@ import LoadingSpinner from './loading-spinner';
 
 const ConfirmationModal = ( { open, setOpen, onClickGenerate } ) => {
 	const {
-		/ businessType: { name: businessType },
+		// businessType: { name: businessType },
 		businessName,
 		businessDetails,
 		businessContact: { email, phone, address },

@@ -8,7 +8,7 @@ import { classNames } from '../../../helpers';
 import { STORE_KEY } from '../../../store/index';
 
 const BusinessLogoControls = () => {
-	const [ { siteLogo, currentCustomizeIndex }, dispatch ] = [ {}, () => {} ]; / Remove this line.
+	const [ { siteLogo, currentCustomizeIndex }, dispatch ] = [ {}, () => {} ]; // Remove this line.
 	const nextStep = () => {
 		dispatch( {
 			type: 'set',

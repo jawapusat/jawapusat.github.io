@@ -188,14 +188,14 @@ const useBuildSiteController = () => {
 		if ( isInProgress ) {
 			return;
 		}
-		/ Start the process.
+		// Start the process.
 		setIsInProgress( true );
 
 		const response = await createSite( requestData );
 
 		if ( response.success ) {
 			const websiteData = response.data.data.site;
-			/ Close the onboarding screen on success.
+			// Close the onboarding screen on success.
 			setWebsiteInfoAIStep( websiteData );
 			updateImportAiSiteData( {
 				templateId: websiteData.uuid,
@@ -203,7 +203,7 @@ const useBuildSiteController = () => {
 				importErrorResponse: [],
 				importError: false,
 			} );
-			setCookie( 'ai-show-start-over-warning', true, 2 * 24 * 60 * 60 ); / 2 days in seconds.
+			setCookie( 'ai-show-start-over-warning', true, 2 * 24 * 60 * 60 ); // 2 days in seconds.
 			nextStep();
 		} else {
 			const error = response?.data?.data?.errors,
@@ -222,7 +222,7 @@ const useBuildSiteController = () => {
 					'site_creation_limit_exceeded' === code ||
 					message.includes( 'limit' )
 				) {
-					/ Handle site limit exceed error.
+					// Handle site limit exceed error.
 					setLimitExceedModal( {
 						open: true,
 					} );
@@ -264,7 +264,7 @@ const useBuildSiteController = () => {
 				)
 				.map( ( feature ) => feature.id );
 
-			/ Add ecommerce feature if selected template is ecommerce.
+			// Add ecommerce feature if selected template is ecommerce.
 			if ( hasEcommerceFeature ) {
 				enabledFeatures.push( 'ecommerce' );
 			}

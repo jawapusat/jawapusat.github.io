@@ -27,7 +27,7 @@ const PlanUpgradePromoModal = () => {
 
 	useEffect( () => {
 		const checkUpgradePromo = async () => {
-			/ handle not logged in case.
+			// handle not logged in case.
 			if (
 				typeof aiBuilderVars?.zip_plans !== 'object' ||
 				show_zip_plan !== '1'
@@ -38,7 +38,7 @@ const PlanUpgradePromoModal = () => {
 			const promoDismissTimeinMS = ( await getPlanPromoDissmissTime() )
 				.dismiss_time;
 
-			/ if 2 weeks have not been passed
+			// if 2 weeks have not been passed
 			if ( getTimeDiff( promoDismissTimeinMS ) < 2 * WEEKS_IN_SECONDS ) {
 				return;
 			}
@@ -118,7 +118,7 @@ const PlanUpgradePromoModal = () => {
 							</p>
 							<p className="text-background-primary text-xs sm:text-sm font-normal mt-1">
 								{ sprintf(
-									/ translators: %1$s: Number of AI sites used, %2$s: Current plan name, %3$s: Suggested Plan
+									// translators: %1$s: Number of AI sites used, %2$s: Current plan name, %3$s: Suggested Plan
 									__(
 										"You've successfully generated %1$s AI sites with your %2$s account. Do much more with the %3$s Plan:",
 										'ai-builder'

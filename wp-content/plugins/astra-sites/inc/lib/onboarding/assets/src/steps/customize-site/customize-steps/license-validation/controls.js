@@ -31,12 +31,12 @@ const LicenseValidationControls = () => {
 	const [ licenseKey, setLicenseKey ] = useState( '' );
 	const premiumTemplate = false;
 
-	/ Start the pre import process.
+	// Start the pre import process.
 	useEffect( () => {
 		if ( importError ) {
 			dispatch( {
 				type: 'set',
-				currentIndex: currentIndex + 2, / Skip 2 steps.
+				currentIndex: currentIndex + 2, // Skip 2 steps.
 			} );
 		}
 	}, [ importError ] );
@@ -87,7 +87,7 @@ const LicenseValidationControls = () => {
 	const processingClass = processing ? 'processing' : '';
 
 	const supportLink = sprintf(
-		/translators: %1$s Support page URL.
+		//translators: %1$s Support page URL.
 		__(
 			`<b> Questions? </b> Get in touch with our %1$ssupport team%2$s.`,
 			'astra-sites'
@@ -104,7 +104,7 @@ const LicenseValidationControls = () => {
 	};
 
 	const downloadLink = sprintf(
-		/translators: %1$s Store page URL.
+		//translators: %1$s Store page URL.
 		__(
 			`If you have purchased our Essential or Business Toolkits, please install the premium version of the plugin that you can %1$sdownload%2$s from our store.`,
 			'astra-sites'

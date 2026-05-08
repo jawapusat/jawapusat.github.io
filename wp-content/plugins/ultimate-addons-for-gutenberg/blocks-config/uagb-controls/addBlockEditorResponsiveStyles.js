@@ -1,9 +1,9 @@
 const addBlockEditorResponsiveStyles = ( clientId, styling, deviceTypeClass ) => {
-	/ Desktop.
+	// Desktop.
 	const findResponsiveElement = document.getElementById( `block-${ clientId }` );
 
 	if ( null !== findResponsiveElement && undefined !== findResponsiveElement ) {
-		findResponsiveElement.classList.remove( 'uag-hide-desktop' ); / To remove uag-hide-desktop when toggle click.
+		findResponsiveElement.classList.remove( 'uag-hide-desktop' ); // To remove uag-hide-desktop when toggle click.
 		styling.map( ( item ) => {
 			if ( item ) {
 				findResponsiveElement.classList.remove( item, deviceTypeClass );
@@ -14,9 +14,9 @@ const addBlockEditorResponsiveStyles = ( clientId, styling, deviceTypeClass ) =>
 			return findResponsiveElement;
 		} );
 	}
-	/ Desktop ends.
+	// Desktop ends.
 
-	/ Tablet / Mobile Starts.
+	// Tablet / Mobile Starts.
 	const tabletPreview = document.getElementsByClassName( 'is-tablet-preview' );
 	const mobilePreview = document.getElementsByClassName( 'is-mobile-preview' );
 

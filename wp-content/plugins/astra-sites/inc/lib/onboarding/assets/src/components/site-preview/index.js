@@ -53,7 +53,7 @@ const SitePreview = () => {
 		const scaleY = containerHeight / iframeHeight;
 		const scaleValue = Math.min( scaleX, scaleY );
 
-		/ Set the scale for both width and height
+		// Set the scale for both width and height
 		iframe.style.transform = `scale(${ scaleValue })`;
 		iframe.style.transformOrigin = 'top left';
 		iframe.style.height = `${ containerHeight / scaleValue }px`;
@@ -75,7 +75,7 @@ const SitePreview = () => {
 	}, [ showSidebar ] );
 
 	const handleResize = () => {
-		/ Collapse the sidebar when it's a mobile view.
+		// Collapse the sidebar when it's a mobile view.
 		if ( showSidebar ) {
 			if ( window.innerWidth < 1024 ) {
 				dispatch( {
@@ -92,7 +92,7 @@ const SitePreview = () => {
 		updateScaling();
 	};
 
-	/ Update scaling on window resize.
+	// Update scaling on window resize.
 	useEffect( () => {
 		handleResize();
 		window.addEventListener( 'resize', handleResize );

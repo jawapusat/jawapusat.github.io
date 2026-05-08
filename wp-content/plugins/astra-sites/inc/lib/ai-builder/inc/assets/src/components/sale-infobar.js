@@ -12,7 +12,7 @@ const SaleInfobar = () => {
 		getCookie( `${ currentSalePeriod }-dismissed` )
 	);
 
-	/ Check if the current sale period has been dismissed
+	// Check if the current sale period has been dismissed
 	useEffect( () => {
 		const dismissedCookie = getCookie( `${ currentSalePeriod }-dismissed` );
 		if ( dismissedCookie === 'true' ) {
@@ -20,7 +20,7 @@ const SaleInfobar = () => {
 		}
 	}, [ currentSalePeriod ] );
 
-	/ Don't render if sale has ended or if dismissed or if already upgraded.
+	// Don't render if sale has ended or if dismissed or if already upgraded.
 	if (
 		! showTimer ||
 		isDismissed ||
@@ -29,7 +29,7 @@ const SaleInfobar = () => {
 		return null;
 	}
 
-	/ Define titles for each sale period
+	// Define titles for each sale period
 	const getSaleTitle = () => {
 		switch ( currentSalePeriod ) {
 			case 'black-friday':
@@ -45,14 +45,14 @@ const SaleInfobar = () => {
 		}
 	};
 
-	/ Handle closing the infobar
+	// Handle closing the infobar
 	const handleClose = () => {
 		setIsDismissed( true );
 		setCookie(
 			`${ currentSalePeriod }-dismissed`,
 			'true',
 			30 * 24 * 60 * 60
-		); / Expires in 30 days
+		); // Expires in 30 days
 	};
 
 	return (

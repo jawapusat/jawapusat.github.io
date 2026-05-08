@@ -12,7 +12,7 @@ if ( astraSitesVars?.default_page_builder ) {
 			? 'gutenberg'
 			: astraSitesVars?.default_page_builder;
 
-	/ If AI builder is disabled but set as default, fallback to gutenberg
+	// If AI builder is disabled but set as default, fallback to gutenberg
 	if ( builderKey === 'ai-builder' && ! astraSitesVars?.showAiBuilder ) {
 		builderKey = 'gutenberg';
 	}
@@ -27,17 +27,17 @@ export const siteLogoDefault = {
 
 export const initialState = {
 	siteFeatures: [
-		/ {
-		/ 	title: __( 'Blog', 'astra-sites' ),
-		/ 	id: 'blog',
-		/ 	description: __(
-		/ 		'Display a well-designed blog on your website',
-		/ 		'astra-sites'
-		/ 	),
-		/ 	enabled: false,
-		/ 	compulsory: false,
-		/ 	icon: 'blog',
-		/ },
+		// {
+		// 	title: __( 'Blog', 'astra-sites' ),
+		// 	id: 'blog',
+		// 	description: __(
+		// 		'Display a well-designed blog on your website',
+		// 		'astra-sites'
+		// 	),
+		// 	enabled: false,
+		// 	compulsory: false,
+		// 	icon: 'blog',
+		// },
 		{
 			title: __( 'Page Builder', 'astra-sites' ),
 			id: 'page-builder',
@@ -81,29 +81,29 @@ export const initialState = {
 			icon: 'arrow-trending-up',
 			plugins: [ 'surerank' ],
 		},
-		/ Will be added back.
-		/ {
-		/ 	title: __( 'Automation & Integrations', 'astra-sites' ),
-		/ 	id: 'automation-integrations',
-		/ 	description: __( 'Automate your website & tasks', 'astra-sites' ),
-		/ 	enabled: false,
-		/ 	compulsory: false,
-		/ 	icon: 'squares-plus',
-		/ 	plugins: [ 'suretriggers' ],
-		/ },
-		/ Removing
-		/ {
-		/ 	title: __( 'Appointment & Bookings', 'astra-sites' ),
-		/ 	id: 'appointment-bookings',
-		/ 	description: __(
-		/ 		'Easily manage bookings for your services',
-		/ 		'astra-sites'
-		/ 	),
-		/ 	enabled: false,
-		/ 	compulsory: false,
-		/ 	icon: 'calendar',
-		/ 	plugins: [ 'latepoint' ],
-		/ },
+		// Will be added back.
+		// {
+		// 	title: __( 'Automation & Integrations', 'astra-sites' ),
+		// 	id: 'automation-integrations',
+		// 	description: __( 'Automate your website & tasks', 'astra-sites' ),
+		// 	enabled: false,
+		// 	compulsory: false,
+		// 	icon: 'squares-plus',
+		// 	plugins: [ 'suretriggers' ],
+		// },
+		// Removing
+		// {
+		// 	title: __( 'Appointment & Bookings', 'astra-sites' ),
+		// 	id: 'appointment-bookings',
+		// 	description: __(
+		// 		'Easily manage bookings for your services',
+		// 		'astra-sites'
+		// 	),
+		// 	enabled: false,
+		// 	compulsory: false,
+		// 	icon: 'calendar',
+		// 	plugins: [ 'latepoint' ],
+		// },
 		{
 			title: __( 'Website Emails & SMTP', 'astra-sites' ),
 			id: 'smtp',
@@ -163,7 +163,7 @@ export const initialState = {
 	pluginInstallationAttempts: 0,
 	confettiDone: false,
 
-	/ Template Information.
+	// Template Information.
 	templateId: 0,
 	templateResponse: null,
 	requiredPlugins: null,
@@ -172,7 +172,7 @@ export const initialState = {
 	selectedTemplateName: '',
 	selectedTemplateType: '',
 
-	/ Import statuses.
+	// Import statuses.
 	reset: 'yes' === starterTemplates.firstImportStatus ? true : false,
 	allowResetSite: true,
 	themeStatus: false,
@@ -209,45 +209,45 @@ export const initialState = {
 	analyticsFlag: starterTemplates.analytics !== 'yes' ? true : false,
 	shownRequirementOnce: false,
 
-	/ Filter Favorites.
+	// Filter Favorites.
 	onMyFavorite: false,
 
-	/ All Sites and Favorites
+	// All Sites and Favorites
 	favoriteSiteIDs: Object.values( astraSitesVars?.favorite_data ) || [],
 
-	/ License.
+	// License.
 	licenseStatus: astraSitesVars?.license_status,
 	validateLicenseStatus: false,
 
-	/ Staging connected.
+	// Staging connected.
 	stagingConnected:
 		astraSitesVars?.staging_connected !== 'yes'
 			? ''
 			: '&draft=' + astraSitesVars?.staging_connected,
 
-	/ Search.
+	// Search.
 	searchTerms: [],
 	searchTermsWithCount: [],
 	enabledFeatureIds: [],
 	dismissAINotice: astraSitesVars?.dismiss_ai_notice,
 
-	/ Sync Library.
+	// Sync Library.
 	bgSyncInProgress: !! astraSitesVars?.bgSyncInProgress,
 	sitesSyncing: false,
 	syncPageCount: 0,
 	syncPageInProgress: 0,
 
-	/ Limit exceed modal for AI-Builder.
+	// Limit exceed modal for AI-Builder.
 	limitExceedModal: {
 		open: false,
 	},
 
-	/ Page builder API loading state and cache
+	// Page builder API loading state and cache
 	pageBuilderCache: {
 		timestamp: null,
 	},
 
-	/ Spectra Blocks Version
+	// Spectra Blocks Version
 	spectraBlocksVersion: astraSitesVars?.spectraBlocks?.version || 'v2',
 };
 
@@ -256,8 +256,8 @@ const reducer = ( state = initialState, { type, ...rest } ) => {
 		case 'set':
 			return { ...state, ...rest };
 
-		/ Plugin installed: move from notInstalledList to notActivatedList
-		/ Uses current state to avoid closure issues
+		// Plugin installed: move from notInstalledList to notActivatedList
+		// Uses current state to avoid closure issues
 		case 'plugin_installed':
 			return {
 				...state,
@@ -268,8 +268,8 @@ const reducer = ( state = initialState, { type, ...rest } ) => {
 				importStatus: rest.importStatus || state.importStatus,
 			};
 
-		/ Plugin activated: remove from notActivatedList
-		/ Uses current state to avoid closure issues
+		// Plugin activated: remove from notActivatedList
+		// Uses current state to avoid closure issues
 		case 'plugin_activated':
 			return {
 				...state,
@@ -280,7 +280,7 @@ const reducer = ( state = initialState, { type, ...rest } ) => {
 				importPercent: rest.importPercent ?? state.importPercent,
 			};
 
-		/ Plugin deferred: remove from notActivatedList (will be retried later)
+		// Plugin deferred: remove from notActivatedList (will be retried later)
 		case 'plugin_deferred':
 			return {
 				...state,
@@ -291,9 +291,9 @@ const reducer = ( state = initialState, { type, ...rest } ) => {
 				importPercent: rest.importPercent ?? state.importPercent,
 			};
 
-		/ Deferred plugins re-queued for activation: merge into current notActivatedList.
-		/ Uses state.notActivatedList (not closure) to avoid overwriting activations
-		/ that completed between when retryDeferredPlugins() read the list and dispatch.
+		// Deferred plugins re-queued for activation: merge into current notActivatedList.
+		// Uses state.notActivatedList (not closure) to avoid overwriting activations
+		// that completed between when retryDeferredPlugins() read the list and dispatch.
 		case 'plugin_retry_deferred':
 			return {
 				...state,

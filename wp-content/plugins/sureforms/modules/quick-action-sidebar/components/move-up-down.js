@@ -41,7 +41,7 @@ function DragAndDropComponent( {
 								index={ index }
 							>
 								{ (
-									provided / eslint-disable-line no-shadow
+									provided // eslint-disable-line no-shadow
 								) => (
 									<div
 										className="srfm-ee-quick-access__sidebar--blocks--block"

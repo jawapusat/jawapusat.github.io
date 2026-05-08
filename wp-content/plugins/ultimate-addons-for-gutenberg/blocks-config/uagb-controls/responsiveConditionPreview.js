@@ -1,5 +1,5 @@
 const responsiveConditionPreview = ( props ) => {
-	/ Desktop.
+	// Desktop.
 	const element = document.getElementById( 'block-' + props.clientId );
 
 	const desktopStyle = document.getElementById( props.clientId + '-desktop-hide-block' );

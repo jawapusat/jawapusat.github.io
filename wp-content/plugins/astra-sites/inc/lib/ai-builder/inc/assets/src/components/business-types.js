@@ -165,31 +165,31 @@ const BusinessTypes = () => {
 				'button, input, [tabindex]:not([tabindex="-1"])'
 			)
 		);
-		/ eslint-disable-next-line @wordpress/no-global-active-element
+		// eslint-disable-next-line @wordpress/no-global-active-element
 		let index = focusableElements.indexOf( document.activeElement );
 
 		switch ( event.key ) {
 			case 'Escape':
-				/ Close the suggestion when Esc is pressed
+				// Close the suggestion when Esc is pressed
 				handleCloseSuggestions( event?.target );
 				break;
 			case 'ArrowUp':
-				/ Focus the previous element when Up Arrow is pressed
+				// Focus the previous element when Up Arrow is pressed
 				index--;
 				if ( index < 0 ) {
 					index = focusableElements.length - 1;
-				} / Loop back to the end if at the beginning
+				} // Loop back to the end if at the beginning
 				focusableElements[ index ].focus();
-				event.preventDefault(); / Prevent the default scroll behavior
+				event.preventDefault(); // Prevent the default scroll behavior
 				break;
 			case 'ArrowDown':
-				/ Focus the next element when Down Arrow is pressed
+				// Focus the next element when Down Arrow is pressed
 				index++;
 				if ( index >= focusableElements.length ) {
 					index = 0;
-				} / Loop back to the beginning if at the end
+				} // Loop back to the beginning if at the end
 				focusableElements[ index ].focus();
-				event.preventDefault(); / Prevent the default scroll behavior
+				event.preventDefault(); // Prevent the default scroll behavior
 				break;
 			default:
 				break;
@@ -208,14 +208,14 @@ const BusinessTypes = () => {
 		}
 	};
 
-	/ handle outside click to close the suggestions.
+	// handle outside click to close the suggestions.
 	useEffect( () => {
 		document.addEventListener( 'mousedown', handleClickOutside );
 		return () =>
 			document.removeEventListener( 'mousedown', handleClickOutside );
 	}, [ handleClickOutside ] );
 
-	/ Reset the keyword when business type is changed.
+	// Reset the keyword when business type is changed.
 	useEffect( () => {
 		if ( businessType ) {
 			return;
@@ -268,7 +268,7 @@ const BusinessTypes = () => {
 		);
 	};
 
-	/ Include current input at the top of the list if the input is not empty and not in the list.
+	// Include current input at the top of the list if the input is not empty and not in the list.
 	const renderBusinessTypeList = () => {
 		try {
 			const businessTypes =

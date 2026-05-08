@@ -15,7 +15,7 @@ const Tooltip = ( {
 			arrow
 			content={ content }
 			className="zw-tooltip zw-xs-normal flex items-center justify-left"
-			offset={ offset } / [x,y]
+			offset={ offset } // [x,y]
 			placement={ placement }
 			interactive={ interactive }
 			delay={ delay }

@@ -2,7 +2,7 @@ export const withinIframe = () => {
 	try {
 		return window.self !== window.top;
 	} catch ( e ) {
-		/ Cross-origin access blocked, we're in an iframe
+		// Cross-origin access blocked, we're in an iframe
 		return true;
 	}
 };

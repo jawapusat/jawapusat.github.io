@@ -25,7 +25,7 @@ const AddGBSStylesDom = ( globalBlockStyleId, styleText ) => {
 		}
 
 		for ( const iterateIFrames of getAllIFrames ) {
-			/ Skip the iframe with the specific name.
+			// Skip the iframe with the specific name.
 			if ( uagb_blocks_info.exclude_crops_iframes.includes( iterateIFrames.name ) ) {
 				continue;
 			}
@@ -37,9 +37,9 @@ const AddGBSStylesDom = ( globalBlockStyleId, styleText ) => {
 
 				putStyleInHead( iframeDocument, styleText, globalBlockStyleId );
 			} catch ( e ) {
-					/ Ignore cross-origin access errors.
+					// Ignore cross-origin access errors.
 			}
-		} / Loop end.
+		} // Loop end.
 	} );
 };
 

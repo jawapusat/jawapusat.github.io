@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-/ import { Tooltip } from '@brainstormforce/starter-templates-components';
+// import { Tooltip } from '@brainstormforce/starter-templates-components';
 import Tooltip from '../components/tooltip/tooltip';
 import { __ } from '@wordpress/i18n';
 import { useStateValue } from '../store/store';
@@ -30,7 +30,7 @@ const Steps = () => {
 	const current = STEPS[ currentIndex ];
 	const history = useNavigate();
 
-	/ Helper function to validate template data exists
+	// Helper function to validate template data exists
 	const hasTemplateData = ( state ) => {
 		return (
 			state &&
@@ -48,7 +48,7 @@ const Steps = () => {
 	}, [ searchTerms, searchTermsWithCount ] );
 
 	const heartbeatDone = ( event, data ) => {
-		/ Check for our data, and use it.
+		// Check for our data, and use it.
 		if ( ! data[ 'ast-sites-search-terms' ] ) {
 			return;
 		}
@@ -60,7 +60,7 @@ const Steps = () => {
 	};
 
 	const sendHeartbeat = ( event, data ) => {
-		/ Add additional data to Heartbeat data.
+		// Add additional data to Heartbeat data.
 		if ( searchTerms.length > 0 ) {
 			data[ 'ast-sites-search-terms' ] = searchTermsWithCount;
 			data[ 'ast-sites-builder' ] = builder;
@@ -127,14 +127,14 @@ const Steps = () => {
 				...stateValueUpdates,
 			} );
 
-			/ Validate template data exists when at CI index 3 or more
+			// Validate template data exists when at CI index 3 or more
 			if ( urlIndex >= 3 ) {
 				if ( ! hasTemplateData( storedStateValue ) ) {
-					/ Template data is missing, prevent user from proceeding beyond current index.
+					// Template data is missing, prevent user from proceeding beyond current index.
 					dispatch( {
 						type: 'set',
-						/ Reset to a safe state where user can reselect template.
-						currentIndex: 2, / Go back to template selection step.
+						// Reset to a safe state where user can reselect template.
+						currentIndex: 2, // Go back to template selection step.
 					} );
 				}
 			}
@@ -171,16 +171,16 @@ const Steps = () => {
 				urlIndex !== currentIndex ) ||
 			templateResponse !== null
 		) {
-			/ Prevent navigation forward if at CI index 3+ and template data is missing.
+			// Prevent navigation forward if at CI index 3+ and template data is missing.
 			if ( currentIndex >= 3 ) {
 				if ( ! hasTemplateData( stateValue ) ) {
-					/ If template data is missing, don't allow forward navigation.
-					/ Reset to a safe state.
+					// If template data is missing, don't allow forward navigation.
+					// Reset to a safe state.
 					dispatch( {
 						type: 'set',
-						currentIndex: 2, / Go back to template selection step.
+						currentIndex: 2, // Go back to template selection step.
 					} );
-					return; / Exit early to prevent state storage.
+					return; // Exit early to prevent state storage.
 				}
 			}
 			storeCurrentState( stateValue );
@@ -190,7 +190,7 @@ const Steps = () => {
 			);
 		}
 
-		/ Execute only for the last Customization step.
+		// Execute only for the last Customization step.
 		if (
 			designStep !== 0 &&
 			urlIndex === STEPS.length - 1 &&

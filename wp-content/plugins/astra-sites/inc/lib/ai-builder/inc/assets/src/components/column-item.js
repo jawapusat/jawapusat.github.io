@@ -70,14 +70,14 @@ export const ColumnItem = ( {
 		};
 	}, [] );
 
-	/ Regenerate random palette when shuffle is triggered.
+	// Regenerate random palette when shuffle is triggered.
 	useEffect( () => {
 		if ( shuffleCount > 0 ) {
 			setPreviewPalette( getRandomColorPaletteForTemplate( template ) );
 		}
-	}, [ shuffleCount ] ); / eslint-disable-line react-hooks/exhaustive-deps
+	}, [ shuffleCount ] ); // eslint-disable-line react-hooks/exhaustive-deps
 
-	/ Send palette to iframe when it changes and iframe is loaded.
+	// Send palette to iframe when it changes and iframe is loaded.
 	useEffect( () => {
 		if ( ! isLoaded || ! previewPalette ) {
 			return;
@@ -89,7 +89,7 @@ export const ColumnItem = ( {
 			},
 			template.uuid
 		);
-	}, [ previewPalette, isLoaded ] ); / eslint-disable-line react-hooks/exhaustive-deps
+	}, [ previewPalette, isLoaded ] ); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleRemoveLoadingSkeleton = ( uuid ) => {
 		if ( ! loadingSkeleton.current ) {
@@ -171,10 +171,10 @@ export const ColumnItem = ( {
 	}, [ shouldLoad, isLoaded ] );
 
 	const handleAddUUIDToQueryParams = ( uuid ) => {
-		/ Add the uuid to the query params
+		// Add the uuid to the query params
 		const newUrl = new URL( window.location.href );
 		newUrl.searchParams.set( 'uuid', uuid );
-		/ set hashtag to design page
+		// set hashtag to design page
 		newUrl.hash = '/design';
 
 		window.history.pushState( {}, '', newUrl.toString() );

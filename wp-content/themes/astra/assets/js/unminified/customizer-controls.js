@@ -40,33 +40,33 @@
 		 */
 		_initToggles: function()
 		{
-			/ Trigger the Adv Tab Click trigger.
+			// Trigger the Adv Tab Click trigger.
 			ASTControlTrigger.triggerHook( 'astra-toggle-control', api );
 
-			/ Loop through each setting.
+			// Loop through each setting.
 			$.each( ASTCustomizerToggles, function( settingId, toggles ) {
 
-				/ Get the setting object.
+				// Get the setting object.
 				api( settingId, function( setting ) {
 
-					/ Loop though the toggles for the setting.
+					// Loop though the toggles for the setting.
 					$.each( toggles, function( i, toggle ) {
 
-						/ Loop through the controls for the toggle.
+						// Loop through the controls for the toggle.
 						$.each( toggle.controls, function( k, controlId ) {
 
-							/ Get the control object.
+							// Get the control object.
 							api.control( controlId, function( control ) {
 
-								/ Define the visibility callback.
+								// Define the visibility callback.
 								var visibility = function( to ) {
 									control.container.toggle( toggle.callback( to ) );
 								};
 
-								/ Init visibility.
+								// Init visibility.
 								visibility( setting.get() );
 
-								/ Bind the visibility callback to the setting.
+								// Bind the visibility callback to the setting.
 								setting.bind( visibility );
 							});
 						});
@@ -84,11 +84,11 @@
 		subControlsToggleCSS( controlValue, dependents ) {
 			$.each( dependents, function( controlOption, dependentSubControls ) {
 				$.each( dependentSubControls, function( dependentIndex, subControl ) {
-					/ Remove old.
+					// Remove old.
 					jQuery( 'style#ast-sub-control-' + subControl ).remove();
-					/ Add new.
+					// Add new.
 					if ( controlValue !== controlOption ) {
-						/ Concat and append new <style>.
+						// Concat and append new <style>.
 						jQuery( 'head' ).append(
 							'<style id="ast-sub-control-' + subControl + '">' +
 							'#customize-control-' + subControl + '	{ display: none; }' +
@@ -122,11 +122,11 @@
 
 
 ( function( api ) {
-    / Extends our custom astra-pro section.
+    // Extends our custom astra-pro section.
     api.sectionConstructor['astra-pro'] = api.Section.extend( {
-        / No events for this type of section.
+        // No events for this type of section.
         attachEvents: function () {},
-        / Always make the section active.
+        // Always make the section active.
         isContextuallyActive: function () {
             return true;
         }

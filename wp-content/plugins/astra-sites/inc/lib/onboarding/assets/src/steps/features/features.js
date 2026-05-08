@@ -188,7 +188,7 @@ const ClassicFeatures = () => {
 		'woocommerce',
 	] );
 
-	/ Template required plugins list.
+	// Template required plugins list.
 	const templateRequiredPluginsList = useMemo( () => {
 		return ( templateResponse?.[ 'required-plugins' ] ?? [] )?.map(
 			( plugin ) => ( {
@@ -204,7 +204,7 @@ const ClassicFeatures = () => {
 
 		setEcomSupported( [ 'surecart', 'woocommerce' ] );
 
-		/ Handle selected ecommerce plugin
+		// Handle selected ecommerce plugin
 		if ( isEcommerce ) {
 			if ( ! selectedEcom || selectedEcom !== selectedEcommercePlugin ) {
 				setSelectedEcom(
@@ -217,7 +217,7 @@ const ClassicFeatures = () => {
 			setSelectedEcom( selectedEcom || 'surecart' );
 		}
 
-		/ Update features in a single pass
+		// Update features in a single pass
 		const updatedFeatures = siteFeatures.map( ( feature ) => {
 			const hasRequiredPlugin = feature?.plugins?.some( ( slug ) =>
 				allSlugs.includes( slug )
@@ -250,7 +250,7 @@ const ClassicFeatures = () => {
 	] );
 
 	useEffect( () => {
-		/ Track features step when component mounts
+		// Track features step when component mounts
 		trackOnboardingStep( 'features' );
 	}, [] );
 
@@ -293,7 +293,7 @@ const ClassicFeatures = () => {
 		} );
 	};
 
-	/ Generate the list of plugins required for the selected features along with the template required plugins.
+	// Generate the list of plugins required for the selected features along with the template required plugins.
 	const featurePluginsList = useMemo( () => {
 		const enabledFeatureIds =
 			siteFeatures
@@ -309,7 +309,7 @@ const ClassicFeatures = () => {
 			) ?? [] ),
 		];
 
-		/ Remove duplicates based on plugin slug
+		// Remove duplicates based on plugin slug
 		const uniquePlugins = allPlugins.reduce( ( acc, plugin ) => {
 			if ( ! acc.some( ( p ) => p.slug === plugin.slug ) ) {
 				acc.push( plugin );
@@ -373,7 +373,7 @@ const ClassicFeatures = () => {
 													disabled={
 														feature?.compulsory ===
 														true
-													} / Disabled if feature is compulsory
+													} // Disabled if feature is compulsory
 													onChange={ setSelectedEcom }
 													dispatch={ dispatch }
 												/>

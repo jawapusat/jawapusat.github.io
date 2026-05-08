@@ -20,7 +20,7 @@ import {
 	generateAnalyticsLead,
 } from '../utils/import-site/import-utils';
 const { migrateSvg, reportError } = aiBuilderVars;
-const successMessageDelay = 8000; / 8 seconds delay for fully assets load.
+const successMessageDelay = 8000; // 8 seconds delay for fully assets load.
 import { STORE_KEY } from '../store';
 import ErrorModel from '../components/error-model';
 import { stepNextButtonClick, TOTAL_STEPS, useNavigateSteps } from '../router';
@@ -349,7 +349,7 @@ const ImportAiSite = () => {
 	 * Install Required plugins.
 	 */
 	const installRequiredPlugins = () => {
-		/ Install Bulk.
+		// Install Bulk.
 		if ( notInstalledList.length <= 0 ) {
 			dispatch( {
 				requiredPluginsDone: true,
@@ -367,7 +367,7 @@ const ImportAiSite = () => {
 
 		notInstalledList.forEach( ( plugin ) => {
 			wp.updates.queue.push( {
-				action: 'install-plugin', / Required action.
+				action: 'install-plugin', // Required action.
 				data: {
 					slug: plugin.slug,
 					init: plugin.init,
@@ -377,7 +377,7 @@ const ImportAiSite = () => {
 					success() {
 						dispatch( {
 							importStatus: sprintf(
-								/ translators: Plugin Name.
+								// translators: Plugin Name.
 								__(
 									'%1$s plugin installed successfully.',
 									'ai-builder'
@@ -418,7 +418,7 @@ const ImportAiSite = () => {
 						}
 						report(
 							sprintf(
-								/ translators: Plugin Name.
+								// translators: Plugin Name.
 								__(
 									'Could not install the plugin - %s',
 									'ai-builder'
@@ -436,7 +436,7 @@ const ImportAiSite = () => {
 			} );
 		} );
 
-		/ Required to set queue.
+		// Required to set queue.
 		wp.updates.queueChecker();
 	};
 
@@ -449,7 +449,7 @@ const ImportAiSite = () => {
 		percentage.current += 2;
 		dispatch( {
 			importStatus: sprintf(
-				/ translators: Plugin Name.
+				// translators: Plugin Name.
 				__( 'Activating %1$s plugin.', 'ai-builder' ),
 				plugin.name
 			),
@@ -493,7 +493,7 @@ const ImportAiSite = () => {
 						percentage.current += 2;
 						dispatch( {
 							importStatus: sprintf(
-								/ translators: Plugin Name.
+								// translators: Plugin Name.
 								__( '%1$s activated.', 'ai-builder' ),
 								plugin.name
 							),
@@ -503,7 +503,7 @@ const ImportAiSite = () => {
 				} catch ( error ) {
 					report(
 						sprintf(
-							/ translators: Plugin name.
+							// translators: Plugin name.
 							__(
 								`JSON_Error: Could not activate the required plugin - %1$s.`,
 								'ai-builder'
@@ -514,7 +514,7 @@ const ImportAiSite = () => {
 						error,
 						'',
 						sprintf(
-							/ translators: %1$s is the opening <a> tag with the URL, %2$s is the closing </a> tag.
+							// translators: %1$s is the opening <a> tag with the URL, %2$s is the closing </a> tag.
 							__(
 								'%1$sRead article%2$s to resolve the issue and continue importing the template.',
 								'ai-builder'
@@ -538,7 +538,7 @@ const ImportAiSite = () => {
 				} );
 				report(
 					sprintf(
-						/ translators: Plugin name.
+						// translators: Plugin name.
 						__(
 							`Could not activate the required plugin - %1$s.`,
 							'ai-builder'
@@ -549,7 +549,7 @@ const ImportAiSite = () => {
 					error?.data?.message,
 					'',
 					sprintf(
-						/ translators: %1$s is the opening <a> tag, %2$s is the closing </a> tag.
+						// translators: %1$s is the opening <a> tag, %2$s is the closing </a> tag.
 						__(
 							'%1$sRead article%2$s to resolve the issue and continue importing the template.',
 							'ai-builder'
@@ -1109,7 +1109,7 @@ const ImportAiSite = () => {
 			try {
 				dispatch( {
 					importStatus: sprintf(
-						/translators: %s: Image number.
+						//translators: %s: Image number.
 						__( 'Downloading Image %s', 'ai-builder' ),
 						index + 1
 					),
@@ -1335,7 +1335,7 @@ const ImportAiSite = () => {
 	 * @param {JSON} data JSON object for all the content in XML
 	 */
 	const importXML = ( data ) => {
-		/ Import XML though Event Source.
+		// Import XML though Event Source.
 		sseImport.data = data;
 		sseImport.render( dispatch, percentage.current );
 
@@ -1391,7 +1391,7 @@ const ImportAiSite = () => {
 
 			dispatch( {
 				importStatus: sprintf(
-					/ translators: Response importMessage
+					// translators: Response importMessage
 					__( 'Importing - %1$s', 'ai-builder' ),
 					importMessage
 				),
@@ -1736,7 +1736,7 @@ const ImportAiSite = () => {
 
 	const waitForFullMigration = async () => {
 		try {
-			const randomToken = ( Math.random() * 200 )?.toString(); / to avoid response caching
+			const randomToken = ( Math.random() * 200 )?.toString(); // to avoid response caching
 			const response = await apiFetch( {
 				path: `zipwp/v1/migration-status?uuid=${ websiteInfo.uuid }&token=${ randomToken }`,
 				method: 'GET',
@@ -1747,7 +1747,7 @@ const ImportAiSite = () => {
 			} );
 
 			if ( response?.data?.data === 'yes' ) {
-				/ Save customizations.
+				// Save customizations.
 				await customizeWebsite();
 
 				dispatch( {
@@ -1797,13 +1797,13 @@ const ImportAiSite = () => {
 	};
 
 	useEffect( () => {
-		window.addEventListener( 'beforeunload', preventRefresh ); / eslint-disable-line
+		window.addEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 		return () => {
-			window.removeEventListener( 'beforeunload', preventRefresh ); / eslint-disable-line
+			window.removeEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 		};
-	}, [ importPercent ] ); / Add importPercent as a dependency.
+	}, [ importPercent ] ); // Add importPercent as a dependency.
 
-	/ Add a useEffect to remove the event listener when importPercent is 100%.
+	// Add a useEffect to remove the event listener when importPercent is 100%.
 	useEffect( () => {
 		if ( importPercent === 100 ) {
 			window.removeEventListener( 'beforeunload', preventRefresh );
@@ -1868,7 +1868,7 @@ const ImportAiSite = () => {
 	};
 
 	const handleImportStart = async () => {
-		/ Get the import data from the AI site.
+		// Get the import data from the AI site.
 		await getAiDemo( stepsData, dispatch, websiteInfo );
 		await checkRequiredPlugins( dispatch );
 		checkFileSystemPermissions( dispatch );
@@ -1891,13 +1891,13 @@ const ImportAiSite = () => {
 
 	const tryAainCallback = () => {
 		dispatch( {
-			/ Reset errors.
+			// Reset errors.
 			importErrorMessages: {},
 			importErrorResponse: [],
 			importError: false,
-			/ Try again count.
+			// Try again count.
 			tryAgainCount: tryAgainCount + 1,
-			/ Reset import flags.
+			// Reset import flags.
 			xmlImportDone: false,
 			resetData: [],
 			importStart: false,
@@ -1949,19 +1949,19 @@ const ImportAiSite = () => {
 		if ( response?.success ) {
 			const step = +responseCode?.slice( 1 );
 
-			/ Avoid progress bar going back
+			// Avoid progress bar going back
 			if ( step > currentStep ) {
 				currentStep = step;
 				updateProgressBar( currentStep, TOTAL_STEPS );
 			}
 
-			/ Make sure msg is not empty
+			// Make sure msg is not empty
 			if ( msg && msg !== 'Done' ) {
 				dispatch( {
 					importStatus: msg,
 				} );
 
-				/ Refresh status after 7 seconds.
+				// Refresh status after 7 seconds.
 				await new Promise( ( resolve ) => setTimeout( resolve, 7000 ) );
 				return await fetchImportStatus();
 			}
@@ -2016,7 +2016,7 @@ const ImportAiSite = () => {
 		setIsFetchingStatus( true );
 
 		try {
-			const randomToken = ( Math.random() * 200 )?.toString(); / to avoid response caching
+			const randomToken = ( Math.random() * 200 )?.toString(); // to avoid response caching
 			const response = await apiFetch( {
 				path: `zipwp/v1/import-status?uuid=${ websiteInfo.uuid }&token=${ randomToken }`,
 				method: 'GET',
@@ -2026,7 +2026,7 @@ const ImportAiSite = () => {
 				},
 			} );
 
-			/ explicit check
+			// explicit check
 			if ( response?.success === true ) {
 				await handleStatusResponse( response );
 			} else if ( response?.success === false ) {
@@ -2076,7 +2076,7 @@ const ImportAiSite = () => {
 		}
 	}, [ xmlImportDone ] );
 
-	/ This checks if all the required plugins are installed and activated.
+	// This checks if all the required plugins are installed and activated.
 	useEffect( () => {
 		if (
 			! requiredPlugins ||
@@ -2092,7 +2092,7 @@ const ImportAiSite = () => {
 		}
 	}, [ notActivatedList, notInstalledList, requiredPlugins, tryAgainCount ] );
 
-	/ Whenever a plugin is installed, this code sends an activation request.
+	// Whenever a plugin is installed, this code sends an activation request.
 	useEffect( () => {
 		if (
 			! requiredPlugins ||
@@ -2100,13 +2100,13 @@ const ImportAiSite = () => {
 		) {
 			return;
 		}
-		/ Installed all required plugins.
+		// Installed all required plugins.
 		if ( notActivatedList.length > 0 ) {
 			activatePlugin( notActivatedList[ 0 ] );
 		}
 	}, [ notActivatedList, requiredPlugins ] );
 
-	/ Confirmation before leaving the page.
+	// Confirmation before leaving the page.
 	useEffect( () => {
 		const handleBeforeUnload = () => importPercent < 100;
 		window.onbeforeunload = handleBeforeUnload;
@@ -2131,7 +2131,7 @@ const ImportAiSite = () => {
 							percent={ importPercent }
 							round
 							speed={
-								importError || status === 'retrying' ? 0 : 15 /eslint-disable-line
+								importError || status === 'retrying' ? 0 : 15 //eslint-disable-line
 							}
 							fontColor="#0F172A"
 							fontSize="18px"

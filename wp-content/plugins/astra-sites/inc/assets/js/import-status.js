@@ -47,7 +47,7 @@
 				.done( function ( result ) {
 					AstraSitesImportStatus.ajax_in_process = false;
 
-					/ Admin Bar UI markup.
+					// Admin Bar UI markup.
 					if (
 						'complete' === result.data.response.step ||
 						'fail' === result.data.response.step
@@ -72,7 +72,7 @@
 						);
 					}
 
-					/ Admin page UI markup.
+					// Admin page UI markup.
 					var currentStep = $(
 						'.import-step[data-step="' +
 							result.data.response.step +
@@ -104,7 +104,7 @@
 				.fail( function ( err ) {
 					AstraSitesImportStatus.ajax_in_process = false;
 
-					/ Stop.
+					// Stop.
 					AstraSitesImportStatus.stop();
 				} );
 		},

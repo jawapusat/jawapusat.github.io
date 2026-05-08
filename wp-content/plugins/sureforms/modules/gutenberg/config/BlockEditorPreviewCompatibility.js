@@ -1,5 +1,5 @@
 function BlockEditorPreviewCompatibility( cssStyleID, styleTagId, styling ) {
-	/ Required CSS File.
+	// Required CSS File.
 	const WidgetCssFileTag = document.getElementById( cssStyleID );
 	let cloneWidgetCssFileTag = false;
 
@@ -7,7 +7,7 @@ function BlockEditorPreviewCompatibility( cssStyleID, styleTagId, styling ) {
 		cloneWidgetCssFileTag = WidgetCssFileTag.cloneNode( true );
 	}
 
-	/ Desktop.
+	// Desktop.
 	const element = document.getElementById( styleTagId );
 
 	if ( null === element || undefined === element ) {
@@ -19,9 +19,9 @@ function BlockEditorPreviewCompatibility( cssStyleID, styleTagId, styling ) {
 	if ( null !== element && undefined !== element ) {
 		element.innerHTML = styling;
 	}
-	/ Desktop ends.
+	// Desktop ends.
 
-	/ Tablet / Mobile Starts.
+	// Tablet / Mobile Starts.
 	const tabletPreview =
 		document.getElementsByClassName( 'is-tablet-preview' );
 	const mobilePreview =
@@ -42,7 +42,7 @@ function BlockEditorPreviewCompatibility( cssStyleID, styleTagId, styling ) {
 			iframeDocument.head.appendChild( $style );
 		}
 
-		/ Required CSS File.
+		// Required CSS File.
 		if ( cloneWidgetCssFileTag ) {
 			iframeDocument.head.appendChild( cloneWidgetCssFileTag );
 		}

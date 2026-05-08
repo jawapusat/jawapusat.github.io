@@ -27,7 +27,7 @@ const SiteSearch = ( { setSiteData } ) => {
 		const term = siteSearchTerm.toLowerCase();
 		const allTerms = searchTerms;
 		const allTermsWithCount = searchTermsWithCount;
-		/ Skip blank words and words smaller than 3 characters.
+		// Skip blank words and words smaller than 3 characters.
 		if ( '' === term || term.length < 3 ) {
 			return;
 		}
@@ -59,10 +59,10 @@ const SiteSearch = ( { setSiteData } ) => {
 				topCross = header.clientHeight;
 			}
 
-			/ Remove the search box height too.
+			// Remove the search box height too.
 			topCross = topCross - ref.current.clientHeight;
 
-			/ Check the search wrapper scrool top.
+			// Check the search wrapper scrool top.
 			const parentTop =
 				parentRef.current.getBoundingClientRect().top || 0;
 			if ( parentTop <= topCross ) {
@@ -142,7 +142,7 @@ const SiteSearch = ( { setSiteData } ) => {
 											selectedTemplate.ecommerce_parent_template !==
 												''
 										) {
-											/ If ecommerce_parent_template is not empty, skip adding the site to allSites.
+											// If ecommerce_parent_template is not empty, skip adding the site to allSites.
 											continue;
 										}
 										results[ id ] = allFilteredSites[ id ];

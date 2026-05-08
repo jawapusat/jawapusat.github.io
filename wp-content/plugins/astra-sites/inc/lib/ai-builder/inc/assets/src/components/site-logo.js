@@ -99,7 +99,7 @@ const SiteLogo = () => {
 				'.components-range-control__wrapper'
 			);
 
-			/ Range control slider styling for RTL.
+			// Range control slider styling for RTL.
 			const currentValue = rangeControl.children[ 3 ].style.left;
 			rangeControl.children[ 3 ].style.marginRight = '-10px';
 			rangeControl.children[ 3 ].style.removeProperty( 'margin-left' );

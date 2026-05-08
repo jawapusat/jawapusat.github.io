@@ -26,12 +26,12 @@
 		let anchorSupport = '';
 		let WidthTitleSupport = '';
 
-		/ Check if anchors should be loaded in the CSS for headings.
+		// Check if anchors should be loaded in the CSS for headings.
 		if( astraCustomizer.includeAnchorsInHeadindsCss ) {
 			anchorSupport = ',.entry-content ' + slug + ' a';
 		}
 
-		/ Add widget title support to font-weight preview CSS.
+		// Add widget title support to font-weight preview CSS.
 		if( astraCustomizer.font_weights_widget_title_support ) {
 			WidthTitleSupport = ',' + slug + '.widget-title';
 		}
@@ -49,7 +49,7 @@
 					elementorSupport = ',.elementor-widget-heading '+ slug +'.elementor-heading-title';
 				}
 
-					/ Line Height
+					// Line Height
 					const globalSelectorLineHeight = slug + ', .entry-content '+ slug + elementorSupport + anchorSupport;
 
 					if( data['line-height'] && data['line-height-unit'] ) {
@@ -97,7 +97,7 @@
 
 	let woo_button_attr = '';
 
-	/ WooCommerce global button compatibility for new users only.
+	// WooCommerce global button compatibility for new users only.
 	if( astraCustomizer.astra_woo_btn_global_compatibility ) {
 		woo_button_attr = ', .woocommerce a.button, .woocommerce button.button, .woocommerce .woocommerce-message a.button, .woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt, .woocommerce input.button,.woocommerce-cart table.cart td.actions .button, .woocommerce form.checkout_coupon .button, .woocommerce #respond input#submit, .wc-block-grid__products .wc-block-grid__product .wp-block-button__link';
 	}
@@ -112,7 +112,7 @@
 		var ele_btn_letter_spacing = '';
 
 		if ( 'color-typo' == astraCustomizer.elementor_default_color_font_setting || 'typo' == astraCustomizer.elementor_default_color_font_setting ) {
-			/ Button Typo
+			// Button Typo
 			ele_btn_font_family = ',.elementor-widget-button .elementor-button, .elementor-widget-button .elementor-button:visited';
 			ele_btn_font_weight = ',.elementor-widget-button .elementor-button, .elementor-widget-button .elementor-button:visited';
 			ele_btn_font_size = ',.elementor-widget-button .elementor-button.elementor-size-sm, .elementor-widget-button .elementor-button.elementor-size-xs, .elementor-widget-button .elementor-button.elementor-size-md, .elementor-widget-button .elementor-button.elementor-size-lg, .elementor-widget-button .elementor-button.elementor-size-xl, .elementor-widget-button .elementor-button';
@@ -120,7 +120,7 @@
 			ele_btn_line_height = ',.elementor-widget-button .elementor-button, .elementor-widget-button .elementor-button:visited';
 			ele_btn_letter_spacing = ',.elementor-widget-button .elementor-button, .elementor-widget-button .elementor-button:visited', 'px';
 		}
-		/ Button Typo
+		// Button Typo
 		astra_generate_outside_font_family_css( 'astra-settings[font-family-button]', 'button, .ast-button, .ast-custom-button, input#submit, input[type="button"], input[type="submit"], input[type="reset"], .wp-block-button .wp-block-button__link, form[CLASS*="wp-block-search__"].wp-block-search .wp-block-search__inside-wrapper .wp-block-search__button' + astraCustomizer.v4_2_2_core_form_btns_styling + ele_btn_font_family + woo_button_attr );
 		astra_generate_font_weight_css( 'astra-settings[font-family-button]', 'astra-settings[font-weight-button]', 'font-weight', 'button, .ast-button, .ast-custom-button, input#submit, input[type="button"], input[type="submit"], input[type="reset"], .wp-block-button .wp-block-button__link, form[CLASS*="wp-block-search__"].wp-block-search .wp-block-search__inside-wrapper .wp-block-search__button' + astraCustomizer.v4_2_2_core_form_btns_styling + ele_btn_font_weight + woo_button_attr );
 		astra_font_extras_css( 'font-extras-button', 'button, .ast-button, .ast-custom-button, input#submit, input[type="button"], input[type="submit"], input[type="reset"], body .wp-block-button .wp-block-button__link, form[CLASS*="wp-block-search__"].wp-block-search .wp-block-search__inside-wrapper .wp-block-search__button' + astraCustomizer.v4_2_2_core_form_btns_styling + ele_btn_transform + woo_button_attr + astraCustomizer.improved_button_selector );
@@ -130,7 +130,7 @@
 		astra_css( 'astra-settings[theme-btn-letter-spacing]', 'letter-spacing', 'button, .ast-button, .ast-custom-button, input#submit, input[type="button"], input[type="submit"], input[type="reset"], .wp-block-button .wp-block-button__link, form[CLASS*="wp-block-search__"].wp-block-search .wp-block-search__inside-wrapper .wp-block-search__button' + astraCustomizer.v4_2_2_core_form_btns_styling + ele_btn_letter_spacing + woo_button_attr, 'px' );
 
 	} else {
-		/ Button Typo
+		// Button Typo
 		astra_generate_outside_font_family_css( 'astra-settings[font-family-button]', 'button, .ast-button, .ast-custom-button, input#submit, input[type="button"], input[type="submit"], input[type="reset"]' + astraCustomizer.v4_2_2_core_form_btns_styling + woo_button_attr );
 		astra_generate_font_weight_css( 'astra-settings[font-family-button]', 'astra-settings[font-weight-button]', 'font-weight', 'button, .ast-button, .ast-custom-button, input#submit, input[type="button"], input[type="submit"], input[type="reset"]' + astraCustomizer.v4_2_2_core_form_btns_styling + woo_button_attr );
 		astra_font_extras_css( 'font-extras-button', 'button, .ast-button, .ast-custom-button, input#submit, input[type="button"], input[type="submit"], input[type="reset"]' + astraCustomizer.v4_2_2_core_form_btns_styling + woo_button_attr );
@@ -139,7 +139,7 @@
 		astra_css( 'astra-settings[theme-btn-letter-spacing]', 'letter-spacing', 'button, .ast-button, .ast-custom-button, input#submit, input[type="button"], input[type="submit"], input[type="reset"]' + astraCustomizer.v4_2_2_core_form_btns_styling + woo_button_attr , 'px' );
 	}
 
-	/ Secondary button typo.
+	// Secondary button typo.
 	let outline_btn_selector = 'body .wp-block-buttons .wp-block-button.is-style-outline .wp-block-button__link.wp-element-button, body .ast-outline-button, body .wp-block-uagb-buttons-child .uagb-buttons-repeater.ast-outline-button';
 	astra_generate_outside_font_family_css( 'astra-settings[secondary-font-family-button]', outline_btn_selector );
 	astra_generate_font_weight_css( 'astra-settings[secondary-font-family-button]', 'astra-settings[secondary-font-weight-button]', 'font-weight', outline_btn_selector );

@@ -17,7 +17,7 @@ const Tooltip = ( {
 				'zw-tooltip zw-xs-normal bg-app-tooltip px-0.5 py-1.5 flex items-center justify-left text-justify',
 				className
 			) }
-			offset={ offset } / [x,y]
+			offset={ offset } // [x,y]
 			placement={ placement }
 		>
 			{ children }

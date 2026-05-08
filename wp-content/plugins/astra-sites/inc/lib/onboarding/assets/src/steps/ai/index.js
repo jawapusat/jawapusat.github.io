@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-/ import { useState } from '@wordpress/element';
+// import { useState } from '@wordpress/element';
 import { DefaultStep, PreviousStepLink } from '../../components/index';
 import { useStateValue } from '../../store/store';
 import ZipWPAuthorize from '../../components/zipwp-auth/index';
@@ -9,7 +9,7 @@ const { imageDir, isBeaverBuilderDisabled } = starterTemplates;
 
 const PageBuilder = () => {
 	const [ { currentIndex }, dispatch ] = useStateValue();
-	/ const [ builder, setBuilder ] = useState( 'ai' );
+	// const [ builder, setBuilder ] = useState( 'ai' );
 
 	useEffect( () => {
 		const startTime = localStorage.getItem( 'st-import-start' );
@@ -35,17 +35,17 @@ const PageBuilder = () => {
 		e = e || window.event;
 
 		if ( e.keyCode === 37 ) {
-			/Left Arrow
+			//Left Arrow
 			if ( e.target.previousSibling ) {
 				e.target.previousSibling.focus();
 			}
 		} else if ( e.keyCode === 39 ) {
-			/Right Arrow
+			//Right Arrow
 			if ( e.target.nextSibling ) {
 				e.target.nextSibling.focus();
 			}
 		} else if ( e.key === 'Enter' ) {
-			/Enter
+			//Enter
 			update( value );
 		}
 	};

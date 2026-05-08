@@ -41,7 +41,7 @@ const SiteType = () => {
 			localStorage.removeItem( 'st-import-end' );
 		}
 
-		/ Track welcome step when component mounts
+		// Track welcome step when component mounts
 		trackOnboardingStep( 'welcome' );
 	}, [] );
 
@@ -51,9 +51,9 @@ const SiteType = () => {
 				return;
 			}
 
-			/ Check cache - if same builder was set recently (within 5 minutes), skip API call.
+			// Check cache - if same builder was set recently (within 5 minutes), skip API call.
 			const now = Date.now();
-			const cacheExpiry = 5 * 60 * 1000; / 5 minutes.
+			const cacheExpiry = 5 * 60 * 1000; // 5 minutes.
 
 			if (
 				pageBuilderCache.timestamp &&
@@ -78,17 +78,17 @@ const SiteType = () => {
 		e = e || window.event;
 
 		if ( e.keyCode === 37 ) {
-			/Left Arrow
+			//Left Arrow
 			if ( e.target.previousSibling ) {
 				e.target.previousSibling.focus();
 			}
 		} else if ( e.keyCode === 39 ) {
-			/Right Arrow
+			//Right Arrow
 			if ( e.target.nextSibling ) {
 				e.target.nextSibling.focus();
 			}
 		} else if ( e.key === 'Enter' ) {
-			/Enter
+			//Enter
 			navigate();
 		}
 	};
@@ -279,7 +279,7 @@ const SiteType = () => {
 		},
 	];
 
-	/ Determine grid columns based on what should be shown
+	// Determine grid columns based on what should be shown
 	let colClass = '';
 	switch ( builders.filter( ( _builder ) => _builder?.show ).length ) {
 		case 2:
@@ -350,7 +350,7 @@ const SiteType = () => {
 					</div>
 					<LimitExceedModal
 						onOpenChange={ () => {
-							/ remove params
+							// remove params
 							const urlParams = new URLSearchParams(
 								window.location.search
 							);

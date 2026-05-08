@@ -27,7 +27,7 @@
 		height: 20,
 	} );
 
-	/ Function to remove existing commands
+	// Function to remove existing commands
 	function removeExistingCommands() {
 		const store = wp.data.select( 'core/commands' );
 		if ( store ) {
@@ -41,11 +41,11 @@
 		}
 	}
 
-	/ Function to register commands.
+	// Function to register commands.
 	function registerSTCommands() {
 		customCommands.forEach( function ( command ) {
 			try {
-				/ Register the command.
+				// Register the command.
 				dispatch( commandsStore ).registerCommand( {
 					name: command.name,
 					label: command.label,
@@ -61,7 +61,7 @@
 		} );
 	}
 
-	/ Remove existing commands first, then register new ones
+	// Remove existing commands first, then register new ones
 	if ( wp.domReady ) {
 		wp.domReady( function () {
 			removeExistingCommands();

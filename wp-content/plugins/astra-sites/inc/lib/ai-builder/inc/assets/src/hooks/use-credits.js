@@ -32,11 +32,11 @@ const useCredits = () => {
 			if ( response.success ) {
 				setCreditsDetails( response?.data?.data );
 			} else {
-				/  Handle error.
+				//  Handle error.
 				throw new Error( response?.data?.data );
 			}
 		} catch ( error ) {
-			/ Handle error.
+			// Handle error.
 			toast.error( toastBody( error ) );
 		}
 	};

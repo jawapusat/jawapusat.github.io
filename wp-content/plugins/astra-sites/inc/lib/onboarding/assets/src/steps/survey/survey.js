@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n';
 
 const SurveyForm = ( { formDetails, updateFormDetails } ) => {
 	useEffect( () => {
-		/ Track survey step when component mounts
+		// Track survey step when component mounts
 		trackOnboardingStep( 'survey' );
 	}, [] );
 

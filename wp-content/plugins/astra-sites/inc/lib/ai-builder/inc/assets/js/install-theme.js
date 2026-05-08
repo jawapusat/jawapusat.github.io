@@ -73,7 +73,7 @@
 				);
 			}
 
-			/ WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
+			// WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
 			setTimeout( function () {
 				$.ajax( {
 					url: aiBuilderVars.ajax_url,

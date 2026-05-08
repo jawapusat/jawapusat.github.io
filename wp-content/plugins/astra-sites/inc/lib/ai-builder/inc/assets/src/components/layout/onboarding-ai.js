@@ -51,8 +51,8 @@ const OnboardingAI = () => {
 
 	const urlParams = new URLSearchParams( window.location.search );
 
-	/ catch the query params from the URL, we're using useRef to avoid
-	/ re-rendering the component when the URL changes
+	// catch the query params from the URL, we're using useRef to avoid
+	// re-rendering the component when the URL changes
 	const showContinueProgressModal = useRef(
 		! urlParams.get( 'should_resume' )
 	).current;

@@ -72,8 +72,8 @@ import {
 			return null;
 		}
 
-		/ Parse the global key to extract the color ID.
-		/ Format: 'globals/colors?id=primary' -> id: 'primary'
+		// Parse the global key to extract the color ID.
+		// Format: 'globals/colors?id=primary' -> id: 'primary'
 		const match = globalKey.match( /id=([^&]+)/ );
 		if ( ! match ) {
 			return null;
@@ -82,8 +82,8 @@ import {
 		const colorId = match[ 1 ];
 
 		try {
-			/ Method 1: Get from CSS variable (most reliable).
-			/ Elementor outputs global colors as CSS variables: --e-global-color-{id}
+			// Method 1: Get from CSS variable (most reliable).
+			// Elementor outputs global colors as CSS variables: --e-global-color-{id}
 			const cssVarName = '--e-global-color-' + colorId;
 			const cssValue = getComputedStyle( document.documentElement )
 				.getPropertyValue( cssVarName )
@@ -92,7 +92,7 @@ import {
 				return cssValue;
 			}
 
-			/ Method 2: Try to get from $e.data cache (fallback).
+			// Method 2: Try to get from $e.data cache (fallback).
 			if (
 				typeof $e !== 'undefined' &&
 				$e.data &&
@@ -112,7 +112,7 @@ import {
 				}
 			}
 		} catch ( e ) {
-			/ Silently fail and return null.
+			// Silently fail and return null.
 		}
 
 		return null;
@@ -128,7 +128,7 @@ import {
 		const bgColor = container.dataset.bgColor || '#FFFFFF';
 		const bgImage = container.dataset.bgImage || '';
 
-		/ Reset background.
+		// Reset background.
 		container.style.removeProperty( 'background' );
 		container.style.removeProperty( 'background-color' );
 		container.style.removeProperty( 'background-image' );
@@ -141,7 +141,7 @@ import {
 				container.style.background = gradient;
 			}
 		} else if ( bgType === 'image' && bgImage ) {
-			/ Validate URL protocol to prevent CSS injection.
+			// Validate URL protocol to prevent CSS injection.
 			if (
 				bgImage.startsWith( 'https://' ) ||
 				bgImage.startsWith( 'http://' )
@@ -159,19 +159,19 @@ import {
 	 * @param {*}           value     The control value.
 	 */
 	function applyStyle( container, name, value ) {
-		/ Handle simple CSS variable mappings.
+		// Handle simple CSS variable mappings.
 		if ( SIMPLE_CSS_MAP[ name ] ) {
 			container.style.setProperty( SIMPLE_CSS_MAP[ name ], value );
 			return;
 		}
 
-		/ Handle DIMENSIONS controls.
+		// Handle DIMENSIONS controls.
 		if ( DIMENSIONS_CSS_MAP[ name ] ) {
 			applyDimensions( container, DIMENSIONS_CSS_MAP[ name ], value );
 			return;
 		}
 
-		/ Handle special controls.
+		// Handle special controls.
 		switch ( name ) {
 			case 'primaryColor':
 				applyColorMap( container, PRIMARY_COLOR_MAP, value );
@@ -185,7 +185,7 @@ import {
 				const fieldSpacingVars =
 					window.srfmElementorStyling?.fieldSpacingVars;
 				if ( fieldSpacingVars ) {
-					/ Merge base (small) with size-specific overrides.
+					// Merge base (small) with size-specific overrides.
 					const baseSize = fieldSpacingVars.small || {};
 					const overrideSize = fieldSpacingVars[ value ] || {};
 					const finalSize = Object.assign(
@@ -221,7 +221,7 @@ import {
 				break;
 			}
 
-			/ Background controls - store in dataset and apply.
+			// Background controls - store in dataset and apply.
 			case 'bgType':
 				container.dataset.bgType = value;
 				applyBackground( container );
@@ -232,7 +232,7 @@ import {
 				applyBackground( container );
 				break;
 
-			/ Gradient group control fields - store in dataset and rebuild gradient.
+			// Gradient group control fields - store in dataset and rebuild gradient.
 			case 'bgGradient_color':
 				container.dataset.bgGradientColor = value;
 				applyBackground( container );
@@ -249,7 +249,7 @@ import {
 				break;
 
 			case 'bgGradient_gradient_angle': {
-				/ Elementor slider returns object with size and unit.
+				// Elementor slider returns object with size and unit.
 				const angleSize =
 					typeof value === 'object' ? value.size : value;
 				const angleUnit =
@@ -261,7 +261,7 @@ import {
 			}
 
 			case 'bgGradient_color_stop': {
-				/ Elementor slider returns object with size and unit.
+				// Elementor slider returns object with size and unit.
 				const stopSize = typeof value === 'object' ? value.size : value;
 				const stopUnit = typeof value === 'object' ? value.unit : '%';
 				container.dataset.bgGradientColorStop = stopSize;
@@ -271,7 +271,7 @@ import {
 			}
 
 			case 'bgGradient_color_b_stop': {
-				/ Elementor slider returns object with size and unit.
+				// Elementor slider returns object with size and unit.
 				const stopBSize =
 					typeof value === 'object' ? value.size : value;
 				const stopBUnit = typeof value === 'object' ? value.unit : '%';
@@ -282,7 +282,7 @@ import {
 			}
 
 			case 'bgImage': {
-				/ val is an object with url property from Elementor.
+				// val is an object with url property from Elementor.
 				const url = typeof value === 'object' ? value.url : value;
 				container.dataset.bgImage = url || '';
 				applyBackground( container );
@@ -298,19 +298,19 @@ import {
 	 * @param {string}      name      The control name.
 	 */
 	function resetControl( container, name ) {
-		/ Handle simple CSS variable mappings.
+		// Handle simple CSS variable mappings.
 		if ( SIMPLE_CSS_MAP[ name ] ) {
 			container.style.removeProperty( SIMPLE_CSS_MAP[ name ] );
 			return;
 		}
 
-		/ Handle DIMENSIONS controls.
+		// Handle DIMENSIONS controls.
 		if ( DIMENSIONS_CSS_MAP[ name ] ) {
 			resetDimensions( container, DIMENSIONS_CSS_MAP[ name ] );
 			return;
 		}
 
-		/ Handle special controls.
+		// Handle special controls.
 		switch ( name ) {
 			case 'primaryColor':
 				resetColorMap( container, PRIMARY_COLOR_MAP );
@@ -321,7 +321,7 @@ import {
 				break;
 
 			case 'fieldSpacing': {
-				/ Reset field spacing by removing all related CSS variables.
+				// Reset field spacing by removing all related CSS variables.
 				const fieldSpacingVars =
 					window.srfmElementorStyling?.fieldSpacingVars;
 				if ( fieldSpacingVars && fieldSpacingVars.small ) {
@@ -348,7 +348,7 @@ import {
 				break;
 			}
 
-			/ Background controls.
+			// Background controls.
 			case 'bgType':
 				delete container.dataset.bgType;
 				container.style.removeProperty( 'background' );
@@ -361,7 +361,7 @@ import {
 				container.style.removeProperty( 'background-color' );
 				break;
 
-			/ Gradient group control fields.
+			// Gradient group control fields.
 			case 'bgGradient_color':
 				delete container.dataset.bgGradientColor;
 				container.style.removeProperty( 'background' );
@@ -413,7 +413,7 @@ import {
 			resetControl( container, controlName );
 		} );
 
-		/ Reset container classes to original.
+		// Reset container classes to original.
 		container.className = originalClasses;
 	}
 
@@ -454,7 +454,7 @@ import {
 		originalClasses,
 		widgetSettings = null
 	) {
-		/ Handle formTheme change - reset all styles when set to inherit.
+		// Handle formTheme change - reset all styles when set to inherit.
 		if ( name === 'formTheme' ) {
 			if ( value === 'inherit' ) {
 				resetAllStyles( container, originalClasses );
@@ -463,21 +463,21 @@ import {
 			return;
 		}
 
-		/ Handle empty/default values - reset to original.
+		// Handle empty/default values - reset to original.
 		if ( value === '' || value === 'default' ) {
 			resetControl( container, name );
 			dispatchUpdateEvent( name, value, container, widgetSettings );
 			return;
 		}
 
-		/ Apply the style update.
+		// Apply the style update.
 		applyStyle( container, name, value );
 
-		/ Dispatch event for Pro to extend.
+		// Dispatch event for Pro to extend.
 		dispatchUpdateEvent( name, value, container, widgetSettings );
 	}
 
-	/ Main initialization.
+	// Main initialization.
 	window.addEventListener( 'elementor/frontend/init', function () {
 		if (
 			typeof elementorFrontend === 'undefined' ||
@@ -496,10 +496,10 @@ import {
 					return;
 				}
 
-				/ Store original classes for reset functionality.
+				// Store original classes for reset functionality.
 				const originalClasses = container.className;
 
-				/ Listen for control changes in editor.
+				// Listen for control changes in editor.
 				if (
 					typeof elementor !== 'undefined' &&
 					elementor.channels &&
@@ -507,8 +507,8 @@ import {
 				) {
 					const widgetId = $scope.data( 'id' );
 
-					/ Initialize dataset from current widget settings.
-					/ This ensures values like bgType are available before any change events.
+					// Initialize dataset from current widget settings.
+					// This ensures values like bgType are available before any change events.
 					const widgetContainer = elementor.getContainer
 						? elementor.getContainer( widgetId )
 						: null;
@@ -516,13 +516,13 @@ import {
 					if ( widgetContainer && widgetContainer.settings ) {
 						const settings = widgetContainer.settings;
 
-						/ Initialize bgType from current settings.
+						// Initialize bgType from current settings.
 						const bgType = settings.get( 'bgType' );
 						if ( bgType ) {
 							container.dataset.bgType = bgType;
 						}
 
-						/ Initialize gradient values if bgType is gradient.
+						// Initialize gradient values if bgType is gradient.
 						if ( bgType === 'gradient' ) {
 							initGradientFromSettings(
 								container,
@@ -532,7 +532,7 @@ import {
 							);
 						}
 
-						/ Dispatch init event for Pro plugin to initialize its controls.
+						// Dispatch init event for Pro plugin to initialize its controls.
 						document.dispatchEvent(
 							new CustomEvent( 'srfm-elementor-styling-init', {
 								detail: { container, widgetSettings: settings },
@@ -540,7 +540,7 @@ import {
 						);
 					}
 
-					/ Regular control change listener.
+					// Regular control change listener.
 					elementor.channels.editor.on(
 						'change',
 						function ( controlView ) {
@@ -559,15 +559,15 @@ import {
 							let value =
 								controlView.container.settings.get( name );
 
-							/ Check for global color value and resolve it.
+							// Check for global color value and resolve it.
 							const globalKey =
 								controlView.container.globals.get( name );
 							if ( globalKey ) {
 								value = resolveGlobalColor( globalKey );
 							}
 
-							/ Initialize gradient values when any gradient control changes.
-							/ This ensures colors are in dataset when location/angle sliders change.
+							// Initialize gradient values when any gradient control changes.
+							// This ensures colors are in dataset when location/angle sliders change.
 							if ( name.startsWith( 'bgGradient_' ) ) {
 								initGradientFromSettings(
 									container,
@@ -587,14 +587,14 @@ import {
 						}
 					);
 
-					/ Listen for global color changes.
-					/ When a global color is selected, Elementor updates the globals model
-					/ instead of firing the regular change event.
+					// Listen for global color changes.
+					// When a global color is selected, Elementor updates the globals model
+					// instead of firing the regular change event.
 					if ( widgetContainer && widgetContainer.globals ) {
 						widgetContainer.globals.on(
 							'change',
 							function ( model ) {
-								/ Get all changed attributes.
+								// Get all changed attributes.
 								const changed = model.changed;
 								for ( const name in changed ) {
 									if ( ! Object.hasOwn( changed, name ) ) {
@@ -604,10 +604,10 @@ import {
 									let value = null;
 
 									if ( globalKey ) {
-										/ Global color selected - resolve it.
+										// Global color selected - resolve it.
 										value = resolveGlobalColor( globalKey );
 									} else {
-										/ Global color cleared - get direct value.
+										// Global color cleared - get direct value.
 										value =
 											widgetContainer.settings.get(
 												name

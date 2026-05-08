@@ -5,14 +5,14 @@ module.exports = withTW( {
 	theme: {
 		extend: {
 			colors: {
-				/ Override @bsf/force-ui library colors.
-				/ background
+				// Override @bsf/force-ui library colors.
+				// background
 				'background-primary':
 					'var(--oo-primary-background, var(--oo-default-primary-background))',
 				'background-secondary':
 					'var(--oo-secondary-background, var(--oo-default-secondary-background))',
 
-				/ brand colors
+				// brand colors
 				'brand-primary-600':
 					'var(--oo-primary-brand, var(--oo-default-primary-brand))',
 				'button-primary':
@@ -27,7 +27,7 @@ module.exports = withTW( {
 				'border-interactive':
 					'var(--oo-secondary-brand, var(--oo-default-secondary-brand))',
 
-				/ text colors
+				// text colors
 				'text-primary':
 					'var(--oo-primary-text, var(--oo-default-primary-text))',
 				'text-secondary':
@@ -39,7 +39,7 @@ module.exports = withTW( {
 				'field-helper':
 					'var(--oo-tertiary-text, var(--oo-default-tertiary-text))',
 
-				/ border colors.
+				// border colors.
 				'border-strong':
 					'var(--oo-tertiary-text, var(--oo-default-tertiary-text))',
 			},
@@ -47,7 +47,7 @@ module.exports = withTW( {
 				figtree: [ '"Figtree"', 'Inter', 'sans-serif' ],
 			},
 			fontSize: {
-				xxs: '0.6875rem', / 11px
+				xxs: '0.6875rem', // 11px
 			},
 		},
 	},

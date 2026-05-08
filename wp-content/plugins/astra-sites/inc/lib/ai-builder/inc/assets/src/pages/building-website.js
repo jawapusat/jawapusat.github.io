@@ -97,13 +97,13 @@ const WebsiteBuilding = () => {
 		if ( response?.success ) {
 			const step = +responseCode?.slice( 1 );
 
-			/ Avoid progress bar going back
+			// Avoid progress bar going back
 			if ( step > currentStep ) {
 				currentStep = step;
 				updateProgressBar( currentStep, TOTAL_STEPS );
 			}
 
-			/ Make sure msg is not empty
+			// Make sure msg is not empty
 			if ( msg && msg !== 'Done' ) {
 				setStatusText( msg );
 				setStatus(
@@ -149,7 +149,7 @@ const WebsiteBuilding = () => {
 		setIsFetchingStatus( true );
 
 		try {
-			const randomToken = ( Math.random() * 200 )?.toString(); / to avoid response caching
+			const randomToken = ( Math.random() * 200 )?.toString(); // to avoid response caching
 			const response = await apiFetch( {
 				path: `zipwp/v1/import-status?uuid=${ websiteInfo.uuid }&token=${ randomToken }`,
 				method: 'GET',
@@ -159,14 +159,14 @@ const WebsiteBuilding = () => {
 				},
 			} );
 
-			/ explicit check
+			// explicit check
 			if ( response?.success === true ) {
 				handleStatusResponse( response );
 			} else if ( response?.success === false ) {
 				onCreationError();
 			}
 		} catch ( error ) {
-			/ Do nothing
+			// Do nothing
 		} finally {
 			setIsFetchingStatus( false );
 		}
@@ -187,7 +187,7 @@ const WebsiteBuilding = () => {
 		window.location.href = `${ aiBuilderVars.adminUrl }themes.php?page=starter-templates`;
 	};
 
-	/ Confirmation before leaving the page.
+	// Confirmation before leaving the page.
 	useEffect( () => {
 		const handleBeforeUnload = () => isFetchingStatus;
 

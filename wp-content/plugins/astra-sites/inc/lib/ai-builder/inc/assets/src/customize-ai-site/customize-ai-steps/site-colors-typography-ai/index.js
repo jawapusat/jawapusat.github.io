@@ -2,7 +2,7 @@ import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 const SiteColors = () => {
-	const [ { builder }, dispatch ] = [ {}, () => {} ]; / Remove this line.
+	const [ { builder }, dispatch ] = [ {}, () => {} ]; // Remove this line.
 	useEffect( () => {
 		dispatch( {
 			type: 'set',

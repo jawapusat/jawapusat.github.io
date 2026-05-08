@@ -1,7 +1,7 @@
 import React from 'react';
 import Tooltip from '../../components/tooltip/tooltip';
 import { __ } from '@wordpress/i18n';
-/ import { decodeEntities } from '@wordpress/html-entities';
+// import { decodeEntities } from '@wordpress/html-entities';
 import { useStateValue } from '../../store/store';
 import ICONS from '../../../icons';
 import { whiteLabelEnabled } from '../../utils/functions';

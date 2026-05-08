@@ -2,7 +2,7 @@ import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 const BusinessLogo = () => {
-	const [ {}, dispatch ] = [ {}, () => {} ]; / Remove this line.
+	const [ {}, dispatch ] = [ {}, () => {} ]; // Remove this line.
 	useEffect( () => {
 		dispatch( {
 			type: 'set',

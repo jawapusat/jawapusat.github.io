@@ -21,18 +21,18 @@ const getApiData = async ( { url, action, data } ) => {
 	if ( !isObjectNotEmpty( data ) ) { 
 		return Promise.reject( new Error( __( 'data object is empty', 'ultimate-addons-for-gutenberg' ) ) );
 	}
-	/ Create a new instance of the FormData class
+	// Create a new instance of the FormData class
 	const formData = new window.FormData();
-	/ Append an 'action' property to the formData object
+	// Append an 'action' property to the formData object
 	formData.append( 'action', action );
 
-	/ If the 'data' object is not empty, iterate over its key-value pairs and append them to the formData object
+	// If the 'data' object is not empty, iterate over its key-value pairs and append them to the formData object
 	for( const dataKey in data ){
 		const dataValue = data[dataKey];
 		formData.append( dataKey, dataValue );
 	}
 	
-	/ Make a POST request using the apiFetch function, passing in the url, method, and body properties
+	// Make a POST request using the apiFetch function, passing in the url, method, and body properties
 	return await apiFetch( {
 		url,
 		method: 'POST',
@@ -41,5 +41,5 @@ const getApiData = async ( { url, action, data } ) => {
 };
 
 
-/ Export the getApiData function as the default export of the module
+// Export the getApiData function as the default export of the module
 export default getApiData;

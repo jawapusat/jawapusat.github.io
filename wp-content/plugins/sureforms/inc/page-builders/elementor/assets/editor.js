@@ -3,7 +3,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 		return;
 	}
 
-	/ Form edit link
+	// Form edit link
 	elementor.channels.editor.on( 'sureforms:form:edit', function ( view ) {
 		const block_id = view.elementSettingsModel.get( 'srfm_form_block' );
 		if ( ! block_id ) {
@@ -18,7 +18,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 		win.focus();
 	} );
 
-	/ Form create link
+	// Form create link
 	elementor.channels.editor.on( 'sureforms:form:create', function () {
 		const win = window.open( srfmElementorData.add_new_form_url, '_blank' );
 		win.focus();

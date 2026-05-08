@@ -100,7 +100,7 @@ const BusinessContact = () => {
 			  };
 	};
 
-	/ Save inputs before moving to the previous step.
+	// Save inputs before moving to the previous step.
 	const handleClickPrevious = async () => {
 		const formValue = watch();
 		const validValues = getValidFormValues( formValue );
@@ -131,7 +131,7 @@ const BusinessContact = () => {
 			<div
 				dangerouslySetInnerHTML={ {
 					__html: sprintf(
-						/ translators: %s: Business name.
+						// translators: %s: Business name.
 						__(
 							'How can people get in touch with %1$s?',
 							'ai-builder'

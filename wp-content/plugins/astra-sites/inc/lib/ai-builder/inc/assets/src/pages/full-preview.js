@@ -78,7 +78,7 @@ const FullPagePreview = () => {
 		const scaleX = containerWidth / iframeWidth;
 		const scaleValue = scaleX;
 
-		/ Set the scale for both width and height
+		// Set the scale for both width and height
 		iframe.style.transform = `scale(${ scaleValue })`;
 		iframe.style.transformOrigin = 'top left';
 		iframe.style.height = `${ containerHeight / scaleValue }px`;
@@ -171,7 +171,7 @@ const FullPagePreview = () => {
 		}
 	};
 
-	/ Check for window resize.
+	// Check for window resize.
 	useLayoutEffect( () => {
 		const resizeObserver = new ResizeObserver( handleResize );
 		resizeObserver.observe( window.document.body );

@@ -17,7 +17,7 @@ window.XgUtils =
 			return result;
 		}
 
-		/public interface
+		//public interface
 		return {
 			extend,
 		};
@@ -50,7 +50,7 @@ window.xsLocalStorage =
 			try {
 				data = JSON.parse( event.data );
 			} catch ( err ) {
-				/not our message, can ignore
+				//not our message, can ignore
 			}
 			if ( data && data.namespace === MESSAGE_NAMESPACE ) {
 				if ( data.id === 'iframe-ready' ) {
@@ -107,7 +107,7 @@ window.xsLocalStorage =
 		}
 
 		return {
-			/callback is optional for cases you use the api before window load.
+			//callback is optional for cases you use the api before window load.
 			init( customOptions ) {
 				if ( ! customOptions.iframeUrl ) {
 					throw 'Please specify the iframe URL';
@@ -119,14 +119,14 @@ window.xsLocalStorage =
 				if ( isDomReady() ) {
 					init( customOptions );
 				} else if ( document.addEventListener ) {
-					/ All browsers expect IE < 9
+					// All browsers expect IE < 9
 					document.addEventListener( 'readystatechange', function () {
 						if ( isDomReady() ) {
 							init( customOptions );
 						}
 					} );
 				} else {
-					/ IE < 9
+					// IE < 9
 					document.attachEvent( 'readystatechange', function () {
 						if ( isDomReady() ) {
 							init( customOptions );

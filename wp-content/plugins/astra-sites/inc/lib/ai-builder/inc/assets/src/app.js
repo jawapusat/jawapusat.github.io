@@ -1,9 +1,9 @@
 import NiceModal from '@ebay/nice-modal-react';
 import Router from './router';
-/ Global Stylesheet
+// Global Stylesheet
 import './style.scss';
 
-/ Main App component
+// Main App component
 const App = () => (
 	<NiceModal.Provider>
 		<Router />;

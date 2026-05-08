@@ -4,18 +4,18 @@
 
 import { createElement as el } from '@wordpress/element';
 
-/ This is the color that will be visible on the drag and drop of the blocks. Use this as the primary fill / stroke color.
+// This is the color that will be visible on the drag and drop of the blocks. Use this as the primary fill / stroke color.
 const iconColor = '#fff';
-/ This is the color used for non-block icons.
+// This is the color used for non-block icons.
 const spectraDarkColor = '#1d2327';
 
-/ Negative Space Color needs to be implemented for the property that doesn't use iconColor.
+// Negative Space Color needs to be implemented for the property that doesn't use iconColor.
 const noColor = 'none';
 
 const UAGB_Block_Icons = {
-	/ ------------------------.
-	/ All Spectra Block Icons .
-	/ ------------------------.
+	// ------------------------.
+	// All Spectra Block Icons .
+	// ------------------------.
 
 	logo: el(
 		'svg',
@@ -1077,9 +1077,9 @@ const UAGB_Block_Icons = {
 		} )
 	),
 
-	/ ----------------------------.
-	/ All Spectra Pro Block Icons .
-	/ ----------------------------.
+	// ----------------------------.
+	// All Spectra Pro Block Icons .
+	// ----------------------------.
 
 	login: el(
 		'svg',
@@ -1264,9 +1264,9 @@ const UAGB_Block_Icons = {
 		} )
 	),
 
-	/ --------------------------------.
-	/ All Spectra Cross-Product Icons .
-	/ --------------------------------.
+	// --------------------------------.
+	// All Spectra Cross-Product Icons .
+	// --------------------------------.
 
 	sure_forms: el(
 		'svg',
@@ -1339,9 +1339,9 @@ const UAGB_Block_Icons = {
 		),	
 	),
 
-	/ ------------------------.
-	/ All Miscellaneous Icons .
-	/ ------------------------.
+	// ------------------------.
+	// All Miscellaneous Icons .
+	// ------------------------.
 
 	post_title: el(
 		'svg',

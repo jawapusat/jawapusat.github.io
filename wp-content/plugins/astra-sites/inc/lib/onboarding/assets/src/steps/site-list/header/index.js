@@ -1,7 +1,7 @@
 // External dependencies.
 import React from 'react';
 
-/ Internal dependencies.
+// Internal dependencies.
 import './style.scss';
 import Logo from '../../../components/logo';
 import PageBuilder from '../page-builder-filter';
@@ -21,7 +21,7 @@ const SiteListHeader = () => {
 	const areSitesSyncing =
 		( bgSyncInProgress || sitesSyncing ) && currentIndex === 2;
 
-	/ Initialize our library hook.
+	// Initialize our library hook.
 	useWhatsNewRSS( {
 		rssFeedURL: 'https://startertemplates.com/whats-new/feed/',
 		selector: '#st-whats-new',
@@ -44,7 +44,7 @@ const SiteListHeader = () => {
 				const day = date.getDate();
 				const year = date.getFullYear();
 
-				/ Format the date string
+				// Format the date string
 				const formattedDate = `${ dayOfWeek } ${ month } ${ day }, ${ year }`;
 
 				return formattedDate;

@@ -57,7 +57,7 @@ const PlanInformationModal = ( { onOpenChange } ) => {
 					);
 				default:
 					return sprintf(
-						/ translators: Reset Type
+						// translators: Reset Type
 						__( 'This usage quota will reset %s', 'ai-builder' ),
 						resetType
 					);
@@ -72,7 +72,7 @@ const PlanInformationModal = ( { onOpenChange } ) => {
 
 	const { aiSiteTooltipText } = usageTooltipText;
 
-	/ Early return AFTER all hooks to avoid React hooks rule violation.
+	// Early return AFTER all hooks to avoid React hooks rule violation.
 	if ( ! isValidPlanData ) {
 		return null;
 	}
@@ -97,7 +97,7 @@ const PlanInformationModal = ( { onOpenChange } ) => {
 
 		const redirectUrl = new URL( window.location.href );
 
-		/ add should_resume=1 and security nonce to the URL.
+		// add should_resume=1 and security nonce to the URL.
 		redirectUrl.searchParams.set( 'should_resume', 1 );
 		redirectUrl.searchParams.set(
 			'security',
@@ -115,12 +115,12 @@ const PlanInformationModal = ( { onOpenChange } ) => {
 	};
 
 	const handleDisconnect = () => {
-		/ Add revoke_redirect_url to redirect back to the current page after disconnect.
+		// Add revoke_redirect_url to redirect back to the current page after disconnect.
 		const authRevokeUrl = new URL( aiBuilderVars.zip_auth_revoke_url );
 
 		const redirectUrl = new URL( window.location.href );
 
-		/ add should_resume=1 and security nonce to the URL.
+		// add should_resume=1 and security nonce to the URL.
 		redirectUrl.searchParams.set( 'should_resume', 1 );
 
 		authRevokeUrl.searchParams.set(

@@ -36,7 +36,7 @@ window.UAGBModal = {
 						e.preventDefault();
 						if ( ! innerModal.classList.contains( 'active' ) ) {
 							innerModal.classList.add( 'active' );
-							/ Once this modal is active, create a focusable element to add focus onto the modal and then remove it.
+							// Once this modal is active, create a focusable element to add focus onto the modal and then remove it.
 							const focusElement = document.createElement( 'button' );
 							focusElement.style.position = 'absolute';
 							focusElement.style.opacity = '0';
@@ -53,7 +53,7 @@ window.UAGBModal = {
 							}
 						}
 					} );
-					if ( '.uagb-modal-wrapper' === mainSelector ) { / When we get mainSelector as a uagb-modal-wrapper from AstraQuickViewForModal event we get null for closeModal. So avoid this we need to use uagb-modal-popup as mainSelector.
+					if ( '.uagb-modal-wrapper' === mainSelector ) { // When we get mainSelector as a uagb-modal-wrapper from AstraQuickViewForModal event we get null for closeModal. So avoid this we need to use uagb-modal-popup as mainSelector.
 						mainSelector = '.uagb-modal-popup';
 					}
 					const closeModal = innerModal.querySelector( `${ mainSelector } .uagb-modal-popup-close` );
@@ -71,7 +71,7 @@ window.UAGBModal = {
 
 					if ( 'disable' !== closeOverlayClick ) {
 						innerModal.addEventListener( 'click', function ( e ) {
-							/ Don't close modal if clicking on buttons or form elements
+							// Don't close modal if clicking on buttons or form elements
 							if ( e.target.matches( 'button, input[type="submit"], input[type="button"]' ) || e.target.closest( 'button' ) ) {
 								return;
 							}
@@ -104,7 +104,7 @@ window.UAGBModal = {
 			}
 		}
 	},
-	/ Get the Document element if it's inside an iFrame.
+	// Get the Document element if it's inside an iFrame.
 	_getDocumentElement() {
 		let document_element = document;
 		const getEditorIframe = document.querySelectorAll( 'iframe[name="editor-canvas"]' );
@@ -116,7 +116,7 @@ window.UAGBModal = {
 		}
 		return document_element;
 	},
-	/ Close the Modal and check if the Scrollbar needs to be reactivated.
+	// Close the Modal and check if the Scrollbar needs to be reactivated.
 	closeModalScrollCheck( bodyWrapper, document_element ) {
 		const allActiveModals = document_element.querySelectorAll( '.uagb-modal-popup.active' );
 		if ( ! allActiveModals?.length ) {

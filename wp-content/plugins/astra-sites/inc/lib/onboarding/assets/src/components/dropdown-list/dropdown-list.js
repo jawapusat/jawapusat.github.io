@@ -2,7 +2,7 @@ import { Children, Fragment, cloneElement, isValidElement, memo } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { classNames } from '../../utils/functions';
 
-/ eslint-disable-next-line func-style
+// eslint-disable-next-line func-style
 function DropdownList( { value, onChange, by = 'id', children } ) {
 	return (
 		<Listbox value={ value } onChange={ onChange } by={ by }>

@@ -1,5 +1,5 @@
 jQuery( document ).ready( function ( $ ) {
-	/ Banner dismiss functionality for WooPayments notices.
+	// Banner dismiss functionality for WooPayments notices.
 	$( document ).on(
 		'click',
 		'.woop-dismissible-notice .notice-dismiss, .woop-notice .woop-notice-close-btn',
@@ -9,7 +9,7 @@ jQuery( document ).ready( function ( $ ) {
 			const { ajaxNonce, ajaxUrl, dismissedCount, dismissingText } =
 				aiBuilderWooPayments;
 			if ( dismissedCount > 0 ) {
-				/ Display the confirmation text if the banner has been already dismissed once.
+				// Display the confirmation text if the banner has been already dismissed once.
 				if ( window.confirm( dismissingText ) === false ) {
 					return;
 				}
@@ -18,7 +18,7 @@ jQuery( document ).ready( function ( $ ) {
 			const $notice = $( this ).closest( '.woop-notice' );
 			const noticeId = $notice.attr( 'id' );
 
-			/ Using fetch instead of jQuery.ajax
+			// Using fetch instead of jQuery.ajax
 			const formData = new FormData();
 			formData.append( 'action', 'dismiss_woopayments_notice' );
 			formData.append( '_security', ajaxNonce );
@@ -45,13 +45,13 @@ jQuery( document ).ready( function ( $ ) {
 		}
 	);
 
-	/ WooPayments Analytics button clicks.
+	// WooPayments Analytics button clicks.
 	$( document ).on(
 		'click',
 		'.woop-notice-btn, .connect-account-page__buttons button, #woocommerce_payments .woocommerce-list__item-buttons__actions button',
 		function ( e ) {
 			const { ajaxNonce, ajaxUrl } = aiBuilderWooPayments;
-			/ Set the flag in user meta via AJAX.
+			// Set the flag in user meta via AJAX.
 			const clickSource = e.target.dataset?.source || 'onboarding';
 
 			const formData = new FormData();
@@ -71,7 +71,7 @@ jQuery( document ).ready( function ( $ ) {
 					if ( ! response.ok ) {
 						throw new Error( 'Network response was not ok' );
 					}
-					/ return response.json();
+					// return response.json();
 				} )
 				.catch( ( error ) => {
 					console.error( 'Error in WooPayments Analytics:', error );

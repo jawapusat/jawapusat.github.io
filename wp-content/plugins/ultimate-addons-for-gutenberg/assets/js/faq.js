@@ -3,7 +3,7 @@ function slideUp( target, duration ) {
 	target.style.transitionDuration = duration + 'ms';
 	target.style.boxSizing = 'border-box';
 	target.style.height = target.offsetHeight + 'px';
-	target.offsetHeight; / eslint-disable-line no-unused-expressions
+	target.offsetHeight; // eslint-disable-line no-unused-expressions
 	target.style.overflow = 'hidden';
 	target.style.height = 0;
 	target.style.paddingTop = 0;
@@ -37,7 +37,7 @@ function slideDown( target, duration ) {
 	target.style.paddingBottom = 0;
 	target.style.marginTop = 0;
 	target.style.marginBottom = 0;
-	target.offsetHeight; / eslint-disable-line no-unused-expressions
+	target.offsetHeight; // eslint-disable-line no-unused-expressions
 	target.style.boxSizing = 'border-box';
 	target.style.transitionProperty = 'height, margin, padding';
 	target.style.transitionDuration = duration + 'ms';
@@ -141,7 +141,7 @@ window.addEventListener( 'load', function () {
 
 function faqClick( e, faqItem, questionButtons ) {
 	if ( e.keyCode === 13 || e.keyCode === 32 || e.button === 0 ) {
-		/ enter || spacebar || left mouse click.
+		// enter || spacebar || left mouse click.
 		if ( faqItem.classList.contains( 'uagb-faq-item-active' ) ) {
 			faqItem.classList.remove( 'uagb-faq-item-active' );
 			faqItem.setAttribute( 'aria-expanded', false );

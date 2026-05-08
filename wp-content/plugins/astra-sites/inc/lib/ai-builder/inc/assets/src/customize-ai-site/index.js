@@ -6,7 +6,7 @@ import SiteSkeleton from '../../../components/site-preview/site-skeleton';
 import { CustomizeAiSteps } from './customize-ai-steps';
 
 const CustomizeAiSite = () => {
-	const [ { currentCustomizeIndex, siteLogo }, dispatch ] = [ {}, () => {} ]; / Remove this line.
+	const [ { currentCustomizeIndex, siteLogo }, dispatch ] = [ {}, () => {} ]; // Remove this line.
 
 	const currentStepObject = CustomizeAiSteps[ currentCustomizeIndex ];
 	let CurrentStepContent;

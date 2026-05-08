@@ -74,7 +74,7 @@ var AstraSitesAjaxQueue = ( function () {
 	$elscope = {};
 
 	$.fn.isInViewport = function () {
-		/ If not have the element then return false!
+		// If not have the element then return false!
 		if ( ! $( this ).length ) {
 			return false;
 		}
@@ -194,7 +194,7 @@ var AstraSitesAjaxQueue = ( function () {
 							AstraElementorSitesAdmin._open
 						);
 
-						/ Click events.
+						// Click events.
 						$( 'body' ).on(
 							'click',
 							'.ast-sites-modal__header__close',
@@ -256,7 +256,7 @@ var AstraSitesAjaxQueue = ( function () {
 							AstraElementorSitesAdmin._dismiss
 						);
 
-						/ Other events.
+						// Other events.
 						$elscope
 							.find( '.astra-sites-content-wrap' )
 							.scroll(
@@ -273,7 +273,7 @@ var AstraSitesAjaxQueue = ( function () {
 							AstraElementorSitesAdmin._changeType
 						);
 
-						/ Triggers.
+						// Triggers.
 						$( document ).on(
 							'astra-sites__elementor-open-after',
 							AstraElementorSitesAdmin._initSites
@@ -309,7 +309,7 @@ var AstraSitesAjaxQueue = ( function () {
 							AstraElementorSitesAdmin._goStep2
 						);
 
-						/ Plugin install & activate.
+						// Plugin install & activate.
 						$( document ).on(
 							'wp-plugin-installing',
 							AstraElementorSitesAdmin._pluginInstalling
@@ -323,7 +323,7 @@ var AstraSitesAjaxQueue = ( function () {
 							AstraElementorSitesAdmin._installSuccess
 						);
 
-						/open modal on reload after required plugins activated
+						//open modal on reload after required plugins activated
 						AstraElementorSitesAdmin.insertBlockOnRefresh();
 					} );
 				}
@@ -333,7 +333,7 @@ var AstraSitesAjaxQueue = ( function () {
 		insertBlockOnRefresh() {
 			const urlObj = new URL( window.location.href );
 			const remoteST = urlObj.searchParams.get( 'remoteST' );
-			/ Get the value of the "blockID" parameter
+			// Get the value of the "blockID" parameter
 			const blockID = urlObj.searchParams.get( 'blockID' );
 			const type =
 				urlObj.searchParams.get( 'type' ) === 'blocks'
@@ -406,7 +406,7 @@ var AstraSitesAjaxQueue = ( function () {
 					) {
 						AstraElementorSitesAdmin.page =
 							AstraElementorSitesAdmin.page + 1;
-						/ Set listing HTML.
+						// Set listing HTML.
 						AstraElementorSitesAdmin._appendPaginationBlocks(
 							astraElementorSites.astra_blocks
 						);
@@ -587,7 +587,7 @@ var AstraSitesAjaxQueue = ( function () {
 							button.removeClass( 'updating-message' );
 							console.log( 'Already sync all the sites.' );
 						} else {
-							/ Import categories.
+							// Import categories.
 							$.ajax( {
 								url: astraElementorSites.ajaxurl,
 								type: 'POST',
@@ -600,7 +600,7 @@ var AstraSitesAjaxQueue = ( function () {
 								console.log( jqXHR );
 							} );
 
-							/ Import categories.
+							// Import categories.
 							$.ajax( {
 								url: astraElementorSites.ajaxurl,
 								type: 'POST',
@@ -613,7 +613,7 @@ var AstraSitesAjaxQueue = ( function () {
 								console.log( jqXHR );
 							} );
 
-							/ Import Blocks.
+							// Import Blocks.
 							$.ajax( {
 								url: astraElementorSites.ajaxurl,
 								type: 'POST',
@@ -671,7 +671,7 @@ var AstraSitesAjaxQueue = ( function () {
 											} );
 										}
 
-										/ Run the AJAX queue.
+										// Run the AJAX queue.
 										AstraSitesAjaxQueue.run();
 									} else {
 										console.error(
@@ -681,7 +681,7 @@ var AstraSitesAjaxQueue = ( function () {
 									}
 								} );
 
-							/ Import Block Categories.
+							// Import Block Categories.
 							$.ajax( {
 								url: astraElementorSites.ajaxurl,
 								type: 'POST',
@@ -750,7 +750,7 @@ var AstraSitesAjaxQueue = ( function () {
 											} );
 										}
 
-										/ Run the AJAX queue.
+										// Run the AJAX queue.
 										AstraSitesAjaxQueue.run();
 									}
 								} );
@@ -801,7 +801,7 @@ var AstraSitesAjaxQueue = ( function () {
 				return;
 			}
 			$elscope.find( '#wp-filter-search-input' ).val( '' );
-			/ Hide Back button.
+			// Hide Back button.
 			$elscope.find( '.back-to-layout' ).css( 'visibility', 'hidden' );
 			$elscope.find( '.back-to-layout' ).css( 'opacity', '0' );
 			$elscope
@@ -856,7 +856,7 @@ var AstraSitesAjaxQueue = ( function () {
 					console.groupEnd();
 				} )
 				.done( function ( data ) {
-					/ 1. Fail - Import WPForms Options.
+					// 1. Fail - Import WPForms Options.
 					if ( false === data.success ) {
 						console.log( data.data );
 						console.groupEnd();
@@ -871,7 +871,7 @@ var AstraSitesAjaxQueue = ( function () {
 		_createTemplate: function () {
 			console.groupEnd();
 
-			/ Work with JSON page here
+			// Work with JSON page here
 			$.ajax( {
 				url: astraElementorSites.ajaxurl,
 				type: 'POST',
@@ -916,17 +916,17 @@ var AstraSitesAjaxQueue = ( function () {
 			$.each( not_installed, function ( index, single_plugin ) {
 				console.log( 'Installing Plugin - ' + single_plugin.name );
 
-				/ Add each plugin activate request in Ajax queue.
-				/ @see wp-admin/js/updates.js
+				// Add each plugin activate request in Ajax queue.
+				// @see wp-admin/js/updates.js
 				wp.updates.queue.push( {
-					action: 'install-plugin', / Required action.
+					action: 'install-plugin', // Required action.
 					data: {
 						slug: single_plugin.slug,
 					},
 				} );
 			} );
 
-			/ Required to set queue.
+			// Required to set queue.
 			wp.updates.queueChecker();
 		},
 
@@ -952,14 +952,14 @@ var AstraSitesAjaxQueue = ( function () {
 								AstraElementorSitesAdmin.requiredPlugins
 									.inactive;
 
-							/ Reset not installed plugins list.
+							// Reset not installed plugins list.
 							AstraElementorSitesAdmin.requiredPlugins.inactive =
 								AstraElementorSitesAdmin._removePluginFromQueue(
 									single_plugin.slug,
 									pluginsList
 								);
 
-							/ Enable Demo Import Button
+							// Enable Demo Import Button
 							AstraElementorSitesAdmin._enableImport();
 						}
 					},
@@ -993,8 +993,8 @@ var AstraSitesAjaxQueue = ( function () {
 		_bulkPluginInstallActivate: function () {
 			console.groupCollapsed( 'Bulk Plugin Install Process Started' );
 
-			/ If has class the skip-plugins then,
-			/ Avoid installing 3rd party plugins.
+			// If has class the skip-plugins then,
+			// Avoid installing 3rd party plugins.
 			var not_installed =
 				AstraElementorSitesAdmin.requiredPlugins.notinstalled || '';
 			var activate_plugins =
@@ -1002,12 +1002,12 @@ var AstraSitesAjaxQueue = ( function () {
 
 			console.log( AstraElementorSitesAdmin.requiredPlugins );
 
-			/ First Install Bulk.
+			// First Install Bulk.
 			if ( not_installed.length > 0 ) {
 				AstraElementorSitesAdmin._installAllPlugins( not_installed );
 			}
 
-			/ Second Activate Bulk.
+			// Second Activate Bulk.
 			if ( activate_plugins.length > 0 ) {
 				AstraElementorSitesAdmin._activateAllPlugins(
 					activate_plugins
@@ -1045,7 +1045,7 @@ var AstraSitesAjaxQueue = ( function () {
 		_unescape: function ( input_string ) {
 			var title = _.unescape( input_string );
 
-			/ @todo check why below character not escape with function _.unescape();
+			// @todo check why below character not escape with function _.unescape();
 			title = title.replace( '&#8211;', '-' );
 
 			return title;
@@ -1099,7 +1099,7 @@ var AstraSitesAjaxQueue = ( function () {
 				var current_site =
 					astraElementorSites.default_page_builder_sites[ site_id ];
 
-				/ Check in site title.
+				// Check in site title.
 				if ( current_site[ 'title' ] ) {
 					var site_title = AstraElementorSitesAdmin._unescape_lower(
 						current_site[ 'title' ]
@@ -1120,12 +1120,12 @@ var AstraSitesAjaxQueue = ( function () {
 					}
 				}
 
-				/ Check in page title.
+				// Check in page title.
 				if ( Object.keys( current_site[ 'pages' ] ).length ) {
 					var pages = current_site[ 'pages' ];
 
 					for ( page_id in pages ) {
-						/ Check in site title.
+						// Check in site title.
 						if ( pages[ page_id ][ 'title' ] ) {
 							var page_title =
 								AstraElementorSitesAdmin._unescape_lower(
@@ -1160,7 +1160,7 @@ var AstraSitesAjaxQueue = ( function () {
 					var current_site =
 						astraElementorSites.astra_blocks[ block_id ];
 
-					/ Check in site title.
+					// Check in site title.
 					if ( current_site[ 'title' ] ) {
 						var site_title =
 							AstraElementorSitesAdmin._unescape_lower(
@@ -1226,12 +1226,12 @@ var AstraSitesAjaxQueue = ( function () {
 		},
 
 		_masonry: function () {
-			/create empty var masonryObj
+			//create empty var masonryObj
 			var masonryObj;
 			var container = document.querySelector(
 				'.dialog-lightbox-content-block'
 			);
-			/ initialize Masonry after all images have loaded
+			// initialize Masonry after all images have loaded
 			imagesLoaded( container, function () {
 				masonryObj = new Masonry( container, {
 					itemSelector: '.astra-sites-library-template',
@@ -1489,7 +1489,7 @@ var AstraSitesAjaxQueue = ( function () {
 		},
 
 		_goStep1: function ( e ) {
-			/ Reset site and page ids to null.
+			// Reset site and page ids to null.
 			AstraElementorSitesAdmin.site_id = '';
 			AstraElementorSitesAdmin.page_id = '';
 			AstraElementorSitesAdmin.block_id = '';
@@ -1498,28 +1498,28 @@ var AstraSitesAjaxQueue = ( function () {
 			AstraElementorSitesAdmin.canImport = false;
 			AstraElementorSitesAdmin.canInsert = false;
 
-			/ Hide Back button.
+			// Hide Back button.
 			$elscope.find( '.back-to-layout' ).css( 'visibility', 'hidden' );
 			$elscope.find( '.back-to-layout' ).css( 'opacity', '0' );
 
-			/ Hide Preview Page.
+			// Hide Preview Page.
 			$elscope.find( '.theme-preview' ).hide();
 			$elscope.find( '.theme-preview' ).html( '' );
 			$elscope.find( '.theme-preview-block' ).hide();
 			$elscope.find( '.theme-preview-block' ).html( '' );
 			$elscope.find( '.ast-template-library-toolbar' ).show();
 
-			/ Show listing page.
+			// Show listing page.
 			if ( AstraElementorSitesAdmin.type == 'pages' ) {
 				$elscope.find( '.dialog-lightbox-content' ).show();
 				$elscope.find( '.dialog-lightbox-content-block' ).hide();
 
-				/ Set listing HTML.
+				// Set listing HTML.
 				AstraElementorSitesAdmin._appendSites(
 					astraElementorSites.default_page_builder_sites
 				);
 			} else {
-				/ Set listing HTML.
+				// Set listing HTML.
 				AstraElementorSitesAdmin._appendBlocks(
 					astraElementorSites.astra_blocks
 				);
@@ -1536,7 +1536,7 @@ var AstraSitesAjaxQueue = ( function () {
 		},
 
 		_goStep2: function ( e ) {
-			/ Set page and site ids.
+			// Set page and site ids.
 			AstraElementorSitesAdmin.site_id = $elscope
 				.find( '#astra-blocks' )
 				.data( 'site-id' );
@@ -1546,7 +1546,7 @@ var AstraSitesAjaxQueue = ( function () {
 				return;
 			}
 
-			/ Single Preview template.
+			// Single Preview template.
 			let single_template = wp.template( 'astra-sites-list-search' );
 			let passing_data =
 				astraElementorSites.default_page_builder_sites[
@@ -1556,14 +1556,14 @@ var AstraSitesAjaxQueue = ( function () {
 			pages_list = single_template( passing_data );
 			$elscope.find( '.dialog-lightbox-content' ).html( pages_list );
 
-			/ Hide Preview page.
+			// Hide Preview page.
 			$elscope.find( '.theme-preview' ).hide();
 			$elscope.find( '.theme-preview' ).html( '' );
 			$elscope.find( '.ast-template-library-toolbar' ).show();
 			$elscope.find( '.theme-preview-block' ).hide();
 			$elscope.find( '.theme-preview-block' ).html( '' );
 
-			/ Show listing page.
+			// Show listing page.
 			$elscope.find( '.dialog-lightbox-content' ).show();
 			$elscope.find( '.dialog-lightbox-content-block' ).hide();
 
@@ -1603,7 +1603,7 @@ var AstraSitesAjaxQueue = ( function () {
 				}
 
 				if ( count == 1 ) {
-					/ Logic for one page sites.
+					// Logic for one page sites.
 					AstraElementorSitesAdmin.page_id = one_page_id;
 
 					$elscope
@@ -1644,7 +1644,7 @@ var AstraSitesAjaxQueue = ( function () {
 					.find( '.ast-sites-modal__header' )
 					.addClass( 'ast-preview-mode' );
 
-				/ Hide.
+				// Hide.
 				$elscope.find( '.theme-preview' ).hide();
 				$elscope.find( '.theme-preview' ).html( '' );
 
@@ -1880,7 +1880,7 @@ var AstraSitesAjaxQueue = ( function () {
 					? AstraElementorSitesAdmin.block_id?.replace( 'id-', '' )
 					: AstraElementorSitesAdmin.page_id?.replace( 'id-', '' );
 
-			/ Required Required.
+			// Required Required.
 			$.ajax( {
 				url: astraElementorSites.ajaxurl,
 				type: 'POST',
@@ -1957,7 +1957,7 @@ var AstraSitesAjaxQueue = ( function () {
 						if (
 							typeof required_plugins.notinstalled !== 'undefined'
 						) {
-							/ Add not have installed plugins count.
+							// Add not have installed plugins count.
 							remaining_plugins += parseInt(
 								required_plugins.notinstalled.length
 							);
@@ -1992,7 +1992,7 @@ var AstraSitesAjaxQueue = ( function () {
 						if (
 							typeof required_plugins.inactive !== 'undefined'
 						) {
-							/ Add inactive plugins count.
+							// Add inactive plugins count.
 							remaining_plugins += parseInt(
 								required_plugins.inactive.length
 							);
@@ -2098,31 +2098,31 @@ var AstraSitesAjaxQueue = ( function () {
 
 		removeAddedParams: function () {
 			const urlObj = new URL( window.location.href );
-			/ Check if the query parameters exist
+			// Check if the query parameters exist
 			if (
 				urlObj.searchParams.has( 'remoteST' ) &&
 				urlObj.searchParams.has( 'blockID' )
 			) {
-				/ Remove specific query parameters
+				// Remove specific query parameters
 				urlObj.searchParams.delete( 'remoteST' );
 				urlObj.searchParams.delete( 'blockID' );
 				urlObj.searchParams.delete( 'type' );
 
-				/ Update the URL in the browser
+				// Update the URL in the browser
 				window.history.replaceState( {}, '', urlObj.href );
 			}
 		},
 
 		saveContentAndRefresh: function () {
-			const elementorPanel = document.querySelector( '.elementor-panel' ); / Get the Elementor panel element
+			const elementorPanel = document.querySelector( '.elementor-panel' ); // Get the Elementor panel element
 
 			if ( elementorPanel ) {
 				const updateButton = elementorPanel.querySelector(
 					'#elementor-panel-saver-button-publish'
-				); / Find the Elementor update button
+				); // Find the Elementor update button
 
 				if ( updateButton ) {
-					updateButton.click(); / Trigger a click event on the update button
+					updateButton.click(); // Trigger a click event on the update button
 					let id =
 						'blocks' === AstraElementorSitesAdmin.type
 							? AstraElementorSitesAdmin.block_id?.replace(
@@ -2135,33 +2135,33 @@ var AstraSitesAjaxQueue = ( function () {
 							  );
 					if ( id ) {
 						AstraElementorSitesAdmin.updateURLParams( id );
-						window.location.reload(); / Refresh the page
+						window.location.reload(); // Refresh the page
 					}
 				}
 			}
 		},
 
 		updateURLParams: function ( block_id ) {
-			/ Get the current URL
+			// Get the current URL
 			var url = new URL( window.location.href );
 
-			/ Create a new URLSearchParams object from the URL's search params
+			// Create a new URLSearchParams object from the URL's search params
 			var searchParams = new URLSearchParams( url.search );
 
 			let type = AstraElementorSitesAdmin.type;
 
-			/ Add parameters to the searchParams object
+			// Add parameters to the searchParams object
 			searchParams.append( 'remoteST', 'true' );
 			searchParams.append( 'blockID', block_id );
 			searchParams.append( 'type', type );
 
-			/ Update the search property of the URL object with the new search params
+			// Update the search property of the URL object with the new search params
 			url.search = searchParams.toString();
 
-			/ Get the modified URL
+			// Get the modified URL
 			var modifiedUrl = url.toString();
 
-			/ Update the browser's live URL
+			// Update the browser's live URL
 			window.history.pushState( { path: modifiedUrl }, '', modifiedUrl );
 		},
 
@@ -2247,14 +2247,14 @@ var AstraSitesAjaxQueue = ( function () {
 				$( 'body' ).removeClass( 'ast-sites-dark-mode' );
 			}
 
-			/ Hide preview page.
+			// Hide preview page.
 			$elscope.find( '.theme-preview' ).hide();
 			$elscope.find( '.theme-preview' ).html( '' );
 
-			/ Show site listing page.
+			// Show site listing page.
 			$elscope.find( '.dialog-lightbox-content' ).show();
 
-			/ Hide Back button.
+			// Hide Back button.
 			$elscope.find( '.back-to-layout' ).css( 'visibility', 'hidden' );
 			$elscope.find( '.back-to-layout' ).css( 'opacity', '0' );
 		},
@@ -2279,11 +2279,11 @@ var AstraSitesAjaxQueue = ( function () {
 		_installSuccess: function ( event, response ) {
 			event.preventDefault();
 
-			/ Transform the 'Install' button into an 'Activate' button.
+			// Transform the 'Install' button into an 'Activate' button.
 			var $init = $( '.plugin-card-' + response.slug ).data( 'init' );
 			var $name = $( '.plugin-card-' + response.slug ).data( 'name' );
 
-			/ Reset not installed plugins list.
+			// Reset not installed plugins list.
 			var pluginsList =
 				AstraElementorSitesAdmin.requiredPlugins.notinstalled;
 			var curr_plugin = AstraElementorSitesAdmin._getPluginFromQueue(
@@ -2297,7 +2297,7 @@ var AstraSitesAjaxQueue = ( function () {
 					pluginsList
 				);
 
-			/ WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
+			// WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
 			setTimeout( function () {
 				console.log( 'Activating Plugin - ' + curr_plugin.name );
 
@@ -2317,14 +2317,14 @@ var AstraSitesAjaxQueue = ( function () {
 
 						console.log( 'Activated Plugin - ' + curr_plugin.name );
 
-						/ Reset not installed plugins list.
+						// Reset not installed plugins list.
 						AstraElementorSitesAdmin.requiredPlugins.inactive =
 							AstraElementorSitesAdmin._removePluginFromQueue(
 								response.slug,
 								pluginsList
 							);
 
-						/ Enable Demo Import Button
+						// Enable Demo Import Button
 						AstraElementorSitesAdmin._enableImport();
 					}
 				} );

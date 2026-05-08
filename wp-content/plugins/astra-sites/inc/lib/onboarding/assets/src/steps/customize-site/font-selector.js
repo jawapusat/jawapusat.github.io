@@ -41,7 +41,7 @@ const FontSelector = () => {
 				document.head.appendChild( node );
 			}
 
-			/ Removes existing Google fonts URL.
+			// Removes existing Google fonts URL.
 			if ( !! googleFontsURL ) {
 				googleFontsURL.remove();
 			}
@@ -105,7 +105,7 @@ const FontSelector = () => {
 				otherFontsString = otherFontsString.replace( /[&]{1}$/i, '' );
 			}
 
-			/ Add Google fonts URL.
+			// Add Google fonts URL.
 			if ( fontsName ) {
 				const fontUrl = `https://fonts.googleapis.com/css2?${ fontsName.join(
 					'&'
@@ -114,14 +114,14 @@ const FontSelector = () => {
 				node.setAttribute( 'href', fontUrl );
 				document.head.insertAdjacentElement( 'afterbegin', node );
 			}
-			/ Add default font.
+			// Add default font.
 			const allFonts = defaultFonts.concat( fonts );
-			/ if ( Object.keys( typography ).length === 0 ) {
+			// if ( Object.keys( typography ).length === 0 ) {
 			dispatch( {
 				type: 'set',
 				typography: allFonts[ 0 ],
 			} );
-			/ }
+			// }
 
 			setFonts( allFonts );
 		}

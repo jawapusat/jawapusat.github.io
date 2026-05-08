@@ -27,7 +27,7 @@ const BuildDone = () => {
 		removeLocalStorageItem( USER_KEYWORD );
 	}, [] );
 
-	/ Remove onboarding details from local storage.
+	// Remove onboarding details from local storage.
 	useEffect( () => {
 		removeSavedState();
 		window.addEventListener( 'beforeunload', removeSavedState );

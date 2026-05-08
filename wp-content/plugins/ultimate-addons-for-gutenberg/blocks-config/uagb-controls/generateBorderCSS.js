@@ -55,7 +55,7 @@ const generateBorderCSS = ( attributes, prefix, deviceType = 'desktop' ) => {
 		return borderCSS;
 	}
 
-	/ In case of 'default' border style, we return an empty object.
+	// In case of 'default' border style, we return an empty object.
 	return {};
 };
 

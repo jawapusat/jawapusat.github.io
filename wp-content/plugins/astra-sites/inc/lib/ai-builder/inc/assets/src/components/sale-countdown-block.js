@@ -8,7 +8,7 @@ const SaleCountdownBlock = () => {
 	const { timeLeft, showTimer, currentSalePeriod } = useCountdownTimer();
 	const { zip_plans } = aiBuilderVars;
 
-	/ Don't render if sale has ended or if already upgraded.
+	// Don't render if sale has ended or if already upgraded.
 	if (
 		! showTimer ||
 		( zip_plans?.active_plan && zip_plans?.active_plan?.slug !== 'free' )
@@ -16,7 +16,7 @@ const SaleCountdownBlock = () => {
 		return null;
 	}
 
-	/ Define titles for each sale period
+	// Define titles for each sale period
 	const getSaleTitle = () => {
 		switch ( currentSalePeriod ) {
 			case 'black-friday':

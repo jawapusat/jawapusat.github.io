@@ -13,7 +13,7 @@ const blockVersions = {
 const SpectraBlocksVersionSelector = () => {
 	const [ { builder, spectraBlocksVersion }, dispatch ] = useStateValue();
 
-	/ Bail early if the selector is not enabled or the builder is not Gutenberg.
+	// Bail early if the selector is not enabled or the builder is not Gutenberg.
 	if (
 		! astraSitesVars?.spectraBlocks?.selectorEnabled ||
 		builder !== 'gutenberg'

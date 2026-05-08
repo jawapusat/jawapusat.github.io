@@ -6,13 +6,13 @@ UAGBCountdown = {
 	cache: {},
 
 	editorInit( mainSelector, data = {}, countdownRef ) {
-		/ When a new Countdown timer block is added, the timeModified value received is 'false',
-		/ even though it's attribute has been set to 'true'.
-		/ Hence, we need to ensure here that the dynamic defaults are followed.
+		// When a new Countdown timer block is added, the timeModified value received is 'false',
+		// even though it's attribute has been set to 'true'.
+		// Hence, we need to ensure here that the dynamic defaults are followed.
 		if ( ! data.timeModified ) {
 			const d = new Date();
 
-			/ Set the default end time to 7 days later.
+			// Set the default end time to 7 days later.
 			d.setMilliseconds( d.getMilliseconds() + 7 * 24 * 60 * 60 * 1000 );
 
 			data.endDateTime = d;
@@ -54,13 +54,13 @@ UAGBCountdown = {
 	init( mainSelector, data = {} ) {
 		this.elements[ mainSelector ] = this.getElement( mainSelector );
 
-		/ If global flag variable does not exists, create it.
-		/ This is used like a signal for usage in Pro code.
+		// If global flag variable does not exists, create it.
+		// This is used like a signal for usage in Pro code.
 		if( ! window?.UAGBCountdownTimeSignal ) {
 			window.UAGBCountdownTimeSignal = {};
 		}
 
-		/ Set flag variable to false, till it's overtime.
+		// Set flag variable to false, till it's overtime.
 		window.UAGBCountdownTimeSignal[ mainSelector ] = false;
 
 		if ( typeof this.elements[ mainSelector ] !== 'undefined' ) {
@@ -68,14 +68,14 @@ UAGBCountdown = {
 				const CampaignID =
 					'' !== data?.campaignID && null !== data?.campaignID ? data.campaignID : data.block_id;
 				this.cache.cookie = this.getCookie( CampaignID );
-				/Check for saved cookie.
+				//Check for saved cookie.
 				if ( '' !== this.cache.cookie ) {
 					const currentTimeStamp = new Date();
 					const diff = Math.floor( this.cache.cookie - currentTimeStamp.getTime() );
 					const endTimeStamp = currentTimeStamp.getTime() + diff;
 					const totalDate = new Date( endTimeStamp );
 
-					/ Setting enddate as per cookie timestamp.
+					// Setting enddate as per cookie timestamp.
 					data.endDateTime = totalDate.toISOString().replace( /\.\d{3}Z$/, 'Z' );
 				} else {
 					data.endDateTime = this.getEvergreenEndDate(
@@ -93,20 +93,20 @@ UAGBCountdown = {
 					newDate.setTime( newDate.getTime() + Math.floor( data.evergreenHrs ) * 60 * 60 * 1000 );
 					newDate.setTime( newDate.getTime() + Math.floor( data.evergreenMinutes ) * 60 * 1000 );
 
-					/ Setting value for cache.
+					// Setting value for cache.
 					this.cache.evergreen = newDate.getTime() + 100;
 					const resetDays = '' !== data?.resetDays && 0 < data.resetDays ? data.resetDays : 30;
-					/ Create the cookie for evergreen time.
+					// Create the cookie for evergreen time.
 					this.createCookie( CampaignID, this.cache.evergreen, resetDays, 'days' );
 				}
 			}
 
-			/ Slider block may create duplicate instances of it's slides, which may contain instances of the same countdowns.
+			// Slider block may create duplicate instances of it's slides, which may contain instances of the same countdowns.
 			const allSameCountdownInstances = document.querySelectorAll( mainSelector );
 
 			for( let i = 0; i < allSameCountdownInstances.length; i++ ) {
 
-				/ Ensures instantaneous load/firing of countdown functionality.
+				// Ensures instantaneous load/firing of countdown functionality.
 				this.updateCountdown( mainSelector, data, allSameCountdownInstances[i] );
 
 				this.countdownInterval[ mainSelector ] = setInterval( () => {
@@ -121,7 +121,7 @@ UAGBCountdown = {
 		clearInterval( this.countdownInterval[ mainSelector ] );
 
 		if ( typeof this.elements[ mainSelector ] !== 'undefined' ) {
-			/ Ensures instantaneous refresh of value.
+			// Ensures instantaneous refresh of value.
 			this.updateCountdown( mainSelector, data, ref );
 
             this.countdownInterval[ mainSelector ] = setInterval( () => {
@@ -148,7 +148,7 @@ UAGBCountdown = {
 			return;
 		}
 
-		/ Wrappers.
+		// Wrappers.
 		let daysWrap;
 		let hoursWrap;
 		let minutesWrap;
@@ -166,13 +166,13 @@ UAGBCountdown = {
 			minutesWrap = ref.querySelector( '.wp-block-uagb-countdown__time-minutes' );
 		}
 
-		/ Calculations.
+		// Calculations.
 		const currentTime = new Date();
 		const endDateTime = new Date( data.endDateTime );
 		const diff = endDateTime - currentTime;
 		const isOvertime = diff < 0;
 
-		/ Calculations for each unit.
+		// Calculations for each unit.
 		const days = Math.floor( diff / 1000 / 60 / 60 / 24 );
 		let hours = Math.floor( diff / 1000 / 60 / 60 ) % 24;
 		let minutes = Math.floor( diff / 1000 / 60 ) % 60;
@@ -190,7 +190,7 @@ UAGBCountdown = {
 			seconds = seconds + minutes * 60;
 		}
 
-		/ Update the markup - Also, we check if the wrappers exist to avoid potential console errors.
+		// Update the markup - Also, we check if the wrappers exist to avoid potential console errors.
 		if ( data?.showDays && daysWrap ) {
 			daysWrap.innerHTML = ! isOvertime ? days : 0;
 		}
@@ -207,24 +207,24 @@ UAGBCountdown = {
 			secondsWrap.innerHTML = ! isOvertime ? seconds : 0;
 		}
 
-		/ If it's overtime, stop updating the markup and clear the interval.
+		// If it's overtime, stop updating the markup and clear the interval.
 		if ( isOvertime ) {
 			clearInterval( this.countdownInterval[ mainSelector ] );
 
-			/ Set flag variable to true, for usage in Countdown Pro code (like a signal).
+			// Set flag variable to true, for usage in Countdown Pro code (like a signal).
 			if( ( 'redirect' === data?.timerEndAction || 'hide' === data?.timerEndAction ) && data?.isFrontend ) {
 				window.UAGBCountdownTimeSignal[ mainSelector ] = true;
 			}
 		}
 		
-		/ Check if the page is reloaded by checking the presence of a specific cookie
+		// Check if the page is reloaded by checking the presence of a specific cookie
 		const reloadCookieName = 'spectraPageReloaded_' + mainSelector;
 		const isPageReloaded = this.getCookie( reloadCookieName ) === 'true';
 		const resetDays = '' !== data?.resetDays && 0 < data.resetDays ? data.resetDays : 30;
 		
 		
 		if ( data?.isFrontend ) {
-			/ Execute the code only in front-end.
+			// Execute the code only in front-end.
 			if( isPageReloaded && ! isOvertime && this.getCookie( reloadCookieName ) !== 'false' ) {
 				this.createCookie( reloadCookieName, 'false',  0, 'days' );
 			}

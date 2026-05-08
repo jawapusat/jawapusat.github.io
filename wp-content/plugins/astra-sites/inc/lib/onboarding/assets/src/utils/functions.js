@@ -26,7 +26,7 @@ export const getProUrl = () => {
 };
 
 export const sendPostMessage = ( data ) => {
-	/ console.log( 'sendPostMessage' );
+	// console.log( 'sendPostMessage' );
 	const frame = document.getElementById( 'astra-starter-templates-preview' );
 	if ( ! frame ) {
 		return;
@@ -46,12 +46,12 @@ export const getDataUri = ( url, callback ) => {
 
 	image.onload = function () {
 		const canvas = document.createElement( 'canvas' );
-		canvas.width = this.naturalWidth; / or 'width' if you want a special/scaled size
-		canvas.height = this.naturalHeight; / or 'height' if you want a special/scaled size
+		canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+		canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
 
 		canvas.getContext( '2d' ).drawImage( this, 0, 0 );
 
-		/ ... or get as Data URI
+		// ... or get as Data URI
 		callback( canvas.toDataURL( 'image/png' ) );
 	};
 
@@ -59,10 +59,10 @@ export const getDataUri = ( url, callback ) => {
 };
 
 export const storeCurrentState = ( currentState ) => {
-	/ Remove allSitesData from currentState before storing to localStorage to reduce storage usage.
-	/ if ( currentState && currentState.allSitesData ) {
-	/ delete currentState.allSitesData;
-	/ }
+	// Remove allSitesData from currentState before storing to localStorage to reduce storage usage.
+	// if ( currentState && currentState.allSitesData ) {
+	// delete currentState.allSitesData;
+	// }
 	try {
 		localStorage.setItem(
 			'starter-templates-onboarding',
@@ -250,7 +250,7 @@ export const setLocalStorageItem = ( key, value ) => {
 		}
 		localStorage.setItem( key, JSON.stringify( value ) );
 	} catch ( error ) {
-		/ Handle error (e.g., localStorage is full, etc.)
+		// Handle error (e.g., localStorage is full, etc.)
 	}
 };
 

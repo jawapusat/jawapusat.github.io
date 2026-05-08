@@ -74,7 +74,7 @@ const SyncLibrary = () => {
 			syncPageInProgress: 0,
 		} );
 
-		/ If the sync is already up to date, we don't need to sync again.
+		// If the sync is already up to date, we don't need to sync again.
 		const syncUptoDate = await isSyncUptoDate();
 		const sites = ! syncUptoDate ? await syncSites() : null;
 		const { categories = null, tags = null } = ! syncUptoDate
@@ -97,7 +97,7 @@ const SyncLibrary = () => {
 	};
 
 	const syncSites = async () => {
-		/ const newData = await SyncStart();
+		// const newData = await SyncStart();
 		const { totalPages: pageCount } = await fetchSitesPageCount();
 		dispatch( {
 			type: 'set',

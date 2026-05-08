@@ -31,10 +31,10 @@ wp.hooks.addFilter(
 	20
 );
 
-/ Get the block editor's data module.
+// Get the block editor's data module.
 const { dispatch } = wp.data;
 
-/ Create a function to set the default align attribute
+// Create a function to set the default align attribute
 function setWooDefaultAlignments() {
 	const checkoutBlocks = wp.blocks.getBlockTypes().some(block => block.name === 'woocommerce/checkout');
 	const cartBlocks = wp.blocks.getBlockTypes().some(block => block.name === 'woocommerce/cart');
@@ -74,7 +74,7 @@ function setWooDefaultAlignments() {
 	}
 }
 
-/ Listen for the first insertion of a WooCommerce block
+// Listen for the first insertion of a WooCommerce block
 wp.data.subscribe(() => {
 	setWooDefaultAlignments();
 });

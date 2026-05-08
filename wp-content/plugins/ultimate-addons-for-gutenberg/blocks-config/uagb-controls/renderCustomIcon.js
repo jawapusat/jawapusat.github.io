@@ -2,7 +2,7 @@ function renderCustomIcon( svg ) {
 	let customSVG = '';
 
 	switch ( svg ) {
-		/ Align
+		// Align
 		case 'align-center':
 			customSVG = (
 				<svg id="icon-format_align_center" viewBox="0 0 24 24">
@@ -24,7 +24,7 @@ function renderCustomIcon( svg ) {
 				</svg>
 			);
 			break;
-		/ Flex Row
+		// Flex Row
 		case 'flex-row-start':
 			customSVG = (
 				<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -151,7 +151,7 @@ function renderCustomIcon( svg ) {
 				</svg>
 			);
 			break;
-		/ Flex Column
+		// Flex Column
 		case 'flex-column-start':
 			customSVG = (
 				<svg width="32" height="33" viewBox="0 0 32 33" xmlns="http://www.w3.org/2000/svg">
@@ -264,7 +264,7 @@ function renderCustomIcon( svg ) {
 				</svg>
 			);
 			break;
-		/ Flex Direction
+		// Flex Direction
 		case 'flex-direction-row':
 			customSVG = (
 				<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -309,7 +309,7 @@ function renderCustomIcon( svg ) {
 				</svg>
 			);
 			break;
-		/ Flex Wrap
+		// Flex Wrap
 		case 'flex-wrap':
 			customSVG = (
 				<svg viewBox="0 0 33 32" xmlns="http://www.w3.org/2000/svg">

@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react';
 
-/ Sale timing configuration - Using UTC
+// Sale timing configuration - Using UTC
 export const getSaleDates = () => {
-	/ Sale starts: November 17, 2025 at 6:30 AM UTC (12:00 PM IST)
-	const saleStart = new Date( Date.UTC( 2025, 10, 17, 6, 30, 0 ) ); / Month is 0-indexed (10 = November)
+	// Sale starts: November 17, 2025 at 6:30 AM UTC (12:00 PM IST)
+	const saleStart = new Date( Date.UTC( 2025, 10, 17, 6, 30, 0 ) ); // Month is 0-indexed (10 = November)
 
-	/ Black Friday sale ends: November 29, 2025 at 9:30 AM IST (4:00 AM UTC)
+	// Black Friday sale ends: November 29, 2025 at 9:30 AM IST (4:00 AM UTC)
 	const blackFridaySaleEndDate = new Date(
 		Date.UTC( 2025, 10, 29, 4, 0, 0 )
 	);
 
-	/ Small Business Saturday: November 30, 2025 at 9:30 AM IST (4:00 AM UTC)
+	// Small Business Saturday: November 30, 2025 at 9:30 AM IST (4:00 AM UTC)
 	const smallBusinessSatEndDate = new Date(
 		Date.UTC( 2025, 10, 30, 4, 0, 0 )
 	);
 
-	/ Give Back Sunday: December 1, 2025 at 9:30 AM IST (4:00 AM UTC)
+	// Give Back Sunday: December 1, 2025 at 9:30 AM IST (4:00 AM UTC)
 	const giveBackSundayEndDate = new Date( Date.UTC( 2025, 11, 1, 4, 0, 0 ) );
 
-	/ Cyber Monday: December 6, 2025 at 9:30 AM IST (4:00 AM UTC)
+	// Cyber Monday: December 6, 2025 at 9:30 AM IST (4:00 AM UTC)
 	const cyberMondayEndDate = new Date( Date.UTC( 2025, 11, 6, 4, 0, 0 ) );
 
 	return {
@@ -30,7 +30,7 @@ export const getSaleDates = () => {
 	};
 };
 
-/ Custom hook for countdown timer
+// Custom hook for countdown timer
 export const useCountdownTimer = () => {
 	const [ timeLeft, setTimeLeft ] = useState( {
 		days: 0,
@@ -41,7 +41,7 @@ export const useCountdownTimer = () => {
 	const [ isActive, setIsActive ] = useState( false );
 	const [ showTimer, setShowTimer ] = useState( true );
 	const [ currentSalePeriod, setCurrentSalePeriod ] =
-		useState( 'black-friday' ); / default
+		useState( 'black-friday' ); // default
 
 	useEffect( () => {
 		const calculateTimeLeft = () => {
@@ -57,11 +57,11 @@ export const useCountdownTimer = () => {
 
 			let targetDate;
 			let active = false;
-			let salePeriod = 'black-friday'; / default
+			let salePeriod = 'black-friday'; // default
 
-			/ Check each timer in sequence
+			// Check each timer in sequence
 			if ( now >= saleStart && now < blackFridaySaleEndDate ) {
-				/ Black Friday sale - countdown to end
+				// Black Friday sale - countdown to end
 				targetDate = blackFridaySaleEndDate;
 				active = true;
 				salePeriod = 'black-friday';
@@ -69,7 +69,7 @@ export const useCountdownTimer = () => {
 				now >= blackFridaySaleEndDate &&
 				now < smallBusinessSatEndDate
 			) {
-				/ Small Business Saturday - countdown to end
+				// Small Business Saturday - countdown to end
 				targetDate = smallBusinessSatEndDate;
 				active = true;
 				salePeriod = 'small-business-saturday';
@@ -77,7 +77,7 @@ export const useCountdownTimer = () => {
 				now >= smallBusinessSatEndDate &&
 				now < giveBackSundayEndDate
 			) {
-				/ Give Back Sunday - countdown to end
+				// Give Back Sunday - countdown to end
 				targetDate = giveBackSundayEndDate;
 				active = true;
 				salePeriod = 'give-back-sunday';
@@ -85,7 +85,7 @@ export const useCountdownTimer = () => {
 				now >= giveBackSundayEndDate &&
 				now < cyberMondayEndDate
 			) {
-				/ Cyber Monday - countdown to end
+				// Cyber Monday - countdown to end
 				targetDate = cyberMondayEndDate;
 				active = true;
 				salePeriod = 'cyber-monday';
@@ -93,7 +93,7 @@ export const useCountdownTimer = () => {
 				active = false;
 				setShowTimer( false );
 				return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-				/ All sales have ended
+				// All sales have ended
 			}
 
 			setIsActive( active );
@@ -117,15 +117,15 @@ export const useCountdownTimer = () => {
 				};
 			}
 
-			/ When a timer reaches zero, move to the next one automatically
+			// When a timer reaches zero, move to the next one automatically
 			return { days: 0, hours: 0, minutes: 0, seconds: 0 };
 		};
 
-		/ Update immediately
+		// Update immediately
 		const initialTime = calculateTimeLeft();
 		setTimeLeft( initialTime );
 
-		/ Update every second
+		// Update every second
 		const timer = setInterval( () => {
 			const newTime = calculateTimeLeft();
 			setTimeLeft( newTime );
@@ -142,7 +142,7 @@ export const useCountdownTimer = () => {
 	};
 };
 
-/ Utility function to format number with leading zero
+// Utility function to format number with leading zero
 export const formatNumber = ( num ) => {
 	return num.toString().padStart( 2, '0' );
 };

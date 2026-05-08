@@ -4,7 +4,7 @@
 import { createRoot } from 'react-dom/client';
 import Sidebar from './components/Sidebar';
 
-/ Toggles the sidebar based on the url parameters.
+// Toggles the sidebar based on the url parameters.
 export const toggleSidebar = ( url ) => {
 	const currentUrl = new URL( url );
 	if ( '/wp-admin/site-editor.php' === currentUrl.pathname ) {
@@ -19,7 +19,7 @@ export const toggleSidebar = ( url ) => {
 	}
 };
 
-/ Attaches the sidebar to the DOM.
+// Attaches the sidebar to the DOM.
 export const attachSidebar = () => {
 	const interval = setInterval( () => {
 		const rootElement = document.querySelector(
@@ -52,7 +52,7 @@ export const attachSidebar = () => {
 	}, 100 );
 };
 
-/ Attaches the sidebar after the page is loaded ( in FSE editor).
+// Attaches the sidebar after the page is loaded ( in FSE editor).
 const attachSidebarAfterLoading = () => {
 	const skeletonInterval = setInterval( () => {
 		const skeleton = document.querySelector(

@@ -39,7 +39,7 @@ const Type = ( { onClickContinue } ) => {
 			if ( response.success ) {
 				setSiteLanguageListAIStep( response?.data?.data );
 			} else {
-				/  Handle error.
+				//  Handle error.
 				throw new Error( response?.data?.data );
 			}
 		} catch ( error ) {

@@ -80,7 +80,7 @@ const ImproveUsingAiModal = ( { handleFetchSuggestion } ) => {
 						disabled={ loading }
 						onClick={ async () => {
 							if ( ! loading && description ) {
-								/ Save the description
+								// Save the description
 								modalRef.resolve( description );
 								modalRef.hide();
 								setDescription( null );

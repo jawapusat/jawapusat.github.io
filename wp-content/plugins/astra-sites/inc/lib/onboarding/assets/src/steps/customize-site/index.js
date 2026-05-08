@@ -37,7 +37,7 @@ const CustomizeSite = () => {
 			CustomizeSteps[ currentCustomizeIndex ].class
 		);
 
-		/ Track template preview step when component mounts
+		// Track template preview step when component mounts
 		trackOnboardingStep( 'template-preview' );
 	}, [] );
 
@@ -77,9 +77,9 @@ const CustomizeSite = () => {
 	};
 
 	useEffect( () => {
-		window.addEventListener( 'beforeunload', preventRefresh ); / eslint-disable-line
+		window.addEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 		return () =>
-			window.removeEventListener( 'beforeunload', preventRefresh ); / eslint-disable-line
+			window.removeEventListener( 'beforeunload', preventRefresh ); // eslint-disable-line
 	} );
 
 	return (

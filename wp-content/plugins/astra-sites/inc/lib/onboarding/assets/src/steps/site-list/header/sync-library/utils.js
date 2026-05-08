@@ -1,6 +1,6 @@
 const { post } = wp.ajax;
 
-/ Store current sync status.
+// Store current sync status.
 let syncStatus = [];
 let syncEnded = false;
 
@@ -10,7 +10,7 @@ export const getFormData = ( action, value ) => {
 	return formData;
 };
 
-/ Check if library synced successfully.
+// Check if library synced successfully.
 export const isSyncSuccess = () => {
 	if ( !! syncStatus && syncEnded ) {
 		const status = syncStatus.every( Boolean );
@@ -21,7 +21,7 @@ export const isSyncSuccess = () => {
 };
 
 export const SyncStart = async () => {
-	/ Sync Start.
+	// Sync Start.
 	try {
 		const formData = new FormData();
 		formData.append( 'action', 'astra-sites-update-library' );
@@ -88,12 +88,12 @@ export const isSyncUptoDate = async () => {
 	} catch ( error ) {
 		syncStatus.push( false );
 		syncEnded = true;
-		return true; / prevent fetching categories
+		return true; // prevent fetching categories
 	}
 };
 
 export const fetchCategoriesAndTags = async () => {
-	/ Sync Start.
+	// Sync Start.
 	try {
 		let categories = null;
 		let tags = null;
@@ -121,7 +121,7 @@ export const fetchCategoriesAndTags = async () => {
 };
 
 export const SyncLibraryComplete = async () => {
-	/ Sync complete.
+	// Sync complete.
 	try {
 		const formData = new FormData();
 		formData.append( 'action', 'astra-sites-update-library-complete' );
@@ -142,7 +142,7 @@ export const SyncLibraryComplete = async () => {
 };
 
 export const SyncBlockCategories = async () => {
-	/ Import Block Categories.
+	// Import Block Categories.
 	try {
 		const formData = new FormData();
 		formData.append( 'action', 'astra-sites-import-page-builders' );
@@ -163,7 +163,7 @@ export const SyncBlockCategories = async () => {
 };
 
 export const SyncBlocks = async () => {
-	/ Import Blocks.
+	// Import Blocks.
 	try {
 		const formData = new FormData();
 		formData.append( 'action', 'astra-sites-get-blocks-request-count' );
@@ -204,7 +204,7 @@ export const SyncBlocks = async () => {
 };
 
 export const SyncPageBuilders = async () => {
-	/ Import page builders.
+	// Import page builders.
 	try {
 		const formData = new FormData();
 		formData.append( 'action', 'astra-sites-import-page-builders' );
@@ -225,7 +225,7 @@ export const SyncPageBuilders = async () => {
 };
 
 export const SyncAllCategories = async () => {
-	/ Import all categories.
+	// Import all categories.
 	try {
 		const formData = new FormData();
 		formData.append( 'action', 'astra-sites-import-all-categories' );
@@ -246,7 +246,7 @@ export const SyncAllCategories = async () => {
 };
 
 export const SyncAllCategoriesAndTags = async () => {
-	/ Import all categories and tags.
+	// Import all categories and tags.
 	try {
 		const formData = new FormData();
 		formData.append(
@@ -271,16 +271,16 @@ export const SyncAllCategoriesAndTags = async () => {
 
 export const SyncImportAllSites = async () => {
 	try {
-		/ Get sites request count.
+		// Get sites request count.
 		const response = await post( {
 			action: 'astra-sites-get-sites-request-count',
 			_ajax_nonce: astraSitesVars?._ajax_nonce,
 		} );
 
-		/ Get total request count.
+		// Get total request count.
 		const totalRequest = response?.total;
 
-		/ Import all sites.
+		// Import all sites.
 		if ( totalRequest ) {
 			const allSitesRequests = [];
 
@@ -363,7 +363,7 @@ export const fetchPagedSites = async ( pageNo ) => {
  * @return {Promise<Object>} Returns all sites.
  */
 export const fetchAllSites = async () => {
-	/ Import all sites.
+	// Import all sites.
 	try {
 		const formData = new FormData();
 		formData.append( 'action', 'astra-sites-get-all-sites' );

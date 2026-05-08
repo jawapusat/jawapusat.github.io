@@ -1,10 +1,10 @@
 import React from 'react';
 import { formatNumber } from '../hooks/use-countdown-timer';
 
-/ Reusable Timer Display Component
+// Reusable Timer Display Component
 const CountdownDisplay = ( {
 	timeLeft,
-	variant = 'default', / 'default', 'compact'
+	variant = 'default', // 'default', 'compact'
 	className = '',
 } ) => {
 	const isCompact = variant === 'compact';

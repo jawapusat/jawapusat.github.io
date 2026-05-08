@@ -167,14 +167,14 @@ const Survey = () => {
 			Object.keys( requirementWarning ).length > 0;
 	}
 
-	/ Apply multisite-specific requirement flag logic
+	// Apply multisite-specific requirement flag logic
 	if ( starterTemplates?.isMultisite ) {
-		/ For multisite: use the multisite-aware checking
+		// For multisite: use the multisite-aware checking
 		const shouldSkipRequirements = starterTemplates?.canActivatePlugins
 			? notInstalled?.length <= 0 &&
-			  starterTemplates?.themeStatus !== 'not-installed' / No Plugins/Themes are available to install
+			  starterTemplates?.themeStatus !== 'not-installed' // No Plugins/Themes are available to install
 			: allPuginList?.length <= 0 &&
-			  starterTemplates?.themeStatus === 'installed-and-active'; / No Plugins/Themes are available to install or activate
+			  starterTemplates?.themeStatus === 'installed-and-active'; // No Plugins/Themes are available to install or activate
 
 		if ( shouldSkipRequirements ) {
 			requirementsFlag = false;
@@ -221,7 +221,7 @@ const Survey = () => {
 				} );
 			}, 500 );
 
-			/ Always send analytics opt-in/opt-out preference so the user can change their choice.
+			// Always send analytics opt-in/opt-out preference so the user can change their choice.
 			const answer = analyticsFlag ? 'yes' : 'no';
 			if ( answer !== analytics ) {
 				const optinAnswer = new FormData();
@@ -244,7 +244,7 @@ const Survey = () => {
 					} );
 			}
 
-			/ Skip subscription if chose to skip and start building.
+			// Skip subscription if chose to skip and start building.
 			if ( skipSubscription ) {
 				trackOnboardingStep( 'survey', 'skipped' );
 				return;
@@ -325,7 +325,7 @@ const Survey = () => {
 	};
 
 	const agrText = sprintf(
-		/ translators: %1$s is a terms link, %2$s is a privacy policy link
+		// translators: %1$s is a terms link, %2$s is a privacy policy link
 		__( 'By continuing, you agree to our %1$s and %2$s.', 'astra-sites' ),
 		'_terms_',
 		'_privacy_'
@@ -469,20 +469,20 @@ const Survey = () => {
 	};
 
 	const optionalRequirement = () => {
-		/ Cache frequently accessed properties for better performance
+		// Cache frequently accessed properties for better performance
 		const isMultisite = starterTemplates?.isMultisite;
 		const canActivatePlugins = starterTemplates?.canActivatePlugins;
 		const canInstallPlugins = starterTemplates?.canInstallPlugins;
 		const themeStatus = starterTemplates?.themeStatus;
 
-		/ Helper function to determine if theme is missing based on user permissions
+		// Helper function to determine if theme is missing based on user permissions
 		const checkThemeMissing = () => {
 			return canActivatePlugins
 				? themeStatus === 'not-installed'
 				: themeStatus !== 'installed-and-active';
 		};
 
-		/ Helper function to check if plugins are missing
+		// Helper function to check if plugins are missing
 		const checkPluginsMissing = () => {
 			if ( canInstallPlugins ) {
 				return false;
@@ -492,7 +492,7 @@ const Survey = () => {
 				: ( allPuginList?.length || 0 ) > 0;
 		};
 
-		/ Determine multisite scenario with missing components
+		// Determine multisite scenario with missing components
 		let isMultisiteWithMissingPluginOrTheme = false;
 		let isThemeMissing = false;
 
@@ -503,10 +503,10 @@ const Survey = () => {
 				isThemeMissing || hasPluginsMissing;
 		}
 
-		/ Determine the appropriate requirement list based on user permissions
+		// Determine the appropriate requirement list based on user permissions
 		const requireList = canActivatePlugins ? notInstalled : allPuginList;
 
-		/ Render multisite-specific requirement screen
+		// Render multisite-specific requirement screen
 		if ( isMultisiteWithMissingPluginOrTheme ) {
 			return (
 				<div className="requirement-check-wrap">
@@ -567,7 +567,7 @@ const Survey = () => {
 			);
 		}
 
-		/ Original requirement screen for non-multisite scenarios
+		// Original requirement screen for non-multisite scenarios
 		return (
 			<div className="requirement-check-wrap">
 				<h1 className="text-3xl font-bold text-zip-app-heading max-md:!text-3xl max-sm:!text-2xl !text-center">
@@ -731,7 +731,7 @@ const Survey = () => {
 	let defaultStepContent = surveyForm();
 
 	if ( pluginInstallationAttempts > 2 && allPuginList.length > 0 ) {
-		/ If plugin installation fails more than 3 times.
+		// If plugin installation fails more than 3 times.
 		defaultStepContent = manualPluginInstallation();
 	} else if (
 		fileSystemPermissions !== null &&

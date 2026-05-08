@@ -3,7 +3,7 @@ import React from 'react';
 import Tooltip from '../tooltip';
 import { __ } from '@wordpress/i18n';
 
-/ Internal dependencies.
+// Internal dependencies.
 import ICONS from '../../../icons';
 import './style.scss';
 const { adminUrl } = starterTemplates;

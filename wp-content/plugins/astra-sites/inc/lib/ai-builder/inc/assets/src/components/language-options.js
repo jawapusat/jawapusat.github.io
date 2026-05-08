@@ -33,7 +33,7 @@ const LanguageOptions = ( {
 	);
 	const [ query, setQuery ] = useState( '' );
 
-	/ This is to automatically adjust the height of the dropdown
+	// This is to automatically adjust the height of the dropdown
 	let placementValue = 'bottom-end';
 
 	switch ( placement ) {

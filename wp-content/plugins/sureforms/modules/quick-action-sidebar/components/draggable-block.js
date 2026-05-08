@@ -59,7 +59,7 @@ const DraggableBlock = ( props ) => {
 		);
 	};
 
-	/ Removes the specified element from an array.
+	// Removes the specified element from an array.
 	const removeElementFromArray = (
 		arrayFromWhichElementNeedToRemove,
 		elementToRemove
@@ -75,7 +75,7 @@ const DraggableBlock = ( props ) => {
 		);
 		updateDefaultAllowedQuickSidebarBlocks( updatedArray );
 		saveOptionToDatabase( updatedArray );
-		/ Increment uniqueId when removing a block
+		// Increment uniqueId when removing a block
 		setUniqueId( ( prevUniqueId ) => prevUniqueId + 1 );
 		createNotice(
 			'success',
@@ -92,9 +92,9 @@ const DraggableBlock = ( props ) => {
 				isDismissible: true,
 			}
 		);
-		/ Set a timeout to remove the notice after a specific duration (e.g., 600 milliseconds)
+		// Set a timeout to remove the notice after a specific duration (e.g., 600 milliseconds)
 		setTimeout( () => {
-			/ Remove the notice by ID
+			// Remove the notice by ID
 			dispatch( 'core/notices' ).removeNotice( removedNoticeID );
 		}, 1000 );
 	};

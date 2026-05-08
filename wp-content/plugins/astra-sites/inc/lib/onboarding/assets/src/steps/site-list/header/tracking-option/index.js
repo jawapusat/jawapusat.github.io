@@ -20,7 +20,7 @@ const TrackingOption = () => {
 	const updateBSFUsageTracking = () => {
 		setBSFUsageTracking( ! bsfUsageTracking );
 
-		/ Send an API request to enable/disable the usage analytics.
+		// Send an API request to enable/disable the usage analytics.
 		const formData = new FormData();
 		formData.append( 'action', 'astra_sites_usage_optin_status' );
 		formData.append( '_ajax_nonce', astraSitesVars?._ajax_nonce );
@@ -34,13 +34,13 @@ const TrackingOption = () => {
 				if ( res.success ) {
 					starterTemplates.bsfUsageTracking = ! bsfUsageTracking;
 				} else {
-					/ Revert the optimistic UI change if backend rejected the request.
+					// Revert the optimistic UI change if backend rejected the request.
 					setBSFUsageTracking( bsfUsageTracking );
 					setResponse( { isError: true, message: res?.data } );
 				}
 			} )
 			.catch( ( error ) => {
-				/ Revert the optimistic UI change on error.
+				// Revert the optimistic UI change on error.
 				setBSFUsageTracking( bsfUsageTracking );
 
 				/* eslint-disable-next-line no-console -- We are displaying errors in the console. */
@@ -103,7 +103,7 @@ const TrackingOption = () => {
 							onClick={ updateBSFUsageTracking }
 						>
 							{ sprintf(
-								/ translators: %s: Starter Templates or White Label name.
+								// translators: %s: Starter Templates or White Label name.
 								__( 'Contribute to %s', 'astra-sites' ),
 								whiteLabelEnabled()
 									? getWhileLabelName()

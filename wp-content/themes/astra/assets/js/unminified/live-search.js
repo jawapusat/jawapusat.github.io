@@ -137,20 +137,20 @@
 		});
 	});
 
-	/ Add a click event listener to the document.
+	// Add a click event listener to the document.
 	document.addEventListener("click", function (event) {
 		const searchForm = event.target.closest("form.search-form");
 
-		/ Check if the clicked element is the search bar or the results dropdown
+		// Check if the clicked element is the search bar or the results dropdown
 		if (null !== searchForm) {
-			/ Clicked inside the search bar or dropdown, do nothing
+			// Clicked inside the search bar or dropdown, do nothing
 			if (searchForm.querySelector(".ast-live-search-results")) {
 				searchForm.querySelector(
 					".ast-live-search-results"
 				).style.display = "block";
 			}
 		} else {
-			/ Clicked outside the search bar and dropdown, hide the dropdown
+			// Clicked outside the search bar and dropdown, hide the dropdown
 			const searchResultsWrappers = document.querySelectorAll(
 				".ast-live-search-results"
 			);
